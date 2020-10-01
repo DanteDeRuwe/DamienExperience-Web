@@ -1,0 +1,12 @@
+#registerBtn{
+    background-color: #FE0040;
+    color: white;
+    padding-right: 2rem;
+    font-weight: bold;
+    border-radius: 0px 50px 50px 0px;
+}
+
+.heartImg{
+    padding-right: 1rem;
+    padding-left: 2rem;
+}
