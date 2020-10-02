@@ -15,11 +15,15 @@
   
       <!-- Links -->
       <ul class="navbar-nav ml-auto" id="navitems"> 
+        
+        <button (click)="register()">
+          Register
+        </button>
+
         <li class="nav-item">
             <a class="nav-link text-dark">VOLG DE WANDELAARS</a>
         </li>
         <li class="nav-item">
-            
             <a class="nav-link text-dark" [routerLink]="['about']" href="">OVER DE TOUR</a>
         </li>
         <li class="nav-item" id="registerBtn">

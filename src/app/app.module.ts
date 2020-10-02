@@ -16,6 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { RegisterComponent } from './user/register/register.component';
+import { MaterialModule } from './material/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,18 +27,14 @@ import { MatListModule } from '@angular/material/list';
     MainNavComponent,
     AboutComponent,
     PageNotFoundComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
-    
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule
   ],
