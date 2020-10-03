@@ -3,9 +3,11 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../user/authentication.service';
 
 @Component({
+
   selector: 'main-nav',
+
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.css']
+  styleUrls: ['./main-nav.component.scss'],
 })
 export class MainNavComponent {
 
