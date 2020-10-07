@@ -36,14 +36,14 @@ function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
 function comparePasswords(control: AbstractControl): ValidationErrors {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-  return password.value === confirmPassword.value ? null 
+  return password.value === confirmPassword.value ? null
     : { 'passwordsDiffer': true };
 }
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   public user: FormGroup;
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
       passwordGroup: this.fb.group({
         password: [
           '', [
-            Validators.required, 
+            Validators.required,
             Validators.minLength(8),
             patternValidator(/\d/, { hasNumber: true }),
             patternValidator(/[A-Z]/, { hasUpperCase: true }),
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
         ],
         confirmPassword: ['', Validators.required]
       },
-      { validator: comparePasswords}
+        { validator: comparePasswords }
       )
     })
   }
@@ -109,28 +109,28 @@ export class RegisterComponent implements OnInit {
       this.user.value.email,
       this.user.value.passwordGroup.password
     )
-    .subscribe(
-      (val) => {
-        if (val) {
-          if (this._authService.redirectUrl){
-            // this._router.navigateByUrl(this._authService.redirectUrl);
-            // this._authService.redirectUrl = undefined;
-            console.log(this.user)
+      .subscribe(
+        (val) => {
+          if (val) {
+            if (this._authService.redirectUrl) {
+              // this._router.navigateByUrl(this._authService.redirectUrl);
+              // this._authService.redirectUrl = undefined;
+              console.log(this.user)
+            } else {
+              this._router.navigate(['about']);
+            }
           } else {
-            this._router.navigate(['about']);
-          } 
-        } else {
-          this.errorMessage = 'Could not login'
+            this.errorMessage = 'Could not login'
+          }
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+          if (err.error instanceof Error) {
+            this.errorMessage = `Error while tryling to login user ${this.user.value.email}: ${err.error.message}`
+          } else {
+            this.errorMessage = `Error ${err.status} while trying to login user ${this.user.value.email}: ${err.error}`;
+          }
         }
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err);
-        if(err.error instanceof Error){
-          this.errorMessage= `Error while tryling to login user ${this.user.value.email}: ${err.error.message}`
-        }else {
-          this.errorMessage = `Error ${err.status} while trying to login user ${this.user.value.email}: ${err.error}`;
-        }
-      }
-    )
+      )
   }
 }
