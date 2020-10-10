@@ -302,6 +302,11 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //aanmaken van de map, de accessToken is nodig om toegang te krijgen 
+    //container is het element waar de map in moet in de html (deze moet dan ook een height krijgen anders krijg je niks te zien)
+    //style is de stijl van de kaart, op mapbox kan je verschillende themas terugvinden
+    //zoom is het zoomniveau
+    //center is de focus van de kaart(dit moeten we nog veranderen en het automatisch laten berekenen?)
     this.map = new mapboxgl.Map({
       accessToken: environment.mapbox.accessToken,
       container: 'map',
@@ -310,8 +315,13 @@ export class MapComponent implements OnInit {
       center: [this.lng, this.lat],
     })
 
+    //controls toevoegen aan de map
     this.map.addControl(new mapboxgl.NavigationControl());
     
+    //tekent de waypoints op de kaart door een nieuw Marker object aan te maken
+    //dit maakt een nieuw div element aan waarop er styling moet worden toegepast (zie css)
+    //aan de popup wordt er html toegevoegd om tekst te verschijnen
+    //voor de waypoints kan een eigen svg ingesteld worden
     this.waypoints.features.forEach((waypoint) => {
       var marker = new mapboxgl.Marker()
       .setLngLat([waypoint.coordinates.longitude, waypoint.coordinates.latitude])
@@ -321,36 +331,73 @@ export class MapComponent implements OnInit {
 
     });
 
+    //manier om de afstand te berekenen [POC]
+    //de coordinaten worden in een linestring omgezet en daarvan kan dan de lengte worden berekend
     let lineString = turf.lineString(this.route.features[0].geometry.coordinates);
     let distance = turf.length(lineString);
     console.log(distance);
     
+    //zorgt ervoor dat vanzodra de map geladen wordt, de routes getekend worden [POC]
     this.map.on('load', () => {
-      this.map.addSource('route', {
-        'type': 'geojson',
-        'data': {
-          'type': 'Feature',
-          'properties': {},
-          'geometry': {
-            'type': 'LineString',
-            'coordinates': this.route.features[0].geometry.coordinates
-          }
-        }
-      });
-      this.map.addLayer({
-        'id': 'route',
-        'type': 'line',
-        'source': 'route',
-        'layout': {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        'paint': {
-          'line-color': '#ff0040',
-          'line-width': 4
-          }
-      })
-    })
+      this.addRoutes();
+    });
   }
 
+
+  //Code in deze method can gerefactored en ge extract worden, is op dit moment afhankelijk van de data van BE
+  private addRoutes() {
+    //Dit maakt eerst een source aan voor de route (genaamd route) en zal ze dan toevoegen aan de map adhv het id (de naam)
+    this.map.addSource('route', {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': this.route.features[0].geometry.coordinates
+        }
+      }
+    });
+
+    this.map.addLayer({
+      'id': 'route',
+      'type': 'line',
+      'source': 'route',
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      'paint': {
+        'line-color': '#ff0040',
+        'line-width': 4
+      }
+    });
+
+    //layer en source voor walked path
+    this.map.addSource('walked', {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': this.route.features[0].geometry.coordinates.slice(0, 10)
+        }
+      }
+    });
+
+    this.map.addLayer({
+      'id': 'walked',
+      'type': 'line',
+      'source': 'walked',
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      'paint': {
+        'line-color': '#3bb7a9',
+        'line-width': 4
+      }
+    });
+  }
 }

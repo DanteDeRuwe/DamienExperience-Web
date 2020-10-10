@@ -3,10 +3,8 @@
     height: 100%;
 }
 
-.mapboxgl-marker {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border:1px solid gray;
-    background-color:yellow;
-}
+/* was initieel nodig maar blijkt nu overbodig, indien de markers niet showen, haal onderstaande uit commentaar */
+/* .mapboxgl-marker {
+    width: 20px;
+    height: 20px;
+} */
