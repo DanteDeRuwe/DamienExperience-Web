@@ -1,6 +1,8 @@
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
+import * as turf from '@turf/turf'
 
 @Component({
   selector: 'app-map',
@@ -319,8 +321,10 @@ export class MapComponent implements OnInit {
 
     });
 
-    console.log(this.route)
-
+    let lineString = turf.lineString(this.route.features[0].geometry.coordinates);
+    let distance = turf.length(lineString);
+    console.log(distance);
+    
     this.map.on('load', () => {
       this.map.addSource('route', {
         'type': 'geojson',
