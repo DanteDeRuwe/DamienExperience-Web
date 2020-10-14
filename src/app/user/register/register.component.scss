@@ -1,0 +1,12 @@
+.register-wrapper{
+    margin-top: 4rem;
+}
+
+.side-by-side{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    div{
+        width: 100%;
+    }
+}

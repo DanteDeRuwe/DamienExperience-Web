@@ -65,10 +65,7 @@ export class RegisterComponent implements OnInit {
         password: [
           '', [
             Validators.required,
-            Validators.minLength(8),
-            patternValidator(/\d/, { hasNumber: true }),
-            patternValidator(/[A-Z]/, { hasUpperCase: true }),
-            patternValidator(/[a-z]/, { hasLowerCase: true })
+            Validators.minLength(8)
           ]
         ],
         confirmPassword: ['', Validators.required]

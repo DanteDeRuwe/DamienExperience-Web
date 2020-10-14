@@ -1,4 +1,5 @@
-<div fxLayout="column" fxLayoutAlign="space-around stretch" class="login-main">
+<!-- <div fxLayout="column" fxLayoutAlign="space-around stretch" class="login-main">
+
 
     <form [formGroup]="user" (ngSubmit)="onSubmit()">
       <mat-card-header>
@@ -106,22 +107,116 @@
       </mat-card-content>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="end">
-        <!-- <a [routerLink]="['/login']"
+        <a [routerLink]="['/login']"
         mat-stroked-button
         color="primary"
-        style="margin-right: 20px">Login</a> -->
+        style="margin-right: 20px">Login</a>
 
-        <button
-          mat-raised-button
-          type="submit"
-          color="primary"
-        >
-          Register
-        </button>
-      </mat-card-actions>
+<button mat-raised-button type="submit" color="primary">
+  Register
+</button>
+</mat-card-actions>
+</form>
+<mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+  got an error while loading: {{ errorMessage }}
+</mat-card>
+
+</div> -->
+
+
+<div class="register-wrapper">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+
+  <div class="container">
+    <form [formGroup]="user" (ngSubmit)="onSubmit()">
+
+
+      <div class="form-group side-by-side" formGroupName="nameGroup">
+        <div>
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="John" formControlName="firstName">
+          <p class="text-danger" *ngIf="
+      user.get('nameGroup').get('firstName').errors &&
+      user.get('nameGroup').get('firstName').touched
+    ">
+            {{ getErrorMessage(user.get('nameGroup').get('firstName').errors) }}</p>
+        </div>
+        <div>
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Doe" formControlName="lastName">
+          <p class="text-danger" *ngIf="
+      user.get('nameGroup').get('lastName').errors &&
+      user.get('nameGroup').get('lastName').touched
+    ">
+            {{ getErrorMessage(user.get('nameGroup').get('lastName').errors) }}</p>
+        </div>
+      </div>
+
+
+
+      <div class="form-group side-by-side" formGroupName="dobaAndPhoneGroup">
+        <div>
+          <label for="dob">Date of Birth</label>
+          <input type="text" class="form-control" id="dob" placeholder="01-01-2001" formControlName="dob">
+          <p class="text-danger" *ngIf="
+      user.get('dobaAndPhoneGroup').get('dob').errors &&
+      user.get('dobaAndPhoneGroup').get('dob').touched
+    ">
+            {{ getErrorMessage(user.get('nameGroup').get('dob').errors) }}</p>
+        </div>
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" placeholder="0123 456 789" formControlName="phone">
+          <p class="text-danger" *ngIf="
+      user.get('dobaAndPhoneGroup').get('phone').errors &&
+      user.get('dobaAndPhoneGroup').get('phone').touched
+    ">
+            {{ getErrorMessage(user.get('nameGroup').get('phone').errors) }}</p>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="email@example.com" formControlName="email">
+        <small id="email" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <p class="text-danger" *ngIf="user.get('email').errors && user.get('email').touched">
+          {{ getErrorMessage(user.get('email').errors) }}</p>
+      </div>
+
+
+
+      <div class="form-group side-by-side" formGroupName="passwordGroup">
+        <div>
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password"
+            formControlName="password">
+          <p class="text-danger" *ngIf="
+      user.get('passwordGroup').get('password').errors &&
+      user.get('passwordGroup').get('password').touched
+    ">
+            {{ getErrorMessage(user.get('passwordGroup').get('password').errors) }}</p>
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm your password</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Enter your password"
+            formControlName="confirmPassword">
+          <p class="text-danger" *ngIf="
+      user.get('passwordGroup').get('confirmPassword').errors &&
+      user.get('passwordGroup').get('confirmPassword').touched
+    ">
+            {{ getErrorMessage(user.get('passwordGroup').get('confirmPassword').errors) }}</p>
+        </div>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="remindme">
+        <label class="remindme" for="remindme">Remember me</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
-      got an error while loading: {{ errorMessage }}
-    </mat-card>
+  </div>
 
 </div>
