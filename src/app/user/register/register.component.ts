@@ -21,17 +21,6 @@ function serverSideValidateUsername(
   };
 }
 
-function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } => {
-    if (!control.value) {
-      return null;
-    }
-    // test the value of the control against the regexp supplied
-    const valid = regex.test(control.value);
-    // if true, return no error (no error), else return error passed in the second parameter
-    return valid ? null : error;
-  };
-}
 
 function comparePasswords(control: AbstractControl): ValidationErrors {
   const password = control.get('password');
@@ -46,7 +35,7 @@ function comparePasswords(control: AbstractControl): ValidationErrors {
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public user: FormGroup;
+  public register: FormGroup;
   public errorMessage: string = '';
 
   constructor(private _authService: AuthenticationService,
@@ -54,9 +43,16 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.user = this.fb.group({
-      firstname: ['', Validators.required],
+    this.register = this.fb.group({
+      nameGroup: this.fb.group({
+        firstname: ['', Validators.required],
       lastname: ['', Validators.required],
+      }),
+      dobaAndPhoneGroup: this.fb.group({
+        dob: ['', Validators.required],
+        phone: ['', Validators.required]
+      })
+      ,
       email: [
         '', [Validators.required, Validators.email],
         serverSideValidateUsername(this._authService.checkUserNameAvailability)
@@ -73,6 +69,7 @@ export class RegisterComponent implements OnInit {
         { validator: comparePasswords }
       )
     })
+    
   }
 
   getErrorMessage(errors: any) {
@@ -83,12 +80,6 @@ export class RegisterComponent implements OnInit {
       return 'is required';
     } else if (errors.minlength) {
       return `needs at least ${errors.minlength.requiredLength} characters (got ${errors.minlength.actualLength})`;
-    } else if (errors.hasNumber) {
-      return `needs at least 1 number`;
-    } else if (errors.hasUpperCase) {
-      return `needs at least 1 upper case letter`;
-    } else if (errors.hasNumber) {
-      return `needs at least 1 lower case letter`;
     } else if (errors.userAlreadyExists) {
       return `user already exists`;
     } else if (errors.email) {
@@ -98,13 +89,15 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    console.log(this.user);
+  onSubmitRegister() {
+    console.log(this.register);
     this._authService.register(
-      this.user.value.firstname,
-      this.user.value.lastname,
-      this.user.value.email,
-      this.user.value.passwordGroup.password
+      this.register.value.firstname,
+      this.register.value.lastname,
+      //this.user.value.birthdate,
+      //this.user.value.phoneNumber,
+      this.register.value.email,
+      this.register.value.passwordGroup.password
     )
       .subscribe(
         (val) => {
@@ -112,7 +105,7 @@ export class RegisterComponent implements OnInit {
             if (this._authService.redirectUrl) {
               // this._router.navigateByUrl(this._authService.redirectUrl);
               // this._authService.redirectUrl = undefined;
-              console.log(this.user)
+              console.log(this.register)
             } else {
               this._router.navigate(['about']);
             }
@@ -123,11 +116,13 @@ export class RegisterComponent implements OnInit {
         (err: HttpErrorResponse) => {
           console.log(err);
           if (err.error instanceof Error) {
-            this.errorMessage = `Error while tryling to login user ${this.user.value.email}: ${err.error.message}`
+            this.errorMessage = `Error while tryling to login user ${this.register.value.email}: ${err.error.message}`
           } else {
-            this.errorMessage = `Error ${err.status} while trying to login user ${this.user.value.email}: ${err.error}`;
+            this.errorMessage = `Error ${err.status} while trying to login user ${this.register.value.email}: ${err.error}`;
           }
         }
       )
   }
+
+  
 }

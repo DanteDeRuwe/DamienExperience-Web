@@ -1,7 +1,171 @@
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<h2>Ik maak een account</h2>
+<form [formGroup]="register" (ngSubmit)="onSubmitRegister()">
+  <div class="form-group side-by-side" formGroupName="nameGroup">
+    <div>
+      <label for="firstname">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        placeholder="John"
+        formControlName="firstname"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('nameGroup').get('firstname').errors &&
+          register.get('nameGroup').get('firstname').touched
+        "
+      >
+        {{ getErrorMessage(register.get("nameGroup").get("firstname").errors) }}
+      </p>
+    </div>
+    <div>
+      <label for="lastname">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastname"
+        placeholder="Doe"
+        formControlName="lastname"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('nameGroup').get('lastname').errors &&
+          register.get('nameGroup').get('lastname').touched
+        "
+      >
+        {{ getErrorMessage(register.get("nameGroup").get("lastname").errors) }}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group side-by-side" formGroupName="dobaAndPhoneGroup">
+    <div>
+      <label for="dob">Date of Birth</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dob"
+        placeholder="01-01-2001"
+        formControlName="dob"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('dobaAndPhoneGroup').get('dob').errors &&
+          register.get('dobaAndPhoneGroup').get('dob').touched
+        "
+      >
+        {{
+          getErrorMessage(register.get("dobaAndPhoneGroup").get("dob").errors)
+        }}
+      </p>
+    </div>
+    <div>
+      <label for="phone">Phone Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        placeholder="0123 456 789"
+        formControlName="phone"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('dobaAndPhoneGroup').get('phone').errors &&
+          register.get('dobaAndPhoneGroup').get('phone').touched
+        "
+      >
+        {{
+          getErrorMessage(register.get("dobaAndPhoneGroup").get("phone").errors)
+        }}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      placeholder="email@example.com"
+      formControlName="email"
+    />
+    <small id="email" class="form-text text-muted"
+      >We'll never share your email with anyone else.</small
+    >
+    <p
+      class="text-danger"
+      *ngIf="register.get('email').errors && register.get('email').touched"
+    >
+      {{ getErrorMessage(register.get("email").errors) }}
+    </p>
+  </div>
+
+  <div class="form-group side-by-side" formGroupName="passwordGroup">
+    <div>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter password"
+        formControlName="password"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('passwordGroup').get('password').errors &&
+          register.get('passwordGroup').get('password').touched
+        "
+      >
+        {{
+          getErrorMessage(register.get("passwordGroup").get("password").errors)
+        }}
+      </p>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        placeholder="Confirm password"
+        formControlName="confirmPassword"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('passwordGroup').get('confirmPassword').errors &&
+          register.get('passwordGroup').get('confirmPassword').touched
+        "
+      >
+        {{
+          getErrorMessage(
+            register.get("passwordGroup").get("confirmPassword").errors
+          )
+        }}
+      </p>
+    </div>
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="remindme" />
+    <label class="remindme" for="remindme">Remember me</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 <!-- <div fxLayout="column" fxLayoutAlign="space-around stretch" class="login-main">
 
 
-    <form [formGroup]="user" (ngSubmit)="onSubmit()">
+    <form [formGroup]="register" (ngSubmit)="onSubmit()">
       <mat-card-header>
         <mat-card-title>Register</mat-card-title>
       </mat-card-header>
@@ -16,10 +180,10 @@
             />
             <mat-error
               *ngIf="
-                user.get('firstname').errors && user.get('firstname').touched
+                register.get('firstname').errors && register.get('firstname').touched
               "
             >
-              {{ getErrorMessage(user.get('firstname').errors) }}
+              {{ getErrorMessage(register.get('firstname').errors) }}
             </mat-error>
           </mat-form-field>
           <mat-form-field>
@@ -31,10 +195,10 @@
             />
             <mat-error
               *ngIf="
-                user.get('lastname').errors && user.get('lastname').touched
+                register.get('lastname').errors && register.get('lastname').touched
               "
             >
-              {{ getErrorMessage(user.get('lastname').errors) }}
+              {{ getErrorMessage(register.get('lastname').errors) }}
             </mat-error>
           </mat-form-field>
         </span>
@@ -46,9 +210,9 @@
             formControlName="email"
           />
           <mat-error
-            *ngIf="user.get('email').errors && user.get('email').touched"
+            *ngIf="register.get('email').errors && register.get('email').touched"
           >
-            {{ getErrorMessage(user.get('email').errors) }}
+            {{ getErrorMessage(register.get('email').errors) }}
           </mat-error>
         </mat-form-field>
         <span fxLayout="column" formGroupName="passwordGroup">
@@ -62,13 +226,13 @@
             />
             <mat-error
               *ngIf="
-                user.get('passwordGroup').get('password').errors &&
-                user.get('passwordGroup').get('password').touched
+                register.get('passwordGroup').get('password').errors &&
+                register.get('passwordGroup').get('password').touched
               "
             >
               {{
                 getErrorMessage(
-                  user.get('passwordGroup').get('password').errors
+                  register.get('passwordGroup').get('password').errors
                 )
               }}
             </mat-error>
@@ -83,25 +247,25 @@
             />
             <mat-error
               *ngIf="
-                user.get('passwordGroup').get('confirmPassword').errors &&
-                user.get('passwordGroup').get('confirmPassword').touched
+                register.get('passwordGroup').get('confirmPassword').errors &&
+                register.get('passwordGroup').get('confirmPassword').touched
               "
             >
               {{
                 getErrorMessage(
-                  user.get('passwordGroup').get('confirmPassword').errors
+                  register.get('passwordGroup').get('confirmPassword').errors
                 )
               }}
             </mat-error>
           </mat-form-field>
           <mat-error
             *ngIf="
-              user.get('passwordGroup').errors &&
-              user.get('passwordGroup').get('confirmPassword').touched &&
-              user.get('passwordGroup').get('password').touched
+              register.get('passwordGroup').errors &&
+              register.get('passwordGroup').get('confirmPassword').touched &&
+              register.get('passwordGroup').get('password').touched
             "
           >
-            {{ getErrorMessage(user.get('passwordGroup').errors) }}
+            {{ getErrorMessage(register.get('passwordGroup').errors) }}
           </mat-error>
         </span>
       </mat-card-content>
@@ -122,101 +286,3 @@
 </mat-card>
 
 </div> -->
-
-
-<div class="register-wrapper">
-  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
-    {{ errorMessage }}
-  </div>
-
-
-  <div class="container">
-    <form [formGroup]="user" (ngSubmit)="onSubmit()">
-
-
-      <div class="form-group side-by-side" formGroupName="nameGroup">
-        <div>
-          <label for="firstName">First Name</label>
-          <input type="text" class="form-control" id="firstName" placeholder="John" formControlName="firstName">
-          <p class="text-danger" *ngIf="
-      user.get('nameGroup').get('firstName').errors &&
-      user.get('nameGroup').get('firstName').touched
-    ">
-            {{ getErrorMessage(user.get('nameGroup').get('firstName').errors) }}</p>
-        </div>
-        <div>
-          <label for="lastName">Last Name</label>
-          <input type="text" class="form-control" id="lastName" placeholder="Doe" formControlName="lastName">
-          <p class="text-danger" *ngIf="
-      user.get('nameGroup').get('lastName').errors &&
-      user.get('nameGroup').get('lastName').touched
-    ">
-            {{ getErrorMessage(user.get('nameGroup').get('lastName').errors) }}</p>
-        </div>
-      </div>
-
-
-
-      <div class="form-group side-by-side" formGroupName="dobaAndPhoneGroup">
-        <div>
-          <label for="dob">Date of Birth</label>
-          <input type="text" class="form-control" id="dob" placeholder="01-01-2001" formControlName="dob">
-          <p class="text-danger" *ngIf="
-      user.get('dobaAndPhoneGroup').get('dob').errors &&
-      user.get('dobaAndPhoneGroup').get('dob').touched
-    ">
-            {{ getErrorMessage(user.get('nameGroup').get('dob').errors) }}</p>
-        </div>
-        <div>
-          <label for="phone">Phone Number</label>
-          <input type="tel" class="form-control" id="phone" placeholder="0123 456 789" formControlName="phone">
-          <p class="text-danger" *ngIf="
-      user.get('dobaAndPhoneGroup').get('phone').errors &&
-      user.get('dobaAndPhoneGroup').get('phone').touched
-    ">
-            {{ getErrorMessage(user.get('nameGroup').get('phone').errors) }}</p>
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="email" placeholder="email@example.com" formControlName="email">
-        <small id="email" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        <p class="text-danger" *ngIf="user.get('email').errors && user.get('email').touched">
-          {{ getErrorMessage(user.get('email').errors) }}</p>
-      </div>
-
-
-
-      <div class="form-group side-by-side" formGroupName="passwordGroup">
-        <div>
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter your password"
-            formControlName="password">
-          <p class="text-danger" *ngIf="
-      user.get('passwordGroup').get('password').errors &&
-      user.get('passwordGroup').get('password').touched
-    ">
-            {{ getErrorMessage(user.get('passwordGroup').get('password').errors) }}</p>
-        </div>
-        <div>
-          <label for="confirmPassword">Confirm your password</label>
-          <input type="password" class="form-control" id="confirmPassword" placeholder="Enter your password"
-            formControlName="confirmPassword">
-          <p class="text-danger" *ngIf="
-      user.get('passwordGroup').get('confirmPassword').errors &&
-      user.get('passwordGroup').get('confirmPassword').touched
-    ">
-            {{ getErrorMessage(user.get('passwordGroup').get('confirmPassword').errors) }}</p>
-        </div>
-      </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="remindme">
-        <label class="remindme" for="remindme">Remember me</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-
-</div>
