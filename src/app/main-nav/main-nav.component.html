@@ -16,8 +16,8 @@
       <button (click)="register()">
         Register
       </button>
-
-      <button (click)="logout()">
+      
+      <button *ngIf="loggedInUser$ | async" (click)="logout()">
         Logout
       </button>
 
