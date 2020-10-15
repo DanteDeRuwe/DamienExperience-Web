@@ -50,7 +50,7 @@ export class AuthenticationService {
    //register request
    register(firstname: string, lastname: string, 
             //birthdate: Date, phoneNumber : string,
-            email: string, password: string): Observable<boolean> {
+            email: string, password: string, rememberme: boolean): Observable<boolean> {
      return this.http.post(
        `${environment.apiUrl}/Users/register`,
        {
@@ -67,7 +67,12 @@ export class AuthenticationService {
      .pipe(
        map((token: any) => {
          if(token) {
-           localStorage.setItem(this._tokenKey, token);
+           if(rememberme){
+             localStorage.setItem(this._tokenKey, token);
+           }
+           else{
+             sessionStorage.setItem(this._tokenKey, token);
+           }
            this._user$.next(email);
            return true;
          } else {

@@ -37,6 +37,7 @@ function comparePasswords(control: AbstractControl): ValidationErrors {
 export class RegisterComponent implements OnInit {
   public register: FormGroup;
   public errorMessage: string = '';
+  public rememberMe : boolean = false;
 
   constructor(private _authService: AuthenticationService,
     private _router: Router,
@@ -89,15 +90,19 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  changeCheckbox(){
+    this.rememberMe = !this.rememberMe;
+  }
+
   onSubmitRegister() {
-    console.log(this.register);
     this._authService.register(
-      this.register.value.firstname,
-      this.register.value.lastname,
-      //this.user.value.birthdate,
-      //this.user.value.phoneNumber,
+      this.register.value.nameGroup.firstname,
+      this.register.value.nameGroup.lastname,
+      //this.user.value.dobaAndPhoneGroup.birthdate,
+      //this.user.value.dobaAndPhoneGroup.phoneNumber,
       this.register.value.email,
-      this.register.value.passwordGroup.password
+      this.register.value.passwordGroup.password,
+      this.rememberMe
     )
       .subscribe(
         (val) => {
