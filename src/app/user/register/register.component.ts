@@ -90,10 +90,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  changeCheckbox(){
-    this.rememberMe = !this.rememberMe;
-  }
-
   onSubmitRegister() {
     this._authService.register(
       this.register.value.nameGroup.firstname,
