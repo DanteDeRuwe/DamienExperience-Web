@@ -12,10 +12,6 @@
 
     <!-- Links -->
     <ul class="navbar-nav ml-auto" id="navitems">
-
-      <button (click)="register()">
-        Register
-      </button>
       
       <button *ngIf="loggedInUser$ | async" (click)="logout()">
         Logout
@@ -28,7 +24,7 @@
         <a class="nav-link text-dark" [routerLink]="['about']" href="">OVER DE TOUR</a>
       </li>
       <li class="nav-item" id="registerBtn">
-        <a class="nav-link">
+        <a class="nav-link" (click)="schrijfIn()">
           <img src="assets/images/damiaanhartje.png" alt="damiaanhartje" height="30" class="heartImg">
           IK SCHRIJF ME IN
         </a>

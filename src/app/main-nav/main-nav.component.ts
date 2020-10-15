@@ -11,17 +11,27 @@ import { AuthenticationService } from '../user/authentication.service';
 })
 export class MainNavComponent {
   public loggedInUser$ = this._authenticationService.user$;
-  
+
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router) { }
 
-  register(){
+  register() {
     this._router.navigate(['register']);
   }
 
-  logout(){
+  logout() {
     this._authenticationService.logout();
+  }
+
+  schrijfIn() {
+    if (!this.loggedInUser$.value)
+      this._router.navigate(['register']);
+    else{
+      console.log(this.loggedInUser$.value);
+      
+      this._router.navigate(['pageNotFound']);
+    }
   }
 
 }
