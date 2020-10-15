@@ -23,9 +23,9 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
-    if(parsedToken){
+    if (parsedToken) {
       const expires = new Date(parseInt(parsedToken.exp, 10) * 1000)
-      if(expires){
+      if (expires) {
         localStorage.removeItem(this._tokenKey);
         parsedToken = null;
       }
@@ -33,86 +33,94 @@ export class AuthenticationService {
     this._user$ = new BehaviorSubject<string>(
       parsedToken && parsedToken.unique_name
     );
-   }
+  }
 
-   get user$(): BehaviorSubject<string> {
-      return this._user$;
-   }
+  get user$(): BehaviorSubject<string> {
+    return this._user$;
+  }
 
-   get token(): string {
-     const localToken = localStorage.getItem(this._tokenKey);
-     return !!localToken ? localToken : '';
-   }
+  get token(): string {
+    const localToken = localStorage.getItem(this._tokenKey);
+    return !!localToken ? localToken : '';
+  }
 
-   //insert code for login request 
-   login(email : string, password : string, rememberme : boolean): Observable<boolean> {
+  //insert code for login request 
+  login(email: string, password: string, rememberme: boolean): Observable<boolean> {
     return this.http.post(
       `${environment.apiUrl}/Users/login`,
       {
         email,
         password
       },
-      {responseType: 'text'}
+      { responseType: 'text' }
     )
-    .pipe(
-      map((token: any) => {
-        if(token) {
-          if(rememberme){
-            localStorage.setItem(this._tokenKey, token);
+      .pipe(
+        map((token: any) => {
+          if (token) {
+            if (rememberme) {
+              localStorage.setItem(this._tokenKey, token);
+            }
+            else {
+              sessionStorage.setItem(this._tokenKey, token);
+            }
+            this._user$.next(email);
+            return true;
+          } else {
+            return false;
           }
-          else{
-            sessionStorage.setItem(this._tokenKey, token);
+        })
+      );
+  }
+
+  //register request
+  register(firstname: string, lastname: string,
+    //birthdate: Date, phoneNumber : string,
+    email: string, password: string, rememberme: boolean): Observable<boolean> {
+    return this.http.post(
+      `${environment.apiUrl}/Users/register`,
+      {
+        firstname,
+        lastname,
+        //birthdate,
+        //phoneNumber,
+        email,
+        password,
+        passwordConfirmation: password,
+      },
+      { responseType: 'text' }
+    )
+      .pipe(
+        map((token: any) => {
+          if (token) {
+            if (rememberme) {
+              localStorage.setItem(this._tokenKey, token);
+            }
+            else {
+              sessionStorage.setItem(this._tokenKey, token);
+            }
+            this._user$.next(email);
+            return true;
+          } else {
+            return false;
           }
-          this._user$.next(email);
-          return true;
-        } else {
-         return false;
-        }
-      })
-    );
-   }
+        })
+      );
+  }
 
-   //register request
-   register(firstname: string, lastname: string, 
-            //birthdate: Date, phoneNumber : string,
-            email: string, password: string, rememberme: boolean): Observable<boolean> {
-     return this.http.post(
-       `${environment.apiUrl}/Users/register`,
-       {
-         firstname,
-         lastname,
-         //birthdate,
-         //phoneNumber,
-         email,
-         password,
-         passwordConfirmation: password,
-       },
-       {responseType: 'text'}
-     )
-     .pipe(
-       map((token: any) => {
-         if(token) {
-           if(rememberme){
-             localStorage.setItem(this._tokenKey, token);
-           }
-           else{
-             sessionStorage.setItem(this._tokenKey, token);
-           }
-           this._user$.next(email);
-           return true;
-         } else {
-          return false;
-         }
-       })
-     );
-   }
-
-   checkUserNameAvailability = (email: string): Observable<boolean> => {
+  checkUserNameAvailability = (email: string): Observable<boolean> => {
     return this.http.get<boolean>(
       `${environment.apiUrl}/Users/checkusername`,
       {
         params: { email },
       }
     );
-  };
+  }
+
+  logout() {
+    if (this.user$.getValue()) {
+      localStorage.removeItem('currentUser');
+      sessionStorage.removeItem('currentUser');
+      this._user$.next(null);
+    }
+  }
 }

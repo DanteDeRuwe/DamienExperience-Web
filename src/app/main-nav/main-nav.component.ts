@@ -12,11 +12,15 @@ import { AuthenticationService } from '../user/authentication.service';
 export class MainNavComponent {
 
   constructor(
-    //private _authenticationService: AuthenticationService,
+    private _authenticationService: AuthenticationService,
     private _router: Router) { }
 
   register(){
     this._router.navigate(['register']);
+  }
+
+  logout(){
+    this._authenticationService.logout();
   }
 
 }
