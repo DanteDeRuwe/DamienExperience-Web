@@ -45,7 +45,32 @@ export class AuthenticationService {
    }
 
    //insert code for login request 
-   //login(){}
+   login(email : string, password : string, rememberme : boolean): Observable<boolean> {
+    return this.http.post(
+      `${environment.apiUrl}/Users/login`,
+      {
+        email,
+        password
+      },
+      {responseType: 'text'}
+    )
+    .pipe(
+      map((token: any) => {
+        if(token) {
+          if(rememberme){
+            localStorage.setItem(this._tokenKey, token);
+          }
+          else{
+            sessionStorage.setItem(this._tokenKey, token);
+          }
+          this._user$.next(email);
+          return true;
+        } else {
+         return false;
+        }
+      })
+    );
+   }
 
    //register request
    register(firstname: string, lastname: string, 
