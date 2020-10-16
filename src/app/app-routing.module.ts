@@ -11,7 +11,7 @@ import { UserpageComponent } from './user/userpage/userpage.component';
 const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'register', component: UserpageComponent },
-  { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
   { path: '', redirectTo: 'about', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}

@@ -7,6 +7,7 @@ import {
   import { Injectable } from '@angular/core';
   import { AuthenticationService } from '../user/authentication.service';
   import { Observable } from 'rxjs';
+import { cpuUsage } from 'process';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
@@ -17,12 +18,15 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (this.authService.token.length) {
+        let token = this.authService.token.replace(/[\"]+/g,'');
+        console.log(token)
       const clonedRequest = req.clone({
         headers: req.headers.set(
           'Authorization',
-          `Bearer ${this.authService.token}`
+          `Bearer ${token}`
         ),
       });
+      console.log(clonedRequest)
       return next.handle(clonedRequest);
     }
     return next.handle(req);
