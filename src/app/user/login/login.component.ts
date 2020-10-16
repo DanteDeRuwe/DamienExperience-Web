@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
         (val) => {
           if (val) {
             if (this._authService.redirectUrl) {
-              // this._router.navigateByUrl(this._authService.redirectUrl);
-              // this._authService.redirectUrl = undefined;
+              this._router.navigateByUrl(this._authService.redirectUrl);
+              this._authService.redirectUrl = undefined;
               console.log(this.login)
             } else {
               this._router.navigate(['about']);
