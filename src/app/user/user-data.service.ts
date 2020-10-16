@@ -16,7 +16,7 @@ export class UserDataService {
 
   get profile$(): Observable<User>{
     console.log('yes')
-    return this.http.get(`${environment.apiUrl}/Users/getProfile`).pipe(
+    return this.http.get(`${environment.apiUrl}/profile`).pipe(
       tap(),
       catchError(this.handleError),
       map(User.fromJson)

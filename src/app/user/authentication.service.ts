@@ -47,7 +47,7 @@ export class AuthenticationService {
   //insert code for login request 
   login(email: string, password: string, rememberme: boolean): Observable<boolean> {
     return this.http.post(
-      `${environment.apiUrl}/Users/login`,
+      `${environment.apiUrl}/login`,
       {
         email,
         password
@@ -80,7 +80,7 @@ export class AuthenticationService {
     //birthdate: Date, phoneNumber : string,
     email: string, password: string, rememberme: boolean): Observable<boolean> {
     return this.http.post(
-      `${environment.apiUrl}/Users/register`,
+      `${environment.apiUrl}/register`,
       {
         firstname,
         lastname,
@@ -113,7 +113,7 @@ export class AuthenticationService {
 
   checkUserNameAvailability = (email: string): Observable<boolean> => {
     return this.http.get<boolean>(
-      `${environment.apiUrl}/Users/checkusername`,
+      `${environment.apiUrl}/register/checkusername`,
       {
         params: { email },
       }
@@ -121,7 +121,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    console.log("bitch please!")
     if (this.user$.getValue()) {
       localStorage.removeItem('currentUser');
       sessionStorage.removeItem('currentUser');
