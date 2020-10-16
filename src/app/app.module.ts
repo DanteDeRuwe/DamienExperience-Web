@@ -16,6 +16,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { RegisterComponent } from './user/register/register.component';
+import { MaterialModule } from './material/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './user/login/login.component';
+import { UserpageComponent } from './user/userpage/userpage.component';
 
 
 @NgModule({
@@ -24,18 +30,16 @@ import { MatListModule } from '@angular/material/list';
     MainNavComponent,
     AboutComponent,
     PageNotFoundComponent,
+    RegisterComponent,
+    LoginComponent,
+    UserpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
-    
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule
   ],

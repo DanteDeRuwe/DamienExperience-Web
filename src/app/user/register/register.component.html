@@ -1,0 +1,288 @@
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
+
+<h2>Ik maak een account</h2>
+<form [formGroup]="register" (ngSubmit)="onSubmitRegister()">
+  <div class="form-group side-by-side" formGroupName="nameGroup">
+    <div>
+      <label for="firstname">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstname"
+        placeholder="John"
+        formControlName="firstname"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('nameGroup').get('firstname').errors &&
+          register.get('nameGroup').get('firstname').touched
+        "
+      >
+        {{ getErrorMessage(register.get("nameGroup").get("firstname").errors) }}
+      </p>
+    </div>
+    <div>
+      <label for="lastname">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastname"
+        placeholder="Doe"
+        formControlName="lastname"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('nameGroup').get('lastname').errors &&
+          register.get('nameGroup').get('lastname').touched
+        "
+      >
+        {{ getErrorMessage(register.get("nameGroup").get("lastname").errors) }}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group side-by-side" formGroupName="dobaAndPhoneGroup">
+    <div>
+      <label for="dob">Date of Birth</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dob"
+        placeholder="01-01-2001"
+        formControlName="dob"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('dobaAndPhoneGroup').get('dob').errors &&
+          register.get('dobaAndPhoneGroup').get('dob').touched
+        "
+      >
+        {{
+          getErrorMessage(register.get("dobaAndPhoneGroup").get("dob").errors)
+        }}
+      </p>
+    </div>
+    <div>
+      <label for="phone">Phone Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        placeholder="0123 456 789"
+        formControlName="phone"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('dobaAndPhoneGroup').get('phone').errors &&
+          register.get('dobaAndPhoneGroup').get('phone').touched
+        "
+      >
+        {{
+          getErrorMessage(register.get("dobaAndPhoneGroup").get("phone").errors)
+        }}
+      </p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      placeholder="email@example.com"
+      formControlName="email"
+    />
+    <small id="email" class="form-text text-muted"
+      >We'll never share your email with anyone else.</small
+    >
+    <p
+      class="text-danger"
+      *ngIf="register.get('email').errors && register.get('email').touched"
+    >
+      {{ getErrorMessage(register.get("email").errors) }}
+    </p>
+  </div>
+
+  <div class="form-group side-by-side" formGroupName="passwordGroup">
+    <div>
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Enter password"
+        formControlName="password"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('passwordGroup').get('password').errors &&
+          register.get('passwordGroup').get('password').touched
+        "
+      >
+        {{
+          getErrorMessage(register.get("passwordGroup").get("password").errors)
+        }}
+      </p>
+    </div>
+    <div>
+      <label for="confirmPassword">Confirm password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        placeholder="Confirm password"
+        formControlName="confirmPassword"
+      />
+      <p
+        class="text-danger"
+        *ngIf="
+          register.get('passwordGroup').get('confirmPassword').errors &&
+          register.get('passwordGroup').get('confirmPassword').touched
+        "
+      >
+        {{
+          getErrorMessage(
+            register.get("passwordGroup").get("confirmPassword").errors
+          )
+        }}
+      </p>
+    </div>
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="rememberMe" [checked]="rememberMe" (change)="this.rememberMe = !this.rememberMe"/>
+    <label class="rememberMe" for="rememberMe">Remember me</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<!-- <div fxLayout="column" fxLayoutAlign="space-around stretch" class="login-main">
+
+
+    <form [formGroup]="register" (ngSubmit)="onSubmit()">
+      <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayout="column">
+        <span fxLayout="row" fxLayoutGap="2%">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="first name"
+              aria-label="first name"
+              formControlName="firstname"
+            />
+            <mat-error
+              *ngIf="
+                register.get('firstname').errors && register.get('firstname').touched
+              "
+            >
+              {{ getErrorMessage(register.get('firstname').errors) }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="last name"
+              aria-label="last name"
+              formControlName="lastname"
+            />
+            <mat-error
+              *ngIf="
+                register.get('lastname').errors && register.get('lastname').touched
+              "
+            >
+              {{ getErrorMessage(register.get('lastname').errors) }}
+            </mat-error>
+          </mat-form-field>
+        </span>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="email"
+            aria-label="email"
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="register.get('email').errors && register.get('email').touched"
+          >
+            {{ getErrorMessage(register.get('email').errors) }}
+          </mat-error>
+        </mat-form-field>
+        <span fxLayout="column" formGroupName="passwordGroup">
+          <mat-form-field>
+            <input
+              type="password"
+              matInput
+              placeholder="password"
+              aria-label="password"
+              formControlName="password"
+            />
+            <mat-error
+              *ngIf="
+                register.get('passwordGroup').get('password').errors &&
+                register.get('passwordGroup').get('password').touched
+              "
+            >
+              {{
+                getErrorMessage(
+                  register.get('passwordGroup').get('password').errors
+                )
+              }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              type="password"
+              matInput
+              placeholder="confirm password"
+              aria-label="confirm password"
+              formControlName="confirmPassword"
+            />
+            <mat-error
+              *ngIf="
+                register.get('passwordGroup').get('confirmPassword').errors &&
+                register.get('passwordGroup').get('confirmPassword').touched
+              "
+            >
+              {{
+                getErrorMessage(
+                  register.get('passwordGroup').get('confirmPassword').errors
+                )
+              }}
+            </mat-error>
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              register.get('passwordGroup').errors &&
+              register.get('passwordGroup').get('confirmPassword').touched &&
+              register.get('passwordGroup').get('password').touched
+            "
+          >
+            {{ getErrorMessage(register.get('passwordGroup').errors) }}
+          </mat-error>
+        </span>
+      </mat-card-content>
+
+      <mat-card-actions fxLayout="row" fxLayoutAlign="end">
+        <a [routerLink]="['/login']"
+        mat-stroked-button
+        color="primary"
+        style="margin-right: 20px">Login</a>
+
+<button mat-raised-button type="submit" color="primary">
+  Register
+</button>
+</mat-card-actions>
+</form>
+<mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+  got an error while loading: {{ errorMessage }}
+</mat-card>
+
+</div> -->
