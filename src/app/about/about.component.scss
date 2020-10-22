@@ -1,0 +1,29 @@
+.about{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 1rem;
+    .info{ 
+        width: 60rem; 
+    }
+    .app{
+        .phoneImg {
+            height: 30rem;
+        }
+        .download{
+            display: flex;
+            justify-content: center;
+            .dlImg {
+                width: 12rem;
+                margin: 0.3rem;
+            }
+        }
+    }
+}
+
+
+h2{
+    color: #ff0040;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
