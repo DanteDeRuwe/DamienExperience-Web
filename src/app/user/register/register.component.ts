@@ -94,8 +94,8 @@ export class RegisterComponent implements OnInit {
     this._authService.register(
       this.register.value.nameGroup.firstname,
       this.register.value.nameGroup.lastname,
-      //this.user.value.dobaAndPhoneGroup.birthdate,
-      //this.user.value.dobaAndPhoneGroup.phoneNumber,
+      this.register.value.dobaAndPhoneGroup.birthdate,
+      this.register.value.dobaAndPhoneGroup.phoneNumber,
       this.register.value.email,
       this.register.value.passwordGroup.password,
       this.rememberMe

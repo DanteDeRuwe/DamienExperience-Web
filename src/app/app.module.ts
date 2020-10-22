@@ -22,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './user/login/login.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
+import { httpInterceptorProviders } from './interceptors';
+import { ProfileComponent } from './user/profile/profile.component';
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { UserpageComponent } from './user/userpage/userpage.component';
     PageNotFoundComponent,
     RegisterComponent,
     LoginComponent,
+    ProfileComponent,
     UserpageComponent
   ],
   imports: [
@@ -43,7 +46,7 @@ import { UserpageComponent } from './user/userpage/userpage.component';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
