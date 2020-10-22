@@ -14,16 +14,17 @@ export class UserDataService {
 
   }
 
-  changeCredentials(user: any){
-    this.http.put(`${environment.apiUrl}/profile/update`, user).pipe(
+  changeCredentials(user: User){
+    console.log('hhtpreq');
+    console.log(user);
+    this.http.put(`${environment.apiUrl}/profile/update`, user, { responseType: 'text' }).pipe(
+      tap(),
       catchError(this.handleError)
     );
   }
 
   get profile$(): Observable<User>{
-    console.log('yes')
     return this.http.get(`${environment.apiUrl}/profile`).pipe(
-      tap(),
       catchError(this.handleError),
       map(User.fromJson)
     );

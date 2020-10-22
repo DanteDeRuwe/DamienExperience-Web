@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -41,13 +42,9 @@ export class ProfileComponent implements OnInit {
 
   changeCredentials(){
     console.log('submit')
-    // var temp = {
-    //   email: this.credentials.get("email"),
-    //   firstName: this.credentials.get("firstname"),
-    //   lastName: this.credentials.get("lastname"),
-    // }
-    // console.log(temp);
-    // this._uds.changeCredentials(temp);
+    console.log(this.user)
+   
+    //this._uds.changeCredentials(temp);
   }
 
   getErrorMessage(errors: any) {
