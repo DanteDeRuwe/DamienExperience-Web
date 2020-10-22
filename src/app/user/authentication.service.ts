@@ -24,7 +24,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
     if (parsedToken) {
-      const expires = new Date(parseInt(parsedToken.exp, 10) * 1000)
+      const expires: boolean = new Date(parseInt(parsedToken.exp, 10) * 1000) < new Date();
       if (expires) {
         localStorage.removeItem(this._tokenKey);
         parsedToken = null;
@@ -47,7 +47,7 @@ export class AuthenticationService {
   //insert code for login request 
   login(email: string, password: string, rememberme: boolean): Observable<boolean> {
     return this.http.post(
-      `${environment.apiUrl}/Users/login`,
+      `${environment.apiUrl}/login`,
       {
         email,
         password
@@ -56,13 +56,16 @@ export class AuthenticationService {
     )
       .pipe(
         map((token: any) => {
+          console.log(token);
           if (token) {
-            if (rememberme) {
-              localStorage.setItem(this._tokenKey, token);
-            }
-            else {
-              sessionStorage.setItem(this._tokenKey, token);
-            }
+            // if (rememberme) {
+            //   localStorage.setItem(this._tokenKey, token);
+            // }
+            // else {
+            //   sessionStorage.setItem(this._tokenKey, token);
+            // }
+
+            localStorage.setItem(this._tokenKey, token);
             this._user$.next(email);
             return true;
           } else {
@@ -74,15 +77,15 @@ export class AuthenticationService {
 
   //register request
   register(firstname: string, lastname: string,
-    //birthdate: Date, phoneNumber : string,
+    birthdate: Date, phoneNumber : string,
     email: string, password: string, rememberme: boolean): Observable<boolean> {
     return this.http.post(
-      `${environment.apiUrl}/Users/register`,
+      `${environment.apiUrl}/register`,
       {
         firstname,
         lastname,
-        //birthdate,
-        //phoneNumber,
+        birthdate,
+        phoneNumber,
         email,
         password,
         passwordConfirmation: password,
@@ -92,12 +95,13 @@ export class AuthenticationService {
       .pipe(
         map((token: any) => {
           if (token) {
-            if (rememberme) {
-              localStorage.setItem(this._tokenKey, token);
-            }
-            else {
-              sessionStorage.setItem(this._tokenKey, token);
-            }
+            // if (rememberme) {
+            //   localStorage.setItem(this._tokenKey, token);
+            // }
+            // else {
+            //   sessionStorage.setItem(this._tokenKey, token);
+            // }
+            localStorage.setItem(this._tokenKey, token);
             this._user$.next(email);
             return true;
           } else {
@@ -109,7 +113,7 @@ export class AuthenticationService {
 
   checkUserNameAvailability = (email: string): Observable<boolean> => {
     return this.http.get<boolean>(
-      `${environment.apiUrl}/Users/checkusername`,
+      `${environment.apiUrl}/register/checkusername`,
       {
         params: { email },
       }
