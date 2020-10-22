@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  mapbox: {
+    accessToken: 'pk.eyJ1Ijoiam9yZHl2YW5rZXJrdm9vcmRlIiwiYSI6ImNrZzNvN3o2bTBicncycHBqYzRtZW50dHkifQ.ceuhpKlsJFUPaxinU4qoag'
+  },
   apiUrl: '/api',
 };
 
