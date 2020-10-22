@@ -308,7 +308,7 @@ export class MapComponent implements OnInit {
     //zoom is het zoomniveau
     //center is de focus van de kaart(dit moeten we nog veranderen en het automatisch laten berekenen?)
     this.map = new mapboxgl.Map({
-      accessToken: environment.mapbox.accessToken,
+      accessToken: environment.accessToken,
       container: 'map',
       style: this.style,
       zoom: 14,
