@@ -1,29 +1,64 @@
-.about{
+.content{
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 1rem;
-    .info{ 
-        width: 60rem; 
-    }
-    .app{
-        .phoneImg {
-            height: 30rem;
+    flex-direction: column;
+    justify-content: space-between;
+    .about{
+        margin: 0 5rem 7rem 5rem;
+        justify-content: space-around;
+        display: flex;
+        flex-wrap: wrap;
+        .info{ 
+            width: 60rem; 
         }
-        .download{
-            display: flex;
-            justify-content: center;
-            .dlImg {
-                width: 12rem;
-                margin: 0.3rem;
+        .app{
+            .phoneImg {
+                height: 30rem;
+            }
+            .download{
+                display: flex;
+                justify-content: center;
+                .dlImg {
+                    width: 12rem;
+                    margin: 0.3rem;
+                }
             }
         }
     }
+    .tshirt{
+        margin: 5rem 5rem 7rem 5rem;
+        justify-content: space-around;
+        flex-direction: row;
+        display: flex;
+        flex-wrap: wrap;
+        .picture{
+            .tshirtImg{
+                height: 25rem;
+            }
+        }
+        .info{
+            width: 60rem; 
+            // h2{
+            //     text-align: right;
+            // }
+        }
+    }
 }
-
 
 h2{
     color: #ff0040;
     margin-bottom: 1rem;
     margin-top: 1rem;
+}
+
+.fade_rule {
+    height: 2px;
+    background-color: #E6E6E6;
+    width: 66.0em;
+    margin: 0 auto;
+    background-image: linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -o-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -moz-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -ms-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-gradient( linear, left bottom, right bottom, color-stop(0.02, white), color-stop(0.5, #dcdcdc), color-stop(0.98, white) );
 }
