@@ -1,0 +1,29 @@
+
+
+.side-by-side{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    div{
+        width: 100%;
+    }
+}
+
+
+
+
+
+.container{
+    padding-left: 5rem;
+    margin-right: 5rem;
+}
+
+.btn{
+    background-color: #ff0040;
+    border-color: #ff0040;
+}
+
+.loginform{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

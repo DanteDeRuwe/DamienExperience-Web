@@ -1,0 +1,25 @@
+.loginRegister{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.vl{
+    border-left: 6px solid #ff0040;
+  height: 35rem;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  margin-top: 7rem;
+  top: 0;
+
+}
+
+.register-wrapper{
+    margin-top: 4rem;
+}
+
+.container{
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
