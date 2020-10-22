@@ -14,6 +14,12 @@ export class UserDataService {
 
   }
 
+  changeCredentials(user: any){
+    this.http.put(`${environment.apiUrl}/profile/update`, user).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   get profile$(): Observable<User>{
     console.log('yes')
     return this.http.get(`${environment.apiUrl}/profile`).pipe(

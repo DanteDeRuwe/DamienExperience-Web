@@ -1,1 +1,60 @@
-<p>profile works!</p>
+<h2>Mijn profiel</h2>
+<h3>Wijzig mijn persoonlijke informatie</h3>
+<form [formGroup]="credentials" (ngSubmit)="changeCredentials()">
+    <div>
+        <label for="firstname">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstname"
+          formControlName="firstname"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            credentials.get('firstname').errors &&
+            credentials.get('firstname').touched
+          "
+        >
+          {{ getErrorMessage(credentials.get("firstname").errors) }}
+        </p>
+      </div>
+      <div>
+        <label for="lastname">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastname"
+          formControlName="lastname"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            credentials.get('lastname').errors &&
+            credentials.get('lastname').touched
+          "
+        >
+          {{ getErrorMessage(credentials.get("firstname").errors) }}
+        </p>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          formControlName="email"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            credentials.get('email').errors &&
+            credentials.get('email').touched
+          "
+        >
+          {{ getErrorMessage(credentials.get("email").errors) }}
+        </p>
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
