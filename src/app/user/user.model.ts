@@ -33,7 +33,7 @@ export class User{
             firstName: this._firstName,
             email: this._email,
             phoneNumber: this._phoneNumber
-        }
+        };
     }
 
     get id(){

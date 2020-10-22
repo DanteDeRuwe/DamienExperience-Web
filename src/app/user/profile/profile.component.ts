@@ -41,8 +41,8 @@ export class ProfileComponent implements OnInit {
   }
 
   changeCredentials(){
-    console.log('submit')
-    console.log(this.user)
+    console.log('submit');
+    console.log(this.user);
    
     //this._uds.changeCredentials(temp);
   }
