@@ -16,7 +16,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+
 import { MapComponent } from './map/map.component';
+
+import { RegisterComponent } from './user/register/register.component';
+import { MaterialModule } from './material/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './user/login/login.component';
+import { UserpageComponent } from './user/userpage/userpage.component';
+import { httpInterceptorProviders } from './interceptors';
+import { ProfileComponent } from './user/profile/profile.component';
+
 
 
 @NgModule({
@@ -26,22 +37,21 @@ import { MapComponent } from './map/map.component';
     AboutComponent,
     PageNotFoundComponent,
     MapComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent,
+    UserpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
-    
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
