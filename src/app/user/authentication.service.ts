@@ -52,7 +52,7 @@ export class AuthenticationService {
         email,
         password
       },
-      { responseType: 'text' }
+     // { responseType: 'text' }
     )
       .pipe(
         map((token: any) => {
@@ -90,7 +90,7 @@ export class AuthenticationService {
         password,
         passwordConfirmation: password,
       },
-      { responseType: 'text' }
+     // { responseType: 'text' }
     )
       .pipe(
         map((token: any) => {
