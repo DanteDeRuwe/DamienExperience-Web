@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _uds: UserDataService,
     private fb: FormBuilder,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this._uds.profile$.subscribe((user: User) => {
@@ -36,15 +36,24 @@ export class ProfileComponent implements OnInit {
     this.credentials = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', Validators.required]
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      dateOfBirth: ['', Validators.required]
     });
   }
 
-  changeCredentials(){
+  changeCredentials() {
     console.log('submit');
     console.log(this.user);
-   
-    //this._uds.changeCredentials(temp);
+    var tempUser = {
+      "email": this.credentials.get("email").value,
+      "firstName": this.credentials.get("firstname").value,
+      "lastName": this.credentials.get("lastname").value,
+      "phoneNumber": this.credentials.get("phoneNumber").value,
+      "dateOfBirth": this.credentials.get("dateOfBirth").value
+    }
+  //  console.log(tempUser)
+   this._uds.changeCredentials(tempUser).subscribe();
   }
 
   getErrorMessage(errors: any) {

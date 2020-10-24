@@ -14,10 +14,8 @@ export class UserDataService {
 
   }
 
-  changeCredentials(user: User){
-    console.log('hhtpreq');
-    console.log(user);
-    this.http.put(`${environment.apiUrl}/profile/update`, user, { responseType: 'text' }).pipe(
+  changeCredentials(user: any){
+    return this.http.put(`${environment.apiUrl}/profile/update`, user).pipe(
       tap(),
       catchError(this.handleError)
     );
