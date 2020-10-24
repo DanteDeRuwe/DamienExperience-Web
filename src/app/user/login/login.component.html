@@ -41,5 +41,5 @@
         <input type="checkbox" class="form-check-input" id="loginRemindme" [checked]="rememberMe" (change)="this.rememberMe = !this.rememberMe"/>
         <label class="remindme" for="remindme">Remember me</label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!login.valid">Submit</button>
     </form>

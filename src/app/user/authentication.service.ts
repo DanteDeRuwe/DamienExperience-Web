@@ -78,7 +78,8 @@ export class AuthenticationService {
   //register request
   register(firstname: string, lastname: string,
     birthdate: Date, phoneNumber : string,
-    email: string, password: string, rememberme: boolean): Observable<boolean> {
+    email: string, password: string, passwordConfirmation: string,
+     rememberme: boolean): Observable<boolean> {
     return this.http.post(
       `${environment.apiUrl}/register`,
       {
@@ -88,7 +89,7 @@ export class AuthenticationService {
         phoneNumber,
         email,
         password,
-        passwordConfirmation: password,
+        passwordConfirmation,
       },
      // { responseType: 'text' }
     )
