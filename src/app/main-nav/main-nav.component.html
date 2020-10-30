@@ -1,41 +1,37 @@
-
-
-  <mat-toolbar>
-      
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark white ie-nav fixed-top" [containerInside]="false">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark white ie-nav" [containerInside]="false">
 
-    <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">
-        <a class="navbar-brand" [routerLink]="['about']">
-            <img src="assets/images/damiaantours.png" height="30" alt="damiaantours logo">
-        </a>
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">
+      <a class="navbar-brand" [routerLink]="['about']">
+        <img src="assets/images/damiaantours.png" height="30" alt="damiaantours logo">
+      </a>
     </a></mdb-navbar-brand>
-  
-    <links>
-  
-      <!-- Links -->
-      <ul class="navbar-nav ml-auto" id="navitems"> 
-        <li class="nav-item">
-            <a class="nav-link text-dark">VOLG DE WANDELAARS</a>
-        </li>
-        <li class="nav-item">
-            
-            <a class="nav-link text-dark" [routerLink]="['about']" href="">OVER DE TOUR</a>
-        </li>
-        <li class="nav-item" id="registerBtn">
-            <a class="nav-link">
-                <img src="assets/images/damiaanhartje.png" alt="damiaanhartje" height="30" class="heartImg">
-                IK SCHRIJF ME IN
-            </a>
-        </li>
-      </ul>
-      <!-- Links -->
-    </links>
-    <!-- content -->
-  </mdb-navbar>
 
-  </mat-toolbar>
-  <ng-content></ng-content>
-  
+  <links>
 
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto" id="navitems">
+      
+      <button *ngIf="loggedInUser$ | async" (click)="logout()">
+        Logout
+      </button>
+
+      <li class="nav-item">
+        <a class="nav-link text-dark">VOLG DE WANDELAARS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-dark" [routerLink]="['about']" href="">OVER DE TOUR</a>
+      </li>
+      <li class="nav-item" id="registerBtn">
+        <a class="nav-link" (click)="schrijfIn()">
+          <img src="assets/images/damiaanhartje.png" alt="damiaanhartje" height="30" class="heartImg">
+          IK SCHRIJF ME IN
+        </a>
+      </li>
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- content -->
+</mdb-navbar>
+<ng-content></ng-content>
