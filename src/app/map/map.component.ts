@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import * as turf from '@turf/turf'
+import { Walk } from './model/walk.model';
+import { RouteDataService } from './services/route-data.service';
 
 @Component({
   selector: 'app-map',
@@ -297,7 +299,9 @@ export class MapComponent implements OnInit {
   }
 
 
-  constructor() { 
+  constructor(
+      private _rds: RouteDataService
+    ) { 
     
   }
 
@@ -341,11 +345,46 @@ export class MapComponent implements OnInit {
     this.map.on('load', () => {
       this.addRoutes();
     });
+
+    this._rds.getRoute$('RouteZero').subscribe(route => {
+      console.log(route)
+    });
+    
   }
 
 
   //Code in deze method can gerefactored en ge extract worden, is op dit moment afhankelijk van de data van BE
   private addRoutes() {
+    
+    // let routes: [Walk];
+    // routes.forEach(route => {
+    //   this.map.addSource(route.id, {
+    //     'type': 'geojson',
+    //     'data': {
+    //       'type': 'Feature',
+    //       'properties': {},
+    //       'geometry': {
+    //         'type': 'LineString',
+    //         'coordinates': route.coordinates
+    //       }
+    //     }
+    //   });
+  
+    //   this.map.addLayer({
+    //     'id': route.id,
+    //     'type': 'line',
+    //     'source': route.id,
+    //     'layout': {
+    //       'line-join': 'round',
+    //       'line-cap': 'round',
+    //     },
+    //     'paint': {
+    //       'line-color': route.lineColor,
+    //       'line-width': 4
+    //     }
+    //   });
+    // })
+
     //Dit maakt eerst een source aan voor de route (genaamd route) en zal ze dan toevoegen aan de map adhv het id (de naam)
     this.map.addSource('route', {
       'type': 'geojson',
