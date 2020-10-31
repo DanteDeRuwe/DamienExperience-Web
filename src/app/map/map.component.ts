@@ -1,11 +1,12 @@
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import * as turf from '@turf/turf'
 import { Walk } from './model/walk.model';
 import { RouteDataService } from './services/route-data.service';
 import { WalkDataService } from './services/walk-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -14,10 +15,13 @@ import { WalkDataService } from './services/walk-data.service';
 })
 export class MapComponent implements OnInit {
   
+  @Input() tourName$: Observable<string>;
+  @Input() userName$: Observable<string>;
+
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
   
-  //temp hardcoded staringpoint
+  //temp hardcoded startingpoint
   lat = 50.990410;
   lng = 4.708955;
 
@@ -97,15 +101,23 @@ export class MapComponent implements OnInit {
     
     //zorgt ervoor dat vanzodra de map geladen wordt, de routes getekend worden [POC]
     this.map.on('load', () => {
-      this._rds.getRoute$('RouteZero').subscribe(route => {
-        let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
-        this.addRoute(route.tourname, color, route.coordinates);
-      });
-      
-      this._wds.getWalk$('t@tt.te').subscribe(walk => {
-        let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
-        this.addRoute(walk.id, color, walk.coordinates)
+      this.tourName$.subscribe(name =>{
+        if(name != null){
+          this._rds.getRoute$(name).subscribe(route => {
+            let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
+            this.addRoute(route.tourname, color, route.coordinates);
+          });
+        }
       })
+      
+      // this.userName$.subscribe(user => {
+      //   if(user != null){
+      //     this._wds.getWalk$(user).subscribe(walk => {
+      //       let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
+      //       this.addRoute(walk.id, color, walk.coordinates)
+      //     });
+      //   }
+      // })
     });
     
     
