@@ -2,10 +2,11 @@
     [tourName] = "tourname"
     [userName] = "username"
 ></app-map>
-<div *ngIf="visible">
+<div *ngIf="visible" id="search">
     <div>
             <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
-                <label for="username">Email</label>
+                <label for="username">ZOEK EEN WANDELAAR</label>
+                <div class="searchcontrols">
                 <input
                 type="email"
                 class="form-control"
@@ -14,6 +15,7 @@
                 formControlName="username"
                 />
                 <button type="submit" class="btn btn-primary">ZOEKEN</button>
+                </div>
             </form>
     </div>
 </div>
