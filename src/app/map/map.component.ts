@@ -1,5 +1,5 @@
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import * as turf from '@turf/turf'
@@ -13,10 +13,10 @@ import { Observable } from 'rxjs';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   
-  @Input() tourName$: Observable<string>;
-  @Input() userName$: Observable<string>;
+  @Input() tourName: string;
+  @Input() userName: string;
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -101,29 +101,31 @@ export class MapComponent implements OnInit {
     
     //zorgt ervoor dat vanzodra de map geladen wordt, de routes getekend worden [POC]
     this.map.on('load', () => {
-      this.tourName$.subscribe(name =>{
-        if(name != null){
-          this._rds.getRoute$(name).subscribe(route => {
-            let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
-            this.addRoute(route.tourname, color, route.coordinates);
-          });
-        }
-      })
-      
-      // this.userName$.subscribe(user => {
-      //   if(user != null){
-      //     this._wds.getWalk$(user).subscribe(walk => {
-      //       let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
-      //       this.addRoute(walk.id, color, walk.coordinates)
-      //     });
-      //   }
-      // })
-    });
-    
-    
-    
+    this.loadRoute()
+  });
   }
 
+  ngOnChanges(changes: SimpleChanges){
+    this.tourName = changes.tourName.currentValue;
+    this.userName = changes.userName.currentValue;
+    this.loadRoute();
+  }
+
+  loadRoute(){
+      if(this.tourName != null){
+        this._rds.getRoute$(this.tourName).subscribe(route => {
+          let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
+          this.addRoute(route.tourname, color, route.coordinates);
+        });
+      }
+    
+      if(this.userName != null){
+        this._wds.getWalk$(this.userName).subscribe(walk => {
+          let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
+          this.addRoute(walk.id, color, walk.coordinates)
+        });
+      }
+  }
 
   //Code in deze method can gerefactored en ge extract worden, is op dit moment afhankelijk van de data van BE
   private addRoute(name: string, color: string, coords: any) {
@@ -153,32 +155,5 @@ export class MapComponent implements OnInit {
         'line-width': 4
       }
     });
-
-    //layer en source voor walked path
-    // this.map.addSource('walked', {
-    //   'type': 'geojson',
-    //   'data': {
-    //     'type': 'Feature',
-    //     'properties': {},
-    //     'geometry': {
-    //       'type': 'LineString',
-    //       'coordinates': this.route.features[0].geometry.coordinates.slice(0, 10)
-    //     }
-    //   }
-    // });
-
-    // this.map.addLayer({
-    //   'id': 'walked',
-    //   'type': 'line',
-    //   'source': 'walked',
-    //   'layout': {
-    //     'line-join': 'round',
-    //     'line-cap': 'round',
-    //   },
-    //   'paint': {
-    //     'line-color': '#3bb7a9',
-    //     'line-width': 4
-    //   }
-    // });
   }
 }

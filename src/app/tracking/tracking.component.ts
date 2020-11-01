@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { getTestBed } from '@angular/core/testing';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NgForm } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-tracking',
@@ -10,25 +12,34 @@ import { Observable } from 'rxjs';
 })
 export class TrackingComponent implements OnInit {
 
-  tourName$: Observable<string>;
-  userName$: Observable<string>;
+  tourName: string;
+  userName: string;
   visible: boolean = true;
 
   public searchForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
-    //this.tourName = 'RouteZero';
-    //this.userName = 't@tt.te';
+    console.log(this.tourName, this.userName)
     this.searchForm = this.fb.group({
       username: ['', Validators.required]
     });
   }
 
   onSubmitSearch(){
-    this.userName$ = this.searchForm.value.username;
-    this.tourName$ = Observable.apply("RouteZero")
+    this.userName = this.searchForm.value.username;
+    this.tourName = "RouteZero";
+    console.log(this.tourName, this.userName)
     this.visible = false
+  }
+
+  get tourname(){
+    return this.tourName;
+  }
+
+  get username(){
+    return this.userName
   }
 }
