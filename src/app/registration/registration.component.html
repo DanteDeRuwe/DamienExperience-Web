@@ -1,0 +1,21 @@
+<h2>Ik schrijf me in voor een wandeling!</h2>
+<div>
+    <form [formGroup]="registration" (ngSumbit)="onSubmitRegistration()">
+        <label for="route">Kies je wandeling:</label>
+        <select id="route"
+            class="form-control"
+             formControlName="route"
+             (change)="onChange($event.target.value)"
+             >
+            <option *ngFor="let route of routes" [ngValue]="route">
+                {{ route.tourName }}, {{ route.distanceInMeters / 1000 }}km
+            </option>
+        </select>
+    </form>
+
+</div>
+<!-- <app-map
+    [tourName] = "tourname"
+    [userName] = "username"
+></app-map> -->
+

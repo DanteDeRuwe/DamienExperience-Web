@@ -20,6 +20,13 @@ export class RouteDataService {
     );
   }
 
+  getFutureRoutes$(): Observable<Route[]> {
+    return this.http.get(`${environment.apiUrl}/route/getfutureroutes`).pipe(
+      catchError(this.handleError),
+      map((list: any[]): Route[] => list.map(Route.fromJson))
+    )
+  }
+
   handleError(err: any): Observable<never> {
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {

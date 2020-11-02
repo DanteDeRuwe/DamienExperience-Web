@@ -1,5 +1,6 @@
 export interface RouteJson {
-    tourname: string,
+    tourName: string,
+    date: Date,
     distanceInMeters: number,
     lineColor: string,
     coordinates: [number[]]
@@ -7,7 +8,8 @@ export interface RouteJson {
 
 export class Route{
     constructor(
-        private _tourname: string,
+        private _tourName: string,
+        private _date: Date,
         private _distanceInMeters: number,
         private _lineColor: string,
         private _coordinates: [number[]]
@@ -15,7 +17,8 @@ export class Route{
 
     static fromJson(json: RouteJson){
         const route = new Route(
-            json.tourname,
+            json.tourName,
+            json.date,
             json.distanceInMeters,
             json.lineColor,
             json.coordinates,
@@ -25,15 +28,20 @@ export class Route{
 
     toJson(): RouteJson{
         return {
-            tourname: this._tourname,
+            tourName: this._tourName,
+            date: this._date,
             distanceInMeters: this._distanceInMeters,
             lineColor: this._lineColor,
             coordinates: this._coordinates,
         };
     }
 
-    get tourname(){
-        return this._tourname;
+    get tourName(){
+        return this._tourName;
+    }
+
+    get date(){
+        return this._date;
     }
 
     get distanceInMeters(){
