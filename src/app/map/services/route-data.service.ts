@@ -10,10 +10,11 @@ import { Route } from '../model/route.model';
   providedIn: 'root'
 })
 export class RouteDataService {
+  public redirectUrl: string = null;
 
   constructor(private http: HttpClient) { }
 
-  getRoute$(name: string): Observable<Route>{
+  getRoute$(name: string): Observable<Route> {
     return this.http.get(`${environment.apiUrl}/route/${name}`).pipe(
       catchError(this.handleError),
       map(Route.fromJson)
@@ -26,6 +27,21 @@ export class RouteDataService {
       map((list: any[]): Route[] => list.map(Route.fromJson))
     )
   }
+
+  routeRegistration$(routeId: string, orderedShirt: boolean, sizeShirt: string) {
+    return this.http.post(`${environment.apiUrl}/routeregistration`,
+      {
+        routeId,
+        orderedShirt,
+        sizeShirt
+      }).pipe(
+        tap(),
+        catchError(this.handleError)
+      )
+  }
+
+
+
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;

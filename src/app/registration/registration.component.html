@@ -1,21 +1,44 @@
 <h2>Ik schrijf me in voor een wandeling!</h2>
+
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>
+
 <div>
-    <form [formGroup]="registration" (ngSumbit)="onSubmitRegistration()">
+    <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
         <label for="route">Kies je wandeling:</label>
-        <select id="route"
-            class="form-control"
-             formControlName="route"
-             (change)="onChange($event.target.value)"
-             >
+        <select id="route" class="form-control" formControlName="route" (change)="onChange($event.target.value)">
             <option *ngFor="let route of routes" [ngValue]="route">
-                {{ route.tourName }}, {{ route.distanceInMeters / 1000 }}km
+                {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
             </option>
         </select>
+        <p class="text-danger" *ngIf="registration.get('route').errors && registration.get('route').touched">
+            {{ getErrorMessage(registration.get("route").errors) }}
+        </p>
+        <br>
+
+        <label for="sizeShirt">Koop een limited edition T-shirt</label> <br>
+        <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
+        <select id="sizeShirt" class="form-control" formControlName="sizeShirt">
+            <option value="geen">geen T-shirt</option> <!-- Is dat erg dat en dan "geen" staat in db ipv null -->
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
+        <p class="text-danger" *ngIf="registration.get('sizeShirt').errors && registration.get('sizeShirt').touched">
+            {{ getErrorMessage(registration.get("sizeShirt").errors) }}
+        </p><br>
+
+        <p>Te betalen: ???</p>
+
+        <button type="submit" class="btn btn-primary">Bevestig</button>
     </form>
 
 </div>
+
 <!-- <app-map
     [tourName] = "tourname"
     [userName] = "username"
 ></app-map> -->
-
