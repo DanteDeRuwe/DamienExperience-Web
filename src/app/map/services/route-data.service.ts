@@ -28,12 +28,12 @@ export class RouteDataService {
     )
   }
 
-  routeRegistration$(routeId: string, orderedShirt: boolean, sizeShirt: string) {
+  routeRegistration$(routeId: string, orderedShirt: boolean, shirtSize: string) {
     return this.http.post(`${environment.apiUrl}/routeregistration`,
       {
         routeId,
         orderedShirt,
-        sizeShirt
+        shirtSize
       }).pipe(
         tap(),
         catchError(this.handleError)

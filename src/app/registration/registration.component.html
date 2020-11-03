@@ -17,18 +17,23 @@
         </p>
         <br>
 
-        <label for="sizeShirt">Koop een limited edition T-shirt</label> <br>
+        <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
         <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
-        <select id="sizeShirt" class="form-control" formControlName="sizeShirt"  (change)="onChangeShirt($event)">
-            <option value="geen">geen T-shirt</option> <!-- Is dat erg dat en dan "geen" staat in db ipv null -->
+        <!-- <select id="shirtSize" class="form-control" formControlName="shirtSize"  (change)="onChangeShirt($event)">
+            <option value="geen">geen T-shirt</option>
             <option value="S">S</option>
             <option value="M">M</option>
             <option value="L">L</option>
             <option value="XL">XL</option>
             <option value="XXL">XXL</option>
-        </select>
-        <p class="text-danger" *ngIf="registration.get('sizeShirt').errors && registration.get('sizeShirt').touched">
-            {{ getErrorMessage(registration.get("sizeShirt").errors) }}
+        </select> -->
+        <select id="shirtSize" class="form-control" formControlName="shirtSize"  (change)="onChangeShirt($event)">
+            <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
+              {{ shirtSize }}
+            </option>
+          </select>
+        <p class="text-danger" *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
+            {{ getErrorMessage(registration.get("shirtSize").errors) }}
         </p><br>
 
         <p>Te betalen: €{{price}}</p>

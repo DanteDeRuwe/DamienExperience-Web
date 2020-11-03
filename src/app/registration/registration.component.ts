@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ShirtSize } from '../enums.model';
 import { Route } from '../map/model/route.model';
 import { RouteDataService } from '../map/services/route-data.service';
 
@@ -18,8 +19,10 @@ export class RegistrationComponent implements OnInit {
   tourName: string;
   userName: string;
   errorMessage: string = '';
-  selectedSize: string;
+  selectedSize: ShirtSize;
   price: number = 0;
+  
+  shirtSizes = Object.values(ShirtSize);
 
   constructor(private fb: FormBuilder,
     private _rds: RouteDataService, private _router: Router,
@@ -29,14 +32,13 @@ export class RegistrationComponent implements OnInit {
     this.registration = this.fb.group({
       route: ['', Validators.required],
       orderedShirt: ['', Validators.required],
-      sizeShirt: ['', Validators.required]
+      shirtSize: ['', Validators.required]
     });
 
     this._rds.getFutureRoutes$().subscribe(routes => {
       console.log(routes);
       this.routes = routes;
     });
-
   }
 
   onChange(value) {
@@ -49,11 +51,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   onChangeShirt(selected) {
-    this.selectedSize = selected.target.value
-
-    if(this.selectedSize != 'geen'){
+    this.selectedSize = selected.target.value;  
+    console.log(ShirtSize.GEEN);
+    if (this.selectedSize != ShirtSize.GEEN) {
       this.price = 65;
-    }else{
+    } else {
       this.price = 50;
     }
   }
@@ -61,15 +63,15 @@ export class RegistrationComponent implements OnInit {
   onSubmitRegistration() {
 
     this.registration.value.orderedShirt = true
-    if (this.registration.value.sizeShirt == "geen")
+    if (this.registration.value.shirtSize == "geen")
       this.registration.value.orderedShirt = false
 
     // console.log(this.registration.value.route.tourId)
-    // console.log(this.registration.value.sizeShirt)
+    // console.log(this.registration.value.shirtSize)
     // console.log(this.registration.value.orderedShirt)
 
 
-    this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.sizeShirt)
+    this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
       .subscribe((val) => {
         if (val) {
           if (this._rds.redirectUrl) {
