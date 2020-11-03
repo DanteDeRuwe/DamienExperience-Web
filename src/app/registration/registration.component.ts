@@ -52,12 +52,13 @@ export class RegistrationComponent implements OnInit {
     if (this.registration.value.sizeShirt == "geen")
       this.registration.value.orderedShirt = false
 
-    console.log(this.registration.value.route)
+    console.log(this.registration.value.route.tourId)
     console.log(this.registration.value.sizeShirt)
     console.log(this.registration.value.orderedShirt)
 
-    //Dit werkt nog niet omdat je het route id moet doorgeven, maar dit halen we niet up uit
-    this._rds.routeRegistration$(this.registration.value.route/*.id*/, this.registration.value.orderedShirt, this.registration.value.sizeShirt)
+    
+
+    this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.sizeShirt)
       .subscribe((val) => {
         if (val) {
           if (this._rds.redirectUrl) {
