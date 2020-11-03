@@ -18,6 +18,8 @@ export class RegistrationComponent implements OnInit {
   tourName: string;
   userName: string;
   errorMessage: string = '';
+  selectedSize: string;
+  price: number = 0;
 
   constructor(private fb: FormBuilder,
     private _rds: RouteDataService, private _router: Router,
@@ -46,17 +48,26 @@ export class RegistrationComponent implements OnInit {
     this.tourName = "RouteZero";
   }
 
+  onChangeShirt(selected) {
+    this.selectedSize = selected.target.value
+
+    if(this.selectedSize != 'geen'){
+      this.price = 65;
+    }else{
+      this.price = 50;
+    }
+  }
+
   onSubmitRegistration() {
 
     this.registration.value.orderedShirt = true
     if (this.registration.value.sizeShirt == "geen")
       this.registration.value.orderedShirt = false
 
-    console.log(this.registration.value.route.tourId)
-    console.log(this.registration.value.sizeShirt)
-    console.log(this.registration.value.orderedShirt)
+    // console.log(this.registration.value.route.tourId)
+    // console.log(this.registration.value.sizeShirt)
+    // console.log(this.registration.value.orderedShirt)
 
-    
 
     this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.sizeShirt)
       .subscribe((val) => {
