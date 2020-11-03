@@ -52,8 +52,10 @@ export class RegistrationComponent implements OnInit {
 
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;  
-    console.log(ShirtSize.GEEN);
-    if (this.selectedSize != ShirtSize.GEEN) {
+
+    console.log(this.selectedSize)
+    console.log(this.selectedSize.endsWith("GEEN"));
+    if (!this.selectedSize.endsWith("GEEN")) {
       this.price = 65;
     } else {
       this.price = 50;
@@ -63,9 +65,10 @@ export class RegistrationComponent implements OnInit {
   onSubmitRegistration() {
 
     this.registration.value.orderedShirt = true
-    if (this.registration.value.shirtSize == "geen")
+    if (this.registration.value.shirtSize == ShirtSize.GEEN)
       this.registration.value.orderedShirt = false
 
+      console.log(`orderedShirt: ${this.registration.value.orderedShirt}`)
     // console.log(this.registration.value.route.tourId)
     // console.log(this.registration.value.shirtSize)
     // console.log(this.registration.value.orderedShirt)
