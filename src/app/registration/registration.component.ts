@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { ShirtSize } from '../enums.model';
 import { Route } from '../map/model/route.model';
 import { RouteDataService } from '../map/services/route-data.service';
+import { UserDataService } from '../user/user-data.service';
+import { User } from '../user/user.model';
 
 
 @Component({
@@ -21,11 +23,15 @@ export class RegistrationComponent implements OnInit {
   errorMessage: string = '';
   selectedSize: ShirtSize;
   price: number = 0;
-  
+  user: User;
+
+  userLoaded: Promise<boolean>
+
   shirtSizes = Object.values(ShirtSize);
 
   constructor(private fb: FormBuilder,
     private _rds: RouteDataService, private _router: Router,
+    private _uds: UserDataService
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +45,12 @@ export class RegistrationComponent implements OnInit {
       console.log(routes);
       this.routes = routes;
     });
+
+    this._uds.profile$.subscribe(u => {
+      this.user = u;
+      this.userLoaded = Promise.resolve(true);
+    }
+    )
   }
 
   onChange(value) {
@@ -51,7 +63,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onChangeShirt(selected) {
-    this.selectedSize = selected.target.value;  
+    this.selectedSize = selected.target.value;
 
     console.log(this.selectedSize)
     console.log(this.selectedSize.endsWith("GEEN"));
@@ -63,15 +75,16 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmitRegistration() {
-
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN)
       this.registration.value.orderedShirt = false
 
-      console.log(`orderedShirt: ${this.registration.value.orderedShirt}`)
-    // console.log(this.registration.value.route.tourId)
-    // console.log(this.registration.value.shirtSize)
-    // console.log(this.registration.value.orderedShirt)
+    console.log(this.user.registrations)
+    console.log(this.routes)
+
+    console.log(`user already registered: ${this.alreadyRegistered()}`)
+
+
 
 
     this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
@@ -97,6 +110,37 @@ export class RegistrationComponent implements OnInit {
           }
         }
       );
+
+  }
+
+  async alreadyRegistered$():Promise<any> {
+    return this.alreadyRegistered();
+  }
+
+  alreadyRegistered(): boolean {
+
+    var ret = false;
+    var registrationLength = this.user.registrations.length;
+
+    console.log("START")
+    console.log(this.user)
+
+    console.log(registrationLength)
+    if (this.user.registrations.length == 0)
+      return false
+
+    this.user.registrations.forEach(registration => {
+      console.log(`registration: ${registration.routeId}`)
+      this.routes.forEach(route => {
+        console.log(`route: ${route.tourId}`)
+        if (route.tourId == registration.routeId)
+          ret = true
+
+      })
+    })
+    console.log("STOP")
+
+    return ret
   }
 
   getErrorMessage(errors: any) {

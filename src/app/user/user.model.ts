@@ -1,9 +1,12 @@
+import { Registration } from '../map/model/registration.model';
+
 export interface UserJson {
     id: string;
     lastName: string;
     firstName: string;
     email: string;
     phoneNumber: number;
+    registrations: Registration[];
 }
 
 export class User{
@@ -12,7 +15,8 @@ export class User{
         private _firstName: string,
         private _lastName: string,
         private _email: string,
-        private _phoneNumber: number
+        private _phoneNumber: number,
+        private _registrations: Registration[]
     ) {}
 
     static fromJson(json: UserJson){
@@ -21,7 +25,8 @@ export class User{
             json.lastName,
             json.firstName,
             json.email,
-            json.phoneNumber
+            json.phoneNumber,
+            json.registrations
         );
         return user;
     }
@@ -32,9 +37,11 @@ export class User{
             lastName: this._lastName,
             firstName: this._firstName,
             email: this._email,
-            phoneNumber: this._phoneNumber
+            phoneNumber: this._phoneNumber,
+            registrations: this._registrations
         };
     }
+
 
     get id(){
         return this._id;
@@ -54,5 +61,9 @@ export class User{
 
     get phoneNumber(){
         return this._phoneNumber;
+    }
+
+    get registrations(){
+        return this._registrations;
     }
 }
