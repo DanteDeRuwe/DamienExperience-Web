@@ -55,6 +55,42 @@
           {{ getErrorMessage(credentials.get("email").errors) }}
         </p>
       </div>
+      <div>
+        <label for="phoneNumber">Phone number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phoneNumber"
+          formControlName="phoneNumber"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            credentials.get('phoneNumber').errors &&
+            credentials.get('phoneNumber').touched
+          "
+        >
+          {{ getErrorMessage(credentials.get("phoneNumber").errors) }}
+        </p>
+      </div>
+      <div>
+        <label for="dateOfBirth">Date of birth</label>
+        <input
+          type="text"
+          class="form-control"
+          id="dateOfBirth"
+          formControlName="dateOfBirth"
+        />
+        <p
+          class="text-danger"
+          *ngIf="
+            credentials.get('dateOfBirth').errors &&
+            credentials.get('dateOfBirth').touched
+          "
+        >
+          {{ getErrorMessage(credentials.get("dateOfBirth").errors) }}
+        </p>
+      </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

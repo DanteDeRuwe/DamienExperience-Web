@@ -1,31 +1,22 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from './user.model';
+import { Walk } from '../model/walk.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService {
+export class WalkDataService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) { }
 
-  }
-
-  changeCredentials(user: any){
-    return this.http.put(`${environment.apiUrl}/profile/update`, user).pipe(
-      tap(),
-      catchError(this.handleError)
-    );
-  }
-
-  get profile$(): Observable<User>{
-    return this.http.get(`${environment.apiUrl}/profile`).pipe(
+  getWalk$(email: string): Observable<Walk>{
+    return this.http.get(`${environment.apiUrl}/walk/${email}`).pipe(
       catchError(this.handleError),
-      map(User.fromJson)
-    );
+      map(Walk.fromJson)
+    )
   }
 
   handleError(err: any): Observable<never> {
