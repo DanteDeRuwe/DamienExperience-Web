@@ -3,8 +3,8 @@
 
   <!-- Navbar brand -->
   <mdb-navbar-brand><a class="navbar-brand" href="#">
-      <a class="navbar-brand" [routerLink]="['about']">
-        <img src="assets/images/damiaantours.png" height="30" alt="damiaantours logo">
+      <a class="navbar-brand" [routerLink]="['home']">
+        <img src="assets/images/logoDE.png" height="40" alt="damiaantours logo">
       </a>
     </a></mdb-navbar-brand>
 
@@ -35,3 +35,104 @@
   <!-- content -->
 </mdb-navbar>
 <ng-content></ng-content>
+
+
+<footer class="page-footer font-small" style="background-color: #ff0040;">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Info</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a [routerLink]="['regulations']">Reglement en voorwaarden</a>
+          </li>
+          <li>
+            <a [routerLink]="['sponsors']">Sponsors</a>
+          </li>
+          <li>
+            <a [routerLink]="['privacypolicy']">Privacy Policy</a>
+          </li>
+          <li>
+            <a [routerLink]="['cookiepolicy']">Cookie Policy</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://damiaanactie.be">damiaanactie</a>
+          </li>
+          <li>
+            <a href="https://damiaanactie-shop.be/">Webshop</a>
+          </li>
+          <li>
+            <a href="#!">Andoid app</a>
+          </li>
+          <li>
+            <a href="#!">iOS app</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Contact</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            Damien Experience <br>
+            ondernemingsnr: 0406.694.670
+          </li>
+          <li>
+            Leopold II-laan 263 <br>
+            1081 Brussel
+          </li>
+          <li>
+            info@damiaanactie.be <br>
+            +32(0)2 422 59 11
+          </li>
+          <li>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright 
+    <a href="https://damiaanactie.be/"> damiaanactie</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>

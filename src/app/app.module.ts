@@ -29,6 +29,11 @@ import { httpInterceptorProviders } from './interceptors';
 import { ProfileComponent } from './user/profile/profile.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { HomeComponent } from './home/home.component';
+import { RegulationsComponent } from './regulations/regulations.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { SponsorsComponent } from './sponsors/sponsors.component';
+import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 
 
 
@@ -44,7 +49,12 @@ import { RegistrationComponent } from './registration/registration.component';
     ProfileComponent,
     UserpageComponent,
     TrackingComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomeComponent,
+    RegulationsComponent,
+    PrivacyPolicyComponent,
+    SponsorsComponent,
+    CookiePolicyComponent
   ],
   imports: [
     BrowserModule,
