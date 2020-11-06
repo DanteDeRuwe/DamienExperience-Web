@@ -1,17 +1,10 @@
-<h2>Ik schrijf me in voor een wandeling!</h2>
 
-<!-- <div *ngIf="(userLoaded | async); else checksIfRegistered">
-    LOADING
-</div> -->
 
-<!-- <ng-template #checksIfRegistered> -->
-<div *ngIf="(alreadyRegistered$ | async) as alreadyRegistered; else elseBlock">
-    <h2>Deze gebruiker is al geregistreerd.</h2>
-    <p>alreadyRegistered: {{alreadyRegistered()}}</p>
-</div>
-<!-- </ng-template>> -->
-
-<ng-template #elseBlock>
+<ng-template [ngIf]="hasRegistrations" [Else]="notAllowed">
+    You already signed up for a tour
+</ng-template>
+<ng-template #notAllowed>
+    <h2>Ik schrijf me in voor een wandeling!</h2>
     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
         {{ errorMessage }}
     </div>
@@ -19,7 +12,10 @@
     <div>
         <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
             <label for="route">Kies je wandeling:</label>
-            <select id="route" class="form-control" formControlName="route" (change)="onChange($event.target.value)">
+            <select id="route" class="form-control" formControlName="route"
+             
+             >
+             <!-- (change)="onChange($event.target.value)" -->
                 <option *ngFor="let route of routes" [ngValue]="route">
                     {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
                 </option>
@@ -31,14 +27,6 @@
 
             <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
             <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
-            <!-- <select id="shirtSize" class="form-control" formControlName="shirtSize"  (change)="onChangeShirt($event)">
-            <option value="geen">geen T-shirt</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-        </select> -->
             <select id="shirtSize" class="form-control" formControlName="shirtSize" (change)="onChangeShirt($event)">
                 <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
                     {{ shirtSize }}
@@ -56,6 +44,7 @@
 
     </div>
 </ng-template>
+    
 <!-- <app-map
     [tourName] = "tourname"
     [userName] = "username"

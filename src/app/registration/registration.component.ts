@@ -25,6 +25,8 @@ export class RegistrationComponent implements OnInit {
   price: number = 0;
   user: User;
 
+  hasRegistrations: boolean;
+
   userLoaded: Promise<boolean>
 
   shirtSizes = Object.values(ShirtSize);
@@ -46,21 +48,30 @@ export class RegistrationComponent implements OnInit {
       this.routes = routes;
     });
 
-    this._uds.profile$.subscribe(u => {
-      this.user = u;
-      this.userLoaded = Promise.resolve(true);
-    }
-    )
+    this._uds.profile$.subscribe(user => {
+      if(user.registrations.length == 0 ){
+        this.user.registrations.forEach(registration => {
+        this.routes.forEach(route => {
+          console.log(`route: ${route.tourId}`)
+          if (route.tourId == registration.routeId)
+            this.hasRegistrations = true
+          })
+        });
+      }
+
+      this.hasRegistrations = user.registrations.length >= 1
+      
+    });
   }
 
-  onChange(value) {
-    //console.log(this.routes[value[0]])
-    //console.log(this.routes[value[0]].tourName)
-    // console.log(this.tourname)
-    // console.log(this.username)
-    // this.tourName = this.routes[value[0]].tourName
-    this.tourName = "RouteZero";
-  }
+  // onChange(value) {
+  //   //console.log(this.routes[value[0]])
+  //   //console.log(this.routes[value[0]].tourName)
+  //   // console.log(this.tourname)
+  //   // console.log(this.username)
+  //   // this.tourName = this.routes[value[0]].tourName
+  //   this.tourName = "RouteZero";
+  // }
 
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
@@ -78,14 +89,6 @@ export class RegistrationComponent implements OnInit {
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN)
       this.registration.value.orderedShirt = false
-
-    console.log(this.user.registrations)
-    console.log(this.routes)
-
-    console.log(`user already registered: ${this.alreadyRegistered()}`)
-
-
-
 
     this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
       .subscribe((val) => {
@@ -111,36 +114,6 @@ export class RegistrationComponent implements OnInit {
         }
       );
 
-  }
-
-  async alreadyRegistered$():Promise<any> {
-    return this.alreadyRegistered();
-  }
-
-  alreadyRegistered(): boolean {
-
-    var ret = false;
-    var registrationLength = this.user.registrations.length;
-
-    console.log("START")
-    console.log(this.user)
-
-    console.log(registrationLength)
-    if (this.user.registrations.length == 0)
-      return false
-
-    this.user.registrations.forEach(registration => {
-      console.log(`registration: ${registration.routeId}`)
-      this.routes.forEach(route => {
-        console.log(`route: ${route.tourId}`)
-        if (route.tourId == registration.routeId)
-          ret = true
-
-      })
-    })
-    console.log("STOP")
-
-    return ret
   }
 
   getErrorMessage(errors: any) {
