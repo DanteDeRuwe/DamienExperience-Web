@@ -30,7 +30,7 @@ export class MainNavComponent {
     else{
       console.log(this.loggedInUser$.value);
       
-      this._router.navigate(['pageNotFound']);
+      this._router.navigate(['registration']);
     }
   }
 
