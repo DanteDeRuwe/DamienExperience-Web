@@ -10,15 +10,38 @@ import { Route } from '../model/route.model';
   providedIn: 'root'
 })
 export class RouteDataService {
+  public redirectUrl: string = null;
 
   constructor(private http: HttpClient) { }
 
-  getRoute$(name: string): Observable<Route>{
+  getRoute$(name: string): Observable<Route> {
     return this.http.get(`${environment.apiUrl}/route/${name}`).pipe(
       catchError(this.handleError),
       map(Route.fromJson)
     );
   }
+
+  getFutureRoutes$(): Observable<Route[]> {
+    return this.http.get(`${environment.apiUrl}/route/getfutureroutes`).pipe(
+      catchError(this.handleError),
+      map((list: any[]): Route[] => list.map(Route.fromJson))
+    )
+  }
+
+  routeRegistration$(routeId: string, orderedShirt: boolean, shirtSize: string) {
+    return this.http.post(`${environment.apiUrl}/routeregistration`,
+      {
+        routeId,
+        orderedShirt,
+        shirtSize
+      }).pipe(
+        tap(),
+        catchError(this.handleError)
+      )
+  }
+
+
+
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;

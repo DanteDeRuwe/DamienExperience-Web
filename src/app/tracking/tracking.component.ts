@@ -31,7 +31,6 @@ export class TrackingComponent implements OnInit {
   onSubmitSearch(){
     this.userName = this.searchForm.value.username;
     this.tourName = "RouteZero";
-    console.log(this.tourName, this.userName)
     this.visible = false
   }
 

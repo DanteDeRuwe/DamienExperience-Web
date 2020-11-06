@@ -28,6 +28,7 @@ import { UserpageComponent } from './user/userpage/userpage.component';
 import { httpInterceptorProviders } from './interceptors';
 import { ProfileComponent } from './user/profile/profile.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 
@@ -42,7 +43,8 @@ import { TrackingComponent } from './tracking/tracking.component';
     LoginComponent,
     ProfileComponent,
     UserpageComponent,
-    TrackingComponent
+    TrackingComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

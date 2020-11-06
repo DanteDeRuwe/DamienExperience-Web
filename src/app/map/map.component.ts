@@ -26,34 +26,34 @@ export class MapComponent implements OnInit, OnChanges {
   lng = 4.708955;
 
   //temporary json for checkpoints
-  waypoints = {
-    features: [
-      {
-        title: "Delhaize Tremelo",
-        description: "Gratis blikje frisdrank en snoepreep bij vertoon van een geldige coupon.",
-        coordinates: {
-          longitude: 4.705204,
-          latitude: 50.990410
-        }
-      },
-      {
-        title: "Bevoorrading 1",
-        description: "Hier krijg je een appeltje voor de dorst!",
-        coordinates: {
-          longitude: 4.708955,
-          latitude: 50.994423
-        }
-      },
-      {
-        title: "Voetbalveld",
-        description: "Wachtpost rode kruis",
-        coordinates: {
-          longitude: 4.702002,
-          latitude: 50.986546
-        }
-      }
-    ]
-  }
+  // waypoints = {
+  //   features: [
+  //     {
+  //       title: "Delhaize Tremelo",
+  //       description: "Gratis blikje frisdrank en snoepreep bij vertoon van een geldige coupon.",
+  //       coordinates: {
+  //         longitude: 4.705204,
+  //         latitude: 50.990410
+  //       }
+  //     },
+  //     {
+  //       title: "Bevoorrading 1",
+  //       description: "Hier krijg je een appeltje voor de dorst!",
+  //       coordinates: {
+  //         longitude: 4.708955,
+  //         latitude: 50.994423
+  //       }
+  //     },
+  //     {
+  //       title: "Voetbalveld",
+  //       description: "Wachtpost rode kruis",
+  //       coordinates: {
+  //         longitude: 4.702002,
+  //         latitude: 50.986546
+  //       }
+  //     }
+  //   ]
+  // }
 
 
   constructor(
@@ -84,14 +84,16 @@ export class MapComponent implements OnInit, OnChanges {
     //dit maakt een nieuw div element aan waarop er styling moet worden toegepast (zie css)
     //aan de popup wordt er html toegevoegd om tekst te verschijnen
     //voor de waypoints kan een eigen svg ingesteld worden
-    this.waypoints.features.forEach((waypoint) => {
-      var marker = new mapboxgl.Marker()
-      .setLngLat([waypoint.coordinates.longitude, waypoint.coordinates.latitude])
-      .setPopup( new mapboxgl.Popup({ offset: 25 })
-        .setHTML('<h3>' + waypoint.title + '</h3><p>' + waypoint.description + '</p>'))
-      .addTo(this.map);
+    
+    
+    // this.waypoints.features.forEach((waypoint) => {
+    //   var marker = new mapboxgl.Marker()
+    //   .setLngLat([waypoint.coordinates.longitude, waypoint.coordinates.latitude])
+    //   .setPopup( new mapboxgl.Popup({ offset: 25 })
+    //     .setHTML('<h3>' + waypoint.title + '</h3><p>' + waypoint.description + '</p>'))
+    //   .addTo(this.map);
 
-    });
+    // });
 
     //manier om de afstand te berekenen [POC]
     //de coordinaten worden in een linestring omgezet en daarvan kan dan de lengte worden berekend
@@ -106,6 +108,8 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
+    console.log(changes.tourName.currentValue)
+    console.log(changes.userName.currentValue)
     this.tourName = changes.tourName.currentValue;
     this.userName = changes.userName.currentValue;
     this.loadRoute();
@@ -115,11 +119,11 @@ export class MapComponent implements OnInit, OnChanges {
       if(this.tourName != null){
         this._rds.getRoute$(this.tourName).subscribe(route => {
           let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
-          this.addRoute(route.tourname, color, route.coordinates);
+          this.addRoute(route.tourName, color, route.coordinates);
         });
       }
     
-      if(this.userName != null){
+      if(this.userName != null || this.userName != ""){
         this._wds.getWalk$(this.userName).subscribe(walk => {
           let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
           this.addRoute(walk.id, color, walk.coordinates)
