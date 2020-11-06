@@ -1,6 +1,6 @@
 
 
-<ng-template [ngIf]="hasRegistrations" [Else]="notAllowed">
+<ng-template *ngIf="hasRegistrations; else notAllowed" >
     You already signed up for a tour
 </ng-template>
 <ng-template #notAllowed>
@@ -13,7 +13,7 @@
         <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
             <label for="route">Kies je wandeling:</label>
             <select id="route" class="form-control" formControlName="route"
-             
+
              >
              <!-- (change)="onChange($event.target.value)" -->
                 <option *ngFor="let route of routes" [ngValue]="route">
@@ -43,9 +43,9 @@
         </form>
 
     </div>
+    <!-- <app-map
+        [tourName] = "tourname"
+        [userName] = "username"
+    ></app-map> -->
 </ng-template>
     
-<!-- <app-map
-    [tourName] = "tourname"
-    [userName] = "username"
-></app-map> -->
