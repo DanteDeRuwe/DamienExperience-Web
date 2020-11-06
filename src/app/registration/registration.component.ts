@@ -65,7 +65,8 @@ export class RegistrationComponent implements OnInit {
     console.log(this.routes[value[0]].tourName)
     // console.log(this.tourname)
     // console.log(this.username)
-    // this.tourName = this.routes[value[0]].tourName
+    this.tourName = this.routes[value[0]].tourName
+    console.log(this.tourName)
     // this.tourName = "RouteZero";
   }
 

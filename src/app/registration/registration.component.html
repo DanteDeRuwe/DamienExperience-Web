@@ -1,6 +1,5 @@
 
-
-<ng-template *ngIf="hasRegistrations; else notAllowed" >
+<div class="content"><ng-template *ngIf="hasRegistrations; else notAllowed" >
     You already signed up for a tour
 </ng-template>
 <ng-template #notAllowed>
@@ -11,41 +10,50 @@
 
     <div>
         <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
-            <label for="route">Kies je wandeling:</label>
-            <select id="route" class="form-control" formControlName="route"
-
-             >
-             <!-- (change)="onChange($event.target.value)" -->
-                <option *ngFor="let route of routes" [ngValue]="route">
-                    {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
-                </option>
-            </select>
-            <p class="text-danger" *ngIf="registration.get('route').errors && registration.get('route').touched">
-                {{ getErrorMessage(registration.get("route").errors) }}
-            </p>
-            <br>
-
-            <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
-            <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
-            <select id="shirtSize" class="form-control" formControlName="shirtSize" (change)="onChangeShirt($event)">
-                <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
-                    {{ shirtSize }}
-                </option>
-            </select>
-            <p class="text-danger"
-                *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
-                {{ getErrorMessage(registration.get("shirtSize").errors) }}
-            </p><br>
-
-            <p>Te betalen: €{{price}}</p>
-
-            <button type="submit" class="btn btn-primary">Bevestig</button>
+            <div class="components">
+                <div class="component">
+                    <label for="route">Kies je wandeling:</label>
+                    <select id="route" class="form-control" formControlName="route"
+                    (change)="onChange($event.target.value)"
+                     >
+                     <!-- (change)="onChange($event.target.value)" -->
+                        <option *ngFor="let route of routes" [ngValue]="route">
+                            {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
+                        </option>
+                    </select>
+                    <p class="text-danger" *ngIf="registration.get('route').errors && registration.get('route').touched">
+                        {{ getErrorMessage(registration.get("route").errors) }}
+                    </p>
+                    
+                    <div class="map">
+                        <app-map
+                            [tourName] = "tourname"
+                            [userName] = "username"
+                        ></app-map>
+                    </div>
+                </div>
+                <div class="component">
+                    <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
+                    <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
+                    <select id="shirtSize" class="form-control" formControlName="shirtSize" (change)="onChangeShirt($event)">
+                        <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
+                            {{ shirtSize }}
+                        </option>
+                    </select>
+                    <p class="text-danger"
+                        *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
+                        {{ getErrorMessage(registration.get("shirtSize").errors) }}
+                    </p><br>
+        
+                    <p>Te betalen: €{{price}}</p>
+        
+                    <button type="submit" class="btn btn-primary">Bevestig</button>
+                </div>
+            </div>
         </form>
 
     </div>
-    <!-- <app-map
-        [tourName] = "tourname"
-        [userName] = "username"
-    ></app-map> -->
 </ng-template>
+</div>
+
     

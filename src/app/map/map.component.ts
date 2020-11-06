@@ -108,10 +108,13 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    console.log(changes.tourName.currentValue)
-    console.log(changes.userName.currentValue)
+    //console.log(changes.tourName.currentValue)
+    //console.log(changes.userName.currentValue)
     this.tourName = changes.tourName.currentValue;
-    this.userName = changes.userName.currentValue;
+    if(typeof changes.userName != 'undefined'){
+      this.userName = changes.userName.currentValue;
+    }
+    
     this.loadRoute();
   }
 
@@ -123,7 +126,7 @@ export class MapComponent implements OnInit, OnChanges {
         });
       }
     
-      if(this.userName != null || this.userName != ""){
+      if(this.userName != null && this.userName != "" && typeof this.userName != 'undefined'){
         this._wds.getWalk$(this.userName).subscribe(walk => {
           let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
           this.addRoute(walk.id, color, walk.coordinates)
