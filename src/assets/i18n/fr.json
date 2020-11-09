@@ -17,7 +17,29 @@
     "mn_ondernemings_nr" : "numéro d'entreprise: 0406.694.670",
     "mn_da_straat" : "Avenue Leopold II 263",
     "mn_da_stad" : "1081 Bruxelles",
-    "mn_da_mail" : "info@actiondamien.be"
+    "mn_da_mail" : "info@actiondamien.be",
+
+    "home_title":"Promenades Damien expérience",
+    "home_schrijf_je_in" : "Inscrivez-vous dès maintenant aux promenades Damien Experience.",
+    "home_schrijf_me_in" : "ENREGISTRE-MOI",
+    "home_DAGEN" : "JOURS",
+    "home_UREN" : "HEURES",
+    "home_MINUTEN" : "MINUTES",
+    "home_SECONDEN" : "SECONDES",
+
+    "sp_met_dank" : "Merci à nos sponsors!",
+
+    "about_over" : "À PROPOS DU TOUR",
+    "about_over_tekst1" : "Avec la tournée damiaan, nous faisons ensemble une visite à pied autour de Tremelo. Sur le chemin, il y aura des sentinelles et des lieux de repos où vous pourrez faire le plein d'eau ou prendre une collation. Il y a pour une «expérience» optimale, nous vous conseillons de télécharger notre application d'accompagnement.",
+    "about_over_tekst2" : "Nous vous proposons 2 balades pour le même prix, le petit tour de 50km ou le grand de 100km. Lors de votre inscription, vous pouvez choisir celui que vous souhaitez marcher.",
+    "about_over_tekst3" : "Non seulement vous pourrez faire l'expérience de la marche, mais si vous le souhaitez (cochez lors de votre inscription), il est possible que vos amis et votre famille vous soutiennent depuis chez vous. Via un lien partageable (transports en commun), vous pouvez être suivi de chez vous via le site Web et vous pouvez communiquer avec le front de la maison.",
+    "about_over_tekst4" : "Pour participer à la visite, vous devez déposer le montant de 50 euros. Cet argent va entièrement à l'aide que nous offrons, avec 50 euros vous pouvez sauver 1 vie humaine.",
+    "about_over1" : "À PROPOS DE L'APPLICATION",
+    "about_over_tekst5" : "Pour la visite à pied, nous avons développé une application qui vous permet de suivre votre itinéraire parcouru et de voir la distance jusqu'au prochain point de contrôle, mais il y a plus en cours de route, vous pourrez trouver des codes QR. Vous pouvez le scanner avec l'application pour un fait amusant ou un fragment d'écoute.",
+    "about_over_tekst6" : "L'application est disponible dans le Google PlayStore pour Android et dans l'AppStore pour les utilisateurs iOS.",
+    "about_DAMIAAN_TSHIRT" :"DAMIEN TSHIRT",
+    "about_over_tekst7":"Lors de l'inscription à une promenade, vous avez la possibilité de commander un tshirt. Cela a été spécialement conçu pour ces promenades. Il n'est pas possible de commander par la suite.",
+    "about_over_tekst8":"Les tailles disponibles sont S, M, L, XL et XXL Le prix pour 1 t-shirt est de 25 euros. Ce supplément sera déduit immédiatement de votre inscription."
 
 
 }
