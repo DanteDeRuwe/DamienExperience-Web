@@ -122,6 +122,28 @@
 
       </div>
       <!-- Grid column -->
+      
+      <div class="col-md-3 mx-auto">
+
+        <!-- Language -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Taal</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a (click)="changeLang('nl')">Nederlands</a>
+          </li>
+          <li>
+            <a (click)="changeLang('fr')">Français</a>
+          </li>
+
+          <!-- Language teststring-->
+          <li>
+            <a>{{"test" | translate}}</a>
+          </li>
+        </ul>
+
+      </div>
+
 
     </div>
     <!-- Grid row -->
