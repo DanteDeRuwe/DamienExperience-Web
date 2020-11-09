@@ -18,15 +18,15 @@
       </button>
 
       <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]="['about']" href="">OVER DE TOUR</a>
+        <a class="nav-link text-dark" [routerLink]="['about']" href="">{{"mn_over_de_tour" | translate}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]="['track']" href="">WANDELAAR VOLGEN</a>
+        <a class="nav-link text-dark" [routerLink]="['track']" href="">{{"mn_wandelaar_volgen" | translate}}</a>
       </li>
       <li class="nav-item" id="registerBtn">
         <a class="nav-link" (click)="schrijfIn()">
           <img src="assets/images/damiaanhartje.png" alt="damiaanhartje" height="30" class="heartImg">
-          IK SCHRIJF ME IN
+          {{"mn_ik_schrijf_me_in" | translate}}
         </a>
       </li>
     </ul>
@@ -49,20 +49,20 @@
       <div class="col-md-3 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Info</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">{{"mn_info" | translate}}</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a [routerLink]="['regulations']">Reglement en voorwaarden</a>
+            <a [routerLink]="['regulations']">{{"mn_reglement_en_voorwaarden" | translate }}</a>
           </li>
           <li>
-            <a [routerLink]="['sponsors']">Sponsors</a>
+            <a [routerLink]="['sponsors']">{{"mn_sponsors" | translate }}</a>
           </li>
           <li>
-            <a [routerLink]="['privacypolicy']">Privacy Policy</a>
+            <a [routerLink]="['privacypolicy']">{{"mn_privacy_policy" | translate }}</a>
           </li>
           <li>
-            <a [routerLink]="['cookiepolicy']">Cookie Policy</a>
+            <a [routerLink]="['cookiepolicy']">{{"mn_cookie_policy" | translate }}</a>
           </li>
         </ul>
 
@@ -75,20 +75,20 @@
       <div class="col-md-3 mx-auto">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">{{"mn_links" | translate }}</h5>
 
         <ul class="list-unstyled">
           <li>
-            <a href="https://damiaanactie.be">damiaanactie</a>
+            <a href="https://damiaanactie.be">{{"mn_damiaanactie" | translate }}</a>
           </li>
           <li>
-            <a href="https://damiaanactie-shop.be/">Webshop</a>
+            <a href="https://damiaanactie-shop.be/">{{"mn_webshop" | translate}}</a>
           </li>
           <li>
-            <a href="#!">Andoid app</a>
+            <a href="#!">{{"mn_andoid_app" | translate}}</a>
           </li>
           <li>
-            <a href="#!">iOS app</a>
+            <a href="#!">{{"mn_iOS_app" | translate}}</a>
           </li>
         </ul>
 
@@ -106,14 +106,14 @@
         <ul class="list-unstyled">
           <li>
             Damien Experience <br>
-            ondernemingsnr: 0406.694.670
+            {{"mn_ondernemings_nr" | translate}}
           </li>
           <li>
-            Leopold II-laan 263 <br>
-            1081 Brussel
+            {{"mn_da_straat" | translate}} <br>
+            {{"mn_da_stad" | translate}}
           </li>
           <li>
-            info@damiaanactie.be <br>
+            {{"mn_da_mail" | translate}} <br>
             +32(0)2 422 59 11
           </li>
           <li>
@@ -135,11 +135,6 @@
           <li>
             <a (click)="changeLang('fr')">Français</a>
           </li>
-
-          <!-- Language teststring-->
-          <li>
-            <a>{{"test" | translate}}</a>
-          </li>
         </ul>
 
       </div>
@@ -153,7 +148,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2020 Copyright 
-    <a href="https://damiaanactie.be/"> damiaanactie</a>
+    <a href="https://damiaanactie.be/"> {{"mn_damiaanactie" | translate}}</a>
   </div>
   <!-- Copyright -->
 

@@ -1,3 +1,23 @@
 {
-    "test": "Test en français"
+    "test": "Français",
+
+    "mn_over_de_tour" : "À PROPOS DU TOUR",
+    "mn_wandelaar_volgen" : "SUIVEZ LE RANDONNEUR",
+    "mn_ik_schrijf_me_in" : "JE M'INSCRIS",
+    "mn_info" : "Info",
+    "mn_reglement_en_voorwaarden" : "Règles et conditions",
+    "mn_sponsors" : "Sponsors",
+    "mn_privacy_policy" :"Politique de confidentialité",
+    "mn_cookie_policy" : "Politique des cookies",
+    "mn_links" : "Liens",
+    "mn_damiaanactie" : "Action Damien",
+    "mn_webshop" : "E-Shop",
+    "mn_andoid_app":"Application Android",
+    "mn_iOS_app" : "Application iOS",
+    "mn_ondernemings_nr" : "numéro d'entreprise: 0406.694.670",
+    "mn_da_straat" : "Avenue Leopold II 263",
+    "mn_da_stad" : "1081 Bruxelles",
+    "mn_da_mail" : "info@actiondamien.be"
+
+
 }

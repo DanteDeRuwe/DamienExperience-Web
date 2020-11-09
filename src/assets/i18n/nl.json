@@ -1,3 +1,21 @@
 {
-    "test": "test in het nederlands"
+    "test": "Nederlands",
+    
+    "mn_over_de_tour" : "OVER DE TOUR",
+    "mn_wandelaar_volgen" : "WANDELAAR VOLGEN",
+    "mn_ik_schrijf_me_in" : "IK SCHRIJF ME IN",
+    "mn_info" : "Info",
+    "mn_reglement_en_voorwaarden" : "Reglement en voorwaarden",
+    "mn_sponsors" : "Sponsors",
+    "mn_privacy_policy" : "Privacy Policy",
+    "mn_cookie_policy" : "Cookie Policy",
+    "mn_links" : "Links",
+    "mn_damiaanactie" : "Damiaanactie",
+    "mn_webshop" : "Webshop",
+    "mn_andoid_app":"Andoid app",
+    "mn_iOS_app" : "iOS app",
+    "mn_ondernemings_nr" : "ondernemingsnr: 0406.694.670",
+    "mn_da_straat" : "Leopold II-laan 263",
+    "mn_da_stad" : "1081 Brussel",
+    "mn_da_mail" : "info@damiaanactie.be"
 }
