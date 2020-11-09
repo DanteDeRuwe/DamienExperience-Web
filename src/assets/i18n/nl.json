@@ -50,7 +50,7 @@
     "login_email":"E-mail adress",    
     "login_enter_passwoord":"vul wachtwoord in",
     "login_remember_me" : "Onthoud me",
-    "login_knop" : "Verzenden",
+    "submit" : "Verzenden",
 
     "register_title" : "Ik maak een account",
     "register_vn":"Voornaam",
@@ -58,7 +58,18 @@
     "register_gd" : "Geboortedag",
     "register_nummer" : "Telefoonnummer",
     "register_share_email" : "We zullen uw e-mail nooit met iemand anders delen.",
-    "register_confirm" : "Bevestig wachtwoord"
+    "register_confirm" : "Bevestig wachtwoord",
+
+    "profile_title" : "Mijn profiel",
+    "profile_title1" : "Wijzig mijn persoonlijke informatie",
+
+    "registration_already_sign" : "Je bent al geregistreerd",
+    "registration_regist" : "Ik schrijf me in voor een wandeling!",
+    "registration_chose_route" : "Kies je wandeling:",
+    "registration_tshirt" : "Koop een limited edition T-shirt",
+    "registration_pay" : "Te betalen:"
+
+
 
 
 }

@@ -50,7 +50,7 @@
     "login_email":"Adresse e-mail",
     "login_enter_passwoord":"entrer le mot de passe",
     "login_remember_me" : "Souviens-toi de moi",
-    "login_knop" : "Soumettre",
+    "submit" : "Soumettre",
 
     "register_title" : "Je crée un compte",
     "register_vn":"Prénom",
@@ -58,6 +58,16 @@
     "register_gd" : "Date de naissance",
     "register_nummer" : "numéro de téléphone",
     "register_share_email" : "Nous ne partagerons jamais votre e-mail avec qui que ce soit.",
-    "register_confirm" : "Confirmez le mot de passe"
+    "register_confirm" : "Confirmez le mot de passe",
+
+    "profile_title" : "Mon profil",
+    "profile_title1" : "Changer mes informations personnelles",
+
+    "registration_already_sign" : "Vous êtes déjà inscrit",
+    "registration_regist" :"Je m'inscris pour une promenade!",
+    "registration_chose_route" : "Choisissez votre promenade:",
+    "registration_tshirt" : "Achetez un t-shirt en édition limitée",
+    "registration_pay" : "Payer:"
+
 
 }
