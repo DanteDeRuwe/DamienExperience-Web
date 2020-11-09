@@ -18,6 +18,7 @@
     "mn_da_straat" : "Avenue Leopold II 263",
     "mn_da_stad" : "1081 Bruxelles",
     "mn_da_mail" : "info@actiondamien.be",
+    "mn_taal" : "Langue",
 
     "home_title":"Promenades Damien expérience",
     "home_schrijf_je_in" : "Inscrivez-vous dès maintenant aux promenades Damien Experience.",
@@ -39,7 +40,24 @@
     "about_over_tekst6" : "L'application est disponible dans le Google PlayStore pour Android et dans l'AppStore pour les utilisateurs iOS.",
     "about_DAMIAAN_TSHIRT" :"DAMIEN TSHIRT",
     "about_over_tekst7":"Lors de l'inscription à une promenade, vous avez la possibilité de commander un tshirt. Cela a été spécialement conçu pour ces promenades. Il n'est pas possible de commander par la suite.",
-    "about_over_tekst8":"Les tailles disponibles sont S, M, L, XL et XXL Le prix pour 1 t-shirt est de 25 euros. Ce supplément sera déduit immédiatement de votre inscription."
+    "about_over_tekst8":"Les tailles disponibles sont S, M, L, XL et XXL Le prix pour 1 t-shirt est de 25 euros. Ce supplément sera déduit immédiatement de votre inscription.",
 
+    "tracking_zoek" : "TROUVEZ UN RANDONNEUR",
+    "tracking_zoeken": "CHERCHER",
+
+    "login_title":"Je ai déjà un compte",
+    "login_passwoord" : "Mot de passe",
+    "login_email":"Adresse e-mail",
+    "login_enter_passwoord":"entrer le mot de passe",
+    "login_remember_me" : "Souviens-toi de moi",
+    "login_knop" : "Soumettre",
+
+    "register_title" : "Je crée un compte",
+    "register_vn":"Prénom",
+    "register_ln" : "Nom de famille",
+    "register_gd" : "Date de naissance",
+    "register_nummer" : "numéro de téléphone",
+    "register_share_email" : "Nous ne partagerons jamais votre e-mail avec qui que ce soit.",
+    "register_confirm" : "Confirmez le mot de passe"
 
 }

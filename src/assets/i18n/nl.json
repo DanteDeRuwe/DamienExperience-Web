@@ -18,6 +18,7 @@
     "mn_da_straat" : "Leopold II-laan 263",
     "mn_da_stad" : "1081 Brussel",
     "mn_da_mail" : "info@damiaanactie.be",
+    "mn_taal" : "Taal",
 
     "home_title":"Damien Experience wandelingen",
     "home_schrijf_je_in" : "Schrijf je nu in voor de damien experience wandelingen.",
@@ -41,6 +42,23 @@
     "about_over_tekst7": "Bij het registreren voor een wandeling hebt u de mogelijkheid om een tshirt bij te bestellen. Dit werd speciaal voor deze wandelingen ontworpen. Achteraf bestellen is niet mogelijk.",
     "about_over_tekst8":"De beschikbare maten zijn S, M, L, XL en XXL.De prijs voor 1 tshirt is 25 euro. Deze meerprijs zal gelijk met uw registratie verrekend worden.",
 
-    "":""
+    "tracking_zoek" : "ZOEK EEN WANDELAAR",
+    "tracking_zoeken" : "ZOEKEN",
+
+    "login_title":"Ik heb al een account",
+    "login_passwoord" : "Passwoord",
+    "login_email":"E-mail adress",    
+    "login_enter_passwoord":"vul wachtwoord in",
+    "login_remember_me" : "Onthoud me",
+    "login_knop" : "Verzenden",
+
+    "register_title" : "Ik maak een account",
+    "register_vn":"Voornaam",
+    "register_ln" : "Achternaam",
+    "register_gd" : "Geboortedag",
+    "register_nummer" : "Telefoonnummer",
+    "register_share_email" : "We zullen uw e-mail nooit met iemand anders delen.",
+    "register_confirm" : "Bevestig wachtwoord"
+
 
 }
