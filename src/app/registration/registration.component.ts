@@ -23,9 +23,8 @@ export class RegistrationComponent implements OnInit {
   errorMessage: string = '';
   selectedSize: ShirtSize;
   price: number = 0;
-  user: User;
 
-  hasRegistrations: boolean;
+  hasRegistrations: boolean = false;
 
   userLoaded: Promise<boolean>
 
@@ -49,29 +48,27 @@ export class RegistrationComponent implements OnInit {
     });
 
     this._uds.profile$.subscribe(user => {
-      if(user.registrations.length == 0 ){
-        this.user.registrations.forEach(registration => {
+      if(user.registrations.length != 0){
+        user.registrations.forEach(registration => {
         this.routes.forEach(route => {
-          console.log(`route: ${route.tourId}`)
           if (route.tourId == registration.routeId)
             this.hasRegistrations = true
           })
         });
       }
-
-      this.hasRegistrations = user.registrations.length >= 1
-      
     });
+    console.log(this.hasRegistrations)
   }
 
-  // onChange(value) {
-  //   //console.log(this.routes[value[0]])
-  //   //console.log(this.routes[value[0]].tourName)
-  //   // console.log(this.tourname)
-  //   // console.log(this.username)
-  //   // this.tourName = this.routes[value[0]].tourName
-  //   this.tourName = "RouteZero";
-  // }
+  onChange(value) {
+    //console.log(this.routes[value[0]])
+    console.log(this.routes[value[0]].tourName)
+    // console.log(this.tourname)
+    // console.log(this.username)
+    this.tourName = this.routes[value[0]].tourName
+    console.log(this.tourName)
+    // this.tourName = "RouteZero";
+  }
 
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
