@@ -16,3 +16,40 @@
         margin-bottom: 1rem;
     }
 }
+
+.fill-space{
+    flex: 1 1 auto;
+}
+
+.page-container{
+    position: relative;
+    min-height: 100%;
+    
+}
+
+.content-wrap{
+    padding-bottom: 25rem;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+.form-inline{
+    display: flex;
+    margin-left: auto;
+    margin-right: 0;
+    
+}
+
+select{
+    color: white;
+    background-color: black;
+    border: 0;
+    display: flex;
+    height: 1.7rem;
+    font-size: small;
+    text-transform: uppercase;
+}
