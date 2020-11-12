@@ -1,8 +1,8 @@
-<h2>Mijn profiel</h2>
-<h3>Wijzig mijn persoonlijke informatie</h3>
+<h2>{{"profile_title" | translate}}</h2>
+<h3>{{"profile_title1" | translate}}</h3>
 <form [formGroup]="credentials" (ngSubmit)="changeCredentials()">
     <div>
-        <label for="firstname">First Name</label>
+        <label for="firstname">{{"register_vn" | translate}}</label>
         <input
           type="text"
           class="form-control"
@@ -20,7 +20,7 @@
         </p>
       </div>
       <div>
-        <label for="lastname">Last Name</label>
+        <label for="lastname">{{"register_ln" | translate}}</label>
         <input
           type="text"
           class="form-control"
@@ -38,7 +38,7 @@
         </p>
       </div>
       <div>
-        <label for="email">Email</label>
+        <label for="email">{{"login_email" | translate}}</label>
         <input
           type="text"
           class="form-control"
@@ -56,7 +56,7 @@
         </p>
       </div>
       <div>
-        <label for="phoneNumber">Phone number</label>
+        <label for="phoneNumber">{{"register_nummer" | translate}}</label>
         <input
           type="text"
           class="form-control"
@@ -74,7 +74,7 @@
         </p>
       </div>
       <div>
-        <label for="dateOfBirth">Date of birth</label>
+        <label for="dateOfBirth">{{"register_gd" | translate}}</label>
         <input
           type="text"
           class="form-control"
@@ -91,6 +91,6 @@
           {{ getErrorMessage(credentials.get("dateOfBirth").errors) }}
         </p>
       </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">{{"submit" |translate}}</button>
 </form>
 
