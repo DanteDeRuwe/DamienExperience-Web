@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../user/authentication.service';
-import * as moment from 'moment';
-import { min } from 'rxjs/operators';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   public loggedInUser$ = this._authenticationService.user$;
@@ -19,9 +18,9 @@ export class HomeComponent implements OnInit {
     this.initTimer()
   }
 
-  initTimer(){
+  initTimer() {
     var countDownDate = new Date("May 15, 2021 13:00:00").getTime();
-    var x = setInterval(function() {
+    var x = setInterval(function () {
       var now = new Date().getTime();
       var distance = countDownDate - now;
 
@@ -29,9 +28,6 @@ export class HomeComponent implements OnInit {
       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      // + minutes + "m " + seconds + "s ";
 
       document.getElementById("days").innerHTML = `${days}`;
       document.getElementById("hours").innerHTML = `${hours}`;
@@ -51,9 +47,9 @@ export class HomeComponent implements OnInit {
   schrijfIn() {
     if (!this.loggedInUser$.value)
       this._router.navigate(['register']);
-    else{
+    else {
       console.log(this.loggedInUser$.value);
-      
+
       this._router.navigate(['registration']);
     }
   }
