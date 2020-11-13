@@ -1,0 +1,13 @@
+@import "src/scss-partials/variables";
+
+//button
+.btn-primary.damien{
+    background-color: $primary;
+    border-color: transparent;
+    color: $white; 
+
+    &:hover{
+        background-color: darken($primary, 3%) !important;
+        color: $white; 
+    }
+}
