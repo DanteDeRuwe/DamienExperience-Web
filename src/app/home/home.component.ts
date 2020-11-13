@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../user/authentication.service';
 
@@ -7,8 +7,9 @@ import { AuthenticationService } from '../user/authentication.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public loggedInUser$ = this._authenticationService.user$;
+  private _countdown;
 
   constructor(
     private _authenticationService: AuthenticationService,
@@ -18,9 +19,13 @@ export class HomeComponent implements OnInit {
     this.initTimer()
   }
 
+  ngOnDestroy() {
+    clearInterval(this._countdown);
+  }
+
   initTimer() {
     var countDownDate = new Date("May 15, 2021 13:00:00").getTime();
-    var x = setInterval(function () {
+    this._countdown = setInterval(function () {
       var now = new Date().getTime();
       var distance = countDownDate - now;
 
@@ -35,7 +40,7 @@ export class HomeComponent implements OnInit {
       document.getElementById("seconds").innerHTML = `${seconds}`;
 
       if (distance < 0) {
-        clearInterval(x);
+        clearInterval(this._countdown);
         document.getElementById("days").innerHTML = "EXPIRED";
         document.getElementById("hours").innerHTML = "EXPIRED";
         document.getElementById("minutes").innerHTML = "EXPIRED";
