@@ -1,7 +1,7 @@
 @import "src/scss-partials/variables";
 
 //button
-.btn-primary.damien{
+.btn-primary{
     background-color: $primary;
     border-color: transparent;
     color: $white; 
@@ -9,5 +9,30 @@
     &:hover{
         background-color: darken($primary, 3%) !important;
         color: $white; 
+    }
+}
+
+
+.toggle-buttons{
+    display: flex;
+    justify-content: center;
+
+    .toggle-button{
+        border: 1px solid $primary;
+        border-radius: 0;
+        background: none;
+        color: $dark;
+        &.active, &:hover, &:active{
+            background-color: $primary;
+            color: $white;
+            font-weight: bolder;
+        }
+        
+        &:first-of-type{
+            border-radius: 5px 0 0 5px;
+        }
+        &:last-of-type{
+            border-radius: 0 5px 5px 0;
+        }
     }
 }
