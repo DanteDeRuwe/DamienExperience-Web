@@ -67,7 +67,7 @@
     "registration_regist" :"Je m'inscris pour une promenade!",
     "registration_chose_route" : "Choisissez votre promenade:",
     "registration_tshirt" : "Achetez un t-shirt en édition limitée",
-    "registration_pay" : "Payer:"
+    "registration_pay" : "Payer:",
 
-
+    "about_tour_info" : "test info tour FR"
 }

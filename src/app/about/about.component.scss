@@ -62,3 +62,8 @@ h2{
     background-image: -ms-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
     background-image: -webkit-gradient( linear, left bottom, right bottom, color-stop(0.02, white), color-stop(0.5, #dcdcdc), color-stop(0.98, white) );
 }
+
+.map{
+    height: 30rem;
+    width: 30rem;
+}

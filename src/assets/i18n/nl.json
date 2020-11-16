@@ -35,7 +35,7 @@
     "about_over_tekst2" : "We bieden 2 wandelingen aan voor dezelfde prijs, de kleine tour van 50km of de grote van 100km. Bij registratie kan u kiezen welke u wenst te bewandelen.",
     "about_over_tekst3" : "Niet alleen u zal de wandeling kunnen beleven, indien u het wenst (aanvinken bij registratie) is er de mogelijkheid om je van thuisuit te laten supporteren door je vrienden en familieleden. Via een deelbare link (o.v.) kan je van thuisuit gevolgd worden via de website en kan je met het thuisfront communiceren.",
     "about_over_tekst4" : "Om deel te nemen aan de tour dient u het bedrag van 50 euro te storten. Dit geld gaat integraal naar de hulpverlening die wij bieden, met 50 euro kunt u 1 mensenleven redden.",
-    "about_over2" : "OVER DE APP",
+    "about_over1" : "OVER DE APP",
     "about_over_tekst5" : "Voor de wandeltocht hebben we een app ontwikkelt die je toelaat je afgelegde weg te volgen en de afstand tot het volgende checkpunt te zien.Maar er is meer onderweg zal je QR codes kunnen vinden. Deze kan je scannen met de app voor een tof weetje of een luisterfragment.",
     "about_over_tekst6" : "De app is beschikbaar in de Google PlayStore voor android en in de AppStore voor iOS gebruikers.",
     "about_DAMIAAN_TSHIRT" :"DAMIAAN TSHIRT",
@@ -67,9 +67,9 @@
     "registration_regist" : "Ik schrijf me in voor een wandeling!",
     "registration_chose_route" : "Kies je wandeling:",
     "registration_tshirt" : "Koop een limited edition T-shirt",
-    "registration_pay" : "Te betalen:"
+    "registration_pay" : "Te betalen:",
 
-
+    "about_tour_info" : "test info tour NL"
 
 
 }

@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="fade_rule"></div>  
+    <div class="fade_rule"></div>
     <div class="tshirt">
         <div class="picture">
             <img class="tshirtImg" src="/assets/images/tshirt.png" alt="thirt design">
@@ -49,4 +49,18 @@
             </p>
         </div>
     </div>
+    <div class="fade_rule"></div>
+    <div *ngFor="let route of routes">
+        <button (click)="onClick(route)">{{route.tourName}}</button>
+    </div>
+    <div>
+        <div class="map">
+            <app-map [tourName]="tourname" [userName]="username"></app-map>
+        </div>
+        <div id="aboutTourInfo">
+            <!-- {{"about_tour_info" | translate}} -->
+            
+        </div>
+    </div>
+
 </div>
