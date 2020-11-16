@@ -56,8 +56,8 @@ export class RegistrationComponent implements OnInit {
           })
         });
       }
-    });
     console.log(this.hasRegistrations)
+    });
   }
 
   onChange(value) {

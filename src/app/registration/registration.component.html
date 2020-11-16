@@ -1,7 +1,8 @@
 
-<div class="content"><ng-template *ngIf="hasRegistrations; else notAllowed" >
+<div class="content">
+<div *ngIf="hasRegistrations; else notAllowed" >
     You already signed up for a tour
-</ng-template>
+</div>
 <ng-template #notAllowed>
     <h2>Ik schrijf me in voor een wandeling!</h2>
     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
