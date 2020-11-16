@@ -18,6 +18,8 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() tourName: string;
   @Input() userName: string;
 
+  currentTour: string;
+  oldTour: string;
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
   
@@ -110,9 +112,29 @@ export class MapComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
     //console.log(changes.tourName.currentValue)
     //console.log(changes.userName.currentValue)
-    this.tourName = changes.tourName.currentValue;
+    let temp = changes.tourName.currentValue;
+
+    this.oldTour = this.currentTour
+    this.currentTour = temp
+      
     if(typeof changes.userName != 'undefined'){
       this.userName = changes.userName.currentValue;
+    }
+
+    if(this.map != null){
+      var mapLayer = this.map.getLayer(this.currentTour);
+
+      if(typeof mapLayer !== 'undefined') {
+        // Remove map layer & source.
+        this.map.removeLayer(this.currentTour).removeSource(this.currentTour);
+      }
+
+      var mapLayerTwo = this.map.getLayer(this.oldTour);
+
+      if(typeof mapLayerTwo !== 'undefined') {
+        // Remove map layer & source.
+        this.map.removeLayer(this.oldTour).removeSource(this.oldTour);
+      }
     }
     
     this.loadRoute();
