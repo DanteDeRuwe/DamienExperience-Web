@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-userpage',
   templateUrl: './userpage.component.html',
-  styleUrls: ['./userpage.component.css']
+  styleUrls: ['./userpage.component.scss']
 })
 export class UserpageComponent implements OnInit {
 
-  constructor() { }
+  public isMobile: boolean = false;
+  public registerActive: boolean = false;
 
-  ngOnInit(): void {
+  constructor(public bpo: BreakpointObserver) {
+    bpo.observe([
+      Breakpoints.Handset,
+      Breakpoints.HandsetPortrait,
+      Breakpoints.TabletPortrait
+    ]).subscribe(result => this.isMobile = result.matches);
   }
+
+  ngOnInit(): void { }
 
 }
