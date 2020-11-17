@@ -7,6 +7,7 @@ import { Walk } from './model/walk.model';
 import { RouteDataService } from './services/route-data.service';
 import { WalkDataService } from './services/walk-data.service';
 import { Observable } from 'rxjs';
+import { polygon } from '@turf/helpers';
 
 @Component({
   selector: 'app-map',
@@ -136,7 +137,7 @@ export class MapComponent implements OnInit, OnChanges {
         this.map.removeLayer(this.oldTour).removeSource(this.oldTour);
       }
     }
-    
+
     this.loadRoute();
   }
 
@@ -158,6 +159,13 @@ export class MapComponent implements OnInit, OnChanges {
 
   //Code in deze method can gerefactored en ge extract worden, is op dit moment afhankelijk van de data van BE
   private addRoute(name: string, color: string, coords: any) {
+    var bounds = coords.reduce(function (bounds, coord) {
+      return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
+       
+      this.map.fitBounds(bounds, {
+      padding: 20
+    });
     //Dit maakt eerst een source aan voor de route (genaamd route) en zal ze dan toevoegen aan de map adhv het id (de naam)
     this.map.addSource(`${name}`, {
       'type': 'geojson',
