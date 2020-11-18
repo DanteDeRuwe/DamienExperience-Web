@@ -24,19 +24,25 @@
 .page-container{
     position: relative;
     min-height: 100%;
-    
 }
 
 .content-wrap{
-    padding-bottom: 25rem;
+    padding-bottom: 18rem;
 }
 
 footer{
     position: absolute;
     bottom: 0;
     width: 100%;
-  }
+    height: 18rem;
+}
   
+.footer-copyright{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .form-inline{
     display: flex;
     margin-left: auto;
