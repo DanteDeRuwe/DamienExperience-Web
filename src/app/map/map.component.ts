@@ -7,6 +7,7 @@ import { Walk } from './model/walk.model';
 import { RouteDataService } from './services/route-data.service';
 import { WalkDataService } from './services/walk-data.service';
 import { Observable } from 'rxjs';
+import { polygon } from '@turf/helpers';
 
 @Component({
   selector: 'app-map',
@@ -18,6 +19,8 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() tourName: string;
   @Input() userName: string;
 
+  currentTour: string;
+  oldTour: string;
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
   
@@ -64,11 +67,6 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    //aanmaken van de map, de accessToken is nodig om toegang te krijgen 
-    //container is het element waar de map in moet in de html (deze moet dan ook een height krijgen anders krijg je niks te zien)
-    //style is de stijl van de kaart, op mapbox kan je verschillende themas terugvinden
-    //zoom is het zoomniveau
-    //center is de focus van de kaart(dit moeten we nog veranderen en het automatisch laten berekenen?)
     this.map = new mapboxgl.Map({
       accessToken: environment.mapbox.accessToken,
       container: 'map',
@@ -79,46 +77,42 @@ export class MapComponent implements OnInit, OnChanges {
 
     //controls toevoegen aan de map
     this.map.addControl(new mapboxgl.NavigationControl());
-    
-    //tekent de waypoints op de kaart door een nieuw Marker object aan te maken
-    //dit maakt een nieuw div element aan waarop er styling moet worden toegepast (zie css)
-    //aan de popup wordt er html toegevoegd om tekst te verschijnen
-    //voor de waypoints kan een eigen svg ingesteld worden
-    
-    
-    // this.waypoints.features.forEach((waypoint) => {
-    //   var marker = new mapboxgl.Marker()
-    //   .setLngLat([waypoint.coordinates.longitude, waypoint.coordinates.latitude])
-    //   .setPopup( new mapboxgl.Popup({ offset: 25 })
-    //     .setHTML('<h3>' + waypoint.title + '</h3><p>' + waypoint.description + '</p>'))
-    //   .addTo(this.map);
-
-    // });
-
-    //manier om de afstand te berekenen [POC]
-    //de coordinaten worden in een linestring omgezet en daarvan kan dan de lengte worden berekend
-    // let lineString = turf.lineString(this.route.features[0].geometry.coordinates);
-    // let distance = turf.length(lineString);
-    // console.log(distance);
-    
-    //zorgt ervoor dat vanzodra de map geladen wordt, de routes getekend worden [POC]
     this.map.on('load', () => {
     this.loadRoute()
   });
   }
 
   ngOnChanges(changes: SimpleChanges){
-    //console.log(changes.tourName.currentValue)
-    //console.log(changes.userName.currentValue)
-    this.tourName = changes.tourName.currentValue;
+    let temp = changes.tourName.currentValue;
+
+    this.oldTour = this.currentTour
+    this.currentTour = temp
+      
     if(typeof changes.userName != 'undefined'){
       this.userName = changes.userName.currentValue;
     }
-    
+
+    if(this.map != null){
+      var mapLayer = this.map.getLayer(this.currentTour);
+
+      if(typeof mapLayer !== 'undefined') {
+        // Remove map layer & source.
+        this.map.removeLayer(this.currentTour).removeSource(this.currentTour);
+      }
+
+      var mapLayerTwo = this.map.getLayer(this.oldTour);
+
+      if(typeof mapLayerTwo !== 'undefined') {
+        // Remove map layer & source.
+        this.map.removeLayer(this.oldTour).removeSource(this.oldTour);
+      }
+    }
+
     this.loadRoute();
   }
 
   loadRoute(){
+    //indien problemen met async gebruik forkJoin()?
       if(this.tourName != null){
         this._rds.getRoute$(this.tourName).subscribe(route => {
           let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
@@ -128,14 +122,21 @@ export class MapComponent implements OnInit, OnChanges {
     
       if(this.userName != null && this.userName != "" && typeof this.userName != 'undefined'){
         this._wds.getWalk$(this.userName).subscribe(walk => {
-          let color: string = walk.lineColor == null ? "#3bb7a9" : walk.lineColor;
-          this.addRoute(walk.id, color, walk.coordinates)
+          let color: string = walk.walkedPath.lineColor == null ? "#3bb7a9" : walk.walkedPath.lineColor;
+          this.addRoute(walk.id, color, walk.walkedPath.coordinates)
         });
       }
   }
 
   //Code in deze method can gerefactored en ge extract worden, is op dit moment afhankelijk van de data van BE
   private addRoute(name: string, color: string, coords: any) {
+    var bounds = coords.reduce(function (bounds, coord) {
+      return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
+       
+      this.map.fitBounds(bounds, {
+      padding: 20
+    });
     //Dit maakt eerst een source aan voor de route (genaamd route) en zal ze dan toevoegen aan de map adhv het id (de naam)
     this.map.addSource(`${name}`, {
       'type': 'geojson',
