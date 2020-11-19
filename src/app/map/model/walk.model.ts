@@ -2,8 +2,10 @@ export interface WalkJson {
     id: string
     starttime: Date;
     endtime: Date,
-    lineColor: string,
-    coordinates: [number[]],
+    walkedPath: {
+        lineColor: string,
+        coordinates: [number[]],
+    }
 }
 
 export class Walk{
@@ -11,8 +13,12 @@ export class Walk{
         private _id: string,
         private _starttime: Date,
         private _endtime: Date,
-        private _lineColor: string,
-        private _coordinates: [number[]],
+        private _walkedPath: {
+            lineColor: string,
+            coordinates: [number[]],
+        }
+        //private _lineColor: string,
+        //private _coordinates: [number[]],
     ){}
 
     static fromJson(json: WalkJson){
@@ -20,8 +26,9 @@ export class Walk{
             json.id,
             json.starttime,
             json.endtime,
-            json.lineColor,
-            json.coordinates,
+            json.walkedPath
+            //json.lineColor,
+            //json.coordinates,
         )
         return walk
     }
@@ -31,8 +38,9 @@ export class Walk{
             id: this._id,
             starttime: this._starttime,
             endtime: this._endtime,
-            lineColor: this._lineColor,
-            coordinates: this._coordinates
+            walkedPath: this._walkedPath
+            //lineColor: this._lineColor,
+            //coordinates: this._coordinates
         }
     }
 
@@ -48,12 +56,16 @@ export class Walk{
         return this._endtime;
     }
 
-    get coordinates(){
-        return this._coordinates;
+    get walkedPath(){
+        return this._walkedPath
     }
 
-    get lineColor(){
-        return this._lineColor;
-    }
+    // get coordinates(){
+    //     return this._coordinates;
+    // }
+
+    // get lineColor(){
+    //     return this._lineColor;
+    // }
 
 }
