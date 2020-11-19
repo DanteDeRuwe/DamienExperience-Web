@@ -1,9 +1,9 @@
 
 <div class="content"><ng-template *ngIf="hasRegistrations; else notAllowed" >
-    You already signed up for a tour
+    {{"registration_already_sign"| translate}}
 </ng-template>
 <ng-template #notAllowed>
-    <h2>Ik schrijf me in voor een wandeling!</h2>
+    <h2>{{"registration_regist" | translate}}</h2>
     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
         {{ errorMessage }}
     </div>
@@ -12,7 +12,7 @@
         <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
             <div class="components">
                 <div class="component">
-                    <label for="route">Kies je wandeling:</label>
+                    <label for="route">{{"registration_chose_route" | translate}}</label>
                     <select id="route" class="form-control" formControlName="route"
                     (change)="onChange($event.target.value)"
                      >
@@ -45,9 +45,9 @@
                         {{ getErrorMessage(registration.get("shirtSize").errors) }}
                     </p><br>
         
-                    <p>Te betalen: €{{price}}</p>
+                    <p>{{"registration_pay" | translate}} €{{price}}</p>
         
-                    <button type="submit" class="btn btn-primary">Bevestig</button>
+                    <button type="submit" class="btn btn-primary">{{"submit" | translate}}</button>
                 </div>
             </div>
         </form>
