@@ -7,13 +7,13 @@ import { AuthenticationService } from '../authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   public login: FormGroup;
   public errorMessage: string = '';
-  public rememberMe : boolean = false;
+  public rememberMe: boolean = false;
 
   constructor(private _authService: AuthenticationService,
     private _router: Router,
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.login = this.fb.group({
-      email:['', Validators.required],
-      password:['', Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
     }
     if (errors.required) {
       return 'is required';
-    } 
+    }
   }
 
-  onSubmitLogin(){
+  onSubmitLogin() {
     //TODO: login
-    
+
     this._authService.login(
       this.login.value.email,
       this.login.value.password,

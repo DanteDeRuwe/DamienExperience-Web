@@ -1,0 +1,30 @@
+
+@import "src/scss-partials/mixins";
+@import "src/scss-partials/variables";
+@import "src/scss-partials/buttons";
+
+.userpage{
+    &-desktop{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap:1rem;
+
+        app-login, app-register{
+            padding: 2rem;
+            flex-basis: 49%;
+        }
+        app-login{
+            border-width: 2px;
+            border-style: solid;
+            border-image: linear-gradient(to bottom , transparent 2%, $primary 50%, transparent 98%) 1 100%;
+            border-left: none;
+        }
+    }
+
+    &-mobile{
+        padding: 2rem;
+    }
+}
+
