@@ -1,0 +1,22 @@
+@import "src/scss-partials/variables";
+
+.container{
+    text-align: center;
+    
+    h2{
+        color: $primary;
+        margin-top: 2rem;
+        font-size: 3rem;
+    }
+    
+    .sponsor{
+        height: 7rem;
+        width: 20%;
+        min-width: 5rem;
+        display: inline-block;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1rem solid transparent;
+    }
+}
