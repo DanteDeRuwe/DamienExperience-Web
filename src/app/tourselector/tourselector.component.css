@@ -3,3 +3,7 @@
     height: 30rem;
     width: 30rem;
 }
+
+.container {
+    display: flex;
+}

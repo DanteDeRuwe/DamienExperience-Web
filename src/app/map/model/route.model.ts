@@ -3,8 +3,14 @@ export interface RouteJson {
     tourName: string,
     date: Date,
     distanceInMeters: number,
-    lineColor: string,
-    coordinates: [number[]]
+    path:{
+        lineColor: string,
+        coordinates: [number[]]
+    },
+    info: {
+        nl: string,
+        fr: string
+    }
 }
 
 export class Route {
@@ -13,8 +19,8 @@ export class Route {
         private _tourName: string,
         private _date: Date,
         private _distanceInMeters: number,
-        private _lineColor: string,
-        private _coordinates: [number[]]
+        private _path,
+        private _info
     ) { }
 
     static fromJson(json: RouteJson) {
@@ -23,8 +29,8 @@ export class Route {
             json.tourName,
             json.date,
             json.distanceInMeters,
-            json.lineColor,
-            json.coordinates,
+            json.path,
+            json.info
         )
         return route;
     }
@@ -35,8 +41,8 @@ export class Route {
             tourName: this._tourName,
             date: this._date,
             distanceInMeters: this._distanceInMeters,
-            lineColor: this._lineColor,
-            coordinates: this._coordinates,
+            path: this._path,
+            info: this._info
         };
     }
 
@@ -56,12 +62,12 @@ export class Route {
         return this._distanceInMeters;
     }
 
-    get coordinates() {
-        return this._coordinates;
+    get path(){
+        return this._path
     }
 
-    get lineColor() {
-        return this._lineColor;
+    get info() {
+        return this._info
     }
 
 }

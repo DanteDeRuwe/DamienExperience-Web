@@ -12,11 +12,11 @@
         <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
             <div class="components">
                 <div class="component">
-                    <label for="route">{{"registration_chose_route" | translate}}</label>
+                    <!-- <label for="route">{{"registration_chose_route" | translate}}</label>
                     <select id="route" class="form-control" formControlName="route"
                     (change)="onChange($event.target.value)"
                      >
-                     <!-- (change)="onChange($event.target.value)" -->
+                     -- (change)="onChange($event.target.value)" --
                         <option *ngFor="let route of routes" [ngValue]="route">
                             {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
                         </option>
@@ -29,8 +29,9 @@
                         <app-map
                             [tourName] = "tourname"
                             [userName] = "username"
-                        ></app-map>
-                    </div>
+                        ></app-map> 
+                    </div>-->
+                    <app-tourselector></app-tourselector>
                 </div>
                 <div class="component">
                     <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
