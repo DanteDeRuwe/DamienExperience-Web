@@ -87,6 +87,9 @@ export class MapComponent implements OnInit, OnChanges {
 
     this.oldTour = this.currentTour
     this.currentTour = temp
+
+    console.log(this.oldTour)
+    console.log(this.currentTour)
       
     if(typeof changes.userName != 'undefined'){
       this.userName = changes.userName.currentValue;
@@ -115,13 +118,15 @@ export class MapComponent implements OnInit, OnChanges {
     //indien problemen met async gebruik forkJoin()?
       if(this.tourName != null){
         this._rds.getRoute$(this.tourName).subscribe(route => {
-          let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
-          this.addRoute(route.tourName, color, route.coordinates);
+          console.log(route)
+          let color: string = route.path.lineColor == null ? "#FE0040" : route.path.lineColor;
+          this.addRoute(route.tourName, color, route.path.coordinates);
         });
       }
     
       if(this.userName != null && this.userName != "" && typeof this.userName != 'undefined'){
         this._wds.getWalk$(this.userName).subscribe(walk => {
+          console.log(walk)
           let color: string = walk.walkedPath.lineColor == null ? "#3bb7a9" : walk.walkedPath.lineColor;
           this.addRoute(walk.id, color, walk.walkedPath.coordinates)
         });
