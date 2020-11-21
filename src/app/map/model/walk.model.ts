@@ -1,6 +1,6 @@
 export interface WalkJson {
-    id: string
-    starttime: Date;
+    id: string,
+    starttime: Date,
     endtime: Date,
     walkedPath: {
         lineColor: string,
