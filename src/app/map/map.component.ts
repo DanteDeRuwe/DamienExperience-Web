@@ -9,6 +9,7 @@ import { WalkDataService } from './services/walk-data.service';
 import { Observable } from 'rxjs';
 import { polygon } from '@turf/helpers';
 import { Waypoint } from './model/waypoint.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-map',
@@ -63,6 +64,7 @@ export class MapComponent implements OnInit, OnChanges {
   constructor(
       private _rds: RouteDataService,
       private _wds: WalkDataService,
+      public translate: TranslateService
     ) { 
     
   }
@@ -174,12 +176,13 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   addWaypoints(waypoints: Waypoint[]){
+    let localLang: string = localStorage.getItem("lang");
     waypoints.forEach(waypoint => {
       console.log(waypoint)
       var marker = new mapboxgl.Marker()
       .setLngLat([waypoint.longitude, waypoint.latitude])
       .setPopup( new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3>' + waypoint.languagesText.title["nl"] + '</h3><p>' + waypoint.languagesText.description["nl"] + '</p>'))
+      .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
       .addTo(this.map);
     });
   }
