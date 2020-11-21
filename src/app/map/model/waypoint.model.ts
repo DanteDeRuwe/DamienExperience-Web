@@ -2,7 +2,7 @@ export interface WaypointJson {
     id: string,
     longitude: number,
     latitude: number,
-    languageText: {
+    languagesText: {
         title: {
             nl: string,
             fr: string
@@ -19,7 +19,7 @@ export class Waypoint{
         private _id: string,
         private _longitude: number,
         private _latitude: number,
-        private _languageText
+        private _languagesText
     ){}
 
     static fromJson(json: WaypointJson){
@@ -27,7 +27,7 @@ export class Waypoint{
             json.id,
             json.longitude,
             json.latitude,
-            json.languageText
+            json.languagesText
         )
         return walk
     }
@@ -37,7 +37,7 @@ export class Waypoint{
             id: this._id,
             longitude: this._longitude,
             latitude: this._latitude,
-            languageText: this._languageText
+            languagesText: this._languagesText
         }
     }
 
@@ -53,7 +53,7 @@ export class Waypoint{
         return this._latitude
     }
 
-    get languageText(){
-        return this._languageText
+    get languagesText(){
+        return this._languagesText
     }
 }

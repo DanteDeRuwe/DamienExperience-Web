@@ -8,6 +8,7 @@ import { RouteDataService } from './services/route-data.service';
 import { WalkDataService } from './services/walk-data.service';
 import { Observable } from 'rxjs';
 import { polygon } from '@turf/helpers';
+import { Waypoint } from './model/waypoint.model';
 
 @Component({
   selector: 'app-map',
@@ -121,6 +122,8 @@ export class MapComponent implements OnInit, OnChanges {
           console.log(route)
           let color: string = route.path.lineColor == null ? "#FE0040" : route.path.lineColor;
           this.addRoute(route.tourName, color, route.path.coordinates);
+          
+          this.addWaypoints(route.waypoints);
         });
       }
     
@@ -167,6 +170,17 @@ export class MapComponent implements OnInit, OnChanges {
         'line-color': color,
         'line-width': 4
       }
+    });
+  }
+
+  addWaypoints(waypoints: Waypoint[]){
+    waypoints.forEach(waypoint => {
+      console.log(waypoint)
+      var marker = new mapboxgl.Marker()
+      .setLngLat([waypoint.longitude, waypoint.latitude])
+      .setPopup( new mapboxgl.Popup({ offset: 25 })
+      .setHTML('<h3>' + waypoint.languagesText.title["nl"] + '</h3><p>' + waypoint.languagesText.description["nl"] + '</p>'))
+      .addTo(this.map);
     });
   }
 }
