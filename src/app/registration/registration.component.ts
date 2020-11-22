@@ -60,7 +60,8 @@ export class RegistrationComponent implements OnInit {
     });
 
     this._dis.obserervableMapData$.subscribe(data => {
-      console.log(data);
+      this.tourName = data[0]
+      //console.log(data);
     });
   }
 
