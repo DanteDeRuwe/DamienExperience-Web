@@ -1,3 +1,5 @@
+import { Waypoint } from './waypoint.model';
+
 export interface RouteJson {
     tourId: string,
     tourName: string,
@@ -11,6 +13,7 @@ export interface RouteJson {
         nl: string,
         fr: string
     }
+    waypoints: Waypoint[]
 }
 
 export class Route {
@@ -20,7 +23,8 @@ export class Route {
         private _date: Date,
         private _distanceInMeters: number,
         private _path,
-        private _info
+        private _info,
+        private _waypoints: Waypoint[]
     ) { }
 
     static fromJson(json: RouteJson) {
@@ -30,7 +34,8 @@ export class Route {
             json.date,
             json.distanceInMeters,
             json.path,
-            json.info
+            json.info,
+            json.waypoints
         )
         return route;
     }
@@ -42,7 +47,8 @@ export class Route {
             date: this._date,
             distanceInMeters: this._distanceInMeters,
             path: this._path,
-            info: this._info
+            info: this._info,
+            waypoints: this._waypoints
         };
     }
 
@@ -68,6 +74,10 @@ export class Route {
 
     get info() {
         return this._info
+    }
+
+    get waypoints(){
+        return this._waypoints
     }
 
 }
