@@ -19,7 +19,6 @@ export class RegistrationComponent implements OnInit {
   routes: Route[];
 
   tourName: string;
-  userName: string;
   errorMessage: string = '';
   selectedSize: ShirtSize;
   price: number = 0;
@@ -121,13 +120,5 @@ export class RegistrationComponent implements OnInit {
     if (errors.required) {
       return 'Dit veld is verplicht';
     }
-  }
-
-  get tourname() {
-    return this.tourName;
-  }
-
-  get username() {
-    return this.userName
   }
 }
