@@ -8,6 +8,8 @@ import { RouteDataService } from './services/route-data.service';
 import { WalkDataService } from './services/walk-data.service';
 import { Observable } from 'rxjs';
 import { polygon } from '@turf/helpers';
+import { Waypoint } from './model/waypoint.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-map',
@@ -62,6 +64,7 @@ export class MapComponent implements OnInit, OnChanges {
   constructor(
       private _rds: RouteDataService,
       private _wds: WalkDataService,
+      public translate: TranslateService
     ) { 
     
   }
@@ -87,6 +90,9 @@ export class MapComponent implements OnInit, OnChanges {
 
     this.oldTour = this.currentTour
     this.currentTour = temp
+
+    console.log(this.oldTour)
+    console.log(this.currentTour)
       
     if(typeof changes.userName != 'undefined'){
       this.userName = changes.userName.currentValue;
@@ -115,13 +121,17 @@ export class MapComponent implements OnInit, OnChanges {
     //indien problemen met async gebruik forkJoin()?
       if(this.tourName != null){
         this._rds.getRoute$(this.tourName).subscribe(route => {
-          let color: string = route.lineColor == null ? "#FE0040" : route.lineColor;
-          this.addRoute(route.tourName, color, route.coordinates);
+          console.log(route)
+          let color: string = route.path.lineColor == null ? "#FE0040" : route.path.lineColor;
+          this.addRoute(route.tourName, color, route.path.coordinates);
+          
+          this.addWaypoints(route.waypoints);
         });
       }
     
       if(this.userName != null && this.userName != "" && typeof this.userName != 'undefined'){
         this._wds.getWalk$(this.userName).subscribe(walk => {
+          console.log(walk)
           let color: string = walk.walkedPath.lineColor == null ? "#3bb7a9" : walk.walkedPath.lineColor;
           this.addRoute(walk.id, color, walk.walkedPath.coordinates)
         });
@@ -162,6 +172,18 @@ export class MapComponent implements OnInit, OnChanges {
         'line-color': color,
         'line-width': 4
       }
+    });
+  }
+
+  addWaypoints(waypoints: Waypoint[]){
+    let localLang: string = localStorage.getItem("lang");
+    waypoints.forEach(waypoint => {
+      console.log(waypoint)
+      var marker = new mapboxgl.Marker()
+      .setLngLat([waypoint.longitude, waypoint.latitude])
+      .setPopup( new mapboxgl.Popup({ offset: 25 })
+      .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
+      .addTo(this.map);
     });
   }
 }

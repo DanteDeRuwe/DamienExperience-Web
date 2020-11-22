@@ -1,15 +1,16 @@
 <div *ngIf="dataLoaded">
-    <div *ngFor="let route of routes">
-        <button (click)="onClick(route)">{{route.tourName}}</button>
-    </div>
-    <div>
+    
+    <div class="container">
         <div class="map">
+            <div *ngFor="let route of routes">
+                <button (click)="onClick(route)">{{route.tourName}}</button>
+            </div>
             <app-map [tourName]="tourname" [userName]="username"></app-map>
         </div>
         <div id="aboutTourInfo">
-            {{"about_tour_info" | translate}}
+            <h2>{{"about_tour_info" | translate}}</h2>
             <p>
-                {{this.currentRoute.tourName}}
+                {{ this.routeInfo }}
             </p>
         </div>
     </div>
