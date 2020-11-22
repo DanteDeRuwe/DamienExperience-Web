@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>

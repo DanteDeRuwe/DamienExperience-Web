@@ -5,9 +5,8 @@ import {
     HttpEvent,
   } from '@angular/common/http';
   import { Injectable } from '@angular/core';
-  import { AuthenticationService } from '../user/authentication.service';
+  import { AuthenticationService } from '../services/authentication.service';
   import { Observable } from 'rxjs';
-import { cpuUsage } from 'process';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {

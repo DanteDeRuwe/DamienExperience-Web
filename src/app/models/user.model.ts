@@ -1,4 +1,4 @@
-import { Registration } from '../map/model/registration.model';
+import { Registration } from './registration.model';
 
 export interface UserJson {
     id: string;

@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShirtSize } from '../enums.model';
-import { Route } from '../map/model/route.model';
-import { RouteDataService } from '../map/services/route-data.service';
-import { UserDataService } from '../user/user-data.service';
-import { User } from '../user/user.model';
+import { Route } from '../models/route.model';
+import { DatainjectionService } from '../services/datainjection.service';
+import { RouteDataService } from '../services/route-data.service';
+import { UserDataService } from '../services/user-data.service';
 
 
 @Component({
@@ -33,7 +33,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private _rds: RouteDataService, private _router: Router,
-    private _uds: UserDataService
+    private _uds: UserDataService,
+    private _dis: DatainjectionService
   ) { }
 
   ngOnInit(): void {
@@ -57,17 +58,17 @@ export class RegistrationComponent implements OnInit {
         this.loaded = true;
       });
     });
+
+    this._dis.obserervableMapData$.subscribe(data => {
+      console.log(data);
+    });
   }
 
-  onChange(value) {
-    //console.log(this.routes[value[0]])
-    console.log(this.routes[value[0]].tourName)
-    // console.log(this.tourname)
-    // console.log(this.username)
-    this.tourName = this.routes[value[0]].tourName
-    console.log(this.tourName)
-    // this.tourName = "RouteZero";
-  }
+  // onChange(value) {
+  //   console.log(this.routes[value[0]].tourName)
+  //   this.tourName = this.routes[value[0]].tourName
+  //   console.log(this.tourName)
+  // }
 
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
