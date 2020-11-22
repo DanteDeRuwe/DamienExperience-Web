@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
   selectedSize: ShirtSize;
   price: number = 0;
 
-  hasRegistrations: boolean;
+  hasRegistrations: boolean = false;
   loaded: boolean = false;
 
   userLoaded: Promise<boolean>
