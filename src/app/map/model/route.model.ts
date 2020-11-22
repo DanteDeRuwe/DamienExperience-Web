@@ -1,11 +1,11 @@
 import { Waypoint } from './waypoint.model';
 
 export interface RouteJson {
-    tourId: string,
+    id: string,
     tourName: string,
     date: Date,
     distanceInMeters: number,
-    path:{
+    path: {
         lineColor: string,
         coordinates: [number[]]
     },
@@ -18,7 +18,7 @@ export interface RouteJson {
 
 export class Route {
     constructor(
-        private _tourId: string,
+        private _id: string,
         private _tourName: string,
         private _date: Date,
         private _distanceInMeters: number,
@@ -29,7 +29,7 @@ export class Route {
 
     static fromJson(json: RouteJson) {
         const route = new Route(
-            json.tourId,
+            json.id,
             json.tourName,
             json.date,
             json.distanceInMeters,
@@ -42,7 +42,7 @@ export class Route {
 
     toJson(): RouteJson {
         return {
-            tourId: this._tourId,
+            id: this._id,
             tourName: this._tourName,
             date: this._date,
             distanceInMeters: this._distanceInMeters,
@@ -53,7 +53,7 @@ export class Route {
     }
 
     get tourId() {
-        return this._tourId;
+        return this._id;
     }
 
     get tourName() {

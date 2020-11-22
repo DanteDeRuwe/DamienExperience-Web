@@ -29,7 +29,6 @@ export class TourselectorComponent implements OnInit {
       this.tourName = this.currentRoute.tourName;
       this.routeInfo = this.currentRoute.info[this.localLang]
       this.dataLoaded = true;
-      console.log(routes)
     });
     this.translate.onLangChange.subscribe((event: LangChangeEvent)=>{
       this.routeInfo = this.currentRoute.info[event.lang]

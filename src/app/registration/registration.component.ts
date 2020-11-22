@@ -24,7 +24,8 @@ export class RegistrationComponent implements OnInit {
   selectedSize: ShirtSize;
   price: number = 0;
 
-  hasRegistrations: boolean = false;
+  hasRegistrations: boolean;
+  loaded: boolean = false;
 
   userLoaded: Promise<boolean>
 
@@ -43,21 +44,19 @@ export class RegistrationComponent implements OnInit {
     });
 
     this._rds.getFutureRoutes$().subscribe(routes => {
-      console.log(routes);
       this.routes = routes;
+      this._uds.profile$.subscribe(user => {
+        if(user.registrations.length != 0){
+          user.registrations.forEach(registration => {
+          routes.forEach(route => {
+            if (route.tourId == registration.routeId)
+              this.hasRegistrations = true
+            })
+          });
+        }
+        this.loaded = true;
+      });
     });
-
-    this._uds.profile$.subscribe(user => {
-      if(user.registrations.length != 0){
-        user.registrations.forEach(registration => {
-        this.routes.forEach(route => {
-          if (route.tourId == registration.routeId)
-            this.hasRegistrations = true
-          })
-        });
-      }
-    });
-    console.log(this.hasRegistrations)
   }
 
   onChange(value) {
