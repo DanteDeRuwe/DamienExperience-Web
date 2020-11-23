@@ -38,7 +38,6 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registration = this.fb.group({
-      route: ['', Validators.required],
       orderedShirt: ['', Validators.required],
       shirtSize: ['', Validators.required]
     });
@@ -60,7 +59,6 @@ export class RegistrationComponent implements OnInit {
 
     this._dis.obserervableMapData$.subscribe(data => {
       this.tourName = data[0]
-      //console.log(data);
     });
   }
 
@@ -72,9 +70,6 @@ export class RegistrationComponent implements OnInit {
 
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
-
-    console.log(this.selectedSize)
-    console.log(this.selectedSize.endsWith("GEEN"));
     if (!this.selectedSize.endsWith("GEEN")) {
       this.price = 65;
     } else {
@@ -85,9 +80,10 @@ export class RegistrationComponent implements OnInit {
   onSubmitRegistration() {
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN)
-      this.registration.value.orderedShirt = false
+    this.registration.value.orderedShirt = false
 
-    this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
+    this._rds.getRoute$(this.tourName).subscribe(route =>{
+       this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
       .subscribe((val) => {
         if (val) {
           if (this._rds.redirectUrl) {
@@ -110,7 +106,7 @@ export class RegistrationComponent implements OnInit {
           }
         }
       );
-
+    });
   }
 
   getErrorMessage(errors: any) {
