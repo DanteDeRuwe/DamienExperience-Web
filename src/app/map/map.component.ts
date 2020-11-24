@@ -1,15 +1,10 @@
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
-import * as turf from '@turf/turf'
-import { Walk } from './model/walk.model';
-import { RouteDataService } from './services/route-data.service';
-import { WalkDataService } from './services/walk-data.service';
-import { Observable } from 'rxjs';
-import { polygon } from '@turf/helpers';
-import { Waypoint } from './model/waypoint.model';
 import { TranslateService } from '@ngx-translate/core';
+import { RouteDataService } from '../services/route-data.service';
+import { WalkDataService } from '../services/walk-data.service';
+import { Waypoint } from '../models/waypoint.model';
 
 @Component({
   selector: 'app-map',

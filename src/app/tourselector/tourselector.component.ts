@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Route } from '../map/model/route.model';
-import { RouteDataService } from '../map/services/route-data.service';
+import { Route } from '../models/route.model';
+import { DatainjectionService } from '../services/datainjection.service';
+import { RouteDataService } from '../services/route-data.service';
 
 @Component({
   selector: 'app-tourselector',
@@ -18,14 +19,18 @@ export class TourselectorComponent implements OnInit {
 
   currentRoute : Route;
   localLang: string = localStorage.getItem("lang");
+
+  data: Array<any>;
   
   constructor(private _rds: RouteDataService,
+    private _dis: DatainjectionService,
     public translate: TranslateService) { }
 
   ngOnInit(): void {
     this._rds.getFutureRoutes$().subscribe((routes: Route[]) => {
       this.routes = routes;
       this.currentRoute = routes[0];
+      this.data = [routes[0].tourName]
       this.tourName = this.currentRoute.tourName;
       this.routeInfo = this.currentRoute.info[this.localLang]
       this.dataLoaded = true;
@@ -44,10 +49,16 @@ export class TourselectorComponent implements OnInit {
     return this.tourName;
   }
 
-  onClick(route:Route) {
+  onClick(route: Route) {
     this.tourName = route.tourName;
     this.currentRoute = route;
     this.localLang = localStorage.getItem("lang");
-    this.routeInfo = route.info[this.localLang]
+    this.routeInfo = route.info[this.localLang];
+    this.notifySubject(route);
+  }
+
+  notifySubject(route: Route){
+    this.data = [route.tourName];
+    this._dis.observableMapData(this.data);
   }
 }

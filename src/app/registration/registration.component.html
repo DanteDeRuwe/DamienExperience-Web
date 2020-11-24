@@ -10,7 +10,7 @@
         </div>
     
         <div>
-            <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
+            <form [formGroup]="registration">
                 <div class="components">
                     <div class="component">
                         <app-tourselector></app-tourselector>
@@ -30,7 +30,7 @@
             
                         <p>{{"registration_pay" | translate}} €{{price}}</p>
             
-                        <button type="submit" class="btn btn-primary">{{"submit" | translate}}</button>
+                        <button type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" | translate}}</button>
                     </div>
                 </div>
             </form>
