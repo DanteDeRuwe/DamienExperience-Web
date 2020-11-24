@@ -14,6 +14,7 @@ import { AuthGuard } from './user/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
+import { AddRouteComponent } from './admin/add-route/add-route.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,9 @@ const routes: Routes = [
   { path: 'register', component: UserpageComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
-  
+  //
+  { path: 'add-route', component: AddRouteComponent },
+
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent},
 ];
