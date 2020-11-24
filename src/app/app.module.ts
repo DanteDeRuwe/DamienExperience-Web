@@ -37,8 +37,11 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TourselectorComponent } from './tourselector/tourselector.component';
+import { ChatComponent } from './chat/chat.component';
+import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
+import { environment } from 'src/environments/environment';
 
-
+const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket']} };
 
 @NgModule({
   declarations: [
@@ -58,7 +61,8 @@ import { TourselectorComponent } from './tourselector/tourselector.component';
     PrivacyPolicyComponent,
     SponsorsComponent,
     CookiePolicyComponent,
-    TourselectorComponent
+    TourselectorComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,8 @@ import { TourselectorComponent } from './tourselector/tourselector.component';
         useFactory: httpTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    //SocketIoModule.forRoot(config)
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
