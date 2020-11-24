@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Route } from 'src/app/models/route.model';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./add-map.component.css']
 })
 export class AddMapComponent implements OnInit {
-  @Input() route: Route;
+  @Input() path: [number[]];
+  @Output() newCoordinates = new EventEmitter<number[]>();
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -31,16 +32,14 @@ export class AddMapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.on('click', (e) => {
       var lngLat = e.lngLat
-      console.log('lngLat : ' + lngLat)
-
       this.addCoordinates(lngLat.lng,lngLat.lat)
     })
     this.startSelecting()
   }
 
   addCoordinates(lng : number, lat : number) {
-    console.log('lng : ' + lng)
-    console.log('lat : ' + lat)
+    var coords = [lng,lat]
+    this.newCoordinates.emit(coords)
   }
 
   startSelecting(){

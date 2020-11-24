@@ -1,1 +1,43 @@
-<div><app-add-map [route]='route'></app-add-map></div> 
+<div id="add_route">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()" >
+        <div id="add_route_form" >
+            <h3>Algemene info</h3>
+            <div id="add_route_form_general">
+                <div class="add_route_form_item">
+                    <label for="tourName">Tourname</label>
+                    <input type="text" class="form-control" id="username" placeholder="Nieuwe tournaam" formControlName="tourName" />
+                </div>
+                <div class="add_route_form_item">
+                    <label for="date">Datum</label>
+                    <input type="date" class="form-control" id="date" placeholder="date" formControlName="date" />
+                </div>
+            </div>
+           <div id="add_route_form_bescrijving">
+            <h4>Beschrijving</h4>
+                <div class="">
+                    <label for="info_nl">Nederlands</label>
+                    <textarea type="text" class="form-control" id="info_nl" placeholder="Beschrijving" formControlName="info_nl"></textarea>
+                </div>
+                <div class="">  
+                    <label for="info_fr">Frans</label>
+                    <textarea type="text" class="form-control" id="info_fr" placeholder="Description" formControlName="info_fr"></textarea>
+                </div>
+           </div>
+           <div id="add_route_form_mapbuttons">
+                <h4>Route</h4>
+                <div id="add_route_form_mapbuttons_bar">
+                <button type="button" id="btnStart" class="btn">Start</button>
+                <button type="button" id="btnUndo" class="btn">Undo</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="btnSubmit">
+            <button type="submit" class="btn btn-primary">Volgende</button>
+        </div>
+    </form>
+    <div id="add_route_map">
+        <app-add-map [path]='path' (newCoordinates)="addCoordinates($event)"></app-add-map>
+    </div>
+</div>
+
