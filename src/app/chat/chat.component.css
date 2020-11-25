@@ -1,8 +1,8 @@
-* { 
+/* * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
-}
+} */
 
 body { 
     font: 13px Helvetica, Arial; 
@@ -29,14 +29,65 @@ form button {
     border: none; 
     padding: 10px; 
 } */
-
-#messages { 
-    list-style-type: none; 
+.chat{
+    height: 95%;
+}
+.chat-messages { 
     margin: 0; 
-    padding: 0; 
+    padding: 0.5rem; 
+    height: inherit;
+    word-break: break-all;
+    overflow-y: scroll;
+}
+
+.chat-messages .message {
+	padding: 10px;
+	margin-bottom: 15px;
+	
+	border-radius: 5px;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .message { 
     padding: 5px 10px; 
     background-color: antiquewhite;
+    word-break: break-all;
 }
+
+.chatcomponent{
+    height: 25rem;
+    width: 20rem;
+    position: relative;
+
+    border-radius: 10px;
+    border: 1px solid #ff0040;
+}
+
+
+
+#chat-form{
+    /* height: 20%; */
+    position: absolute;
+    bottom: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

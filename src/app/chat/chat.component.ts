@@ -43,7 +43,11 @@ export class ChatComponent implements OnInit {
   }
 
   onSendMessage(event){
-    this.socket.emit('chat message', event.target.message.value)
+    if(event.target.message.value !== ''){
+      this.socket.emit('chat message', event.target.message.value)
+      event.target.elements.msg.value = '';
+      event.target.elements.msg.focus();
+    }
   }
 
   outputMessage(message){
@@ -52,6 +56,6 @@ export class ChatComponent implements OnInit {
     div.innerHTML=`<p class="meta">${message.username}<span>${message.time}</span></p>
     <p class="text">${message.text}</p>`;
     document.querySelector('.chat-messages').appendChild(div);
-}
-
+    document.getElementById("chat-messages").scrollIntoView();
+  }
 }
