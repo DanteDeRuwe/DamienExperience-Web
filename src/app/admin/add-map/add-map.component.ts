@@ -67,6 +67,7 @@ export class AddMapComponent implements OnInit {
       this.map.removeLayer("pathlayer")
       this.map.removeSource("pathsource")
     }
+    
     this.map.addSource(`pathsource`, {
       'type': 'geojson',
       'data': {
@@ -92,6 +93,7 @@ export class AddMapComponent implements OnInit {
         'line-width': 4
       }
     });
+    
     this.lineDrawn=true
   }
   
