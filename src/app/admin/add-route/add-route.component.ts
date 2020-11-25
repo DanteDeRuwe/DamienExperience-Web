@@ -10,59 +10,59 @@ import * as turf from '@turf/turf'
   styleUrls: ['./add-route.component.scss']
 })
 export class AddRouteComponent implements OnInit {
+
+  distance: number = 0
+  path : [number[]]
+
   //get acces to child component
   @ViewChild(AddMapComponent)
   private addMapComponent: AddMapComponent;
-
-  hasStartedRecording : boolean
-  route : Route
-  path : [number[]]
-  tourName: string
-  date: Date
-  distanceInMeters: number
-  
-  public routeForm: FormGroup;
-
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    //mabye add color too
-    this.routeForm = this.fb.group({
-      tourName: ['', [Validators.required,Validators.minLength(4)]],
-      date : ['',Validators.required],
-      info_nl : ['',[Validators.required,Validators.minLength(4)]],
-      info_fr : ['',[Validators.required,Validators.minLength(4)]]
-    });
-    this.distanceInMeters = 0
-    this.hasStartedRecording = false
+  ngOnInit(): void {  }
+
+  startstopPath(start: boolean){
+    if(start) this.addMapComponent.startSelecting()
+    else this.addMapComponent.stopSelecting()
   }
-  onSubmit(which : number){
-    this.tourName = this.routeForm.value.tourName;
-    this.date = this.routeForm.value.date;
-    var nl =this.routeForm.value.info_nl;
-    var fr =this.routeForm.value.info_fr;
-    var info = {nl, fr}
-    this.route = new Route("testid",
-      this.tourName,
-      this.date,
-      69,
+  
+  updatePath(path: [number[]]){
+    this.addMapComponent.updatePath(path)
+    this.addMapComponent.drawPath()
+  }
+
+  finishRoute(value: any){
+    let nl = value.info_nl;
+    let fr = value.info_fr;
+    let info = {nl, fr}
+    let route = new Route("testid",
+      value.tourName,
+      value.date,
+      this.distance,
       this.path,
       info,
-      [])
-
-    if(which==0){
-      console.log('Back to dashboard')
-    }else{
-      console.log('Go to waypoints')
-    }
-    //see comment ngOnInit()
-    
-    console.log(this.route)
+      []) //TODO waypoints
+    console.log(route)
   }
-  //adds ("+") or removes ("-")
+
+  addCoordinates(coords: any) {
+    if(this.path == null){
+      this.path = [coords]
+      return
+    }
+
+    this.path.push(coords)
+    this.calcDistance("+")    
+    this.addMapComponent.drawPath()
+  }
+
   calcDistance(operation : String){
+    if(this.path.length < 2){
+      this.distance = 0;
+      return;
+    } 
     var last = this.path.length
-    var tempDist =  this.distanceInMeters
+    var tempDist =  this.distance
     var from = turf.point(this.path[last-2]);
     var to = turf.point(this.path[last-1]);
     var distance = turf.distance(from, to, {units: 'kilometers'});
@@ -71,49 +71,18 @@ export class AddRouteComponent implements OnInit {
     }else{
       tempDist=tempDist- distance;
     }
-    tempDist = tempDist * 100
+    tempDist = tempDist * 1000
     tempDist = Math.round(tempDist)
-    tempDist = tempDist / 100
-    this.distanceInMeters = tempDist
-  }
-  
-
-  addCoordinates(coords: any) {
-    if(this.path==null){
-      this.path = [coords]
-    }else{
-      this.path.push(coords)
-      this.calcDistance("+")
-    }
-    this.addMapComponent.updatePath(this.path)
-    this.addMapComponent.drawPath()
-    console.log(this.path)
+    tempDist = tempDist / 1000
+    this.distance = tempDist
   }
 
-  undo(){
-    if(this.path!=null){
+  undoLastPath(){
+    if(this.path.length > 0){
       this.calcDistance("-")
       this.path.pop()
       this.addMapComponent.updatePath(this.path)
       this.addMapComponent.drawPath()
     }
-  }
-  start(){
-    this.addMapComponent.startSelecting()
-    this.hasStartedRecording = true
-  }
-  stop(){
-    this.addMapComponent.stopSelecting()
-    this.hasStartedRecording = false
-  }
-  getErrorMessage(errors: any): string {
-    if (!errors) {
-      return null;
-    }
-    if (errors.required) {
-      return 'Dit is verplicht';
-    } else if (errors.minlength) {
-      return `Heeft op zijn minst ${errors.minlength.requiredLength} karakters nodig (heeft ${errors.minlength.actualLength})`;
-    } 
   }
 }
