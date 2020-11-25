@@ -22,7 +22,6 @@ export class ChatComponent implements OnInit {
   loggedon: boolean = false;
 
   constructor(
-    private _auths: AuthenticationService,
     private _uds: UserDataService
     ) { }
 
@@ -30,9 +29,7 @@ export class ChatComponent implements OnInit {
     this._uds.profile$.subscribe((user: User) => {
       if(user){
         this.loggedon = true
-        this.socket = io(environment.chatApi, { transports: ['websocket']});
-
-        const username = 'Jordy';
+        this.socket = io(environment.liveChatApi, { transports: ['websocket']});
         const room = 'Jordy\'s Room';
 
         this.socket.emit('join room', {username: user.lastName, room})
