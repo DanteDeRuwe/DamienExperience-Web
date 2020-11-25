@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-add-map',
   templateUrl: './add-map.component.html',
-  styleUrls: ['./add-map.component.css']
+  styleUrls: ['./add-map.component.scss']
 })
 export class AddMapComponent implements OnInit {
   @Input() path: [number[]];
