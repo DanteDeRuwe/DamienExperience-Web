@@ -2,9 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Walk } from '../model/walk.model';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Route } from '../model/route.model';
+import { Route } from '../models/route.model';
 
 @Injectable({
   providedIn: 'root'

@@ -22,7 +22,7 @@ import { MapComponent } from './map/map.component';
 import { RegisterComponent } from './user/register/register.component';
 import { MaterialModule } from './material/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './user/login/login.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
 import { httpInterceptorProviders } from './interceptors';
@@ -34,6 +34,9 @@ import { RegulationsComponent } from './regulations/regulations.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TourselectorComponent } from './tourselector/tourselector.component';
 
 
 
@@ -54,7 +57,8 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
     RegulationsComponent,
     PrivacyPolicyComponent,
     SponsorsComponent,
-    CookiePolicyComponent
+    CookiePolicyComponent,
+    TourselectorComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +68,20 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
     MaterialModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient){
+  return new TranslateHttpLoader(http);
+}

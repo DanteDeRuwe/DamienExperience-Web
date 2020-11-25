@@ -1,17 +1,17 @@
 <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
   {{ errorMessage }}
 </div>
-<h2>Ik heb al een account</h2>
+<h2>{{"login_title" | translate}}</h2>
 <form [formGroup]="login" (ngSubmit)="onSubmitLogin()">
   <div class="loginform">
-    <label for="email">Email</label>
+    <label for="email">{{"login_email" | translate}}</label>
     <input type="email" class="form-control" id="loginEmail" placeholder="email@example.com" formControlName="email" />
     <p class="text-danger" *ngIf="login.get('email').errors && login.get('email').touched">
       {{ getErrorMessage(login.get("email").errors) }}
     </p>
   </div>
   <div class="loginform">
-    <label for="password">Password</label>
+    <label for="password">{{"login_passwoord" | translate}}</label>
     <input type="password" class="form-control" id="loginPassword" placeholder="Enter password"
       formControlName="password" />
     <p class="text-danger" *ngIf="
@@ -23,7 +23,7 @@
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="loginRemindme" [checked]="rememberMe"
       (change)="this.rememberMe = !this.rememberMe" />
-    <label class="remindme" for="remindme">Remember me</label>
+    <label class="remindme" for="remindme">{{"login_remember_me" | translate}}</label>
   </div>
-  <button type="submit" class="btn btn-primary damien">Submit</button>
+  <button type="submit" class="btn btn-primary damien">{{"submit" | translate}}</button>
 </form>

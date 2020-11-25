@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "~9.0.1",
     "@angular/router": "~9.0.1",
     "@fortawesome/fontawesome-free": "^5.15.0",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "@turf/buffer": "^5.1.5",
     "@turf/helpers": "^6.1.4",
     "@turf/length": "^6.0.2",

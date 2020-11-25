@@ -2,11 +2,11 @@
   {{ errorMessage }}
 </div>
 
-<h2>Ik maak een account</h2>
+<h2>{{"register_title" | translate}}</h2>
 <form [formGroup]="register" (ngSubmit)="onSubmitRegister()">
   <div class="form-group side-by-side" formGroupName="nameGroup">
     <div>
-      <label for="firstname">First Name</label>
+      <label for="firstname">{{"register_vn" | translate}}</label>
       <input
         type="text"
         class="form-control"
@@ -25,7 +25,7 @@
       </p>
     </div>
     <div>
-      <label for="lastname">Last Name</label>
+      <label for="lastname">{{"register_ln" | translate}}</label>
       <input
         type="text"
         class="form-control"
@@ -47,7 +47,7 @@
 
   <div class="form-group side-by-side" formGroupName="dobaAndPhoneGroup">
     <div>
-      <label for="dob">Date of Birth</label>
+      <label for="dob">{{"register_gd" | translate}}</label>
       <input
         type="date"
         class="form-control"
@@ -68,7 +68,7 @@
       </p>
     </div>
     <div>
-      <label for="phone">Phone Number</label>
+      <label for="phone">{{"register_nummer" | translate}}</label>
       <input
         type="tel"
         class="form-control"
@@ -91,7 +91,7 @@
   </div>
 
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
+    <label for="exampleInputEmail1">{{"login_email" | translate}}</label>
     <input
       type="email"
       class="form-control"
@@ -100,7 +100,7 @@
       formControlName="email"
     />
     <small id="email" class="form-text text-muted"
-      >We'll never share your email with anyone else.</small
+      >{{"register_share_email" | translate}}</small
     >
     <p
       class="text-danger"
@@ -112,12 +112,12 @@
 
   <div class="form-group side-by-side" formGroupName="passwordGroup">
     <div>
-      <label for="password">Password</label>
+      <label for="password">{{"login_passwoord" |translate}}</label>
       <input
         type="password"
         class="form-control"
         id="password"
-        placeholder="Enter password"
+        placeholder="{{'login_enter_passwoord' |translate}}"
         formControlName="password"
       />
       <p
@@ -133,12 +133,12 @@
       </p>
     </div>
     <div>
-      <label for="confirmPassword">Confirm password</label>
+      <label for="confirmPassword">{{"register_confirm" |translate}}</label>
       <input
         type="password"
         class="form-control"
         id="confirmPassword"
-        placeholder="Confirm password"
+        placeholder="{{'register_confirm' |translate}}"
         formControlName="confirmPassword"
       />
       <p
@@ -158,9 +158,9 @@
   </div>
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="rememberMe" [checked]="rememberMe" (change)="this.rememberMe = !this.rememberMe"/>
-    <label class="rememberMe" for="rememberMe">Remember me</label>
+    <label class="rememberMe" for="rememberMe">{{"login_remember_me" |translate}}</label>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">{{"submit" |translate}}</button>
 </form>
 <!-- <div fxLayout="column" fxLayoutAlign="space-around stretch" class="login-main">
 

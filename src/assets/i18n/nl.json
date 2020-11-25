@@ -1,0 +1,75 @@
+{
+    "test": "Nederlands",
+
+    "mn_over_de_tour" : "OVER DE TOUR",
+    "mn_wandelaar_volgen" : "WANDELAAR VOLGEN",
+    "mn_ik_schrijf_me_in" : "IK SCHRIJF ME IN",
+    "mn_info" : "Info",
+    "mn_reglement_en_voorwaarden" : "Reglement en voorwaarden",
+    "mn_sponsors" : "Sponsors",
+    "mn_privacy_policy" : "Privacy Policy",
+    "mn_cookie_policy" : "Cookie Policy",
+    "mn_links" : "Links",
+    "mn_damiaanactie" : "Damiaanactie",
+    "mn_webshop" : "Webshop",
+    "mn_andoid_app":"Andoid app",
+    "mn_iOS_app" : "iOS app",
+    "mn_ondernemings_nr" : "ondernemingsnr: 0406.694.670",
+    "mn_da_straat" : "Leopold II-laan 263",
+    "mn_da_stad" : "1081 Brussel",
+    "mn_da_mail" : "info@damiaanactie.be",
+    "mn_taal" : "Taal",
+
+    "home_title":"Damien Experience wandelingen",
+    "home_schrijf_je_in" : "Schrijf je nu in voor de damien experience wandelingen.",
+    "home_schrijf_me_in" : "SCHRIJF ME IN",
+    "home_DAGEN" : "DAGEN",
+    "home_UREN" : "UREN",
+    "home_MINUTEN" : "MINUTEN",
+    "home_SECONDEN" : "SECONDEN",
+
+    "sp_met_dank" : "Met dank aan onze sponsors!",
+
+    "about_over" : "OVER DE TOUR",
+    "about_over_tekst1" : "Met de damiaan tour gaan we samen op wandeltocht rondom Tremelo. Onderweg zullen er zich wachtposten en rustplatsen bevinden waar u water kan bijtanken of een snackje nuttigen. Er is voor de optimale \"experience\" raden wij u aan onze bijhorende app te downloaden.",
+    "about_over_tekst2" : "We bieden 2 wandelingen aan voor dezelfde prijs, de kleine tour van 50km of de grote van 100km. Bij registratie kan u kiezen welke u wenst te bewandelen.",
+    "about_over_tekst3" : "Niet alleen u zal de wandeling kunnen beleven, indien u het wenst (aanvinken bij registratie) is er de mogelijkheid om je van thuisuit te laten supporteren door je vrienden en familieleden. Via een deelbare link (o.v.) kan je van thuisuit gevolgd worden via de website en kan je met het thuisfront communiceren.",
+    "about_over_tekst4" : "Om deel te nemen aan de tour dient u het bedrag van 50 euro te storten. Dit geld gaat integraal naar de hulpverlening die wij bieden, met 50 euro kunt u 1 mensenleven redden.",
+    "about_over1" : "OVER DE APP",
+    "about_over_tekst5" : "Voor de wandeltocht hebben we een app ontwikkelt die je toelaat je afgelegde weg te volgen en de afstand tot het volgende checkpunt te zien.Maar er is meer onderweg zal je QR codes kunnen vinden. Deze kan je scannen met de app voor een tof weetje of een luisterfragment.",
+    "about_over_tekst6" : "De app is beschikbaar in de Google PlayStore voor android en in de AppStore voor iOS gebruikers.",
+    "about_DAMIAAN_TSHIRT" :"DAMIAAN TSHIRT",
+    "about_over_tekst7": "Bij het registreren voor een wandeling hebt u de mogelijkheid om een tshirt bij te bestellen. Dit werd speciaal voor deze wandelingen ontworpen. Achteraf bestellen is niet mogelijk.",
+    "about_over_tekst8":"De beschikbare maten zijn S, M, L, XL en XXL.De prijs voor 1 tshirt is 25 euro. Deze meerprijs zal gelijk met uw registratie verrekend worden.",
+
+    "tracking_zoek" : "ZOEK EEN WANDELAAR",
+    "tracking_zoeken" : "ZOEKEN",
+
+    "login_title":"Ik heb al een account",
+    "login_passwoord" : "Passwoord",
+    "login_email":"E-mail adress",    
+    "login_enter_passwoord":"vul wachtwoord in",
+    "login_remember_me" : "Onthoud me",
+    "submit" : "Verzenden",
+
+    "register_title" : "Ik maak een account",
+    "register_vn":"Voornaam",
+    "register_ln" : "Achternaam",
+    "register_gd" : "Geboortedag",
+    "register_nummer" : "Telefoonnummer",
+    "register_share_email" : "We zullen uw e-mail nooit met iemand anders delen.",
+    "register_confirm" : "Bevestig wachtwoord",
+
+    "profile_title" : "Mijn profiel",
+    "profile_title1" : "Wijzig mijn persoonlijke informatie",
+
+    "registration_already_sign" : "Je bent al geregistreerd",
+    "registration_regist" : "Ik schrijf me in voor een wandeling!",
+    "registration_chose_route" : "Kies je wandeling:",
+    "registration_tshirt" : "Koop een limited edition T-shirt",
+    "registration_pay" : "Te betalen:",
+
+    "about_tour_info" : "Tour info"
+    
+
+}
