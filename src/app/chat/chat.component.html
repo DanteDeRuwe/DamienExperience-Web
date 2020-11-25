@@ -1,24 +1,23 @@
-<div class="chat-messages">
+<div *ngIf="loggedon; else notLoggedOn">
+    <div class="chat-messages">
+    </div>
+    
+    <form id="chat-form"(ngSubmit)="onSendMessage($event)" >
+        <input
+          id="msg"
+          type="text"
+          placeholder="Enter Message"
+          required
+          autocomplete="off"
+          name="message"
+        />
+        <button class="btn" value="Submit">verzenden</button>
+    </form>
 </div>
 
-
-<form id="chat-form"(ngSubmit)="onSendMessage($event)" >
-    <input
-      id="msg"
-      type="text"
-      placeholder="Enter Message"
-      required
-      autocomplete="off"
-      name="message"
-    />
-    <button class="btn" value="Submit">verzenden</button>
-</form>
-
-
+<ng-template #notLoggedOn>
+    <div>
+        <p>You are not yet logged on</p>
+    </div>
+</ng-template>
 <script src="/socket.io/socket.io.js"></script>
-<!-- <script>
-  var socket = io();
-  socket.on('connect', function(){});
-  socket.on('event', function(data){});
-  socket.on('disconnect', function(){});
-</script>  -->

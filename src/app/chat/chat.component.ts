@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { WebSocketService } from '../services/web-socket.service';
 //import * as io from 'socket.io-client';
 import { io } from 'socket.io-client';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,22 +17,29 @@ export class ChatComponent implements OnInit {
   // chatForm = document.getElementById('chat-form');
   socket;
 
+  loggedon: boolean = false;
+
   constructor(
-    //private socket: Socket
-    private _wss: WebSocketService
+    private _auths: AuthenticationService
     ) { }
 
   ngOnInit(): void {
-    this.socket = io(environment.chatApi, { transports: ['websocket']});
+    this._auths.user$.subscribe(user => {
+      if(user){
+        this.loggedon = true
+        this.socket = io(environment.chatApi, { transports: ['websocket']});
 
-    const username = 'Jordy';
-    const room = 'Jordy\'s Room';
+        const username = 'Jordy';
+        const room = 'Jordy\'s Room';
 
-    this.socket.emit('join room', {username, room})
+        this.socket.emit('join room', {username, room})
 
-    this.socket.on('chat message', message => {
-      this.outputMessage(message);
-    });
+        this.socket.on('chat message', message => {
+          this.outputMessage(message);
+        });
+      }
+    })
+    
   }
 
   onSendMessage(event){
