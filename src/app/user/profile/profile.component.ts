@@ -1,12 +1,7 @@
-import { UserDataService } from '../user-data.service';
-import { User } from '../user.model';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { UserDataService } from '../../services/user-data.service';
+import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AuthenticationService } from '../authentication.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({

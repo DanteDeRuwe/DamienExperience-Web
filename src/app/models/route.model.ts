@@ -1,47 +1,59 @@
+import { Waypoint } from './waypoint.model';
+
 export interface RouteJson {
-    tourId: string,
+    id: string,
     tourName: string,
     date: Date,
     distanceInMeters: number,
-    lineColor: string,
-    coordinates: [number[]]
+    path: {
+        lineColor: string,
+        coordinates: [number[]]
+    },
+    info: {
+        nl: string,
+        fr: string
+    }
+    waypoints: Waypoint[]
 }
 
 export class Route {
     constructor(
-        private _tourId: string,
+        private _id: string,
         private _tourName: string,
         private _date: Date,
         private _distanceInMeters: number,
-        private _lineColor: string,
-        private _coordinates: [number[]]
+        private _path,
+        private _info,
+        private _waypoints: Waypoint[]
     ) { }
 
     static fromJson(json: RouteJson) {
         const route = new Route(
-            json.tourId,
+            json.id,
             json.tourName,
             json.date,
             json.distanceInMeters,
-            json.lineColor,
-            json.coordinates,
+            json.path,
+            json.info,
+            json.waypoints
         )
         return route;
     }
 
     toJson(): RouteJson {
         return {
-            tourId: this._tourId,
+            id: this._id,
             tourName: this._tourName,
             date: this._date,
             distanceInMeters: this._distanceInMeters,
-            lineColor: this._lineColor,
-            coordinates: this._coordinates,
+            path: this._path,
+            info: this._info,
+            waypoints: this._waypoints
         };
     }
 
     get tourId() {
-        return this._tourId;
+        return this._id;
     }
 
     get tourName() {
@@ -56,12 +68,16 @@ export class Route {
         return this._distanceInMeters;
     }
 
-    get coordinates() {
-        return this._coordinates;
+    get path(){
+        return this._path
     }
 
-    get lineColor() {
-        return this._lineColor;
+    get info() {
+        return this._info
+    }
+
+    get waypoints(){
+        return this._waypoints
     }
 
 }

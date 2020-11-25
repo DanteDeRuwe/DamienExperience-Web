@@ -1,59 +1,44 @@
-
-<div class="content"><ng-template *ngIf="hasRegistrations; else notAllowed" >
-    {{"registration_already_sign"| translate}}
-</ng-template>
-<ng-template #notAllowed>
-    <h2>{{"registration_regist" | translate}}</h2>
-    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
-        {{ errorMessage }}
-    </div>
-
-    <div>
-        <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
-            <div class="components">
-                <div class="component">
-                    <label for="route">{{"registration_chose_route" | translate}}</label>
-                    <select id="route" class="form-control" formControlName="route"
-                    (change)="onChange($event.target.value)"
-                     >
-                     <!-- (change)="onChange($event.target.value)" -->
-                        <option *ngFor="let route of routes" [ngValue]="route">
-                            {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
-                        </option>
-                    </select>
-                    <p class="text-danger" *ngIf="registration.get('route').errors && registration.get('route').touched">
-                        {{ getErrorMessage(registration.get("route").errors) }}
-                    </p>
-                    
-                    <div class="map">
-                        <app-map
-                            [tourName] = "tourname"
-                            [userName] = "username"
-                        ></app-map>
+<div *ngIf="loaded">
+    <div class="content">
+    <ng-template *ngIf="hasRegistrations; else Allowed" >
+        {{"registration_already_sign"| translate}}
+    </ng-template>
+    <ng-template #Allowed>
+        <h2>{{"registration_regist" | translate}}</h2>
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+    
+        <div>
+            <form [formGroup]="registration">
+                <div class="components">
+                    <div class="component">
+                        <app-tourselector></app-tourselector>
+                    </div>
+                    <div class="component">
+                        <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
+                        <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
+                        <select id="shirtSize" class="form-control" formControlName="shirtSize" (change)="onChangeShirt($event)">
+                            <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
+                                {{ shirtSize }}
+                            </option>
+                        </select>
+                        <p class="text-danger"
+                            *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
+                            {{ getErrorMessage(registration.get("shirtSize").errors) }}
+                        </p><br>
+            
+                        <p>{{"registration_pay" | translate}} €{{price}}</p>
+            
+                        <button type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" | translate}}</button>
                     </div>
                 </div>
-                <div class="component">
-                    <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
-                    <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
-                    <select id="shirtSize" class="form-control" formControlName="shirtSize" (change)="onChangeShirt($event)">
-                        <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
-                            {{ shirtSize }}
-                        </option>
-                    </select>
-                    <p class="text-danger"
-                        *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
-                        {{ getErrorMessage(registration.get("shirtSize").errors) }}
-                    </p><br>
-        
-                    <p>{{"registration_pay" | translate}} €{{price}}</p>
-        
-                    <button type="submit" class="btn btn-primary">{{"submit" | translate}}</button>
-                </div>
-            </div>
-        </form>
-
+            </form>
+    
+        </div>
+    </ng-template>
     </div>
-</ng-template>
 </div>
+
 
     

@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShirtSize } from '../enums.model';
-import { Route } from '../map/model/route.model';
-import { RouteDataService } from '../map/services/route-data.service';
-import { UserDataService } from '../user/user-data.service';
-import { User } from '../user/user.model';
+import { Route } from '../models/route.model';
+import { DatainjectionService } from '../services/datainjection.service';
+import { RouteDataService } from '../services/route-data.service';
+import { UserDataService } from '../services/user-data.service';
 
 
 @Component({
@@ -19,12 +19,12 @@ export class RegistrationComponent implements OnInit {
   routes: Route[];
 
   tourName: string;
-  userName: string;
   errorMessage: string = '';
   selectedSize: ShirtSize;
   price: number = 0;
 
   hasRegistrations: boolean = false;
+  loaded: boolean = false;
 
   userLoaded: Promise<boolean>
 
@@ -32,49 +32,44 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private _rds: RouteDataService, private _router: Router,
-    private _uds: UserDataService
+    private _uds: UserDataService,
+    private _dis: DatainjectionService
   ) { }
 
   ngOnInit(): void {
     this.registration = this.fb.group({
-      route: ['', Validators.required],
       orderedShirt: ['', Validators.required],
       shirtSize: ['', Validators.required]
     });
 
     this._rds.getFutureRoutes$().subscribe(routes => {
-      console.log(routes);
       this.routes = routes;
+      this._uds.profile$.subscribe(user => {
+        if(user.registrations.length != 0){
+          user.registrations.forEach(registration => {
+          routes.forEach(route => {
+            if (route.tourId == registration.routeId)
+              this.hasRegistrations = true
+            })
+          });
+        }
+        this.loaded = true;
+      });
     });
 
-    this._uds.profile$.subscribe(user => {
-      if(user.registrations.length != 0){
-        user.registrations.forEach(registration => {
-        this.routes.forEach(route => {
-          if (route.tourId == registration.routeId)
-            this.hasRegistrations = true
-          })
-        });
-      }
+    this._dis.obserervableMapData$.subscribe(data => {
+      this.tourName = data[0]
     });
-    console.log(this.hasRegistrations)
   }
 
-  onChange(value) {
-    //console.log(this.routes[value[0]])
-    console.log(this.routes[value[0]].tourName)
-    // console.log(this.tourname)
-    // console.log(this.username)
-    this.tourName = this.routes[value[0]].tourName
-    console.log(this.tourName)
-    // this.tourName = "RouteZero";
-  }
+  // onChange(value) {
+  //   console.log(this.routes[value[0]].tourName)
+  //   this.tourName = this.routes[value[0]].tourName
+  //   console.log(this.tourName)
+  // }
 
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
-
-    console.log(this.selectedSize)
-    console.log(this.selectedSize.endsWith("GEEN"));
     if (!this.selectedSize.endsWith("GEEN")) {
       this.price = 65;
     } else {
@@ -85,9 +80,10 @@ export class RegistrationComponent implements OnInit {
   onSubmitRegistration() {
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN)
-      this.registration.value.orderedShirt = false
+    this.registration.value.orderedShirt = false
 
-    this._rds.routeRegistration$(this.registration.value.route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
+    this._rds.getRoute$(this.tourName).subscribe(route =>{
+       this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
       .subscribe((val) => {
         if (val) {
           if (this._rds.redirectUrl) {
@@ -110,7 +106,7 @@ export class RegistrationComponent implements OnInit {
           }
         }
       );
-
+    });
   }
 
   getErrorMessage(errors: any) {
@@ -120,13 +116,5 @@ export class RegistrationComponent implements OnInit {
     if (errors.required) {
       return 'Dit veld is verplicht';
     }
-  }
-
-  get tourname() {
-    return this.tourName;
-  }
-
-  get username() {
-    return this.userName
   }
 }
