@@ -4,6 +4,8 @@ import { WebSocketService } from '../services/web-socket.service';
 //import * as io from 'socket.io-client';
 import { io } from 'socket.io-client';
 import { AuthenticationService } from '../services/authentication.service';
+import { UserDataService } from '../services/user-data.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-chat',
@@ -20,11 +22,12 @@ export class ChatComponent implements OnInit {
   loggedon: boolean = false;
 
   constructor(
-    private _auths: AuthenticationService
+    private _auths: AuthenticationService,
+    private _uds: UserDataService
     ) { }
 
   ngOnInit(): void {
-    this._auths.user$.subscribe(user => {
+    this._uds.profile$.subscribe((user: User) => {
       if(user){
         this.loggedon = true
         this.socket = io(environment.chatApi, { transports: ['websocket']});
@@ -32,9 +35,9 @@ export class ChatComponent implements OnInit {
         const username = 'Jordy';
         const room = 'Jordy\'s Room';
 
-        this.socket.emit('join room', {username, room})
+        this.socket.emit('join room', {username: user.lastName, room})
 
-        this.socket.on('chat message', message => {
+        this.socket.on('chat message', message => { 
           this.outputMessage(message);
         });
       }
@@ -56,6 +59,5 @@ export class ChatComponent implements OnInit {
     div.innerHTML=`<p class="meta">${message.username}<span>${message.time}</span></p>
     <p class="text">${message.text}</p>`;
     document.querySelector('.chat-messages').appendChild(div);
-    document.getElementById("chat-messages").scrollIntoView();
   }
 }
