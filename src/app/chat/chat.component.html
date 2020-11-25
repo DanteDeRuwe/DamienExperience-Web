@@ -1,8 +1,15 @@
 <div class="chatcomponent">
-    <div class="chat" *ngIf="loggedon; else notLoggedOn">
+    <div class="chat" *ngIf="loggedon; else notLoggedOn" >
         <div class="chat-messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <div class="chat-messages-message" *ngFor="let message of messages">
+                <div class="chat-messages-message-meta">
+                    <b class="text-primary">{{message.sender.name}}</b>
+                    <small class="text-gray">{{message.time}}</small>
+                </div>
+                <div class="chat-messages-message-text">{{message.text}}</div>
+            </div>
         </div>
-        <form id="chat-form"(ngSubmit)="onSendMessage($event)" >
+        <form id="chat-form" class="chat-form" (ngSubmit)="onSendMessage($event)" >
             <input
             id="msg"
             type="text"
@@ -11,7 +18,7 @@
             autocomplete="off"
             name="message"
             />
-            <button class="btn" value="Submit">verzenden</button>
+            <button class="btn btn-primary" value="Submit">verzenden</button>
         </form>
     </div>
 

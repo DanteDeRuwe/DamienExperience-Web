@@ -6,11 +6,12 @@ import { io } from 'socket.io-client';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
+import { ChatMessage } from '../models/chatmessage.model';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
 
@@ -20,6 +21,7 @@ export class ChatComponent implements OnInit {
   socket;
 
   loggedon: boolean = false;
+  messages: ChatMessage[] = [];
 
   constructor(
     private _uds: UserDataService
@@ -51,10 +53,6 @@ export class ChatComponent implements OnInit {
   }
 
   outputMessage(message){
-    const div = document.createElement('div');
-    div.classList.add('message');
-    div.innerHTML=`<p class="meta">${message.username}<span>${message.time}</span></p>
-    <p class="text">${message.text}</p>`;
-    document.querySelector('.chat-messages').appendChild(div);
+    this.messages.push(message);
   }
 }
