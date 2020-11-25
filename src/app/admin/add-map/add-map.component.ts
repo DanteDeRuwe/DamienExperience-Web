@@ -18,6 +18,8 @@ export class AddMapComponent implements OnInit {
   //temp hardcoded startingpoint
   lat = 50.8465573;
   lng = 4.351697;
+  lineDrawn = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,10 +33,12 @@ export class AddMapComponent implements OnInit {
 
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.on('click', (e) => {
-      var lngLat = e.lngLat
-      this.addCoordinates(lngLat.lng,lngLat.lat)
+      var cursor = this.map.getCanvas().style.cursor
+      if(cursor == 'pointer'){
+        var lngLat = e.lngLat
+        this.addCoordinates(lngLat.lng,lngLat.lat)
+      }
     })
-    this.startSelecting()
   }
 
   addCoordinates(lng : number, lat : number) {
@@ -51,6 +55,44 @@ export class AddMapComponent implements OnInit {
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
+  }
+
+  updatePath(newPath : [number[]]){
+    this.path = newPath
+  }
+
+  drawPath(){
+    var color = "#FE0040"
+    if(this.lineDrawn){
+      this.map.removeLayer("pathlayer")
+      this.map.removeSource("pathsource")
+    }
+    this.map.addSource(`pathsource`, {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': this.path
+        }
+      }
+    });
+
+    this.map.addLayer({
+      'id': `pathlayer`,
+      'type': 'line',
+      'source': `pathsource`,
+      'layout': {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      'paint': {
+        'line-color': color,
+        'line-width': 4
+      }
+    });
+    this.lineDrawn=true
   }
   
 

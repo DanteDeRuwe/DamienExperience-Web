@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Route } from 'src/app/models/route.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AddMapComponent } from '../add-map/add-map.component';
 
 @Component({
   selector: 'app-add-route',
@@ -8,6 +9,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./add-route.component.scss']
 })
 export class AddRouteComponent implements OnInit {
+  //get acces to child component
+  @ViewChild(AddMapComponent)
+  private addMapComponent: AddMapComponent;
+
   route : Route
   path : [number[]]
   tourName: string
@@ -49,11 +54,20 @@ export class AddRouteComponent implements OnInit {
     }else{
       this.path.push(coords)
     }
+    this.addMapComponent.updatePath(this.path)
+    this.addMapComponent.drawPath()
     console.log(this.path)
   }
 
   undo(){
-    this.path.pop()
+    if(this.path!=null){
+      this.path.pop()
+      this.addMapComponent.updatePath(this.path)
+      this.addMapComponent.drawPath()
+    }
+  }
+  start(){
+    this.addMapComponent.startSelecting()
   }
 
 }
