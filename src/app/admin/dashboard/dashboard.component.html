@@ -1,33 +1,12 @@
-
 <div class="flexbox">
+    <div class="navDiv">
 
-
-<!-- Nav -->
-<div class="navDiv">
-    <ul>
-
-        <!-- NavList van enum -->
-        <li *ngFor="let navItem of navItems" class="NavListItem">
-            <a class="nav-link text-dark" href=""> {{navItem}}</a>
-        </li>
-
-    </ul>
-</div>
-
-
-<!-- Lijst van routes -->
-<div class="routeListDiv" >
-    <div class="btnAddRouteDiv">
-        <button class="btnAddRoute">Add new Route</button>
+        <ul class="navbar-nav ml-auto" id="navitems">
+            <li class="nav-item">
+                <a class="nav-link text-dark" routerLink="manageroutes" href="">
+                    ManageRoutes</a>
+            </li>
+        </ul>
     </div>
-    <div *ngFor="let route of routes" class="RouteListItem">
-        {{route.tourName}} | {{route.distanceInMeters}}m | {{route.date | date: "dd/MM/yyyy"}}
-        <button class="btnRemoveRoute">Remove Route</button>
-    </div>
+    <router-outlet></router-outlet>
 </div>
-
-</div>
-<!-- 
-<div class="routeListDiv" *ngIf="lastNavigated == AdminNavList.ManageRoutes">
-    HELLOOOOOOOOO
-</div> -->

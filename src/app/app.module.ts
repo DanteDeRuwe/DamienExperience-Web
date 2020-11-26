@@ -38,6 +38,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TourselectorComponent } from './tourselector/tourselector.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
+import { TestComponent } from './admin/test/test.component';
 
 
 
@@ -60,7 +62,9 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     SponsorsComponent,
     CookiePolicyComponent,
     TourselectorComponent,
-    DashboardComponent
+    DashboardComponent,
+    ManageroutesComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
