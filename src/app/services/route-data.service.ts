@@ -14,7 +14,14 @@ export class RouteDataService {
   constructor(private http: HttpClient) { }
 
   getRoute$(name: string): Observable<Route> {
-    return this.http.get(`${environment.apiUrl}/route/${name}`).pipe(
+    return this.http.get(`${environment.apiUrl}/route/getroutebyname/${name}`).pipe(
+      catchError(this.handleError),
+      map(Route.fromJson)
+    );
+  }
+
+  getRouteById$(id: string): Observable<Route> {
+    return this.http.get(`${environment.apiUrl}/route/getroutebyid/${id}`).pipe(
       catchError(this.handleError),
       map(Route.fromJson)
     );

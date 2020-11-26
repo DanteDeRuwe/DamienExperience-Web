@@ -1,6 +1,6 @@
 <div class="chatcomponent">
     <div class="chat" *ngIf="loggedon; else notLoggedOn" >
-        <div class="chat-messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div class="chat-messages" #scrollMe [scrollTop]="scrolltop">
             <div class="chat-messages-message" *ngFor="let message of messages">
                 <div class="chat-messages-message-meta">
                     <b class="text-primary">{{message.sender.name}}</b>

@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { WebSocketService } from '../services/web-socket.service';
-//import * as io from 'socket.io-client';
 import { io } from 'socket.io-client';
-import { AuthenticationService } from '../services/authentication.service';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { ChatMessage } from '../models/chatmessage.model';
@@ -14,7 +11,8 @@ import { ChatMessage } from '../models/chatmessage.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-
+  @ViewChild('scrollMe') chat: ElementRef;
+  @Input() roomname: string;
   // username = 'Jordy';
   // room = 'JordyRoom';
   // chatForm = document.getElementById('chat-form');
@@ -22,6 +20,8 @@ export class ChatComponent implements OnInit {
 
   loggedon: boolean = false;
   messages: ChatMessage[] = [];
+
+  scrolltop: number = null;
 
   constructor(
     private _uds: UserDataService
@@ -34,14 +34,14 @@ export class ChatComponent implements OnInit {
         this.socket = io(environment.liveChatApi, { transports: ['websocket']});
         const room = 'Jordy\'s Room';
 
-        this.socket.emit('join room', {username: user.lastName, room})
+        this.socket.emit('join room', {username: user.lastName, email: user, room: this.roomname})
 
-        this.socket.on('chat message', message => { 
+        this.socket.on('chat message', (message: ChatMessage) => { 
           this.outputMessage(message);
+          this.scrolltop = this.chat.nativeElement.scrollHeight;
         });
       }
-    })
-    
+    });
   }
 
   onSendMessage(event){
@@ -50,9 +50,10 @@ export class ChatComponent implements OnInit {
       event.target.elements.msg.value = '';
       event.target.elements.msg.focus();
     }
+    this.scrolltop = this.chat.nativeElement.scrollHeight;
   }
 
-  outputMessage(message){
+  outputMessage(message: ChatMessage){
     this.messages.push(message);
   }
 }
