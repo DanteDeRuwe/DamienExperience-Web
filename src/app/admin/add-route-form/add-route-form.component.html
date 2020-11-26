@@ -19,14 +19,14 @@
         </div>
        <div id="add_route_form_bescrijving">
         <h4>Beschrijving</h4>
-            <div class="">
+            <div>
                 <label for="info_nl">Nederlands</label>
                 <textarea type="text" class="form-control" id="info_nl" placeholder="Beschrijving" formControlName="info_nl"></textarea>
                 <p class="error" *ngIf="routeForm.get('info_nl')['errors'] && routeForm.get('info_nl').touched">
                     {{ getErrorMessage(routeForm.get('info_nl')['errors']) }}
                 </p>
             </div>
-            <div class="">  
+            <div>  
                 <label for="info_fr">Frans</label>
                 <textarea type="text" class="form-control" id="info_fr" placeholder="Description" formControlName="info_fr"></textarea>
                 <p class="error" *ngIf="routeForm.get('info_fr')['errors'] && routeForm.get('info_fr').touched">
