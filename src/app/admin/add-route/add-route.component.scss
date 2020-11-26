@@ -2,55 +2,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction:row;
-    #add_route_form{
-        padding:1em;
-        width: 100%;
-        #add_route_form_general{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            .add_route_form_item{
-                padding-left:1em;
-                width: 15rem;
-            }
-        }
-        #add_route_form_bescrijving{
-            padding:1em;
-        }
+    .form_comp{
+        width: 50%;
     }
-
-    #add_route_form_mapbuttons{
-        padding:1em;
-        border-bottom:#FE0040 solid 2px ;
-        #add_route_form_mapbuttons_bar{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            #btnStart{
-                background-color: #FE0040;                
-                font-weight: bold;
-            }
-            #btnUndo{
-                background-color: lightgray;
-            }
-            button{
-                border: none;
-                color: white;
-                text-align: center;
-                display: inline-block;
-                font-size: 16px;
-            }
-        }
-    }
-    #btnSubmit{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0em 1em 1em 1em;
-    }
-
-    #add_route_map{
-        padding:1em;
-        width: 900px;
-    }
+}
+#add_route_map{
+    padding:1em;
+    width: 50%;
 }

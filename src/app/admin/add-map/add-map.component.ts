@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AddMapComponent implements OnInit {
   @Input() path: [number[]];
-  @Output() newCoordinates = new EventEmitter<number[]>();
+  @Output() newCoordinates = new EventEmitter<any>();
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -56,6 +56,16 @@ export class AddMapComponent implements OnInit {
       this.map.getCanvas().style.cursor = '';
     });
   }
+  stopSelecting(){
+    // Change the cursor to a nothing when the mouse is over the places layer.
+    this.map.on('mousemove', () => {
+      this.map.getCanvas().style.cursor = '';
+      });
+      // Change it back to a pointer when it leaves.
+    this.map.on('mouseleave', () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+  }
 
   updatePath(newPath : [number[]]){
     this.path = newPath
@@ -67,6 +77,7 @@ export class AddMapComponent implements OnInit {
       this.map.removeLayer("pathlayer")
       this.map.removeSource("pathsource")
     }
+    
     this.map.addSource(`pathsource`, {
       'type': 'geojson',
       'data': {
@@ -92,6 +103,7 @@ export class AddMapComponent implements OnInit {
         'line-width': 4
       }
     });
+    
     this.lineDrawn=true
   }
   

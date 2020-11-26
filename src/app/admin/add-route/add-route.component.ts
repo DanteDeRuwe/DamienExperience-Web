@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Route } from 'src/app/models/route.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddMapComponent } from '../add-map/add-map.component';
+import * as turf from '@turf/turf'
 
 @Component({
   selector: 'app-add-route',
@@ -9,65 +10,79 @@ import { AddMapComponent } from '../add-map/add-map.component';
   styleUrls: ['./add-route.component.scss']
 })
 export class AddRouteComponent implements OnInit {
+
+  distance: number = 0
+  path : [number[]]
+
   //get acces to child component
   @ViewChild(AddMapComponent)
   private addMapComponent: AddMapComponent;
-
-  route : Route
-  path : [number[]]
-  tourName: string
-  date: Date
-  distanceInMeters: number
-  public searchForm: FormGroup;
-
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    //mabye add color too
-    this.searchForm = this.fb.group({
-      tourName: ['', Validators.required],
-      date : ['',Validators.required],
-      info_nl : ['',Validators.required],
-      info_fr : ['',Validators.required]
-    });
+  ngOnInit(): void {  }
+
+  startstopPath(start: boolean){
+    if(start) this.addMapComponent.startSelecting()
+    else this.addMapComponent.stopSelecting()
   }
-  onSubmitSearch(){
-    //see comment ngOnInit()
-    this.tourName = this.searchForm.value.tourName;
-    this.date = this.searchForm.value.date;
-    var nl =this.searchForm.value.info_nl;
-    var fr =this.searchForm.value.info_fr;
-    var info = {nl, fr}
-    this.route = new Route("testid",
-      this.tourName,
-      this.date,
-      69,
+  
+  updatePath(path: [number[]]){
+    this.addMapComponent.updatePath(path)
+    this.addMapComponent.drawPath()
+  }
+
+  finishRoute(value: any){
+    let nl = value.info_nl;
+    let fr = value.info_fr;
+    let info = {nl, fr}
+    let route = new Route("testid",
+      value.tourName,
+      value.date,
+      this.distance,
       this.path,
       info,
-      [])
-    console.log(this.route)
+      []) //TODO waypoints
+    console.log(route)
   }
 
-  addCoordinates(coords: number[]) {
-    if(this.path==null){
+  addCoordinates(coords: any) {
+    if(this.path == null){
       this.path = [coords]
-    }else{
-      this.path.push(coords)
+      return
     }
-    this.addMapComponent.updatePath(this.path)
+
+    this.path.push(coords)
+    this.calcDistance("+")    
     this.addMapComponent.drawPath()
-    console.log(this.path)
   }
 
-  undo(){
-    if(this.path!=null){
+  calcDistance(operation : String){
+    if(this.path.length < 2){
+      this.distance = 0;
+      return;
+    } 
+    var last = this.path.length
+    var tempDist =  this.distance
+    var from = turf.point(this.path[last-2]);
+    var to = turf.point(this.path[last-1]);
+    var distance = turf.distance(from, to, {units: 'kilometers'});
+    if(operation=="+"){
+      tempDist =tempDist+ distance;
+    }else{
+      tempDist=tempDist- distance;
+    }
+    tempDist = tempDist * 1000
+    tempDist = Math.round(tempDist)
+    tempDist = tempDist / 1000
+    this.distance = tempDist
+  }
+
+  undoLastPath(){
+    if(this.path.length > 0){
+      this.calcDistance("-")
       this.path.pop()
       this.addMapComponent.updatePath(this.path)
       this.addMapComponent.drawPath()
     }
   }
-  start(){
-    this.addMapComponent.startSelecting()
-  }
-
 }
