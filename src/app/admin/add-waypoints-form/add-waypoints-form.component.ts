@@ -15,12 +15,12 @@ export class AddWaypointsFormComponent implements OnInit {
   ngOnInit(): void {
     this.waypointForm = this.formBuilder.group({
       titleGroup: this.formBuilder.group({
-        titleDutch: ['', Validators.required,Validators.minLength(4)],
-        titleFrench: ['', Validators.required,Validators.minLength(4)]
+        titleDutch: ['', [Validators.required,Validators.minLength(4)]],
+        titleFrench: ['', [Validators.required,Validators.minLength(4)]]
       }),
       descriptionGroup: this.formBuilder.group({
-        descriptionDutch: ['', Validators.required,Validators.minLength(4)],
-        descriptionFrench: ['', Validators.required,Validators.minLength(4)]
+        descriptionDutch: ['', [Validators.required,Validators.minLength(4)]],
+        descriptionFrench: ['', [Validators.required,Validators.minLength(4)]]
       })
     })
   }
@@ -37,7 +37,7 @@ export class AddWaypointsFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+        
   }
 
 }
