@@ -37,6 +37,7 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TourselectorComponent } from './tourselector/tourselector.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 
 
@@ -58,7 +59,8 @@ import { TourselectorComponent } from './tourselector/tourselector.component';
     PrivacyPolicyComponent,
     SponsorsComponent,
     CookiePolicyComponent,
-    TourselectorComponent
+    TourselectorComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
