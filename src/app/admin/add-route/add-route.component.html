@@ -12,12 +12,15 @@
     </div>
   </div>
   <div *ngIf="!routeFormShowing">
-    <app-add-waypoints-form></app-add-waypoints-form>
+    <app-add-waypoints-form
+    (addWaypointToMapEvent)="addWaypointToMap()"
+    ></app-add-waypoints-form>
   </div>
   <div id="add_route_map">
     <app-add-map
       [path]="path"
       (newCoordinates)="addCoordinates($event)"
+      (newCoordinatesWaypoint)="addCoordinatesWaypoint($event)"
     ></app-add-map>
   </div>
 </div>

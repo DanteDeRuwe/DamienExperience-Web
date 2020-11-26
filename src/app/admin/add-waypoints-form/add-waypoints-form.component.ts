@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,11 +8,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddWaypointsFormComponent implements OnInit {
 
+  public pointChosen: boolean;
+
   public waypointForm: FormGroup;
+  
+  @Output()
+  public addWaypointToMapEvent = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    //this.addWaypointToMapEvent.emit();
+
     this.waypointForm = this.formBuilder.group({
       titleGroup: this.formBuilder.group({
         titleDutch: ['', [Validators.required,Validators.minLength(4)]],
@@ -37,7 +44,12 @@ export class AddWaypointsFormComponent implements OnInit {
   }
 
   onSubmit(){
-        
+    //this.addWaypointToMapEvent.emit()
+  }
+
+  test(){
+    this.pointChosen = true;
+    this.addWaypointToMapEvent.emit();
   }
 
 }

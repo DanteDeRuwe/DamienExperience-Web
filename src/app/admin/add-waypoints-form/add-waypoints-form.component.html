@@ -1,3 +1,7 @@
+<div *ngIf="!pointChosen">
+  <button (click)="test()" >test</button>
+</div>
+<div *ngIf="pointChosen">
 <form [formGroup]="waypointForm">
   <div class="add_waypoints_form">
     <h3>Voeg waypoints toe</h3>
@@ -62,5 +66,5 @@
   </div>
   <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!waypointForm.valid">Opslaan</button>
 </form>
-
+</div>
 <!--[disabled]="!waypointForm.valid"-->

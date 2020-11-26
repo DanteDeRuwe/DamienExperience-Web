@@ -20,7 +20,8 @@ export class AddRouteComponent implements OnInit {
   private addMapComponent: AddMapComponent;
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {  
+  }
 
   startstopPath(start: boolean){
     if(start) this.addMapComponent.startSelecting()
@@ -85,5 +86,13 @@ export class AddRouteComponent implements OnInit {
       this.addMapComponent.updatePath(this.path)
       this.addMapComponent.drawPath()
     }
+  }
+
+  addWaypointToMap(){
+    this.addMapComponent.addWaypoint();
+  }
+
+  addCoordinatesWaypoint(coords : any){
+    console.log("eyeyeyeye")
   }
 }

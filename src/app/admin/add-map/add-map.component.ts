@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AddMapComponent implements OnInit {
   @Input() path: [number[]];
   @Output() newCoordinates = new EventEmitter<any>();
+  @Output() newCoordinatesWaypoint = new EventEmitter<any>();
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -37,6 +38,11 @@ export class AddMapComponent implements OnInit {
       if(cursor == 'pointer'){
         var lngLat = e.lngLat
         this.addCoordinates(lngLat.lng,lngLat.lat)
+      }
+      if(cursor == 'crosshair'){
+        var lngLat = e.lngLat
+        var coords = [lngLat.lng,lngLat.lat]
+        this.newCoordinatesWaypoint.emit(coords)
       }
     })
   }
@@ -106,6 +112,31 @@ export class AddMapComponent implements OnInit {
     
     this.lineDrawn=true
   }
-  
 
+  addWaypoint(){
+    this.startSelectingWaypoint();
+    console.log("trololo");
+  }
+
+  startSelectingWaypoint(){
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    this.map.on('mousemove', () => {
+      this.map.getCanvas().style.cursor = 'crosshair';
+      });
+      // Change it back to a pointer when it leaves.
+    this.map.on('mouseleave', () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+  }
+
+  stopSelectingWaypoint(){
+    // Change the cursor to a nothing when the mouse is over the places layer.
+    this.map.on('mousemove', () => {
+      this.map.getCanvas().style.cursor = '';
+      });
+      // Change it back to a pointer when it leaves.
+    this.map.on('mouseleave', () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+  }
 }
