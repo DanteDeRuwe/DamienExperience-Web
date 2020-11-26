@@ -13,6 +13,7 @@ export class AddRouteComponent implements OnInit {
 
   distance: number = 0
   path : [number[]]
+  routeFormShowing : boolean = false
 
   //get acces to child component
   @ViewChild(AddMapComponent)
