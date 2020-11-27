@@ -1,16 +1,16 @@
 <form [formGroup]="routeForm" >
     <div id="add_route_form" >
-        <h3>Algemene info</h3>
+        <h3>{{"add_route_form_title" | translate}}</h3>
         <div id="add_route_form_general">
             <div class="add_route_form_item">
-                <label for="tourName">Tourname</label>
-                <input type="text" class="form-control" id="tourName" placeholder="Nieuwe tournaam" formControlName="tourName" />
+                <label for="tourName">{{"add_route_form_tourname" |translate}}</label>
+                <input type="text" class="form-control" id="tourName" placeholder="{{'add_route_form_tourname' |translate}}" formControlName="tourName" />
                 <p class="error" *ngIf="routeForm.get('tourName')['errors'] && routeForm.get('tourName').touched">
                     {{ getErrorMessage(routeForm.get('tourName')['errors']) }}
                 </p>
             </div>
             <div class="add_route_form_item">
-                <label for="date">Datum</label>
+                <label for="date">{{"add_route_form_datum" | translate}}</label>
                 <input type="date" class="form-control" id="date" placeholder="date" formControlName="date" />
                 <p class="error" *ngIf="routeForm.get('date')['errors'] && routeForm.get('date').touched">
                     {{ getErrorMessage(routeForm.get('date')['errors']) }}
@@ -18,17 +18,17 @@
             </div>
         </div>
        <div id="add_route_form_bescrijving">
-        <h4>Beschrijving</h4>
-            <div class="">
-                <label for="info_nl">Nederlands</label>
-                <textarea type="text" class="form-control" id="info_nl" placeholder="Beschrijving" formControlName="info_nl"></textarea>
+        <h4>{{"add_route_form_besch" | translate}}</h4>
+            <div>
+                <label for="info_nl">{{"taalfull_nl" | translate}}</label>
+                <textarea type="text" class="form-control" id="info_nl" placeholder="{{'add_route_form_besch' | translate}}" formControlName="info_nl"></textarea>
                 <p class="error" *ngIf="routeForm.get('info_nl')['errors'] && routeForm.get('info_nl').touched">
                     {{ getErrorMessage(routeForm.get('info_nl')['errors']) }}
                 </p>
             </div>
-            <div class="">  
-                <label for="info_fr">Frans</label>
-                <textarea type="text" class="form-control" id="info_fr" placeholder="Description" formControlName="info_fr"></textarea>
+            <div>  
+                <label for="info_fr">{{"taalfull_fr" | translate}}</label>
+                <textarea type="text" class="form-control" id="info_fr" placeholder="{{'add_route_form_besch' | translate}}" formControlName="info_fr"></textarea>
                 <p class="error" *ngIf="routeForm.get('info_fr')['errors'] && routeForm.get('info_fr').touched">
                     {{ getErrorMessage(routeForm.get('info_fr')['errors']) }}
                 </p>
@@ -40,7 +40,7 @@
        <div id="add_route_form_mapbuttons">
             <h4>Route</h4>
             <div>
-                <p>Huidige afstand {{ distance }} </p>
+                <p>{{"add_route_form_dist" | translate}} {{ distance }} km </p>
             </div>
             <div id="add_route_form_mapbuttons_bar">
                 <div *ngIf="hasStartedRecording; else elseBlock">
@@ -54,6 +54,7 @@
         </div>
     </div>
     <div id="btnSubmit">
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!routeForm.valid">Opslaan</button>
+        <button type="submit" class="btn btn-primary btn-padding" (click)="onSubmit()" [disabled]="!routeForm.valid">{{"submit" | translate}}</button>
+        <button type="submit" class="btn btn-primary btn-padding" (click)="onSubmit()" [disabled]="!routeForm.valid">{{"add_route_form_submit" | translate}}</button>
     </div>
 </form>
