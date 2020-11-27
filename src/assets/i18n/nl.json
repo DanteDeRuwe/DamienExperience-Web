@@ -1,6 +1,7 @@
 {
     "test": "Nederlands",
 
+    "mn_admin_dashboard": "DASHBOARD",
     "mn_over_de_tour" : "OVER DE TOUR",
     "mn_wandelaar_volgen" : "WANDELAAR VOLGEN",
     "mn_ik_schrijf_me_in" : "IK SCHRIJF ME IN",
@@ -23,6 +24,7 @@
     "home_title":"Damien Experience wandelingen",
     "home_schrijf_je_in" : "Schrijf je nu in voor de damien experience wandelingen.",
     "home_schrijf_me_in" : "SCHRIJF ME IN",
+    "home_datum" : "14 MEI 2020",
     "home_DAGEN" : "DAGEN",
     "home_UREN" : "UREN",
     "home_MINUTEN" : "MINUTEN",
