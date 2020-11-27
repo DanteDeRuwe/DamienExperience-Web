@@ -41,9 +41,12 @@ import { TourselectorComponent } from './tourselector/tourselector.component';
 import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AddMapComponent } from './admin/add-map/add-map.component';
 import { AddRouteFormComponent } from './admin/add-route-form/add-route-form.component';
+import { AddWaypointsFormComponent } from './admin/add-waypoints-form/add-waypoints-form.component';
+
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { TestComponent } from './admin/test/test.component';
+
 
 
 
@@ -70,10 +73,10 @@ import { TestComponent } from './admin/test/test.component';
     AddRouteComponent,
     AddMapComponent,
     AddRouteFormComponent,
+    AddWaypointsFormComponent,
     DashboardComponent,
     ManageroutesComponent,
     TestComponent
-
   ],
   imports: [
     BrowserModule,

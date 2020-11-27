@@ -80,4 +80,7 @@ export class Route {
         return this._waypoints
     }
 
+    set waypoints(waypoints: Waypoint[]){
+        this._waypoints = waypoints
+    }
 }

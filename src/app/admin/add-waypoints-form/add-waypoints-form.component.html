@@ -1,0 +1,72 @@
+<div *ngIf="!pointChosen">
+  <h3>Klik op de kaart om een waypoint toe te voegen</h3>
+  <button (click)="test()" >voeg waypoint toe</button>
+  <button (click)="test()" >ga terug</button>
+</div>
+<div *ngIf="pointChosen">
+<form [formGroup]="waypointForm">
+  <div class="add_waypoints_form">
+    <h3>Voeg waypoints toe</h3>
+    <div class="add_title" formGroupName="titleGroup">
+      <h4>Titel</h4>
+      <div>
+        <label for="titleDutch">Nederlands</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="titleDutch"
+          placeholder="Beschrijving"
+          formControlName="titleDutch"
+        ></textarea>
+        <p class="error" *ngIf="waypointForm.get('titleGroup').get('titleDutch')['errors'] && waypointForm.get('titleGroup').get('titleDutch').touched">
+            {{ getErrorMessage(waypointForm.get('titleGroup').get('titleDutch')['errors']) }}
+        </p>
+      </div>
+      <div>
+        <label for="titleFrench">Fransjais</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="titleFrench"
+          placeholder="Beschrijving en Fransjais"
+          formControlName="titleFrench"
+        ></textarea>
+        <p class="error" *ngIf="waypointForm.get('titleGroup').get('titleFrench')['errors'] && waypointForm.get('titleGroup').get('titleFrench').touched">
+            {{ getErrorMessage(waypointForm.get('titleGroup').get('titleFrench')['errors']) }}
+        </p>
+      </div>
+    </div>
+    <div class="add_description" formGroupName="descriptionGroup">
+        <h4>Beschrijving</h4>
+      <div>
+        <label for="descriptionDutch">Nederlands</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="descriptionDutch"
+          placeholder="Beschrijving"
+          formControlName="descriptionDutch"
+        ></textarea>
+        <p class="error" *ngIf="waypointForm.get('descriptionGroup').get('descriptionDutch')['errors'] && waypointForm.get('descriptionGroup').get('descriptionDutch').touched">
+            {{ getErrorMessage(waypointForm.get('descriptionGroup').get('descriptionDutch')['errors']) }}
+        </p>
+      </div>
+      <div>
+        <label for="descriptionFrench">Fransjais</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="descriptionFrench"
+          placeholder="Beschrijving en Fransjais"
+          formControlName="descriptionFrench"
+        ></textarea>
+        <p class="error" *ngIf="waypointForm.get('descriptionGroup').get('descriptionFrench')['errors'] && waypointForm.get('descriptionGroup').get('descriptionFrench').touched">
+            {{ getErrorMessage(waypointForm.get('descriptionGroup').get('descriptionFrench')['errors']) }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!waypointForm.valid">Opslaan</button>
+</form>
+</div>
+<!--[disabled]="!waypointForm.valid"-->
