@@ -10,16 +10,20 @@ import { environment } from 'src/environments/environment';
 })
 export class AddMapComponent implements OnInit {
   @Input() path: [number[]];
+  @Input() waypoints: [number[]]
+  @Input() waypointAdding: number[]
   @Output() newCoordinates = new EventEmitter<any>();
   @Output() newCoordinatesWaypoint = new EventEmitter<any>();
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
-    
+
   //temp hardcoded startingpoint
   lat = 50.8465573;
   lng = 4.351697;
   lineDrawn = false;
+  waypointDrawn = false;
+  marker;
 
   constructor() { }
 
@@ -35,55 +39,55 @@ export class AddMapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.on('click', (e) => {
       var cursor = this.map.getCanvas().style.cursor
-      if(cursor == 'pointer'){
+      if (cursor == 'pointer') {
         var lngLat = e.lngLat
-        this.addCoordinates(lngLat.lng,lngLat.lat)
+        this.addCoordinates(lngLat.lng, lngLat.lat)
       }
-      if(cursor == 'crosshair'){
+      if (cursor == 'crosshair') {
         var lngLat = e.lngLat
-        var coords = [lngLat.lng,lngLat.lat]
+        var coords = [lngLat.lng, lngLat.lat]
         this.newCoordinatesWaypoint.emit(coords)
       }
     })
   }
 
-  addCoordinates(lng : number, lat : number) {
-    var coords = [lng,lat]
+  addCoordinates(lng: number, lat: number) {
+    var coords = [lng, lat]
     this.newCoordinates.emit(coords)
   }
 
-  startSelecting(){
+  startSelecting() {
     // Change the cursor to a pointer when the mouse is over the places layer.
     this.map.on('mousemove', () => {
       this.map.getCanvas().style.cursor = 'pointer';
-      });
-      // Change it back to a pointer when it leaves.
+    });
+    // Change it back to a pointer when it leaves.
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
   }
-  stopSelecting(){
+  stopSelecting() {
     // Change the cursor to a nothing when the mouse is over the places layer.
     this.map.on('mousemove', () => {
       this.map.getCanvas().style.cursor = '';
-      });
-      // Change it back to a pointer when it leaves.
+    });
+    // Change it back to a pointer when it leaves.
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
   }
 
-  updatePath(newPath : [number[]]){
+  updatePath(newPath: [number[]]) {
     this.path = newPath
   }
 
-  drawPath(){
+  drawPath() {
     var color = "#FE0040"
-    if(this.lineDrawn){
+    if (this.lineDrawn) {
       this.map.removeLayer("pathlayer")
       this.map.removeSource("pathsource")
     }
-    
+
     this.map.addSource(`pathsource`, {
       'type': 'geojson',
       'data': {
@@ -109,34 +113,65 @@ export class AddMapComponent implements OnInit {
         'line-width': 4
       }
     });
-    
-    this.lineDrawn=true
+
+    this.lineDrawn = true
   }
 
-  addWaypoint(){
+  addWaypoint() {
     this.startSelectingWaypoint();
     console.log("trololo");
   }
 
-  startSelectingWaypoint(){
+  startSelectingWaypoint() {
     // Change the cursor to a pointer when the mouse is over the places layer.
     this.map.on('mousemove', () => {
       this.map.getCanvas().style.cursor = 'crosshair';
-      });
-      // Change it back to a pointer when it leaves.
+    });
+    // Change it back to a pointer when it leaves.
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
   }
 
-  stopSelectingWaypoint(){
+  stopSelectingWaypoint() {
     // Change the cursor to a nothing when the mouse is over the places layer.
     this.map.on('mousemove', () => {
       this.map.getCanvas().style.cursor = '';
-      });
-      // Change it back to a pointer when it leaves.
+    });
+    // Change it back to a pointer when it leaves.
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
+  }
+
+  drawWaypoint() {
+
+    if (this.waypointDrawn) {
+      this.map.removeSource("waypointsource")
+      this.marker.remove()
+
+    }
+
+    this.map.addSource(`waypointsource`, {
+      'type': 'geojson',
+      'data': {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'Point',
+          'coordinates': this.waypointAdding
+        }
+      }
+    });
+
+    this.marker = new mapboxgl.Marker()
+      .setLngLat([this.waypointAdding[0], this.waypointAdding[1]])
+      .addTo(this.map);
+
+    this.waypointDrawn = true
+  }
+
+  updateWaypoint(waypointAdding: number[]) {
+    this.waypointAdding = waypointAdding
   }
 }

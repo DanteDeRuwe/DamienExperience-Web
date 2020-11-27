@@ -1,5 +1,7 @@
 <div *ngIf="!pointChosen">
-  <button (click)="test()" >test</button>
+  <h3>Klik op de kaart om een waypoint toe te voegen</h3>
+  <button (click)="test()" >voeg waypoint toe</button>
+  <button (click)="test()" >ga terug</button>
 </div>
 <div *ngIf="pointChosen">
 <form [formGroup]="waypointForm">

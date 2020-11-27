@@ -3,6 +3,8 @@ import { Route } from 'src/app/models/route.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddMapComponent } from '../add-map/add-map.component';
 import * as turf from '@turf/turf'
+import { AddWaypointsFormComponent } from '../add-waypoints-form/add-waypoints-form.component';
+import { Waypoint } from 'src/app/models/waypoint.model';
 
 @Component({
   selector: 'app-add-route',
@@ -13,11 +15,18 @@ export class AddRouteComponent implements OnInit {
 
   distance: number = 0
   path : [number[]]
-  routeFormShowing : boolean = false
+  waypointAdding : number[]
+  waypoints : Waypoint[] = []
+  routeFormShowing : boolean = true
+  route: Route
 
   //get acces to child component
   @ViewChild(AddMapComponent)
   private addMapComponent: AddMapComponent;
+
+  @ViewChild(AddWaypointsFormComponent)
+  private addWaypointsFormComponent: AddWaypointsFormComponent;
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {  
@@ -37,14 +46,15 @@ export class AddRouteComponent implements OnInit {
     let nl = value.info_nl;
     let fr = value.info_fr;
     let info = {nl, fr}
-    let route = new Route("testid",
+    this.route = new Route("testid",
       value.tourName,
       value.date,
       this.distance,
       this.path,
       info,
       []) //TODO waypoints
-    console.log(route)
+    console.log(this.route)
+    this.routeFormShowing=false;
   }
 
   addCoordinates(coords: any) {
@@ -92,7 +102,25 @@ export class AddRouteComponent implements OnInit {
     this.addMapComponent.addWaypoint();
   }
 
-  addCoordinatesWaypoint(coords : any){
-    console.log("eyeyeyeye")
+  addCoordinatesWaypoint(coords : number[]){
+    this.waypointAdding = coords
+    this.addMapComponent.updateWaypoint(this.waypointAdding)
+    this.addMapComponent.drawWaypoint()
+    this.addWaypointsFormComponent.chosePoint()
+  }
+
+  saveAddedWaypoint(value: any){
+    this.addMapComponent.stopSelectingWaypoint()
+
+    const titleNl = value.titleGroup.titleDutch;
+    const titleFr = value.titleGroup.titleFrench;
+    const descriptionNl = value.descriptionGroup.descriptionDutch;
+    const descriptionFr = value.descriptionGroup.descriptionDutch;
+
+    this.waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], [[titleNl, titleFr],[descriptionNl, descriptionFr]]))
+    this.route.waypoints = this.waypoints
+    console.log(this.route)
+
+    this.routeFormShowing = true;
   }
 }
