@@ -69,5 +69,15 @@
     "registration_tshirt" : "Achetez un t-shirt en édition limitée",
     "registration_pay" : "Payer:",
 
-    "about_tour_info" : "L'info du tour"
+    "about_tour_info" : "L'info du tour",
+
+    "add_route_form_title" : "Informations générales",
+    "add_route_form_tourname" : "Nom du tour",
+    "add_route_form_datum" : "Date",
+    "taalfull_nl": "Néerlandais",
+    "taalfull_fr": "Français",
+    "add_route_form_besch": "La description",
+    "add_route_form_dist" : "Distance actuelle : ",
+    "add_route_form_submit" : "Enregistrer et ajouter des waypoints"
+
 }

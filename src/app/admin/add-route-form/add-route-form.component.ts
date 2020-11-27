@@ -47,14 +47,23 @@ export class AddRouteFormComponent implements OnInit {
   }
 
   getErrorMessage(errors: any): string {
+    const localLang: string = localStorage.getItem("lang");
     if (!errors) {
       return null;
     }
-    if (errors.required) {
-      return 'Dit is verplicht';
-    } else if (errors.minlength) {
-      return `Heeft op zijn minst ${errors.minlength.requiredLength} karakters nodig (heeft ${errors.minlength.actualLength})`;
-    } 
+    if(localLang == 'nl'){
+      if (errors.required) {
+        return 'Dit is verplicht';
+      } else if (errors.minlength) {
+        return `Heeft op zijn minst ${errors.minlength.requiredLength} karakters nodig (heeft ${errors.minlength.actualLength})`;
+      } 
+    }else if(localLang == 'fr'){
+      if (errors.required) {
+        return "C'est obligatoire";
+      } else if (errors.minlength) {
+        return `Nécessite au moins ${errors.minlength.requiredLength} caractères (prend ${errors.minlength.actualLength})`;
+      }
+    }
   }
   
   undo(){
