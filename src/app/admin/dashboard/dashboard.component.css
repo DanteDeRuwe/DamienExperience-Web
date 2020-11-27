@@ -1,20 +1,11 @@
 .navDiv{
     border: 5px solid black;
     float: left;
-    width: 15%;
+    height: 100%;
+    position: absolute;
+ 
+    
 }
-
-.routeListDiv{    
-    border: black solid 5px;
-    float: right;
-    width: 80%;
-}
-
-/* .flexBox{
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-} */
 
 .btnAddRouteDiv{
     align-content: center;   
@@ -31,7 +22,4 @@
     float: right;
 }
 
-.RouteListItem{
-    padding: 10px;
-}
 
