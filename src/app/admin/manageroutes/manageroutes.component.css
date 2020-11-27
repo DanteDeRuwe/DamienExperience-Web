@@ -1,4 +1,80 @@
-.all{
-    display: flex;
-    border: blue solid 5px;
-}
+.icon-left {
+    transform: scale(1.5);
+    color: #ff0040;
+  
+ }
+
+ .main{
+     width: 75%;
+     margin:auto;
+     display: flex;
+     flex-direction: row;
+     padding: 1rem;
+ }
+
+ .icon-right{   
+     padding-left: 50px;
+
+ }
+
+ .listItem{
+ }
+ 
+ .list{
+     width: 100%;
+ }
+
+ .icon-right-button{
+    outline: none;
+    border: 0;
+ }
+
+
+
+ .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: visible;
+    opacity: 1;
+    z-index: 500000;
+  }
+  
+  
+  .popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+  
+  .popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: #06D85F;
+    cursor: pointer;
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }

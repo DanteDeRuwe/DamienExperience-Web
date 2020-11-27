@@ -1,5 +1,5 @@
-<div class="all">
-    <!-- Lijst van routes -->
+<!-- <div class="all">
+     Lijst van routes
     <div class="routeListDiv">
         <div class="btnAddRouteDiv">
             <button class="btnAddRoute">Add new Route</button>
@@ -13,4 +13,44 @@
             ManageRoutes</a>
     </div>
     
+</div> -->
+<div class="main">
+    <mat-list class="list">
+        <div *ngFor="let route of routes">
+            <mat-list-item class="listItem">
+                <mat-icon matListIcon class="icon-left">map</mat-icon>
+
+                <h4 matLine>{{route.tourName}}</h4>
+                <p matline>{{route.date | date: "dd/MM/yyyy"}}</p>
+                <p matLine> <span> {{route.distanceInMeters / 1000}} km </span></p>
+
+                <div class="icon-right">
+                    <button mat-icon-button class="icon-right-button">
+                        <mat-icon class="mat-24">create</mat-icon>
+                    </button>
+                </div>
+
+                <div class="icon-right">
+                    <button mat-icon-button class="icon-right-button" >
+                        <!-- <mat-icon class="mat-24" (click)="popup = true">delete</mat-icon> -->
+                        <mat-icon class="mat-24" (click)="openDialog()">delete</mat-icon>
+                    </button>
+                </div>
+            </mat-list-item>
+            <hr>
+        </div>
+    </mat-list>
+</div>
+
+<div class="overlay" *ngIf="popup">
+    <div class="popup">
+        <h2>Delete route?</h2>
+        <a class="close" (click)="popup = false">&times;</a>
+        <div class="content">
+        Are you sure that you want to delete this route?<br>
+        This can not be undone.<br>
+        <button>DELETE</button>
+        </div>
+
+    </div>
 </div>
