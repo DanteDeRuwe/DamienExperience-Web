@@ -69,7 +69,7 @@ import { TestComponent } from './admin/test/test.component';
     TourselectorComponent,
     AddRouteComponent,
     AddMapComponent,
-    AddRouteFormComponent
+    AddRouteFormComponent,
     DashboardComponent,
     ManageroutesComponent,
     TestComponent
