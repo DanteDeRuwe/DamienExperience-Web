@@ -50,10 +50,16 @@ export class AddWaypointsFormComponent implements OnInit {
 
   onSubmit(){
     this.saveAddedWaypointEvent.emit(this.waypointForm.value);
+    this.waypointForm.reset()
+    this.pointChosen = false
   }
 
-  test(){
+  addWaypoint(){
     this.addWaypointToMapEvent.emit();
+  }
+
+  saveAll(){
+
   }
 
   chosePoint(){

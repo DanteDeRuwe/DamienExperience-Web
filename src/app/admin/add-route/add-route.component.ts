@@ -117,10 +117,15 @@ export class AddRouteComponent implements OnInit {
     const descriptionNl = value.descriptionGroup.descriptionDutch;
     const descriptionFr = value.descriptionGroup.descriptionDutch;
 
+    if(localStorage.getItem('lang')==='nl'){
+      this.addMapComponent.saveMarker(titleNl, descriptionNl)
+    } else{
+      this.addMapComponent.saveMarker(titleFr, descriptionFr)
+    }
+    
+
     this.waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], [[titleNl, titleFr],[descriptionNl, descriptionFr]]))
     this.route.waypoints = this.waypoints
     console.log(this.route)
-
-    this.routeFormShowing = true;
   }
 }

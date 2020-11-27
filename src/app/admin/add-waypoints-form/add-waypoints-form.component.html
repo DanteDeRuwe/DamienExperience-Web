@@ -1,7 +1,7 @@
 <div *ngIf="!pointChosen">
-  <h3>Klik op de kaart om een waypoint toe te voegen</h3>
-  <button (click)="test()" >voeg waypoint toe</button>
-  <button (click)="test()" >ga terug</button>
+  <h1>hier komt de lijst met gekozen waypoints voor deze te kunnen updaten</h1>
+  <button (click)="addWaypoint()" >Voeg een waypoint toe</button>
+  <button (click)="saveAll()">Opslaan</button>
 </div>
 <div *ngIf="pointChosen">
 <form [formGroup]="waypointForm">
@@ -69,4 +69,3 @@
   <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!waypointForm.valid">Opslaan</button>
 </form>
 </div>
-<!--[disabled]="!waypointForm.valid"-->

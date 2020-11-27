@@ -174,4 +174,14 @@ export class AddMapComponent implements OnInit {
   updateWaypoint(waypointAdding: number[]) {
     this.waypointAdding = waypointAdding
   }
+
+  saveMarker(title: string, description: string){
+    this.marker.remove()
+    this.waypointDrawn=false
+    let marker = new mapboxgl.Marker()
+    .setLngLat([this.waypointAdding[0], this.waypointAdding[1]])
+    .setPopup( new mapboxgl.Popup({ offset: 25 })
+    .setHTML('<h3>' + title + '</h3><p>' + description + '</p>'))
+    .addTo(this.map);
+  }
 }
