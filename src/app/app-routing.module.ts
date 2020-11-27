@@ -18,6 +18,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
 import { AddRouteComponent } from './admin/add-route/add-route.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 
 
 const routes: Routes = [
@@ -29,9 +30,10 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent},
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
-  { path: 'dashboard', component: DashboardComponent ,children:[
+  { path: 'admin-nav', component: AdminNavComponent ,children:[
     { path: 'manageroutes', component: ManageroutesComponent},
-    { path: 'test', component: TestComponent},
+    { path: 'dashboard', component: DashboardComponent},
+    { path: 'add-route', component: AddRouteComponent},
   ]},
 
 

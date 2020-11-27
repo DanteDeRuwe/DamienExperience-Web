@@ -44,6 +44,7 @@ import { AddRouteFormComponent } from './admin/add-route-form/add-route-form.com
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { TestComponent } from './admin/test/test.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 
 
 
@@ -69,10 +70,11 @@ import { TestComponent } from './admin/test/test.component';
     TourselectorComponent,
     AddRouteComponent,
     AddMapComponent,
-    AddRouteFormComponent
+    AddRouteFormComponent,
     DashboardComponent,
     ManageroutesComponent,
-    TestComponent
+    TestComponent,
+    AdminNavComponent
 
   ],
   imports: [
