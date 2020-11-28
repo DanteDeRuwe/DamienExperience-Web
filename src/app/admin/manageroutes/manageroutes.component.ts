@@ -25,14 +25,19 @@ export class ManageroutesComponent implements OnInit {
     });
   }
 
-  openDialog() {
+  openDialog(routeName: string) {
     this.dialogRef = this._dialog.open(DeleteRouteDialogComponent, {
       height: '400px',
       width: '600px',
+      data: {
+        routeName: routeName
+      }
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`); // Pizza!
+      if (result) {
+        location.reload(); //Is dit ok (reload page), of beter met een updatende lijst werke? 
+      }
     });
 
 

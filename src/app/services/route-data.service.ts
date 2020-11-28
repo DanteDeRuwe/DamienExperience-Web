@@ -39,6 +39,15 @@ export class RouteDataService {
       )
   }
 
+  deleteRoute(routeName: string) {
+    return this.http.delete(`${environment.apiUrl}/route/delete?routeName=${routeName}`
+    )
+      .pipe(
+        tap(),
+        catchError(this.handleError)
+      ).subscribe()
+  }
+
 
 
 

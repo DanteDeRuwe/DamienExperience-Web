@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Route } from 'src/app/models/route.model';
+import { RouteDataService } from 'src/app/services/route-data.service';
 
 
 @Component({
@@ -11,16 +12,22 @@ import { Route } from 'src/app/models/route.model';
 export class DeleteRouteDialogComponent {
 
 
-  constructor(public dialogRef: MatDialogRef<DeleteRouteDialogComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<DeleteRouteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _rds: RouteDataService
+  ) { }
 
-  closeDialog() {
-    this.dialogRef.close();
+  closeDialog(routeName?: string) {
+    this.dialogRef.close(routeName);
   }
 
-  deleteRoute(){
-    console.log("delete route");
+  deleteRoute() {
+    this._rds.deleteRoute(this.data.routeName);
+    this.closeDialog(this.data.routeName)
+    
   }
 
 }
 
- 
+
