@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Waypoint } from 'src/app/models/waypoint.model';
 
 @Component({
   selector: 'app-add-waypoints-form',
@@ -11,6 +12,9 @@ export class AddWaypointsFormComponent implements OnInit {
   public pointChosen: boolean;
 
   public waypointForm: FormGroup;
+
+  @Input() 
+  waypoints: Waypoint[];
   
   @Output()
   public addWaypointToMapEvent = new EventEmitter();
@@ -64,6 +68,22 @@ export class AddWaypointsFormComponent implements OnInit {
 
   chosePoint(){
     this.pointChosen = true
+  }
+
+  getWaypointTitle(waypoint : Waypoint): string {
+    const localLang: string = localStorage.getItem("lang");
+    var title = waypoint.languagesText['title'][localLang];
+    console.log(title);
+
+    return title;
+  }
+  
+  getWaypointDescription(waypoint : Waypoint): string {
+    const localLang: string = localStorage.getItem("lang");
+    var description = waypoint.languagesText['description'][localLang];
+    console.log(description);
+
+    return description;
   }
 
 }

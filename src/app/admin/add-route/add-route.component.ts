@@ -16,7 +16,39 @@ export class AddRouteComponent implements OnInit {
   distance: number = 0
   path : [number[]]
   waypointAdding : number[]
-  waypoints : Waypoint[] = []
+  waypoints : Waypoint[] //= []
+  = [
+    Waypoint.fromJson({
+      id: "2b6c07f0-4464-41c1-a837-eab958a0d0e2",
+      longitude: 4.705204,
+      latitude: 50.99041,
+      languagesText: {
+        title: {
+          nl: "Delhaize Tremelo",
+          fr: "Delhaize Tremelo"
+        },
+        description: {
+          nl: "Gratis blikje frisdrank en snoepreep bij vertoon van een geldige coupon.",
+          fr: "Canette de soda et bonbon gratuit"
+        }
+      }
+    }), Waypoint.fromJson(
+    {
+      id: "0570fdbb-28e5-4cb8-a41f-defcbc3aeba9",
+      longitude: 4.708955,
+      latitude: 50.994423,
+      languagesText: {
+        title: {
+          nl: "Bevoorrading 1",
+          fr: "Rations 1"
+        },
+        description: {
+          nl: "Hier krijg je een appeltje voor de dorst!",
+          fr: "une pomme ou deux"
+        }
+      }
+    })
+  ];
   routeFormShowing : boolean = true
   route: Route
 
@@ -117,15 +149,24 @@ export class AddRouteComponent implements OnInit {
     const descriptionNl = value.descriptionGroup.descriptionDutch;
     const descriptionFr = value.descriptionGroup.descriptionDutch;
 
-    if(localStorage.getItem('lang')==='nl'){
-      this.addMapComponent.saveMarker(titleNl, descriptionNl)
-    } else{
-      this.addMapComponent.saveMarker(titleFr, descriptionFr)
-    }
+    // if(localStorage.getItem('lang')==='nl'){
+    //   this.addMapComponent.saveMarker(titleNl, descriptionNl)
+    // } else{
+    //   this.addMapComponent.saveMarker(titleFr, descriptionFr)
+    // }
     
 
     this.waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], [[titleNl, titleFr],[descriptionNl, descriptionFr]]))
-    this.route.waypoints = this.waypoints
+    
+    this.route.waypoints = this.waypoints;
+    this.addMapComponent.showWaypoints(this.waypoints);
     console.log(this.route)
+  }
+
+  deleteWaypoint(waypoint : Waypoint){
+    const index: number = this.route.waypoints.indexOf(waypoint);
+    if (index !== -1) {
+      this.route.waypoints.splice(index, 1);
+    }  
   }
 }

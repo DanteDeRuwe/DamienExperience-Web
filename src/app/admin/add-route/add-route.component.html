@@ -11,6 +11,7 @@
   </div>
   <div class="form_comp"  *ngIf="!routeFormShowing">
     <app-add-waypoints-form
+      [waypoints]="waypoints"
       (addWaypointToMapEvent)="addWaypointToMap()"
       (saveAddedWaypointEvent)="saveAddedWaypoint($event)"
     ></app-add-waypoints-form>

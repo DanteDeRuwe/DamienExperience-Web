@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Route } from 'src/app/models/route.model';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
+import { Waypoint } from 'src/app/models/waypoint.model';
 
 @Component({
   selector: 'app-add-map',
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AddMapComponent implements OnInit {
   @Input() path: [number[]];
-  @Input() waypoints: [number[]]
+  @Input() waypoints: Waypoint[]
   @Input() waypointAdding: number[]
   @Output() newCoordinates = new EventEmitter<any>();
   @Output() newCoordinatesWaypoint = new EventEmitter<any>();
@@ -183,5 +184,21 @@ export class AddMapComponent implements OnInit {
     .setPopup( new mapboxgl.Popup({ offset: 25 })
     .setHTML('<h3>' + title + '</h3><p>' + description + '</p>'))
     .addTo(this.map);
+
+    
+  }
+
+  showWaypoints(waypoints: Waypoint[] = null){
+    if(waypoints != null)
+      this.waypoints = waypoints;
+
+    let localLang: string = localStorage.getItem("lang");
+    waypoints.forEach(waypoint => {
+      var marker = new mapboxgl.Marker()
+      .setLngLat([waypoint.longitude, waypoint.latitude])
+      .setPopup( new mapboxgl.Popup({ offset: 25 })
+      .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
+      .addTo(this.map);
+    });
   }
 }

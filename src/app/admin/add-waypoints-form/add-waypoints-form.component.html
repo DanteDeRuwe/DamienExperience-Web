@@ -1,5 +1,8 @@
 <div *ngIf="!pointChosen">
   <h1>hier komt de lijst met gekozen waypoints voor deze te kunnen updaten</h1>
+  <p *ngFor="let waypoint of waypoints">
+    {{getWaypointTitle(waypoint)}}
+  </p>
   <button (click)="addWaypoint()" >Voeg een waypoint toe</button>
   <button (click)="saveAll()">Opslaan</button>
 </div>
