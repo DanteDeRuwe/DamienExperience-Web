@@ -1,0 +1,9 @@
+.container{
+    background-color: #f2f1ef;
+    padding: 1rem;
+    border: #414141 solid 2px;
+}
+
+.buttonCancel{
+   float: right;
+}

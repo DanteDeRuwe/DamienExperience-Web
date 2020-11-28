@@ -17,17 +17,15 @@ export class ManageroutesComponent implements OnInit {
 
 
 
-  constructor(private _rds: RouteDataService, private _dialog : MatDialog) { }
+  constructor(private _rds: RouteDataService, private _dialog: MatDialog) { }
 
   ngOnInit(): void {
     this._rds.getFutureRoutes$().subscribe((routes: Route[]) => {
       this.routes = routes;
     });
-
-   
   }
 
-  openDialog(){
+  openDialog() {
     this.dialogRef = this._dialog.open(DeleteRouteDialogComponent, {
       height: '400px',
       width: '600px',
@@ -37,6 +35,6 @@ export class ManageroutesComponent implements OnInit {
       console.log(`Dialog result: ${result}`); // Pizza!
     });
 
-    
+
   }
 }

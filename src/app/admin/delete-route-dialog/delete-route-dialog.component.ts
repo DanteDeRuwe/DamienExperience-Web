@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Route } from 'src/app/models/route.model';
 
 
 @Component({
@@ -9,10 +10,15 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DeleteRouteDialogComponent {
 
+
   constructor(public dialogRef: MatDialogRef<DeleteRouteDialogComponent>) { }
 
   closeDialog() {
-    this.dialogRef.close('Pizza!');
+    this.dialogRef.close();
+  }
+
+  deleteRoute(){
+    console.log("delete route");
   }
 
 }
