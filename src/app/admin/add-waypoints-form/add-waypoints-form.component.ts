@@ -73,7 +73,6 @@ export class AddWaypointsFormComponent implements OnInit {
   getWaypointTitle(waypoint : Waypoint): string {
     const localLang: string = localStorage.getItem("lang");
     var title = waypoint.languagesText['title'][localLang];
-    console.log(title);
 
     return title;
   }
@@ -81,7 +80,6 @@ export class AddWaypointsFormComponent implements OnInit {
   getWaypointDescription(waypoint : Waypoint): string {
     const localLang: string = localStorage.getItem("lang");
     var description = waypoint.languagesText['description'][localLang];
-    console.log(description);
 
     return description;
   }

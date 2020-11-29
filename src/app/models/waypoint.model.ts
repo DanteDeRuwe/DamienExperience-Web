@@ -1,3 +1,5 @@
+
+
 export interface WaypointJson {
     id: string,
     longitude: number,
@@ -22,6 +24,14 @@ export class Waypoint{
         private _languagesText
     ){}
 
+    static fromJsonList(json: WaypointJson[]){
+        var res = [];
+        json.forEach(element => {
+            res.push(this.fromJson(element));
+        });
+        return res;
+    }
+
     static fromJson(json: WaypointJson){
         const walk = new Waypoint(
             json.id,
@@ -30,6 +40,14 @@ export class Waypoint{
             json.languagesText
         )
         return walk
+    }
+
+    static toJsonList(json: Waypoint[]){
+        var res = [];
+        json.forEach(element => {
+            res.push(element.toJson());
+        });
+        return res;
     }
 
     toJson(): WaypointJson{

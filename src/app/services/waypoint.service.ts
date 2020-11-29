@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Waypoint } from '../models/waypoint.model';
 
@@ -12,14 +12,15 @@ export class WaypointService {
 
   constructor(private http: HttpClient) { }
 
-  addWaypoints$(routeId: string, waypoints : Waypoint[]) {
+  addWaypoints$(routeId: string, waypoints : Waypoint[]) : Observable<Waypoint[]> {
     return this.http.post(`${environment.apiUrl}/waypoint/addWaypoints`,
       {
         routeId,
         waypoints
       }).pipe(
         tap(),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        map((list: any[]): Waypoint[] => list.map(Waypoint.fromJson))
       )
   }
 

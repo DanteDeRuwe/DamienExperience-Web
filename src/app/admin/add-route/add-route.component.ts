@@ -5,6 +5,8 @@ import { AddMapComponent } from '../add-map/add-map.component';
 import * as turf from '@turf/turf'
 import { AddWaypointsFormComponent } from '../add-waypoints-form/add-waypoints-form.component';
 import { Waypoint } from 'src/app/models/waypoint.model';
+import { WaypointService } from 'src/app/services/waypoint.service';
+import { RouteDataService } from 'src/app/services/route-data.service';
 
 @Component({
   selector: 'app-add-route',
@@ -13,10 +15,11 @@ import { Waypoint } from 'src/app/models/waypoint.model';
 })
 export class AddRouteComponent implements OnInit {
 
-  distance: number = 0
-  path : [number[]]
+  distanceInMeters: number = 0
+  coordinates : [number[]]
   waypointAdding : number[]
-  waypoints : Waypoint[] //= []
+  lineColor : string = "#3bb7a9";
+  waypointsDUMMY : Waypoint[] //= []
   = [
     Waypoint.fromJson({
       id: "2b6c07f0-4464-41c1-a837-eab958a0d0e2",
@@ -49,8 +52,12 @@ export class AddRouteComponent implements OnInit {
       }
     })
   ];
-  routeFormShowing : boolean = true
+  routeFormShowing : boolean = true;
   route: Route
+   = new Route("","", new Date(),0,{
+    lineColor : this.lineColor,
+    coordinates: [[]]
+},0,[]);
 
   //get acces to child component
   @ViewChild(AddMapComponent)
@@ -59,7 +66,7 @@ export class AddRouteComponent implements OnInit {
   @ViewChild(AddWaypointsFormComponent)
   private addWaypointsFormComponent: AddWaypointsFormComponent;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private _routeService : RouteDataService, private _waypointService : WaypointService, private fb: FormBuilder) { }
 
   ngOnInit(): void {  
   }
@@ -78,37 +85,48 @@ export class AddRouteComponent implements OnInit {
     let nl = value.info_nl;
     let fr = value.info_fr;
     let info = {nl, fr}
-    this.route = new Route("testid",
-      value.tourName,
-      value.date,
-      this.distance,
-      this.path,
-      info,
-      []) //TODO waypoints
-    console.log(this.route)
+    // this.route = new Route("testid",
+    //   value.tourName,
+    //   value.date,
+    //   this.distanceInMeters * 1000,
+    //   {
+    //     lineColor: this.lineColor,
+    //     coordinates: this.coordinates
+    // },
+    //   info,
+    //   this.waypointsDUMMY)
+      //[]) //TODO waypoints
+      this._routeService.addRoute$(value.tourName,
+        value.date,
+        this.distanceInMeters,
+        this.lineColor,
+        this.coordinates,
+        info,
+        this.waypointsDUMMY).subscribe(temp => {this.route = temp; console.log(this.route); 
+          this.addMapComponent.showWaypoints(this.route.waypoints);});
     this.routeFormShowing=false;
   }
 
   addCoordinates(coords: any) {
-    if(this.path == null){
-      this.path = [coords]
+    if(this.coordinates == null){
+      this.coordinates = [coords]
       return
     }
 
-    this.path.push(coords)
+    this.coordinates.push(coords)
     this.calcDistance("+")    
     this.addMapComponent.drawPath()
   }
 
   calcDistance(operation : String){
-    if(this.path.length < 2){
-      this.distance = 0;
+    if(this.coordinates.length < 2){
+      this.distanceInMeters = 0;
       return;
     } 
-    var last = this.path.length
-    var tempDist =  this.distance
-    var from = turf.point(this.path[last-2]);
-    var to = turf.point(this.path[last-1]);
+    var last = this.coordinates.length
+    var tempDist =  this.distanceInMeters
+    var from = turf.point(this.coordinates[last-2]);
+    var to = turf.point(this.coordinates[last-1]);
     var distance = turf.distance(from, to, {units: 'kilometers'});
     if(operation=="+"){
       tempDist =tempDist+ distance;
@@ -118,14 +136,14 @@ export class AddRouteComponent implements OnInit {
     tempDist = tempDist * 1000
     tempDist = Math.round(tempDist)
     tempDist = tempDist / 1000
-    this.distance = tempDist
+    this.distanceInMeters = tempDist
   }
 
   undoLastPath(){
-    if(this.path.length > 0){
+    if(this.coordinates.length > 0){
       this.calcDistance("-")
-      this.path.pop()
-      this.addMapComponent.updatePath(this.path)
+      this.coordinates.pop()
+      this.addMapComponent.updatePath(this.coordinates)
       this.addMapComponent.drawPath()
     }
   }
@@ -156,10 +174,12 @@ export class AddRouteComponent implements OnInit {
     // }
     
 
-    this.waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], [[titleNl, titleFr],[descriptionNl, descriptionFr]]))
-    
-    this.route.waypoints = this.waypoints;
-    this.addMapComponent.showWaypoints(this.waypoints);
+    this.route.waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], [[titleNl, titleFr],[descriptionNl, descriptionFr]]))
+    this._waypointService.addWaypoints$(this.route.tourId, this.route.waypoints)
+    this.route.waypoints 
+    var test = this._waypointService.addWaypoints$(this.route.tourId, this.route.waypoints).subscribe();
+    console.log(test);
+    this.addMapComponent.showWaypoints(this.route.waypoints);
     console.log(this.route)
   }
 

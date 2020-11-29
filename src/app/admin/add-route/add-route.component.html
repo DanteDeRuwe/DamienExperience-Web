@@ -5,21 +5,21 @@
       (startstopEvent)="startstopPath($event)"
       (finishedEvent)="finishRoute($event)"
       (undoEvent)="undoLastPath()"
-      [distance]="distance"
+      [distance]="distanceInMeters"
     >
     </app-add-route-form>
   </div>
   <div class="form_comp"  *ngIf="!routeFormShowing">
     <app-add-waypoints-form
-      [waypoints]="waypoints"
+      [waypoints]="route.waypoints"
       (addWaypointToMapEvent)="addWaypointToMap()"
       (saveAddedWaypointEvent)="saveAddedWaypoint($event)"
     ></app-add-waypoints-form>
   </div>
   <div id="add_route_map">
     <app-add-map
-      [path]="path"
-      [waypoints]="waypoints"
+      [coordinates]="coordinates"
+      [waypoints]="route.waypoints"
       [waypointAdding]="waypointAdding"
       (newCoordinates)="addCoordinates($event)"
       (newCoordinatesWaypoint)="addCoordinatesWaypoint($event)"

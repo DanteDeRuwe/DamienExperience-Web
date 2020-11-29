@@ -10,11 +10,13 @@ import { Waypoint } from 'src/app/models/waypoint.model';
   styleUrls: ['./add-map.component.scss']
 })
 export class AddMapComponent implements OnInit {
-  @Input() path: [number[]];
-  @Input() waypoints: Waypoint[]
-  @Input() waypointAdding: number[]
+  @Input() coordinates: [number[]];
+  @Input() waypoints: Waypoint[];
+  @Input() waypointAdding: number[];
   @Output() newCoordinates = new EventEmitter<any>();
   @Output() newCoordinatesWaypoint = new EventEmitter<any>();
+
+  waypointMarkers : mapboxgl.Marker[] = [];
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -79,7 +81,7 @@ export class AddMapComponent implements OnInit {
   }
 
   updatePath(newPath: [number[]]) {
-    this.path = newPath
+    this.coordinates = newPath
   }
 
   drawPath() {
@@ -96,7 +98,7 @@ export class AddMapComponent implements OnInit {
         'properties': {},
         'geometry': {
           'type': 'LineString',
-          'coordinates': this.path
+          'coordinates': this.coordinates
         }
       }
     });
@@ -184,21 +186,25 @@ export class AddMapComponent implements OnInit {
     .setPopup( new mapboxgl.Popup({ offset: 25 })
     .setHTML('<h3>' + title + '</h3><p>' + description + '</p>'))
     .addTo(this.map);
-
-    
   }
 
   showWaypoints(waypoints: Waypoint[] = null){
     if(waypoints != null)
       this.waypoints = waypoints;
+    if(this.waypointMarkers != null){
+      this.waypointMarkers.forEach(marker => {
+        marker.remove();
+      });
+    }
 
     let localLang: string = localStorage.getItem("lang");
-    waypoints.forEach(waypoint => {
+    this.waypoints.forEach(waypoint => {
       var marker = new mapboxgl.Marker()
       .setLngLat([waypoint.longitude, waypoint.latitude])
       .setPopup( new mapboxgl.Popup({ offset: 25 })
       .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
       .addTo(this.map);
+      this.waypointMarkers.push(marker);
     });
   }
 }
