@@ -14,6 +14,8 @@
       [waypoints]="route.waypoints"
       (addWaypointToMapEvent)="addWaypointToMap()"
       (saveAddedWaypointEvent)="saveAddedWaypoint($event)"
+      (saveDeletedWaypointEvent)="deleteWaypoint($event)"
+      (saveAllWaypointEvent)="saveWaypoints()"
     ></app-add-waypoints-form>
   </div>
   <div id="add_route_map">

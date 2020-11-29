@@ -125,6 +125,15 @@ export class AddMapComponent implements OnInit {
     console.log("trololo");
   }
 
+  aferAddWaypoint() {
+    this.stopSelectingWaypoint();
+    if (this.waypointDrawn) {
+      this.marker.remove()
+    }
+    this.waypointDrawn = false;
+    console.log("Merry Christmas");
+  }
+
   startSelectingWaypoint() {
     // Change the cursor to a pointer when the mouse is over the places layer.
     this.map.on('mousemove', () => {
@@ -150,22 +159,8 @@ export class AddMapComponent implements OnInit {
   drawWaypoint() {
 
     if (this.waypointDrawn) {
-      this.map.removeSource("waypointsource")
       this.marker.remove()
-
     }
-
-    this.map.addSource(`waypointsource`, {
-      'type': 'geojson',
-      'data': {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-          'type': 'Point',
-          'coordinates': this.waypointAdding
-        }
-      }
-    });
 
     this.marker = new mapboxgl.Marker()
       .setLngLat([this.waypointAdding[0], this.waypointAdding[1]])
@@ -178,27 +173,19 @@ export class AddMapComponent implements OnInit {
     this.waypointAdding = waypointAdding
   }
 
-  saveMarker(title: string, description: string){
-    this.marker.remove()
-    this.waypointDrawn=false
-    let marker = new mapboxgl.Marker()
-    .setLngLat([this.waypointAdding[0], this.waypointAdding[1]])
-    .setPopup( new mapboxgl.Popup({ offset: 25 })
-    .setHTML('<h3>' + title + '</h3><p>' + description + '</p>'))
-    .addTo(this.map);
-  }
-
   showWaypoints(waypoints: Waypoint[] = null){
-    if(waypoints != null)
-      this.waypoints = waypoints;
     if(this.waypointMarkers != null){
       this.waypointMarkers.forEach(marker => {
         marker.remove();
       });
     }
 
+    if(waypoints != null)
+      this.waypoints = waypoints;
+
     let localLang: string = localStorage.getItem("lang");
     this.waypoints.forEach(waypoint => {
+
       var marker = new mapboxgl.Marker()
       .setLngLat([waypoint.longitude, waypoint.latitude])
       .setPopup( new mapboxgl.Popup({ offset: 25 })

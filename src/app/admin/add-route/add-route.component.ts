@@ -19,7 +19,7 @@ export class AddRouteComponent implements OnInit {
   coordinates : [number[]]
   waypointAdding : number[]
   lineColor : string = "#3bb7a9";
-  waypointsDUMMY : Waypoint[] //= []
+  waypointsDUMMY : Waypoint[] //TODO DELETE DUMMYDATA
   = [
     Waypoint.fromJson({
       id: "2b6c07f0-4464-41c1-a837-eab958a0d0e2",
@@ -85,24 +85,13 @@ export class AddRouteComponent implements OnInit {
     let nl = value.info_nl;
     let fr = value.info_fr;
     let info = {nl, fr}
-    // this.route = new Route("testid",
-    //   value.tourName,
-    //   value.date,
-    //   this.distanceInMeters * 1000,
-    //   {
-    //     lineColor: this.lineColor,
-    //     coordinates: this.coordinates
-    // },
-    //   info,
-    //   this.waypointsDUMMY)
-      //[]) //TODO waypoints
       this._routeService.addRoute$(value.tourName,
         value.date,
         this.distanceInMeters,
         this.lineColor,
         this.coordinates,
         info,
-        this.waypointsDUMMY).subscribe(temp => {this.route = temp; console.log(this.route); 
+        this.waypointsDUMMY).subscribe(temp => {this.route = temp; console.log(this.route); //TODO DELETE DUMMYDATA
           this.addMapComponent.showWaypoints(this.route.waypoints);});
     this.routeFormShowing=false;
   }
@@ -167,26 +156,36 @@ export class AddRouteComponent implements OnInit {
     const descriptionNl = value.descriptionGroup.descriptionDutch;
     const descriptionFr = value.descriptionGroup.descriptionDutch;
 
-    // if(localStorage.getItem('lang')==='nl'){
-    //   this.addMapComponent.saveMarker(titleNl, descriptionNl)
-    // } else{
-    //   this.addMapComponent.saveMarker(titleFr, descriptionFr)
-    // }
+    var languagesText = {
+      title: {
+          nl : titleNl,
+          fr : titleFr
+      },
+      description: {
+          nl : descriptionNl,
+          fr : descriptionFr
+      }
+    }
     
-
-    this.route.waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], [[titleNl, titleFr],[descriptionNl, descriptionFr]]))
-    this._waypointService.addWaypoints$(this.route.tourId, this.route.waypoints)
-    this.route.waypoints 
-    var test = this._waypointService.addWaypoints$(this.route.tourId, this.route.waypoints).subscribe();
-    console.log(test);
-    this.addMapComponent.showWaypoints(this.route.waypoints);
+    var waypoints = this.route.waypoints;
+    waypoints.push(new Waypoint("", this.waypointAdding[0], this.waypointAdding[1], languagesText))
+    this.route.waypoints = waypoints;
+    this.addMapComponent.aferAddWaypoint();
+    this.addMapComponent.showWaypoints();
     console.log(this.route)
   }
 
   deleteWaypoint(waypoint : Waypoint){
-    const index: number = this.route.waypoints.indexOf(waypoint);
+    var waypoints = this.route.waypoints;
+    const index: number = waypoints.indexOf(waypoint);
     if (index !== -1) {
-      this.route.waypoints.splice(index, 1);
+      waypoints.splice(index, 1);
     }  
+    this.route.waypoints = waypoints;
+    this.addMapComponent.showWaypoints();
+  }
+
+  saveWaypoints(){
+    this._waypointService.addWaypoints$(this.route.tourId, this.route.waypoints).subscribe(temp => this.route.waypoints = temp);
   }
 }

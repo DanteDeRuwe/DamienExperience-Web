@@ -8,7 +8,7 @@ import { Waypoint } from 'src/app/models/waypoint.model';
   styleUrls: ['./add-waypoints-form.component.css']
 })
 export class AddWaypointsFormComponent implements OnInit {
-  @Input()
+  // @Input()
   public pointChosen: boolean;
 
   public waypointForm: FormGroup;
@@ -21,6 +21,10 @@ export class AddWaypointsFormComponent implements OnInit {
 
   @Output()
   public saveAddedWaypointEvent = new EventEmitter();
+  @Output()
+  public saveDeletedWaypointEvent = new EventEmitter();
+  @Output()
+  public saveAllWaypointEvent = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) { 
   }
@@ -62,8 +66,12 @@ export class AddWaypointsFormComponent implements OnInit {
     this.addWaypointToMapEvent.emit();
   }
 
-  saveAll(){
+  deleteWaypoint(waypoint : Waypoint){
+    this.saveDeletedWaypointEvent.emit(waypoint);
+  }
 
+  saveAll(){
+    this.saveAllWaypointEvent.emit();
   }
 
   chosePoint(){

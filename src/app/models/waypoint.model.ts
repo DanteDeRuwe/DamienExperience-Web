@@ -16,12 +16,44 @@ export interface WaypointJson {
     }
 }
 
+export interface WaypointDTO {
+    longitude: number,
+    latitude: number,
+    languagesText: {
+        title: {
+            nl: string,
+            fr: string
+        },
+        description: {
+            nl: string,
+            fr: string
+        }
+    }
+    // title: {
+    //     nl: string,
+    //     fr: string
+    // },
+    // description: {
+    //     nl: string,
+    //     fr: string
+    // }
+}
+
 export class Waypoint{
     constructor(
         private _id: string,
         private _longitude: number,
         private _latitude: number,
-        private _languagesText
+        private _languagesText: {
+            title: {
+                nl: string,
+                fr: string
+            },
+            description: {
+                nl: string,
+                fr: string
+            }
+        }
     ){}
 
     static fromJsonList(json: WaypointJson[]){
@@ -40,6 +72,24 @@ export class Waypoint{
             json.languagesText
         )
         return walk
+    }
+
+    static toDTOList(json: Waypoint[]) : WaypointDTO[] {
+        var res = [];
+        json.forEach(element => {
+            res.push(element.toDTO());
+        });
+        return res;
+    }
+
+    toDTO(): WaypointDTO{
+        return {
+            longitude: this._longitude,
+            latitude: this._latitude,
+            languagesText: this._languagesText
+            //description: this._languagesText.description,
+            //title: this._languagesText.title
+        }
     }
 
     static toJsonList(json: Waypoint[]){

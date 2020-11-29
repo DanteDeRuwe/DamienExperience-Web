@@ -59,7 +59,7 @@ export class RouteDataService {
         info,
         waypoints : jsonWaypoints
       }).pipe(
-        tap(console.log),
+        tap(),
         catchError(this.handleError),
         map(Route.fromJson)
       )
