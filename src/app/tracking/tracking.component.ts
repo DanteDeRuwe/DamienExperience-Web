@@ -34,7 +34,6 @@ export class TrackingComponent implements OnInit {
     private _wds: WalkDataService) { }
 
   ngOnInit(): void {
-    console.log(this.tourName, this.userName)
     this.searchForm = this.fb.group({
       username: ['', Validators.required]
     });
