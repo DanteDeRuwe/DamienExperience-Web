@@ -52,13 +52,23 @@ export class AddRouteComponent implements OnInit {
       }
     })
   ];
-  routeFormShowing : boolean = true;
-  route: Route
+  // change back don't forget 
+  //TODO 
+   routeFormShowing : boolean = true;
+  //routeFormShowing : boolean = false;
+  
+  route: Route 
    = new Route("","", new Date(),0,{
     lineColor : this.lineColor,
     coordinates: [[]]
 },0,[]);
-
+/*
+  route: Route 
+   = new Route("","", new Date(),0,{
+    lineColor : this.lineColor,
+    coordinates: [[]]
+},0,this.waypointsDUMMY);
+*/
   //get acces to child component
   @ViewChild(AddMapComponent)
   private addMapComponent: AddMapComponent;
@@ -71,6 +81,8 @@ export class AddRouteComponent implements OnInit {
   ngOnInit(): void {  
   }
 
+  //routes
+  
   startstopPath(start: boolean){
     if(start) this.addMapComponent.startSelecting()
     else this.addMapComponent.stopSelecting()
@@ -138,6 +150,7 @@ export class AddRouteComponent implements OnInit {
     }
   }
 
+  //waypoints
   addWaypointToMap(){
     this.addMapComponent.addWaypoint();
   }

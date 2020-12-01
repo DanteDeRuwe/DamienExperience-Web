@@ -53,7 +53,12 @@ export class AddMapComponent implements OnInit {
       }
     })
   }
+  ngOnDestroy() {
+    this.removePath()
+    this.removeWaypoints()
+  }
 
+  //route
   addCoordinates(lng: number, lat: number) {
     var coords = [lng, lat]
     this.newCoordinates.emit(coords)
@@ -83,13 +88,15 @@ export class AddMapComponent implements OnInit {
   updatePath(newPath: [number[]]) {
     this.coordinates = newPath
   }
-
-  drawPath() {
-    var color = "#FE0040"
+  removePath(){
     if (this.lineDrawn) {
       this.map.removeLayer("pathlayer")
       this.map.removeSource("pathsource")
     }
+  }
+  drawPath() {
+    var color = "#FE0040"
+    this.removePath()
 
     this.map.addSource(`pathsource`, {
       'type': 'geojson',
@@ -119,10 +126,9 @@ export class AddMapComponent implements OnInit {
 
     this.lineDrawn = true
   }
-
+  //waypoints
   addWaypoint() {
     this.startSelectingWaypoint();
-    console.log("trololo");
   }
 
   aferAddWaypoint() {
@@ -173,12 +179,15 @@ export class AddMapComponent implements OnInit {
     this.waypointAdding = waypointAdding
   }
 
-  showWaypoints(waypoints: Waypoint[] = null){
+  removeWaypoints(){
     if(this.waypointMarkers != null){
       this.waypointMarkers.forEach(marker => {
         marker.remove();
       });
     }
+  }
+  showWaypoints(waypoints: Waypoint[] = null){
+    this.removeWaypoints()
 
     if(waypoints != null)
       this.waypoints = waypoints;

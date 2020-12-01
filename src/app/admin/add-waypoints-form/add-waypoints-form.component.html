@@ -1,75 +1,76 @@
 <div *ngIf="!pointChosen">
-  <h1>hier komt de lijst met gekozen waypoints voor deze te kunnen updaten</h1>
-  <div *ngFor="let waypoint of waypoints">
-    <p>{{getWaypointTitle(waypoint)}}</p>
-    <button type="submit" (click)="deleteWaypoint(waypoint)">Verwijder</button>
+  <div class="add_waypaint_title_overzicht">
+    <h3>Waypoints</h3>
+    <h4>Een overzicht van de huidige waypoints</h4>
   </div>
-  <button (click)="addWaypoint()" >Voeg een waypoint toe</button>
-  <button (click)="saveAll()">Opslaan</button>
+
+  <div class="waypointItems" *ngFor="let waypoint of waypoints">
+    <p>{{getWaypointTitle(waypoint)}}</p>
+    <button class="waypointItemsButton" type="submit" (click)="deleteWaypoint(waypoint)">
+      <span class="material-icons"
+        alt="remove">
+        clear
+      </span>
+    </button>
+  </div>
+  <div class="mainButtons">
+    <button class="btn btn-primary" (click)="addWaypoint()">Voeg een waypoint toe</button>
+    <button class="btn btn-primary submitBtn" (click)="saveAll()">Opslaan</button>
+  </div>
+
 </div>
 <div *ngIf="pointChosen">
-<form [formGroup]="waypointForm">
-  <div class="add_waypoints_form">
-    <h3>Voeg waypoints toe</h3>
-    <div class="add_title" formGroupName="titleGroup">
-      <h4>Titel</h4>
-      <div>
-        <label for="titleDutch">Nederlands</label>
-        <textarea
-          type="text"
-          class="form-control"
-          id="titleDutch"
-          placeholder="Beschrijving"
-          formControlName="titleDutch"
-        ></textarea>
-        <p class="error" *ngIf="waypointForm.get('titleGroup').get('titleDutch')['errors'] && waypointForm.get('titleGroup').get('titleDutch').touched">
+  <form [formGroup]="waypointForm">
+    <div class="add_waypoints_form">
+      <h3>Voeg waypoints toe</h3>
+      <!--main div-->
+      <div class="add_title" formGroupName="titleGroup">
+        <h4>Titel</h4>
+        <div>
+          <label for="titleDutch">Nederlands</label>
+          <textarea type="text" class="form-control" id="titleDutch" placeholder="Beschrijving"
+            formControlName="titleDutch"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('titleGroup').get('titleDutch')['errors'] && waypointForm.get('titleGroup').get('titleDutch').touched">
             {{ getErrorMessage(waypointForm.get('titleGroup').get('titleDutch')['errors']) }}
-        </p>
-      </div>
-      <div>
-        <label for="titleFrench">Fransjais</label>
-        <textarea
-          type="text"
-          class="form-control"
-          id="titleFrench"
-          placeholder="Beschrijving en Fransjais"
-          formControlName="titleFrench"
-        ></textarea>
-        <p class="error" *ngIf="waypointForm.get('titleGroup').get('titleFrench')['errors'] && waypointForm.get('titleGroup').get('titleFrench').touched">
+          </p>
+        </div>
+        <div>
+          <label for="titleFrench">Fransjais</label>
+          <textarea type="text" class="form-control" id="titleFrench" placeholder="Beschrijving en Fransjais"
+            formControlName="titleFrench"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('titleGroup').get('titleFrench')['errors'] && waypointForm.get('titleGroup').get('titleFrench').touched">
             {{ getErrorMessage(waypointForm.get('titleGroup').get('titleFrench')['errors']) }}
-        </p>
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="add_description" formGroupName="descriptionGroup">
+      <div class="add_description" formGroupName="descriptionGroup">
         <h4>Beschrijving</h4>
-      <div>
-        <label for="descriptionDutch">Nederlands</label>
-        <textarea
-          type="text"
-          class="form-control"
-          id="descriptionDutch"
-          placeholder="Beschrijving"
-          formControlName="descriptionDutch"
-        ></textarea>
-        <p class="error" *ngIf="waypointForm.get('descriptionGroup').get('descriptionDutch')['errors'] && waypointForm.get('descriptionGroup').get('descriptionDutch').touched">
+        <div>
+          <label for="descriptionDutch">Nederlands</label>
+          <textarea type="text" class="form-control" id="descriptionDutch" placeholder="Beschrijving"
+            formControlName="descriptionDutch"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('descriptionGroup').get('descriptionDutch')['errors'] && waypointForm.get('descriptionGroup').get('descriptionDutch').touched">
             {{ getErrorMessage(waypointForm.get('descriptionGroup').get('descriptionDutch')['errors']) }}
-        </p>
-      </div>
-      <div>
-        <label for="descriptionFrench">Fransjais</label>
-        <textarea
-          type="text"
-          class="form-control"
-          id="descriptionFrench"
-          placeholder="Beschrijving en Fransjais"
-          formControlName="descriptionFrench"
-        ></textarea>
-        <p class="error" *ngIf="waypointForm.get('descriptionGroup').get('descriptionFrench')['errors'] && waypointForm.get('descriptionGroup').get('descriptionFrench').touched">
+          </p>
+        </div>
+        <div>
+          <label for="descriptionFrench">Fransjais</label>
+          <textarea type="text" class="form-control" id="descriptionFrench" placeholder="Beschrijving en Fransjais"
+            formControlName="descriptionFrench"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('descriptionGroup').get('descriptionFrench')['errors'] && waypointForm.get('descriptionGroup').get('descriptionFrench').touched">
             {{ getErrorMessage(waypointForm.get('descriptionGroup').get('descriptionFrench')['errors']) }}
-        </p>
+          </p>
+        </div>
+      </div>
+      <div class="submitBtnDiv">
+        <button type="submit" class="btn btn-primary submitBtn" (click)="onSubmit()"
+          [disabled]="!waypointForm.valid">Opslaan</button>
       </div>
     </div>
-  </div>
-  <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!waypointForm.valid">Opslaan</button>
-</form>
+
+  </form>
 </div>

@@ -5,7 +5,7 @@ import { Waypoint } from 'src/app/models/waypoint.model';
 @Component({
   selector: 'app-add-waypoints-form',
   templateUrl: './add-waypoints-form.component.html',
-  styleUrls: ['./add-waypoints-form.component.css']
+  styleUrls: ['./add-waypoints-form.component.scss']
 })
 export class AddWaypointsFormComponent implements OnInit {
   // @Input()
