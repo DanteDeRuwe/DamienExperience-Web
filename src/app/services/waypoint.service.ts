@@ -12,13 +12,11 @@ export class WaypointService {
 
   constructor(private http: HttpClient) { }
 
-  addWaypoints$(routeId: string, waypoints : Waypoint[]) : Observable<Waypoint[]> {
-    console.log(waypoints);
+  addWaypoints$(routeName: string, waypoints : Waypoint[]) : Observable<Waypoint[]> {
     var res = Waypoint.toDTOList(waypoints);
-    console.log(res);
     return this.http.post(`${environment.apiUrl}/waypoint/addwaypoints`,
       {
-        tourname : routeId,
+        tourName : routeName,
         dtos : res
       }).pipe(
         tap(),

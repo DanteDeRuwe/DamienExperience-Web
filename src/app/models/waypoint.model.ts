@@ -84,12 +84,20 @@ export class Waypoint{
 
     toDTO(): WaypointDTO{
         return {
-            longitude: this._longitude,
-            latitude: this._latitude,
+            longitude: this.flatline(this._longitude),
+            latitude: this.flatline(this._latitude),
             languagesText: this._languagesText
             //description: this._languagesText.description,
             //title: this._languagesText.title
         }
+    }
+
+    flatline(numb : number): number{
+        //4.708955
+        numb = numb * 1000000        
+        numb = Math.round(numb)
+        numb = numb / 1000000
+        return numb
     }
 
     static toJsonList(json: Waypoint[]){

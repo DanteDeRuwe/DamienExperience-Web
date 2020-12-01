@@ -85,9 +85,10 @@ export class AddRouteComponent implements OnInit {
     let nl = value.info_nl;
     let fr = value.info_fr;
     let info = {nl, fr}
+    let distance = this.distanceInMeters*1000
       this._routeService.addRoute$(value.tourName,
         value.date,
-        this.distanceInMeters,
+        distance,
         this.lineColor,
         this.coordinates,
         info,
@@ -154,7 +155,7 @@ export class AddRouteComponent implements OnInit {
     const titleNl = value.titleGroup.titleDutch;
     const titleFr = value.titleGroup.titleFrench;
     const descriptionNl = value.descriptionGroup.descriptionDutch;
-    const descriptionFr = value.descriptionGroup.descriptionDutch;
+    const descriptionFr = value.descriptionGroup.descriptionFrench;
 
     var languagesText = {
       title: {
@@ -186,6 +187,6 @@ export class AddRouteComponent implements OnInit {
   }
 
   saveWaypoints(){
-    this._waypointService.addWaypoints$(this.route.tourId, this.route.waypoints).subscribe(temp => this.route.waypoints = temp);
+    this._waypointService.addWaypoints$(this.route.tourName, this.route.waypoints).subscribe(temp => this.route.waypoints = temp);
   }
 }

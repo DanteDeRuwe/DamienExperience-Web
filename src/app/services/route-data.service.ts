@@ -53,8 +53,8 @@ export class RouteDataService {
       {
         tourName,
         date,
-        lineColor,
         distanceInMeters,
+        lineColor,
         coordinates,
         info,
         waypoints : jsonWaypoints
