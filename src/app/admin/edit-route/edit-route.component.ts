@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Route } from 'src/app/models/route.model';
 
 @Component({
   selector: 'app-edit-route',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-route.component.css']
 })
 export class EditRouteComponent implements OnInit {
-
-  constructor() { }
+  toEditRoute : Route
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(item => {(this.toEditRoute = item['route']); console.log(this.toEditRoute)});
+    
   }
 
 }
