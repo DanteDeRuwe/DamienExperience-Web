@@ -16,11 +16,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { MapComponent } from './map/map.component';
 
 import { RegisterComponent } from './user/register/register.component';
 import { MaterialModule } from './material/material/material.module';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './user/login/login.component';
@@ -46,6 +48,8 @@ import { AddWaypointsFormComponent } from './admin/add-waypoints-form/add-waypoi
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { TestComponent } from './admin/test/test.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 
 
 
@@ -76,9 +80,14 @@ import { TestComponent } from './admin/test/test.component';
     AddWaypointsFormComponent,
     DashboardComponent,
     ManageroutesComponent,
-    TestComponent
+    TestComponent,
+    AdminNavComponent,
+    DeleteRouteDialogComponent
+
+
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

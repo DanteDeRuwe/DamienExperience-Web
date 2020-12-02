@@ -1,0 +1,27 @@
+.icon-left {
+    transform: scale(1.5);
+    color: #ff0040;
+  
+ }
+
+ .main{
+     width: 75%;
+     margin:auto;
+     display: flex;
+     flex-direction: row;
+     padding: 1rem;
+ }
+
+ .icon-right{   
+     padding-left: 50px;
+
+ }
+
+ .list{
+     width: 100%;
+ }
+
+ .icon-right-button{
+    outline: none;
+    border: 0;
+ }

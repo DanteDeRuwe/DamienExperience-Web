@@ -40,6 +40,16 @@ export class RouteDataService {
       )
   }
 
+  deleteRoute(routeName: string) {
+    return this.http.delete(`${environment.apiUrl}/route/delete?routeName=${routeName}`
+    )
+      .pipe(
+        tap(),
+        catchError(this.handleError)
+      ).subscribe()
+  }
+
+
   addRoute$(
     tourName : string,
     date : Date,
@@ -64,6 +74,7 @@ export class RouteDataService {
         map(Route.fromJson)
       )
   }
+
 
 
   handleError(err: any): Observable<never> {
