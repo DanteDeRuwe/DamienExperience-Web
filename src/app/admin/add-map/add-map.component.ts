@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Route } from 'src/app/models/route.model';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
+import { Waypoint } from 'src/app/models/waypoint.model';
 
 @Component({
   selector: 'app-add-map',
@@ -9,16 +10,23 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./add-map.component.scss']
 })
 export class AddMapComponent implements OnInit {
-  @Input() path: [number[]];
+  @Input() coordinates: [number[]];
+  @Input() waypoints: Waypoint[];
+  @Input() waypointAdding: number[];
   @Output() newCoordinates = new EventEmitter<any>();
+  @Output() newCoordinatesWaypoint = new EventEmitter<any>();
+
+  waypointMarkers : mapboxgl.Marker[] = [];
 
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
-    
+
   //temp hardcoded startingpoint
   lat = 50.8465573;
   lng = 4.351697;
   lineDrawn = false;
+  waypointDrawn = false;
+  marker;
 
   constructor() { }
 
@@ -34,50 +42,62 @@ export class AddMapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.on('click', (e) => {
       var cursor = this.map.getCanvas().style.cursor
-      if(cursor == 'pointer'){
+      if (cursor == 'pointer') {
         var lngLat = e.lngLat
-        this.addCoordinates(lngLat.lng,lngLat.lat)
+        this.addCoordinates(lngLat.lng, lngLat.lat)
+      }
+      if (cursor == 'crosshair') {
+        var lngLat = e.lngLat
+        var coords = [lngLat.lng, lngLat.lat]
+        this.newCoordinatesWaypoint.emit(coords)
       }
     })
   }
+  ngOnDestroy() {
+    this.removePath()
+    this.removeWaypoints()
+  }
 
-  addCoordinates(lng : number, lat : number) {
-    var coords = [lng,lat]
+  //route
+  addCoordinates(lng: number, lat: number) {
+    var coords = [lng, lat]
     this.newCoordinates.emit(coords)
   }
 
-  startSelecting(){
+  startSelecting() {
     // Change the cursor to a pointer when the mouse is over the places layer.
     this.map.on('mousemove', () => {
       this.map.getCanvas().style.cursor = 'pointer';
-      });
-      // Change it back to a pointer when it leaves.
+    });
+    // Change it back to a pointer when it leaves.
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
   }
-  stopSelecting(){
+  stopSelecting() {
     // Change the cursor to a nothing when the mouse is over the places layer.
     this.map.on('mousemove', () => {
       this.map.getCanvas().style.cursor = '';
-      });
-      // Change it back to a pointer when it leaves.
+    });
+    // Change it back to a pointer when it leaves.
     this.map.on('mouseleave', () => {
       this.map.getCanvas().style.cursor = '';
     });
   }
 
-  updatePath(newPath : [number[]]){
-    this.path = newPath
+  updatePath(newPath: [number[]]) {
+    this.coordinates = newPath
   }
-
-  drawPath(){
-    var color = "#FE0040"
-    if(this.lineDrawn){
+  removePath(){
+    if (this.lineDrawn) {
       this.map.removeLayer("pathlayer")
       this.map.removeSource("pathsource")
     }
-    
+  }
+  drawPath() {
+    var color = "#FE0040"
+    this.removePath()
+
     this.map.addSource(`pathsource`, {
       'type': 'geojson',
       'data': {
@@ -85,7 +105,7 @@ export class AddMapComponent implements OnInit {
         'properties': {},
         'geometry': {
           'type': 'LineString',
-          'coordinates': this.path
+          'coordinates': this.coordinates
         }
       }
     });
@@ -103,9 +123,84 @@ export class AddMapComponent implements OnInit {
         'line-width': 4
       }
     });
-    
-    this.lineDrawn=true
-  }
-  
 
+    this.lineDrawn = true
+  }
+  //waypoints
+  addWaypoint() {
+    this.startSelectingWaypoint();
+  }
+
+  aferAddWaypoint() {
+    this.stopSelectingWaypoint();
+    if (this.waypointDrawn) {
+      this.marker.remove()
+    }
+    this.waypointDrawn = false;
+    console.log("Merry Christmas");
+  }
+
+  startSelectingWaypoint() {
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    this.map.on('mousemove', () => {
+      this.map.getCanvas().style.cursor = 'crosshair';
+    });
+    // Change it back to a pointer when it leaves.
+    this.map.on('mouseleave', () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+  }
+
+  stopSelectingWaypoint() {
+    // Change the cursor to a nothing when the mouse is over the places layer.
+    this.map.on('mousemove', () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+    // Change it back to a pointer when it leaves.
+    this.map.on('mouseleave', () => {
+      this.map.getCanvas().style.cursor = '';
+    });
+  }
+
+  drawWaypoint() {
+
+    if (this.waypointDrawn) {
+      this.marker.remove()
+    }
+
+    this.marker = new mapboxgl.Marker()
+      .setLngLat([this.waypointAdding[0], this.waypointAdding[1]])
+      .addTo(this.map);
+
+    this.waypointDrawn = true
+  }
+
+  updateWaypoint(waypointAdding: number[]) {
+    this.waypointAdding = waypointAdding
+  }
+
+  removeWaypoints(){
+    if(this.waypointMarkers != null){
+      this.waypointMarkers.forEach(marker => {
+        marker.remove();
+      });
+    }
+  }
+  showWaypoints(waypoints: Waypoint[] = null){
+    this.removeWaypoints()
+
+    if(waypoints != null)
+      this.waypoints = waypoints;
+
+    let localLang: string = localStorage.getItem("lang");
+    this.waypoints.forEach(waypoint => {
+
+      var marker = new mapboxgl.Marker()
+      .setLngLat([waypoint.longitude, waypoint.latitude])
+      .setPopup( new mapboxgl.Popup({ offset: 25 })
+      .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
+      .addTo(this.map);
+      this.waypointMarkers.push(marker);
+    });
+  }
 }

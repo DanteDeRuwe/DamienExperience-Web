@@ -1,17 +1,30 @@
 <div id="add_route">
-    <div class="form_comp">
-        <app-add-route-form 
-        (updateEvent)="updatePath($event)"
-        (startstopEvent)="startstopPath($event)"
-        (finishedEvent)="finishRoute($event)"
-        (undoEvent)="undoLastPath()"
-        [distance]='distance'>
-        </app-add-route-form>
-    </div>
-    <div id="add_route_map">
-        <app-add-map 
-        [path]='path' 
-        (newCoordinates)="addCoordinates($event)"></app-add-map>
-    </div>
+  <div class="form_comp" *ngIf="routeFormShowing">
+    <app-add-route-form
+      (updateEvent)="updatePath($event)"
+      (startstopEvent)="startstopPath($event)"
+      (finishedEvent)="finishRoute($event)"
+      (undoEvent)="undoLastPath()"
+      [distance]="distanceInMeters"
+    >
+    </app-add-route-form>
+  </div>
+  <div class="form_comp"  *ngIf="!routeFormShowing">
+    <app-add-waypoints-form
+      [waypoints]="route.waypoints"
+      (addWaypointToMapEvent)="addWaypointToMap()"
+      (saveAddedWaypointEvent)="saveAddedWaypoint($event)"
+      (saveDeletedWaypointEvent)="deleteWaypoint($event)"
+      (saveAllWaypointEvent)="saveWaypoints()"
+    ></app-add-waypoints-form>
+  </div>
+  <div id="add_route_map">
+    <app-add-map
+      [coordinates]="coordinates"
+      [waypoints]="route.waypoints"
+      [waypointAdding]="waypointAdding"
+      (newCoordinates)="addCoordinates($event)"
+      (newCoordinatesWaypoint)="addCoordinatesWaypoint($event)"
+    ></app-add-map>
+  </div>
 </div>
-

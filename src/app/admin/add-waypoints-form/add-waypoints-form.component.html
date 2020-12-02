@@ -1,0 +1,76 @@
+<div *ngIf="!pointChosen">
+  <div class="add_waypaint_title_overzicht">
+    <h3>Waypoints</h3>
+    <h4>{{"add_waypoint_main_title" | translate}}</h4>
+  </div>
+
+  <div class="waypointItems" *ngFor="let waypoint of waypoints">
+    <p>{{getWaypointTitle(waypoint)}}</p>
+    <button class="waypointItemsButton" type="submit" (click)="deleteWaypoint(waypoint)">
+      <span class="material-icons"
+        alt="remove">
+        clear
+      </span>
+    </button>
+  </div>
+  <div class="mainButtons">
+    <button class="btn btn-primary" (click)="addWaypoint()">{{"add_waypoint_add_one" | translate}}</button>
+    <button class="btn btn-primary submitBtn" (click)="saveAll()">{{"submit" | translate}}</button>
+  </div>
+
+</div>
+<div *ngIf="pointChosen">
+  <form [formGroup]="waypointForm">
+    <div class="add_waypoints_form">
+      <h3>{{"add_waypoint_add_one" | translate}}</h3>
+      <!--main div-->
+      <div class="add_title" formGroupName="titleGroup">
+        <h4>{{"add_waypoint_title" | translate}}</h4>
+        <div>
+          <label for="titleDutch">{{"taalfull_nl" |translate}}</label>
+          <textarea type="text" class="form-control" id="titleDutch" placeholder="{{'add_waypoint_title' | translate}}"
+            formControlName="titleDutch"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('titleGroup').get('titleDutch')['errors'] && waypointForm.get('titleGroup').get('titleDutch').touched">
+            {{ getErrorMessage(waypointForm.get('titleGroup').get('titleDutch')['errors']) }}
+          </p>
+        </div>
+        <div>
+          <label for="titleFrench">{{"taalfull_fr" |translate}}</label>
+          <textarea type="text" class="form-control" id="titleFrench" placeholder="{{'add_waypoint_title' | translate}}"
+            formControlName="titleFrench"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('titleGroup').get('titleFrench')['errors'] && waypointForm.get('titleGroup').get('titleFrench').touched">
+            {{ getErrorMessage(waypointForm.get('titleGroup').get('titleFrench')['errors']) }}
+          </p>
+        </div>
+      </div>
+      <div class="add_description" formGroupName="descriptionGroup">
+        <h4>{{"add_route_form_besch" | translate}}</h4>
+        <div>
+          <label for="descriptionDutch">{{"taalfull_nl" |translate}}</label>
+          <textarea type="text" class="form-control" id="descriptionDutch" placeholder="{{'add_route_form_besch' | translate}}"
+            formControlName="descriptionDutch"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('descriptionGroup').get('descriptionDutch')['errors'] && waypointForm.get('descriptionGroup').get('descriptionDutch').touched">
+            {{ getErrorMessage(waypointForm.get('descriptionGroup').get('descriptionDutch')['errors']) }}
+          </p>
+        </div>
+        <div>
+          <label for="descriptionFrench">{{"taalfull_fr" |translate}}</label>
+          <textarea type="text" class="form-control" id="descriptionFrench" placeholder="{{'add_route_form_besch' | translate}}"
+            formControlName="descriptionFrench"></textarea>
+          <p class="error"
+            *ngIf="waypointForm.get('descriptionGroup').get('descriptionFrench')['errors'] && waypointForm.get('descriptionGroup').get('descriptionFrench').touched">
+            {{ getErrorMessage(waypointForm.get('descriptionGroup').get('descriptionFrench')['errors']) }}
+          </p>
+        </div>
+      </div>
+      <div class="submitBtnDiv">
+        <button type="submit" class="btn btn-primary submitBtn" (click)="onSubmit()"
+          [disabled]="!waypointForm.valid">{{"submit" | translate}}</button>
+      </div>
+    </div>
+
+  </form>
+</div>
