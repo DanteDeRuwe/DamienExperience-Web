@@ -4,6 +4,7 @@
       SideClass="navbar navbar-expand-lg navbar-dark black ie-nav"
       [containerInside]="false"
     >
+    <a class="nav-link text-dark" [routerLink]="['add-route']" href="">add route</a>
       <span class="form-inline">
         <select
           class="form-control"
@@ -46,6 +47,11 @@
             Logout
           </button>
 
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['dashboard']" href="">{{
+              "mn_admin_dashboard" | translate
+            }}</a>
+          </li>          
           <li class="nav-item">
             <a class="nav-link text-dark" [routerLink]="['about']" href="">{{
               "mn_over_de_tour" | translate

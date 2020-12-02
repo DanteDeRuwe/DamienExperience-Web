@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
+import { TestComponent } from './admin/test/test.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { HomeComponent } from './home/home.component';
 import { MapComponent } from './map/map.component';
@@ -14,6 +17,7 @@ import { AuthGuard } from './user/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
+import { AddRouteComponent } from './admin/add-route/add-route.component';
 
 
 const routes: Routes = [
@@ -25,12 +29,19 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent},
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
+  { path: 'dashboard', component: DashboardComponent ,children:[
+    { path: 'manageroutes', component: ManageroutesComponent},
+    { path: 'test', component: TestComponent},
+  ]},
+
 
   //{ path: 'map', component:MapComponent},
   { path: 'register', component: UserpageComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
-  
+  //
+  { path: 'add-route', component: AddRouteComponent },
+
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent},
 ];

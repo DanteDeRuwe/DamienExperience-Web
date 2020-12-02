@@ -1,6 +1,7 @@
 {
     "test": "Nederlands",
 
+    "mn_admin_dashboard": "DASHBOARD",
     "mn_over_de_tour" : "OVER DE TOUR",
     "mn_wandelaar_volgen" : "WANDELAAR VOLGEN",
     "mn_ik_schrijf_me_in" : "IK SCHRIJF ME IN",
@@ -70,7 +71,20 @@
     "registration_tshirt" : "Koop een limited edition T-shirt",
     "registration_pay" : "Te betalen:",
 
-    "about_tour_info" : "Tour info"
+    "about_tour_info" : "Tour info",
+
+    "add_route_form_title" : "Algemene info",
+    "add_route_form_tourname" : "Tournaam",
+    "add_route_form_datum":"Datum",
+    "taalfull_nl": "Nederlands",
+    "taalfull_fr": "Frans",
+    "add_route_form_besch" : "Beschrijving",
+    "add_route_form_dist" : "Huidige afstand : ",
+    "add_route_form_submit" : "Opslaan en voeg waypoints toe",
+
+    "add_waypoint_main_title" : "Een overzicht van de huidige waypoints",
+    "add_waypoint_add_one" : "Voeg een waypoint toe",
+    "add_waypoint_title" : "Titel"
     
 
 }
