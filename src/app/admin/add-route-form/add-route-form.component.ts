@@ -69,9 +69,20 @@ export class AddRouteFormComponent implements OnInit {
   }
   setRouteFields(route: Route) {
     this.routeForm.controls['tourName'].setValue(route.tourName) 
-    this.routeForm.controls['date'].setValue(route.date.toDateString)
+    var date = this.formatDate(route.date)
+    this.routeForm.controls['date'].patchValue(date)
     this.routeForm.controls['info_nl'].setValue(route.info.nl)
     this.routeForm.controls['info_fr'].setValue(route.info.fr)
+  }
+
+  private formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
   }
   
   undo(){

@@ -75,6 +75,31 @@ export class RouteDataService {
       )
   }
 
+  updateRoute$(
+    tourName : string,
+    date : Date,
+    distanceInMeters : number,
+    lineColor : string,
+    coordinates : [number[]],
+    info : {},
+    waypoints : Waypoint[]) {
+      var jsonWaypoints = Waypoint.toJsonList(waypoints);
+    return this.http.put(`${environment.apiUrl}/route/add`,
+      {
+        tourName,
+        date,
+        distanceInMeters,
+        lineColor,
+        coordinates,
+        info,
+        waypoints : jsonWaypoints
+      }).pipe(
+        tap(),
+        catchError(this.handleError),
+        map(Route.fromJson)
+      )
+  }
+
 
 
   handleError(err: any): Observable<never> {

@@ -52,6 +52,20 @@ export class AddMapComponent implements OnInit {
         this.newCoordinatesWaypoint.emit(coords)
       }
     })
+    this.map.on('load',()=>{
+      this.drawPath()
+      this.showWaypoints(this.waypoints)
+      this.fitToBounds(this.coordinates)
+
+    })
+  }
+  fitToBounds(coords : any) {
+    var bounds = coords.reduce(function (bounds, coord) {
+      return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
+      this.map.fitBounds(bounds, {
+      padding: 20
+    });
   }
   ngOnDestroy() {
     this.removePath()
