@@ -79,8 +79,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmitRegistration() {
     this.registration.value.orderedShirt = true
-    if (this.registration.value.shirtSize == ShirtSize.GEEN)
-    this.registration.value.orderedShirt = false
+    if (this.registration.value.shirtSize == ShirtSize.GEEN) this.registration.value.orderedShirt = false
 
     this._rds.getRoute$(this.tourName).subscribe(route =>{
        this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)

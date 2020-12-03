@@ -3,8 +3,10 @@
         <ng-template *ngIf="hasRegistrations; else Allowed">
             {{"registration_already_sign"| translate}}
         </ng-template>
+
+
         <ng-template #Allowed>
-            <h2>{{"registration_regist" | translate}}</h2>
+            <h2 class="text-primary">{{"registration_regist" | translate}}</h2>
             <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
                 {{ errorMessage }}
             </div>
@@ -14,23 +16,32 @@
 
                     <app-tourselector></app-tourselector>
 
-                    <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
-                    <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
-                    <select id="shirtSize" class="form-control" formControlName="shirtSize"
-                        (change)="onChangeShirt($event)">
-                        <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
-                            {{ shirtSize }}
-                        </option>
-                    </select>
-                    <p class="text-danger"
-                        *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
-                        {{ getErrorMessage(registration.get("shirtSize").errors) }}
-                    </p><br>
+                    <h2 class="text-primary">{{"registration_tshirt" | translate}}</h2>
+                    <div class="registration-tshirt">
+                        <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
 
-                    <p>{{"registration_pay" | translate}} €{{price}}</p>
+                        <div style="width:100%">
+                            <select id="shirtSize" class="form-control" formControlName="shirtSize"
+                                (change)="onChangeShirt($event)">
+                                <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
+                                    {{ shirtSize }}
+                                </option>
+                            </select>
+                            <p class="text-danger"
+                                *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
+                                {{ getErrorMessage(registration.get("shirtSize").errors) }}
+                            </p>
+                        </div>
+                    </div>
 
-                    <button type="submit" class="btn btn-primary"
-                        (click)="onSubmitRegistration()">{{"submit" | translate}}</button>
+                    <div class="registration-pay">
+                        <div>
+                            <p>{{"registration_pay" | translate}} €{{price}}</p>
+
+                            <button type="submit" class="btn btn-primary"
+                                (click)="onSubmitRegistration()">{{"submit" | translate}}</button>
+                        </div>
+                    </div>
                 </form>
 
             </div>
