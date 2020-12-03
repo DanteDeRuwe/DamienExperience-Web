@@ -203,4 +203,5 @@ export class AddMapComponent implements OnInit {
       this.waypointMarkers.push(marker);
     });
   }
+  
 }

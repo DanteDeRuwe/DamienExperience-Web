@@ -1,3 +1,17 @@
-<div id="add_route">
-    
+<div id="edit_route">
+    <div class="form_comp" *ngIf="routeFormShowing">
+        <app-add-route-form
+          
+        >
+        </app-add-route-form>
+      </div>
+      <div class="form_comp"  *ngIf="!routeFormShowing">
+        <app-add-waypoints-form
+          
+        ></app-add-waypoints-form>
+      </div>
+      <div id="edit_route_map">
+        <app-add-map
+         
+        ></app-add-map>
 </div>

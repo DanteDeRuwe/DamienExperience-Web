@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from 'src/app/models/route.model';
+import { DatePipe, formatDate } from '@angular/common';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { Route } from 'src/app/models/route.model';
   styleUrls: ['./add-route-form.component.scss']
 })
 export class AddRouteFormComponent implements OnInit {
+  
   
   public routeForm: FormGroup;
   @Output()
@@ -64,6 +66,12 @@ export class AddRouteFormComponent implements OnInit {
         return `Nécessite au moins ${errors.minlength.requiredLength} caractères (prend ${errors.minlength.actualLength})`;
       }
     }
+  }
+  setRouteFields(route: Route) {
+    this.routeForm.controls['tourName'].setValue(route.tourName) 
+    this.routeForm.controls['date'].setValue(route.date.toDateString)
+    this.routeForm.controls['info_nl'].setValue(route.info.nl)
+    this.routeForm.controls['info_fr'].setValue(route.info.fr)
   }
   
   undo(){
