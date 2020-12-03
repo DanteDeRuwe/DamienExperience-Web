@@ -84,7 +84,7 @@ export class RouteDataService {
     info : {},
     waypoints : Waypoint[]) {
       var jsonWaypoints = Waypoint.toJsonList(waypoints);
-    return this.http.put(`${environment.apiUrl}/route/add`,
+    return this.http.put(`${environment.apiUrl}/route/update`,
       {
         tourName,
         date,
