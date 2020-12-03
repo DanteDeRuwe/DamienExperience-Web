@@ -1,17 +1,26 @@
 @import "src/scss-partials/variables";
 
 //button
-.btn-primary{
-    background-color: $primary;
-    border-color: transparent;
+.btn{
     color: $white; 
+    border-color: transparent;
 
-    &:hover{
-        background-color: darken($primary, 3%) !important;
-        color: $white; 
+    &-primary{
+        background-color: $primary;
+
+        &:hover{
+            background-color: darken($primary, 3%) !important;
+        }
+    }
+
+    &-secondary{
+        background-color: $secondary;
+
+        &:hover{
+            background-color: darken($secondary, 3%) !important;
+        }
     }
 }
-
 
 .toggle-buttons{
     display: flex;

@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit {
         this.socket = io(environment.liveChatApi, { transports: ['websocket']});
         const room = 'Jordy\'s Room';
 
-        this.socket.emit('join room', {username: user.lastName, email: user, room: this.roomname})
+        this.socket.emit('join room', {username: user.lastName, email: user.email, room: this.roomname})
 
         this.socket.on('chat message', (message: ChatMessage) => { 
           this.outputMessage(message);
@@ -45,12 +45,13 @@ export class ChatComponent implements OnInit {
   }
 
   onSendMessage(event){
-    if(event.target.message.value !== ''){
+    if(event.target.message.value !== ''){ 
       this.socket.emit('chat message', event.target.message.value)
       event.target.elements.msg.value = '';
       event.target.elements.msg.focus();
     }
-    this.scrolltop = this.chat.nativeElement.scrollHeight;
+    setTimeout(()=> this.scrolltop = this.chat.nativeElement.scrollHeight, 150);
+
   }
 
   outputMessage(message: ChatMessage){
