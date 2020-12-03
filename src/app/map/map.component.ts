@@ -44,9 +44,6 @@ export class MapComponent implements OnInit, OnChanges {
 
     //controls toevoegen aan de map
     this.map.addControl(new mapboxgl.NavigationControl());
-    this.map.on('load', () => {
-    this.loadRoute()
-  });
   }
 
   ngOnChanges(changes: SimpleChanges){

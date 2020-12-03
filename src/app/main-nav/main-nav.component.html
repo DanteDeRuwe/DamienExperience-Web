@@ -1,21 +1,13 @@
 <div class="page-container" id="page-container">
   <div class="content-wrap" id="content-wrap">
-    <mdb-navbar
-      SideClass="navbar navbar-expand-lg navbar-dark black ie-nav"
-      [containerInside]="false"
-    >
-    <a class="nav-link text-dark" [routerLink]="['add-route']" href="">add route</a>
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark black ie-nav" [containerInside]="false">
       <span class="form-inline">
-        <select
-          class="form-control"
-          #selectedLang
-          (change)="changeLang(selectedLang.value)"
-        >
-          <option
-            *ngFor="let language of translate.getLangs()"
-            [value]="language"
-            [selected]="language === translate.currentLang"
-          >
+        <a class="btn text-light logout" *ngIf="loggedInUser$ | async" (click)="logout()">
+          logout
+        </a>
+        <select class="form-control" #selectedLang (change)="changeLang(selectedLang.value)">
+          <option *ngFor="let language of translate.getLangs()" [value]="language"
+            [selected]="language === translate.currentLang">
             {{ language }}
           </option>
         </select>
@@ -23,19 +15,11 @@
     </mdb-navbar>
 
     <!--Navbar-->
-    <mdb-navbar
-      SideClass="navbar navbar-expand-lg navbar-light white ie-nav"
-      [containerInside]="false"
-    >
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white ie-nav" [containerInside]="false">
       <!-- Navbar brand -->
-      <mdb-navbar-brand
-        ><a class="navbar-brand" href="#">
+      <mdb-navbar-brand><a class="navbar-brand" href="#">
           <a class="navbar-brand" [routerLink]="['home']">
-            <img
-              src="assets/images/logoDE.png"
-              height="40"
-              alt="damiaantours logo"
-            />
+            <img src="assets/images/logoDE.png" height="40" alt="damiaantours logo" />
           </a>
         </a>
       </mdb-navbar-brand>
@@ -43,15 +27,11 @@
       <links>
         <!-- Links -->
         <ul class="navbar-nav ml-auto" id="navitems">
-          <button *ngIf="loggedInUser$ | async" (click)="logout()">
-            Logout
-          </button>
-
           <li class="nav-item">
             <a class="nav-link text-dark" [routerLink]="['admin-nav']" href="">{{
               "mn_admin_dashboard" | translate
             }}</a>
-          </li>          
+          </li>
           <li class="nav-item">
             <a class="nav-link text-dark" [routerLink]="['about']" href="">{{
               "mn_over_de_tour" | translate
@@ -64,12 +44,7 @@
           </li>
           <li class="nav-item" id="registerBtn">
             <a class="nav-link" (click)="schrijfIn()">
-              <img
-                src="assets/images/damiaanhartje.png"
-                alt="damiaanhartje"
-                height="30"
-                class="heartImg"
-              />
+              <img src="assets/images/damiaanhartje.png" alt="damiaanhartje" height="30" class="heartImg" />
               <span class="text-white">{{
                 "mn_ik_schrijf_me_in" | translate
               }}</span>
@@ -80,8 +55,9 @@
       </links>
       <!-- content -->
     </mdb-navbar>
-    <ng-content></ng-content>
-
+    <div class="mb-5">
+      <ng-content></ng-content>
+    </div>
     <footer class="page-footer font-small" style="background-color: #ff0040">
       <!-- Footer Links -->
       <div class="container text-center text-md-left">
@@ -198,8 +174,7 @@
       <div class="footer-copyright text-center py-3">
         © 2020 Copyright
         <a href="https://damiaanactie.be/">
-          {{ "mn_damiaanactie" | translate }}</a
-        >
+          {{ "mn_damiaanactie" | translate }}</a>
       </div>
       <!-- Copyright -->
     </footer>
