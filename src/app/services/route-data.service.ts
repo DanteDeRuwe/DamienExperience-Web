@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Route } from '../models/route.model';
+import { Waypoint } from '../models/waypoint.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,40 @@ export class RouteDataService {
       )
   }
 
+  deleteRoute(routeName: string) {
+    return this.http.delete(`${environment.apiUrl}/route/delete?routeName=${routeName}`
+    )
+      .pipe(
+        tap(),
+        catchError(this.handleError)
+      ).subscribe()
+  }
+
+
+  addRoute$(
+    tourName : string,
+    date : Date,
+    distanceInMeters : number,
+    lineColor : string,
+    coordinates : [number[]],
+    info : {},
+    waypoints : Waypoint[]) {
+      var jsonWaypoints = Waypoint.toJsonList(waypoints);
+    return this.http.post(`${environment.apiUrl}/route/add`,
+      {
+        tourName,
+        date,
+        distanceInMeters,
+        lineColor,
+        coordinates,
+        info,
+        waypoints : jsonWaypoints
+      }).pipe(
+        tap(),
+        catchError(this.handleError),
+        map(Route.fromJson)
+      )
+  }
 
 
 

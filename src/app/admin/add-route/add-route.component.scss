@@ -1,0 +1,12 @@
+#add_route{
+    display: flex;
+    justify-content: space-between;
+    flex-direction:row;
+    .form_comp{
+        width: 40%;
+    }
+}
+#add_route_map{
+    padding:1em;
+    width: 60%;
+}
