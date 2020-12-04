@@ -55,8 +55,9 @@ export class AddMapComponent implements OnInit {
     this.map.on('load',()=>{
       this.drawPath()
       this.showWaypoints(this.waypoints)
-      this.fitToBounds(this.coordinates)
-
+      if(this.coordinates){
+        this.fitToBounds(this.coordinates)
+      }
     })
   }
   fitToBounds(coords : any) {
