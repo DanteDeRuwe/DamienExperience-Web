@@ -3,7 +3,7 @@
 
 
     <div *ngIf="!visible" class="chat">
-        <app-chat [style.visibility]="chatVisible ? 'visible' : 'hidden'" [roomname]="roomname">
+        <app-chat [style.display]="chatVisible ? 'block' : 'none'" [roomname]="roomname">
         </app-chat>
         <div class="icon" (click)="onToggleChat()">
             <span class="iconify" data-icon="cil:chat-bubble" data-inline="false"></span>
