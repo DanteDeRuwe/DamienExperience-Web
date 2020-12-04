@@ -22,11 +22,11 @@ export class TrackingComponent implements OnInit {
   userName: string;
   visible: boolean = true;
   
-  public errorMessage: string = '';
+  errorMessage: string = '';
   chatVisible: boolean = false;
   validWalk: boolean = false;
 
-  public searchForm: FormGroup;
+  searchForm: FormGroup;
 
   constructor(private fb: FormBuilder,
     private router: Router,
@@ -40,7 +40,7 @@ export class TrackingComponent implements OnInit {
   }
 
   onSubmitSearch(){
-    let searchresult = this.searchForm.value.username;
+    const searchresult = this.searchForm.value.username;
     this.roomname = searchresult;
     if(searchresult){
       this._wds.getWalk$(searchresult).subscribe((walk: Walk) =>{

@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
   // chatForm = document.getElementById('chat-form');
   socket;
 
-  loggedon: boolean = false;
+  loggedon = false;
   messages: ChatMessage[] = [];
 
   scrolltop: number = null;
