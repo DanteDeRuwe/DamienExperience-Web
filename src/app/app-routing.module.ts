@@ -34,11 +34,11 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
-  { path: 'admin-nav', component: AdminNavComponent ,children:[
-    { path: 'manageroutes', component: ManageroutesComponent},
-    { path: 'dashboard', component: DashboardComponent},
-    { path: 'add-route', component: AddRouteComponent},
-    { path: 'edit-route/:routename', component: EditRouteComponent,resolve: { route: RouteResolverService }},
+  { path: 'admin-nav', component: AdminNavComponent, canActivate: [RoleGuard],children:[
+    { path: 'manageroutes', component: ManageroutesComponent, canActivate: [RoleGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
+    { path: 'add-route', component: AddRouteComponent, canActivate: [RoleGuard] },
+    { path: 'edit-route/:routename', component: EditRouteComponent, canActivate: [RoleGuard] ,resolve: { route: RouteResolverService }},
   ]},
 
 
