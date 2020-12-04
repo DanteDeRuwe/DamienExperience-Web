@@ -20,11 +20,11 @@ export class TrackingComponent implements OnInit {
 
   tourName: string;
   userName: string;
-  visible: boolean = true;
+  visible = true;
   
-  errorMessage: string = '';
-  chatVisible: boolean = false;
-  validWalk: boolean = false;
+  errorMessage = '';
+  chatVisible = false;
+  validWalk = false;
 
   searchForm: FormGroup;
 
