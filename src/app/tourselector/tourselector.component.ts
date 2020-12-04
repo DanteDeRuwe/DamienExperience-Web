@@ -7,7 +7,7 @@ import { RouteDataService } from '../services/route-data.service';
 @Component({
   selector: 'app-tourselector',
   templateUrl: './tourselector.component.html',
-  styleUrls: ['./tourselector.component.css']
+  styleUrls: ['./tourselector.component.scss']
 })
 export class TourselectorComponent implements OnInit {
 

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { ChatComponent } from './chat/chat.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
+import { TestComponent } from './admin/test/test.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { HomeComponent } from './home/home.component';
 import { MapComponent } from './map/map.component';
@@ -15,6 +18,8 @@ import { AuthGuard } from './user/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
+import { AddRouteComponent } from './admin/add-route/add-route.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 
 
 const routes: Routes = [
@@ -26,6 +31,12 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent},
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
+  { path: 'admin-nav', component: AdminNavComponent ,children:[
+    { path: 'manageroutes', component: ManageroutesComponent},
+    { path: 'dashboard', component: DashboardComponent},
+    { path: 'add-route', component: AddRouteComponent},
+  ]},
+
 
   //temp route
   { path: 'chat', component: ChatComponent },
@@ -34,7 +45,9 @@ const routes: Routes = [
   { path: 'register', component: UserpageComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
-  
+  //
+  { path: 'add-route', component: AddRouteComponent },
+
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent},
 ];

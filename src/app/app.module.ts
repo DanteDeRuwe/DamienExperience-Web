@@ -16,11 +16,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { MapComponent } from './map/map.component';
 
 import { RegisterComponent } from './user/register/register.component';
 import { MaterialModule } from './material/material/material.module';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './user/login/login.component';
@@ -41,7 +43,20 @@ import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
 import { environment } from 'src/environments/environment';
 
+
 const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket']} };
+
+import { AddRouteComponent } from './admin/add-route/add-route.component';
+import { AddMapComponent } from './admin/add-map/add-map.component';
+import { AddRouteFormComponent } from './admin/add-route-form/add-route-form.component';
+import { AddWaypointsFormComponent } from './admin/add-waypoints-form/add-waypoints-form.component';
+
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
+import { TestComponent } from './admin/test/test.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -63,8 +78,18 @@ const config: SocketIoConfig = { url: environment.chatApi, options: { transports
     CookiePolicyComponent,
     TourselectorComponent,
     ChatComponent
+    AddRouteComponent,
+    AddMapComponent,
+    AddRouteFormComponent,
+    AddWaypointsFormComponent,
+    DashboardComponent,
+    ManageroutesComponent,
+    TestComponent,
+    AdminNavComponent,
+    DeleteRouteDialogComponent
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
