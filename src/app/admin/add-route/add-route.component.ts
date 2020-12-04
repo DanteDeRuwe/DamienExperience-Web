@@ -76,7 +76,7 @@ export class AddRouteComponent implements OnInit {
   @ViewChild(AddWaypointsFormComponent)
   private addWaypointsFormComponent: AddWaypointsFormComponent;
 
-  constructor(private _routeService : RouteDataService, private _waypointService : WaypointService, private fb: FormBuilder) { }
+  constructor(private _routeService : RouteDataService, private _waypointService : WaypointService) { }
 
   ngOnInit(): void {  
   }
@@ -98,14 +98,18 @@ export class AddRouteComponent implements OnInit {
     let fr = value.info_fr;
     let info = {nl, fr}
     let distance = this.distanceInMeters*1000
-      this._routeService.addRoute$(value.tourName,
-        value.date,
-        distance,
-        this.lineColor,
-        this.coordinates,
-        info,
-        this.waypointsDUMMY).subscribe(temp => {this.route = temp; console.log(this.route); //TODO DELETE DUMMYDATA
-          this.addMapComponent.showWaypoints(this.route.waypoints);});
+    this._routeService.addRoute$(value.tourName,
+      value.date,
+      distance,
+      this.lineColor,
+      this.coordinates,
+      info,
+      this.waypointsDUMMY)
+      .subscribe(temp => 
+        {
+          this.route = temp; console.log(this.route); //TODO DELETE DUMMYDATA
+          this.addMapComponent.showWaypoints(this.route.waypoints);
+        });
     this.routeFormShowing=false;
   }
 

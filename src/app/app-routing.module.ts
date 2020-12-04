@@ -20,6 +20,8 @@ import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
 import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { EditRouteComponent } from './admin/edit-route/edit-route.component';
+import { RouteResolverService } from './services/route-resolver.service';
 
 
 const routes: Routes = [
@@ -35,6 +37,7 @@ const routes: Routes = [
     { path: 'manageroutes', component: ManageroutesComponent},
     { path: 'dashboard', component: DashboardComponent},
     { path: 'add-route', component: AddRouteComponent},
+    { path: 'edit-route/:routename', component: EditRouteComponent,resolve: { route: RouteResolverService }},
   ]},
 
 
