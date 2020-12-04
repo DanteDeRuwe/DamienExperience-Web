@@ -78,7 +78,7 @@ import { EditRouteComponent } from './admin/edit-route/edit-route.component';
     SponsorsComponent,
     CookiePolicyComponent,
     TourselectorComponent,
-    ChatComponent
+    ChatComponent,
     AddRouteComponent,
     AddMapComponent,
     AddRouteFormComponent,
