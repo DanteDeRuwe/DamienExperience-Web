@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { TestComponent } from './admin/test/test.component';
@@ -36,6 +37,9 @@ const routes: Routes = [
     { path: 'add-route', component: AddRouteComponent},
   ]},
 
+
+  //temp route
+  { path: 'chat', component: ChatComponent },
 
   //{ path: 'map', component:MapComponent},
   { path: 'register', component: UserpageComponent },

@@ -1,21 +1,26 @@
-<app-map
-    [tourName] = "tourname"
-    [userName] = "username"
-></app-map>
+<div class="tracking-map">
+    <app-map [tourName]="tourname" [userName]="username"></app-map>
+
+
+    <div *ngIf="!visible" class="chat">
+        <app-chat [style.visibility]="chatVisible ? 'visible' : 'hidden'" [roomname]="roomname">
+        </app-chat>
+        <div class="icon" (click)="onToggleChat()">
+            <span class="iconify" data-icon="cil:chat-bubble" data-inline="false"></span>
+        </div>
+    </div>
+
+</div>
+
 <div *ngIf="visible" id="search">
     <div>
-            <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
-                <label for="username">{{"tracking_zoek" | translate}}</label>
-                <div class="searchcontrols">
-                <input
-                type="email"
-                class="form-control"
-                id="username"
-                placeholder="email@example.com"
-                formControlName="username"
-                />
-                <button type="submit" class="btn btn-primary">{{"tracking_zoeken" | translate}}</button>
-                </div>
-            </form>
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+            <label for="username">{{"tracking_zoek" | translate}}</label>
+            <div class="searchcontrols">
+                <input type="email" class="form-control" id="username" placeholder="email@example.com"
+                    formControlName="username" />
+                <button type="submit" class="btn btn-secondary">{{"tracking_zoeken" | translate}}</button>
+            </div>
+        </form>
     </div>
 </div>

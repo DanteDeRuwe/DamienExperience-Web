@@ -39,6 +39,12 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TourselectorComponent } from './tourselector/tourselector.component';
+import { ChatComponent } from './chat/chat.component';
+import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
+import { environment } from 'src/environments/environment';
+
+
+const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket']} };
 
 import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AddMapComponent } from './admin/add-map/add-map.component';
@@ -50,9 +56,6 @@ import { ManageroutesComponent } from './admin/manageroutes/manageroutes.compone
 import { TestComponent } from './admin/test/test.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
-
-
-
 
 
 @NgModule({
@@ -74,6 +77,7 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
     SponsorsComponent,
     CookiePolicyComponent,
     TourselectorComponent,
+    ChatComponent
     AddRouteComponent,
     AddMapComponent,
     AddRouteFormComponent,
@@ -83,8 +87,6 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
     TestComponent,
     AdminNavComponent,
     DeleteRouteDialogComponent
-
-
   ],
   imports: [
     MatDialogModule,
@@ -102,7 +104,8 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
         useFactory: httpTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    //SocketIoModule.forRoot(config)
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

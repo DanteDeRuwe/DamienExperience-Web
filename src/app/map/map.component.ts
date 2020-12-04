@@ -56,23 +56,27 @@ export class MapComponent implements OnInit, OnChanges {
       this.userName = changes.userName.currentValue;
     }
 
-    if(this.map != null){
+    this.removeSources();
+
+    this.loadRoute();
+  }
+
+  private removeSources() {
+    if (this.map != null) {
       var mapLayer = this.map.getLayer(this.currentTour);
 
-      if(typeof mapLayer !== 'undefined') {
+      if (typeof mapLayer !== 'undefined') {
         // Remove map layer & source.
         this.map.removeLayer(this.currentTour).removeSource(this.currentTour);
       }
 
       var mapLayerTwo = this.map.getLayer(this.oldTour);
 
-      if(typeof mapLayerTwo !== 'undefined') {
+      if (typeof mapLayerTwo !== 'undefined') {
         // Remove map layer & source.
         this.map.removeLayer(this.oldTour).removeSource(this.oldTour);
       }
     }
-
-    this.loadRoute();
   }
 
   loadRoute(){
