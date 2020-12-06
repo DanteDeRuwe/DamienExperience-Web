@@ -1,11 +1,4 @@
 .match-parent {
     width: 100%;
-    height: 700px;
+    height: 100%;
 }
-
-/* was initieel nodig maar blijkt nu overbodig, indien de markers niet showen, haal onderstaande uit commentaar */
-/* .mapboxgl-marker {
-    width: 20px;
-    height: 20px;
-} */
-

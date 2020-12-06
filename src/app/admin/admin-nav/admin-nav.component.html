@@ -1,0 +1,28 @@
+<mat-sidenav-container class="example-container" autosize>
+	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+        (mouseleave)="mouseleave()">
+        
+		<mat-nav-list>
+            <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" routerLink="dashboard">
+                 <span class="full-width" *ngIf="isExpanded || isShowing">Dashboard</span>                  
+				<mat-icon mat-list-icon>dashboard</mat-icon>    
+            </mat-list-item>
+            
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" routerLink="manageroutes">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Manage Routes</span>
+				<mat-icon mat-list-icon>edit_road</mat-icon>    
+			</mat-list-item>
+
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent" routerLink="add-route">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Add Route</span>
+                <mat-icon mat-list-icon>add_road</mat-icon>
+			</mat-list-item>
+		</mat-nav-list>
+	</mat-sidenav>
+
+  
+	<div class="changingDiv">
+        <router-outlet></router-outlet>
+	</div>
+
+</mat-sidenav-container>

@@ -1,5 +1,6 @@
 export interface WalkJson {
     id: string,
+    routeID: string,
     starttime: Date,
     endtime: Date,
     walkedPath: {
@@ -11,6 +12,7 @@ export interface WalkJson {
 export class Walk{
     constructor(
         private _id: string,
+        private _routeID: string,
         private _starttime: Date,
         private _endtime: Date,
         private _walkedPath: {
@@ -24,6 +26,7 @@ export class Walk{
     static fromJson(json: WalkJson){
         const walk = new Walk(
             json.id,
+            json.routeID,
             json.starttime,
             json.endtime,
             json.walkedPath
@@ -36,6 +39,7 @@ export class Walk{
     toJson(): WalkJson{
         return {
             id: this._id,
+            routeID: this._routeID,
             starttime: this._starttime,
             endtime: this._endtime,
             walkedPath: this._walkedPath
@@ -58,6 +62,10 @@ export class Walk{
 
     get walkedPath(){
         return this._walkedPath
+    }
+
+    get routeID(){
+        return this._routeID
     }
 
     // get coordinates(){

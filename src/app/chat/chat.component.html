@@ -1,0 +1,23 @@
+<div class="chat" *ngIf="loggedon; else notLoggedOn">
+    <div class="chat-messages" #scrollMe [scrollTop]="scrolltop">
+        <div *ngFor="let message of messages"
+            [ngClass]=" {'chat-messages-message': true, 'from-walker': message.sender.email == roomname}">
+            <div class="chat-messages-message-meta">
+                <b class="chat-messages-message-meta-sendername">{{message.sender.name}}</b>
+                <small class="chat-messages-message-meta-sendtime">{{message.time}}</small>
+            </div>
+            <div class="chat-messages-message-text">{{message.text}}</div>
+        </div>
+    </div>
+    <form id="chat-form" class="chat-form" (ngSubmit)="onSendMessage($event)">
+        <input id="msg" type="text" placeholder="Enter Message" required autocomplete="off" name="message" />
+        <button class="btn btn-primary" value="Submit">verzenden</button>
+    </form>
+</div>
+
+<ng-template #notLoggedOn>
+    <div>
+        <p>You are not yet logged on</p>
+    </div>
+</ng-template>
+<script src="/socket.io/socket.io.js"></script>

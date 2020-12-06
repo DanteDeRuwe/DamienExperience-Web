@@ -1,13 +1,14 @@
 <div *ngIf="dataLoaded">
-    
-    <div class="container">
-        <div class="map">
-            <div *ngFor="let route of routes">
-                <button (click)="onClick(route)">{{route.tourName}}</button>
-            </div>
-            <app-map [tourName]="tourname" [userName]="username"></app-map>
+
+    <div class="tourselector">
+        <div class="tourselector-buttons toggle-buttons">
+            <button class="btn btn-primary toggle-button" *ngFor="let route of routes" (click)="onClick(route)"
+                [ngClass]="{'active': currentRoute == route}">
+                {{route.tourName}}
+            </button>
         </div>
-        <div id="aboutTourInfo">
+        <app-map class="tourselector-map" [tourName]="tourname" [userName]="username"></app-map>
+        <div class="tourselector-about">
             <h2>{{"about_tour_info" | translate}}</h2>
             <p>
                 {{ this.routeInfo }}

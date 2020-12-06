@@ -68,4 +68,7 @@ export class MainNavComponent {
     localStorage.setItem("lang", lang)
   }
 
+  isAdmin() {
+    return this._authenticationService.checkAdmin;
+  }
 }

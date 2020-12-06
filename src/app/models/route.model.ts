@@ -22,12 +22,16 @@ export class Route {
         private _tourName: string,
         private _date: Date,
         private _distanceInMeters: number,
-        private _path,
+        private _path : {
+            lineColor: string;
+            coordinates: [number[]];
+        } ,
         private _info,
         private _waypoints: Waypoint[]
     ) { }
 
     static fromJson(json: RouteJson) {
+
         const route = new Route(
             json.id,
             json.tourName,
@@ -35,7 +39,7 @@ export class Route {
             json.distanceInMeters,
             json.path,
             json.info,
-            json.waypoints
+            Waypoint.fromJsonList(json.waypoints)
         )
         return route;
     }
@@ -48,7 +52,7 @@ export class Route {
             distanceInMeters: this._distanceInMeters,
             path: this._path,
             info: this._info,
-            waypoints: this._waypoints
+            waypoints: Waypoint.toJsonList(this._waypoints)
         };
     }
 
@@ -80,4 +84,7 @@ export class Route {
         return this._waypoints
     }
 
+    set waypoints(waypoints: Waypoint[]){
+        this._waypoints = waypoints
+    }
 }
