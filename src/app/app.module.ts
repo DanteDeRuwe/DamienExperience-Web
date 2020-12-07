@@ -77,7 +77,7 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
     SponsorsComponent,
     CookiePolicyComponent,
     TourselectorComponent,
-    ChatComponent
+    ChatComponent,
     AddRouteComponent,
     AddMapComponent,
     AddRouteFormComponent,
