@@ -7,7 +7,7 @@ import { Route } from '../models/route.model';
 import { DatainjectionService } from '../services/datainjection.service';
 import { RouteDataService } from '../services/route-data.service';
 import { UserDataService } from '../services/user-data.service';
-import CryptoJS from 'crypto-js';
+import sha1 from 'sha1';
 
 
 @Component({
@@ -31,7 +31,8 @@ export class RegistrationComponent implements OnInit {
 
   shirtSizes = Object.values(ShirtSize);
 
-  hash = CryptoJS.SHA1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU");
+  hash = sha1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU")
+  //CryptoJS.SHA1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU");
 
 
   constructor(private fb: FormBuilder,
@@ -41,6 +42,7 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.hash)
     this.registration = this.fb.group({
       orderedShirt: ['', Validators.required],
       shirtSize: ['', Validators.required]
