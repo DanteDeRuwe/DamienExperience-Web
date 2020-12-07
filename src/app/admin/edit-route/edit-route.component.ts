@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Route } from 'src/app/models/route.model';
 import { AddMapComponent } from '../add-map/add-map.component';
 import { AddRouteFormComponent } from '../add-route-form/add-route-form.component';
@@ -32,7 +32,7 @@ export class EditRouteComponent implements OnInit {
   private addWaypointsFormComponent: AddWaypointsFormComponent
 
   constructor(private route: ActivatedRoute,private _routeService : RouteDataService, 
-    private _waypointService : WaypointService) { }
+    private _waypointService : WaypointService, private _router: Router) { }
 
   ngOnInit(): void {
     this.routeFormShowing=true
@@ -74,7 +74,6 @@ finishRoute(value: any){
     info,
     this.toEditRoute.waypoints)
       .subscribe(temp =>{
-        console.log(temp)
       })
   this.routeFormShowing=false;
 }
@@ -155,7 +154,7 @@ saveAddedWaypoint(value: any){
   this.toEditRoute.waypoints = waypoints;
   this.addMapComponent.aferAddWaypoint();
   this.addMapComponent.showWaypoints();
-  console.log(this.route)
+  //console.log(this.route)
 }
 
 deleteWaypoint(waypoint : Waypoint){
@@ -170,6 +169,7 @@ deleteWaypoint(waypoint : Waypoint){
 
 saveWaypoints(){
   this._waypointService.addWaypoints$(this.toEditRoute.tourName, this.toEditRoute.waypoints).subscribe(temp => this.toEditRoute.waypoints = temp);
+  this._router.navigate(['admin-nav/manageroutes']);
 }
 
 

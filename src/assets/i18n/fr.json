@@ -80,7 +80,7 @@
     "taalfull_fr": "Français",
     "add_route_form_besch": "La description",
     "add_route_form_dist" : "Distance actuelle : ",
-    "add_route_form_submit" : "Enregistrer et ajouter des waypoints",
+    "add_route_form_submit" : "Enregistrer et modifier des waypoints",
 
     "add_waypoint_main_title" : "Un aperçu des waypoints actuels",
     "add_waypoint_add_one" : "Ajouter un waypoint",
