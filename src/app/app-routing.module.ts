@@ -21,6 +21,7 @@ import { UserpageComponent } from './user/userpage/userpage.component';
 import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentResolverService } from './services/payment-resolver.service';
 
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent},
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
-  { path: 'payment', component: PaymentComponent},
+  { path: 'payment', component: PaymentComponent,resolve : {data: PaymentResolverService}},
   { path: 'admin-nav', component: AdminNavComponent ,children:[
     { path: 'manageroutes', component: ManageroutesComponent},
     { path: 'dashboard', component: DashboardComponent},
