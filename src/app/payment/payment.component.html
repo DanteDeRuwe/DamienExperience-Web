@@ -1,11 +1,50 @@
-<form ngNoForm  method="POST" action="https://ogone.test.v-psp.com/ncol/test/orderstandard_utf8.asp" id="form1" name="form1">
-    <!--Mandatory / recommended / optional parameters -->
-    <input type="hidden" name="PSPID" value="damiaanactie">
-    <input type="hidden" name="ORDERID" value="4">
-    <input type="hidden" name="AMOUNT" value="500">
-    <input type="hidden" name="CURRENCY" value="EUR">
-    <input type="hidden" name="LANGUAGE" value="nl_NL">
-    <input type="hidden" name="EMAIL" value="ruben.naudts@student.hogent.be">
-    <input type="hidden" name="SHASIGN" value="{{hash}}">
-    <button type="submit" id="submit2" name="submit2">submitknop</button>
-</form>
+<div class="payment-main">
+    <table class="payment-table">
+        <tr class="table-header">
+            <th>
+                Item
+            </th>
+            <th class="colomn-right">
+                Prijs
+            </th>
+        </tr>
+        <tr>
+            <td>
+                TestRoute
+            </td>
+            <td class="colomn-right colomn-border-right">
+                50€
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Damiaan t-shirt
+            </td>
+            <td class="colomn-right colomn-border-right">
+                10€
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td class="colomn-right colomn-border-right">
+                Totaal : 60€
+            </td>
+        </tr>
+    </table>
+    <div class="form-button">
+        <form ngNoForm method="POST" action="https://ogone.test.v-psp.com/ncol/test/orderstandard_utf8.asp" id="form1"
+        name="form1">
+            <!--Mandatory / recommended / optional parameters -->
+            <input type="hidden" name="PSPID" value="damiaanactie">
+            <input type="hidden" name="ORDERID" value="4">
+            <input type="hidden" name="AMOUNT" value="500">
+            <input type="hidden" name="CURRENCY" value="EUR">
+            <input type="hidden" name="LANGUAGE" value="nl_NL">
+            <input type="hidden" name="EMAIL" value="ruben.naudts@student.hogent.be">
+            <input type="hidden" name="SHASIGN" value="{{hash}}">
+            <button class="btn btn-primary" type="submit" id="submit2" name="submit2">submitknop</button>
+        </form>
+    </div>
+</div>
