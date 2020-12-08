@@ -1,7 +1,7 @@
 /*TODO: 
   Payment component uitbreiden naar volledige pagina
 x  Registration aangemaakt -> Navigeren naar payment
-  Payment data meegeven met navigatie
+x  Payment data meegeven met navigatie
   Api-calls
 x    -> zoeken naar niet betaalde registratie van ingelogde gebruiker
 x    -> flag betaling op true zetten
