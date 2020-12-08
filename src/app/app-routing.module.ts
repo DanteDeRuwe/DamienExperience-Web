@@ -20,6 +20,9 @@ import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
 import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { RoleGuard } from './user/role.guard';
+import { EditRouteComponent } from './admin/edit-route/edit-route.component';
+import { RouteResolverService } from './services/route-resolver.service';
 
 
 const routes: Routes = [
@@ -28,13 +31,14 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'regulations', component: RegulationsComponent },
-  { path: 'privacypolicy', component: PrivacyPolicyComponent},
+  { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
-  { path: 'admin-nav', component: AdminNavComponent ,children:[
-    { path: 'manageroutes', component: ManageroutesComponent},
-    { path: 'dashboard', component: DashboardComponent},
-    { path: 'add-route', component: AddRouteComponent},
+  { path: 'admin-nav', component: AdminNavComponent, canActivate: [RoleGuard],children:[
+    { path: 'manageroutes', component: ManageroutesComponent, canActivate: [RoleGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
+    { path: 'add-route', component: AddRouteComponent, canActivate: [RoleGuard] },
+    { path: 'edit-route/:routename', component: EditRouteComponent, canActivate: [RoleGuard] ,resolve: { route: RouteResolverService }},
   ]},
 
 
@@ -43,13 +47,13 @@ const routes: Routes = [
 
   //{ path: 'map', component:MapComponent},
   { path: 'register', component: UserpageComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 
   //
   { path: 'add-route', component: AddRouteComponent },
 
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: '**', component: PageNotFoundComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

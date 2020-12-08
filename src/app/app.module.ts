@@ -56,6 +56,7 @@ import { ManageroutesComponent } from './admin/manageroutes/manageroutes.compone
 import { TestComponent } from './admin/test/test.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
+import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 
 
 @NgModule({
@@ -77,7 +78,7 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
     SponsorsComponent,
     CookiePolicyComponent,
     TourselectorComponent,
-    ChatComponent
+    ChatComponent,
     AddRouteComponent,
     AddMapComponent,
     AddRouteFormComponent,
@@ -86,7 +87,8 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
     ManageroutesComponent,
     TestComponent,
     AdminNavComponent,
-    DeleteRouteDialogComponent
+    DeleteRouteDialogComponent,
+    EditRouteComponent
   ],
   imports: [
     MatDialogModule,

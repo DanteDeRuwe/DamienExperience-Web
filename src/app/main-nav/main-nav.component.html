@@ -27,7 +27,7 @@
       <links>
         <!-- Links -->
         <ul class="navbar-nav ml-auto" id="navitems">
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin()">
             <a class="nav-link text-dark" [routerLink]="['admin-nav']" href="">{{
               "mn_admin_dashboard" | translate
             }}</a>

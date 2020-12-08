@@ -98,6 +98,7 @@ export class RegisterComponent implements OnInit {
       this.register.value.dobaAndPhoneGroup.phoneNumber,
       this.register.value.email,
       this.register.value.passwordGroup.password,
+      this.register.value.passwordGroup.confirmPassword,
       this.rememberMe
     )
       .subscribe(
@@ -111,7 +112,7 @@ export class RegisterComponent implements OnInit {
               this._router.navigate(['about']);
             }
           } else {
-            this.errorMessage = 'Could not login'
+            this.errorMessage = 'Could not register'
           }
         },
         (err: HttpErrorResponse) => {

@@ -20,6 +20,7 @@ export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<string>;
   public redirectUrl: string = null;
+  private _checkAdmin: boolean;
 
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
@@ -44,6 +45,10 @@ export class AuthenticationService {
     return !!localToken ? localToken : '';
   }
 
+  get checkAdmin(): boolean {
+    return this._checkAdmin;
+  }
+
   //insert code for login request 
   login(email: string, password: string, rememberme: boolean): Observable<boolean> {
     return this.http.post(
@@ -52,7 +57,7 @@ export class AuthenticationService {
         email,
         password
       },
-     // { responseType: 'text' }
+      // { responseType: 'text' }
     )
       .pipe(
         map((token: any) => {
@@ -67,6 +72,7 @@ export class AuthenticationService {
 
             localStorage.setItem(this._tokenKey, token);
             this._user$.next(email);
+            this.isAdmin().subscribe(val => { this._checkAdmin = val; console.log(this._checkAdmin) });
             return true;
           } else {
             return false;
@@ -78,7 +84,8 @@ export class AuthenticationService {
   //register request
   register(firstname: string, lastname: string,
     birthdate: Date, phoneNumber : string,
-    email: string, password: string, rememberme: boolean): Observable<boolean> {
+    email: string, password: string, passwordConfirmation: string,
+     rememberme: boolean): Observable<boolean> {
     return this.http.post(
       `${environment.apiUrl}/register`,
       {
@@ -88,9 +95,9 @@ export class AuthenticationService {
         phoneNumber,
         email,
         password,
-        passwordConfirmation: password,
+        passwordConfirmation,
       },
-     // { responseType: 'text' }
+      // { responseType: 'text' }
     )
       .pipe(
         map((token: any) => {
@@ -126,5 +133,11 @@ export class AuthenticationService {
       sessionStorage.removeItem('currentUser');
       this._user$.next(null);
     }
+  }
+
+  isAdmin(): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${environment.apiUrl}/profile/isadmin`
+    );
   }
 }
