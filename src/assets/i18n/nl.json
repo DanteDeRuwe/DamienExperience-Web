@@ -1,6 +1,7 @@
 {
     "test": "Nederlands",
 
+    "mn_home" : "HOME",
     "mn_admin_dashboard": "DASHBOARD",
     "mn_over_de_tour" : "OVER DE TOUR",
     "mn_wandelaar_volgen" : "WANDELAAR VOLGEN",
@@ -24,7 +25,7 @@
     "home_title":"Damien Experience wandelingen",
     "home_schrijf_je_in" : "Schrijf je nu in voor de damien experience wandelingen.",
     "home_schrijf_me_in" : "SCHRIJF ME IN",
-    "home_datum" : "14 MEI 2020",
+    "home_datum" : "14 MEI 2021",
     "home_DAGEN" : "DAGEN",
     "home_UREN" : "UREN",
     "home_MINUTEN" : "MINUTEN",
@@ -71,6 +72,11 @@
     "registration_tshirt" : "Koop een limited edition T-shirt",
     "registration_pay" : "Te betalen:",
 
+    "inforegistration_chosen_route" : "U bent geregistreerd voor volgende wandeling: ",
+    "inforegistration_no_tshirt" : "U hebt geen limited edition T-shirt besteld",
+    "inforegistration_tshirt" : "U hebt een limited edition T-shirt besteld in volgende maat: ",
+    "inforegistration_pay" : "Betaald bedrag: ",
+
     "about_tour_info" : "Tour info",
 
     "add_route_form_title" : "Algemene info",
@@ -81,6 +87,7 @@
     "add_route_form_besch" : "Beschrijving",
     "add_route_form_dist" : "Huidige afstand : ",
     "add_route_form_submit" : "Opslaan en beheer waypoints toe",
+    "add_route_form_add" : "Route toevoegen op kaart:",
 
     "add_waypoint_main_title" : "Een overzicht van de huidige waypoints",
     "add_waypoint_add_one" : "Voeg een waypoint toe",

@@ -1,8 +1,8 @@
 <div *ngIf="loaded">
     <div class="container">
-        <ng-template *ngIf="hasRegistrations; else Allowed">
-            {{"registration_already_sign"| translate}}
-        </ng-template>
+        <div *ngIf="hasRegistrations; else Allowed">
+            <app-info-registration></app-info-registration>
+        </div>
 
 
         <ng-template #Allowed>

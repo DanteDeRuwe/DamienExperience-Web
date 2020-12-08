@@ -42,7 +42,6 @@ export class EditRouteComponent implements OnInit {
     setTimeout(() => {
       this.route.data.subscribe(item => {
         this.toEditRoute = item['route']
-        console.log(this.toEditRoute)
         this.coordinates= this.toEditRoute.path.coordinates
         this.waypoints = this.toEditRoute.waypoints
         this.distanceInMeters = this.toEditRoute.distanceInMeters/1000

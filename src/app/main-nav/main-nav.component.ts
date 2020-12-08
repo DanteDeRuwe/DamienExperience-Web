@@ -49,13 +49,14 @@ export class MainNavComponent {
 
   logout() {
     this._authenticationService.logout();
+    this._router.navigate(['home']);
   }
 
   schrijfIn() {
     if (!this.loggedInUser$.value)
       this._router.navigate(['register']);
     else {
-      console.log(this.loggedInUser$.value);
+      //DELETE console.log(this.loggedInUser$.value);
 
       this._router.navigate(['registration']);
     }

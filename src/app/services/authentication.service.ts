@@ -61,7 +61,7 @@ export class AuthenticationService {
     )
       .pipe(
         map((token: any) => {
-          console.log(token);
+          console.log(token); //DELETE
           if (token) {
             // if (rememberme) {
             //   localStorage.setItem(this._tokenKey, token);
@@ -72,7 +72,9 @@ export class AuthenticationService {
 
             localStorage.setItem(this._tokenKey, token);
             this._user$.next(email);
-            this.isAdmin().subscribe(val => { this._checkAdmin = val; console.log(this._checkAdmin) });
+            this.isAdmin().subscribe(val => { this._checkAdmin = val; 
+              console.log(this._checkAdmin) //DELETE
+            });
             return true;
           } else {
             return false;

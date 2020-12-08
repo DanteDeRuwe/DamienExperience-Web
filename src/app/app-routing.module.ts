@@ -4,7 +4,6 @@ import { AboutComponent } from './about/about.component';
 import { ChatComponent } from './chat/chat.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
-import { TestComponent } from './admin/test/test.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { HomeComponent } from './home/home.component';
 import { MapComponent } from './map/map.component';

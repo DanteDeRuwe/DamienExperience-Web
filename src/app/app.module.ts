@@ -53,10 +53,10 @@ import { AddWaypointsFormComponent } from './admin/add-waypoints-form/add-waypoi
 
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
-import { TestComponent } from './admin/test/test.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
+import { InfoRegistrationComponent } from './info-registration/info-registration.component';
 
 
 @NgModule({
@@ -85,10 +85,10 @@ import { EditRouteComponent } from './admin/edit-route/edit-route.component';
     AddWaypointsFormComponent,
     DashboardComponent,
     ManageroutesComponent,
-    TestComponent,
     AdminNavComponent,
     DeleteRouteDialogComponent,
-    EditRouteComponent
+    EditRouteComponent,
+    InfoRegistrationComponent
   ],
   imports: [
     MatDialogModule,
