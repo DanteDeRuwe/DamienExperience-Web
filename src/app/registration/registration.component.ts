@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
 
   shirtSizes = Object.values(ShirtSize);
 
-  hash = sha1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU")
+  //hash = sha1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU")
   //CryptoJS.SHA1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU");
 
 
@@ -42,7 +42,6 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.hash)
     this.registration = this.fb.group({
       orderedShirt: ['', Validators.required],
       shirtSize: ['', Validators.required]
@@ -91,13 +90,7 @@ export class RegistrationComponent implements OnInit {
        this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
       .subscribe((val) => {
         if (val) {
-          if (this._rds.redirectUrl) {
-            this._router.navigateByUrl(this._rds.redirectUrl);
-            this._rds.redirectUrl = undefined;
-
-          } else {
-            this._router.navigate(['about']);
-          }
+          this._router.navigate(['payment'])
         } else {
           this.errorMessage = 'Er ging iets mis...'
         }
