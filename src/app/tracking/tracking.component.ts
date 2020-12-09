@@ -63,9 +63,12 @@ export class TrackingComponent implements OnInit {
         if (err.error instanceof Error) {
           this.translate.get('tracking_error').subscribe( val => {this.errorMessage  = val})
           console.log(this.errorMessage)
+          alert(this.errorMessage)
         } else {
           this.errorMessage = `Error ${err.status}`;
           console.log(this.errorMessage)
+          this.translate.get('tracking_error').subscribe( val => {this.errorMessage  = val})
+          alert(this.errorMessage)
         }
       })
     }else{

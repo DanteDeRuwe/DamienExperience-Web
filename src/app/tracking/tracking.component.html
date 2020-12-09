@@ -19,7 +19,7 @@
             <div class="searchcontrols">
                 <input type="email" class="form-control" id="username" placeholder="email@example.com"
                     formControlName="username" />
-                <button type="submit" class="btn btn-secondary">{{"tracking_zoeken" | translate}}</button>
+                <button type="submit" class="btn btn-secondary" [disabled]="!searchForm.valid">{{"tracking_zoeken" | translate}}</button>
             </div>
         </form>
     </div>

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TranslateService } from '@ngx-translate/core';
-import { errorMonitor } from 'events';
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
