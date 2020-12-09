@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -13,10 +13,17 @@ import { AuthenticationService } from '../services/authentication.service';
 export class MainNavComponent {
   public loggedInUser$ = this._authenticationService.user$;
   current = ""
+  isCheckAdmin :boolean;
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    public translate: TranslateService) {}
+    public translate: TranslateService) {
+      _router.events.subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          _authenticationService.isAdmin()
+        }
+      });
+    }
 
   ngOnInit(){
 
@@ -41,6 +48,13 @@ export class MainNavComponent {
       }
       localStorage.setItem("lang", this.translate.getDefaultLang())
     }
+    this._authenticationService.checkAdmin$.subscribe(
+      (v:boolean)=>
+      {
+        console.log(v)
+        this.isCheckAdmin=v;
+      }
+    )
   }
 
   register() {
@@ -70,9 +84,5 @@ export class MainNavComponent {
   changeLang(lang: string): void {
     this.translate.use(lang);
     localStorage.setItem("lang", lang)
-  }
-
-  isAdmin() {
-    return this._authenticationService.checkAdmin;
   }
 }

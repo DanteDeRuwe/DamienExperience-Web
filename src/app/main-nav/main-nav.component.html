@@ -36,7 +36,7 @@
             "mn_home" | translate
           }}</a>
         <ul class="navbar-nav ml-auto" id="navitems">
-          <li class="nav-item" *ngIf="isAdmin()">
+          <li class="nav-item" *ngIf="isCheckAdmin">
             <a class="nav-link text-dark" [routerLink]="['admin-nav/dashboard']" href="">{{
               "mn_admin_dashboard" | translate
             }}</a>

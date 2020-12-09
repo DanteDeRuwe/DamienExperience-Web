@@ -17,8 +17,12 @@ export class RoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    console.log("IS ADMIN: " + this.authService.checkAdmin)
-    if (this.authService.checkAdmin) {
+    var isAdmin = false;
+    this.authService.checkAdmin$.subscribe((v)=>{
+      isAdmin = v
+    }) 
+    console.log("IS ADMIN: " + isAdmin)
+    if (isAdmin) {
       return true;
     } else {
       this.authService.redirectUrl = state.url;

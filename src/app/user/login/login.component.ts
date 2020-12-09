@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (val) => {
           if (val) {
+            
             if (this._authService.redirectUrl) {
               this._router.navigateByUrl(this._authService.redirectUrl);
               this._authService.redirectUrl = undefined;
