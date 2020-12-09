@@ -1,0 +1,30 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="jumbotron-header">
+            <h1 class="title">{{"home_title" | translate}}</h1>
+            <h2 class="text-primary">{{"home_datum" | translate}}</h2>
+            <p>{{"home_schrijf_je_in" | translate}}</p>
+            <button class="btn btn-primary damien" (click)="schrijfIn()">{{"home_schrijf_me_in" | translate}}</button>
+        </div>
+        <div class="jumbotron-countdown" id="countdown">
+            <div>
+                <div class="countdown-number" id="days"></div>
+                <div class="countdown-text">{{"home_DAGEN" | translate}}</div>
+            </div>
+            <div>
+                <div class="countdown-number" id="hours"></div>
+                <div class="countdown-text">{{"home_UREN" | translate}}</div>
+            </div>
+            <div>
+                <div class="countdown-number" id="minutes"></div>
+                <div class="countdown-text">{{"home_MINUTEN" | translate}}</div>
+            </div>
+            <div>
+                <div class="countdown-number" id="seconds"></div>
+                <div class="countdown-text">{{"home_SECONDEN" | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-sponsors></app-sponsors>

@@ -1,0 +1,61 @@
+.add_waypaint_title_overzicht{
+    padding: 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+}
+.waypointItems{
+    display: flex;
+    justify-content: space-between; 
+    padding: 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    width: 90%;
+    border-top: lightgrey 2px solid;
+    .waypointItemsButton{
+        background: white;
+        font-weight: bold;
+        border: none;
+        color: #FE0040;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        margin: 0.5rem;
+    }
+}
+.mainButtons{
+    border-top: lightgrey 2px solid;
+    display: flex;
+    justify-content: space-around; 
+    padding: 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    width: 90%;
+    .submitBtn{
+        background:  #FE0040;
+        font-weight: bold;
+        border: none;
+        color:white ;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        padding: 0.5em;
+    }
+    
+}
+.add_waypoints_form{
+    padding: 1rem;
+    margin: 0rem 1rem 0rem 1rem;
+    .submitBtnDiv{
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-around; 
+        .submitBtn{
+            background:  #FE0040;
+            font-weight: bold;
+            border: none;
+            color:white ;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            padding: 0.5em;
+        }
+    }
+    
+}

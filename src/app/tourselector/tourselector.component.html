@@ -1,0 +1,18 @@
+<div *ngIf="dataLoaded">
+
+    <div class="tourselector">
+        <div class="tourselector-buttons toggle-buttons">
+            <button class="btn btn-primary toggle-button" *ngFor="let route of routes" (click)="onClick(route)"
+                [ngClass]="{'active': currentRoute == route}">
+                {{route.tourName}}
+            </button>
+        </div>
+        <app-map class="tourselector-map" [tourName]="tourname" [userName]="username"></app-map>
+        <div class="tourselector-about">
+            <h2>{{"about_tour_info" | translate}}</h2>
+            <p>
+                {{ this.routeInfo }}
+            </p>
+        </div>
+    </div>
+</div>

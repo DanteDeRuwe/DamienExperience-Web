@@ -1,0 +1,50 @@
+<div *ngIf="loaded">
+    <div class="container">
+        <div *ngIf="hasRegistrations; else Allowed">
+            <app-info-registration></app-info-registration>
+        </div>
+
+
+        <ng-template #Allowed>
+            <h2 class="text-primary">{{"registration_regist" | translate}}</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+
+            <div>
+                <form [formGroup]="registration">
+
+                    <app-tourselector></app-tourselector>
+
+                    <h2 class="text-primary">{{"registration_tshirt" | translate}}</h2>
+                    <div class="registration-tshirt">
+                        <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
+
+                        <div style="width:100%">
+                            <select id="shirtSize" class="form-control" formControlName="shirtSize"
+                                (change)="onChangeShirt($event)">
+                                <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
+                                    {{ shirtSize }}
+                                </option>
+                            </select>
+                            <p class="text-danger"
+                                *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
+                                {{ getErrorMessage(registration.get("shirtSize").errors) }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="registration-pay">
+                        <div>
+                            <p>{{"registration_pay" | translate}} €{{price}}</p>
+
+                            <button type="submit" class="btn btn-primary"
+                                (click)="onSubmitRegistration()">{{"submit" | translate}}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </ng-template>
+    </div>
+</div>

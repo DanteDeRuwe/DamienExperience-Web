@@ -1,0 +1,20 @@
+<div *ngIf="loaded">
+    <div class="container">
+        <p>
+            {{"registration_already_sign"| translate}} <br>
+            {{"inforegistration_chosen_route"| translate}}{{route.tourName}} ({{route.distanceInMeters}} km)<br>
+        </p>
+        <div *ngIf="registration.orderedShirt; else NoShirt">
+            <p>
+                {{"inforegistration_tshirt"| translate}}{{registration.sizeShirt}}<br>
+                {{"inforegistration_pay"| translate}}65€<br>
+            </p>
+        </div>
+        <ng-template #NoShirt>
+            <p>
+                {{"inforegistration_no_tshirt"| translate}}<br>
+                {{"inforegistration_pay"| translate}}50€<br>
+            </p>
+        </ng-template>
+    </div>
+</div>

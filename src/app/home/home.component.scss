@@ -1,0 +1,47 @@
+@import "src/scss-partials/variables";
+@import "src/scss-partials/buttons";
+@import "src/scss-partials/typography";
+
+.jumbotron {
+    color: white;
+    background: url("https://images.unsplash.com/photo-1551632811-561732d1e306") no-repeat center center;
+    background-size: cover;
+
+    .container{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 4rem 2rem;
+        background-color: rgba(100, 70, 70, 0.1);  
+        border-radius: 1rem;
+        backdrop-filter: blur(15px);
+    }
+
+
+    &-header{
+        h1{
+            font-weight: bolder;
+        }
+    }
+
+    &-countdown{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 1rem;
+        &>div{
+           text-align: center;
+            .countdown-number{
+                font-weight: 400;
+                font-size: 3rem;
+            }
+            .countdown-text{
+                text-transform: lowercase;
+                font-variant: small-caps;
+            }
+        }
+    }
+}

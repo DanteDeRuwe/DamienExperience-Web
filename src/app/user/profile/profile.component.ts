@@ -1,12 +1,8 @@
-import { UserDataService } from '../user-data.service';
-import { User } from '../user.model';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { UserDataService } from '../../services/user-data.service';
+import { User } from '../../models/user.model';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AuthenticationService } from '../authentication.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -25,6 +21,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _uds: UserDataService,
     private fb: FormBuilder,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -57,19 +54,25 @@ export class ProfileComponent implements OnInit {
   }
 
   getErrorMessage(errors: any) {
+    var error = ""
     if (!errors) {
       return null;
     }
     if (errors.required) {
-      return 'is required';
+      this.translate.get('is_required').subscribe( val => {error  = val})
+      return error;
     } else if (errors.minlength) {
-      return `needs at least ${errors.minlength.requiredLength} characters (got ${errors.minlength.actualLength})`;
+      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      return error
     } else if (errors.userAlreadyExists) {
-      return `user already exists`;
+      this.translate.get('register_userexists').subscribe( val => {error  = val})
+      return error;
     } else if (errors.email) {
-      return `not a valid email address`;
+      this.translate.get('register_mail').subscribe( val => {error  = val})
+      return error;
     } else if (errors.passwordsDiffer) {
-      return `passwords are not the same`;
+      this.translate.get('register_password').subscribe( val => {error  = val})
+      return error;
     }
   }
 }
