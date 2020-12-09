@@ -13,7 +13,7 @@
                 {{payment.routeName}}
             </td>
             <td class="colomn-right colomn-border-right">
-                50€
+                €50,00
             </td>
         </tr>
         <tr *ngIf="orderdShirt">
@@ -21,7 +21,7 @@
                 Damiaan t-shirt
             </td>
             <td class="colomn-right colomn-border-right">
-                10€
+                €15,00
             </td>
         </tr>
         <tr>
@@ -29,14 +29,13 @@
                 
             </td>
             <td class="colomn-right colomn-border-right">
-                Totaal : {{amountInEuro}}€
+                Totaal : €{{amountInEuro}}
             </td>
         </tr>
     </table>
     <div class="form-button">
         <form ngNoForm method="POST" target="_blank" action="https://ogone.test.v-psp.com/ncol/test/orderstandard_utf8.asp" id="form1"
         name="form1">
-            <!--Mandatory / recommended / optional parameters -->
             <input type="hidden" name="PSPID" value="{{payment.pspId}}">
             <input type="hidden" name="ORDERID" value="{{payment.orderId}}">
             <input type="hidden" name="AMOUNT" value="{{payment.amount}}">
@@ -46,7 +45,6 @@
             <input type="hidden" name="USERID" value="{{payment.userId}}">
             
             <input type="hidden" name="SHASIGN" value="{{payment.shaSign}}">
-            <!--<input type="hidden" name="SHASIGN" value="{{hash}}">-->
             <button class="btn btn-primary" type="submit" id="submit2" name="submit2">Verzenden</button>
         </form>
     </div>
