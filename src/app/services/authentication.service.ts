@@ -145,7 +145,6 @@ export class AuthenticationService {
         ).pipe(
           catchError(this.handleError)
         ).subscribe((v: boolean)=>{
-          console.log("aaaaahhhhh"+v)
           this._checkAdmin$.next(v)
         });
     }else{

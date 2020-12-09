@@ -21,7 +21,6 @@ export class RoleGuard implements CanActivate {
     this.authService.checkAdmin$.subscribe((v)=>{
       isAdmin = v
     }) 
-    console.log("IS ADMIN: " + isAdmin)
     if (isAdmin) {
       return true;
     } else {

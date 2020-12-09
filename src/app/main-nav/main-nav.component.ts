@@ -51,7 +51,6 @@ export class MainNavComponent {
     this._authenticationService.checkAdmin$.subscribe(
       (v:boolean)=>
       {
-        console.log(v)
         this.isCheckAdmin=v;
       }
     )
