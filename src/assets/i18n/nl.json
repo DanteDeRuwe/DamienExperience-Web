@@ -2,7 +2,7 @@
     "test": "Nederlands",
     "is_required" : "Verplicht",
     "min_length" : "heeft karakters nodig {{min}} kreeg : {{now}})",
-
+    "smt_wrong":"Er ging iets mis...",
 
     "mn_home" : "HOME",
     "mn_admin_dashboard": "DASHBOARD",
@@ -50,6 +50,7 @@
 
     "tracking_zoek" : "ZOEK EEN WANDELAAR",
     "tracking_zoeken" : "ZOEKEN",
+    "tracking_error" : "Fout bij het opvragen van de gebruiker walk",
 
     "login_title":"Ik heb al een account",
     "login_passwoord" : "Passwoord",
@@ -79,6 +80,9 @@
     "registration_chose_route" : "Kies je wandeling:",
     "registration_tshirt" : "Koop een limited edition T-shirt",
     "registration_pay" : "Te betalen:",
+    "registration_error" : "Er ging iets mis bij het inschrijven",
+    "registration_error1" : "Er ging iets mis bij het inschrijven. \nGelieve alle velden in te vullen",
+
 
     "inforegistration_chosen_route" : "U bent geregistreerd voor volgende wandeling: ",
     "inforegistration_no_tshirt" : "U hebt geen limited edition T-shirt besteld",

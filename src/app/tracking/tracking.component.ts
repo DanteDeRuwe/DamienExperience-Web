@@ -10,6 +10,7 @@ import { Route } from '../models/route.model';
 import { Walk } from '../models/walk.model';
 import { RouteDataService } from '../services/route-data.service';
 import { WalkDataService } from '../services/walk-data.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-tracking',
   templateUrl: './tracking.component.html',
@@ -30,6 +31,7 @@ export class TrackingComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
+    private translate: TranslateService,
     private _rds: RouteDataService,
     private _wds: WalkDataService) { }
 
@@ -59,7 +61,7 @@ export class TrackingComponent implements OnInit {
       (err: HttpErrorResponse) => {
         console.log(err);
         if (err.error instanceof Error) {
-          this.errorMessage = `Error while trying to get the walk user`
+          this.translate.get('tracking_error').subscribe( val => {this.errorMessage  = val})
           console.log(this.errorMessage)
         } else {
           this.errorMessage = `Error ${err.status}`;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Waypoint } from 'src/app/models/waypoint.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-waypoints-form',
@@ -26,7 +27,7 @@ export class AddWaypointsFormComponent implements OnInit {
   @Output()
   public saveAllWaypointEvent = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder,private translate: TranslateService) { 
   }
 
   ngOnInit(): void {
@@ -46,14 +47,17 @@ export class AddWaypointsFormComponent implements OnInit {
   }
 
   getErrorMessage(errors: any): string {
+    var error = ""
     if (!errors) {
       return null;
     }
     if (errors.required) {
-      return 'Dit is verplicht';
+      this.translate.get('is_required').subscribe( val => {error  = val})
+      return error;
     } else if (errors.minlength) {
-      return `Heeft op zijn minst ${errors.minlength.requiredLength} karakters nodig (heeft ${errors.minlength.actualLength})`;
-    } 
+      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      return error    
+    }  
   }
 
   onSubmit(){

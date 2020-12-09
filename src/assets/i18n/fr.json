@@ -2,6 +2,7 @@
     "test": "Français",
     "is_required" : "Obligé",
     "min_length" : "a besoin de caractères {{min}} maintenant: {{now}})",
+    "smt_wrong":"Une erreur s'est produite ...",
 
     "mn_home" : "HOME",
     "mn_admin_dashboard" : "DASHBOARD",
@@ -49,6 +50,7 @@
 
     "tracking_zoek" : "TROUVEZ UN RANDONNEUR",
     "tracking_zoeken": "CHERCHER",
+    "tracking_error": "Erreur lors de la demande de l'utilisateur",
 
     "login_title":"Je ai déjà un compte",
     "login_passwoord" : "Mot de passe",
@@ -78,6 +80,8 @@
     "registration_chose_route" : "Choisissez votre promenade:",
     "registration_tshirt" : "Achetez un t-shirt en édition limitée",
     "registration_pay" : "Payer:",
+    "registration_error" : "Une erreur s'est produite lors de l'inscription",
+    "registration_error1" : "Une erreur s'est produite lors de l'inscription. \n Merci de remplir tous les champs",
 
     "inforegistration_chosen_route" : "U bent geregistreerd voor volgende wandeling: ",
     "inforegistration_no_tshirt" : "U hebt geen limited edition T-shirt besteld",
