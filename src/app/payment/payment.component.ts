@@ -27,7 +27,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PaymentComponent implements OnInit {
   payment : Payment 
   orderdShirt : boolean = false
-  amountInEuro : String = "50"
+  amountInEuro : String = "50,00"
   hash : string
 
   constructor(private route: ActivatedRoute,private _routeRepo : RouteDataService) { }
@@ -38,7 +38,7 @@ export class PaymentComponent implements OnInit {
       this.payment = item['data']
       console.log(this.payment)
       if(this.payment.amount == "6500"){
-        this.amountInEuro = "65"
+        this.amountInEuro = "65,00"
         this.orderdShirt = true
       }
       var key = "s*aW2dr86U++ZaKU"
