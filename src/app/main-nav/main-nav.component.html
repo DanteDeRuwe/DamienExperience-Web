@@ -12,7 +12,7 @@
         </ng-template>
         <select class="form-control" #selectedLang (change)="changeLang(selectedLang.value)">
           <option *ngFor="let language of translate.getLangs()" [value]="language"
-            [selected]="language === translate.currentLang">
+            [selected]="checkLang(language)">
             {{ language }}
           </option>
         </select>

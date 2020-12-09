@@ -12,34 +12,34 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class MainNavComponent {
   public loggedInUser$ = this._authenticationService.user$;
-
+  current = ""
   constructor(
     private _authenticationService: AuthenticationService,
     private _router: Router,
-    public translate: TranslateService) {
+    public translate: TranslateService) {}
+
+  ngOnInit(){
 
     //adds dutch and french as supported languages
     const langs = ['nl', 'fr']
-    translate.addLangs(langs);
-
+    this.translate.addLangs(langs);
 
     //checks if language is saved in localstorage
     //else checks if user's browser's language is supported
     //default dutch
     const localLang: string = localStorage.getItem("lang");
-
     if (localLang) {
-      translate.setDefaultLang(localLang)
+      this.translate.setDefaultLang(localLang)
+      this.current = localLang
     } else {
       const browserLang = navigator.language.substring(0, 2)
-
       if (langs.includes(browserLang)) {
-        translate.setDefaultLang(browserLang);
+        this.translate.setDefaultLang(browserLang);
+        this.current = browserLang
       } else {
-        translate.setDefaultLang('nl');
+        this.translate.setDefaultLang('nl');
       }
-
-      localStorage.setItem("lang", translate.getDefaultLang())
+      localStorage.setItem("lang", this.translate.getDefaultLang())
     }
   }
 
@@ -60,6 +60,9 @@ export class MainNavComponent {
 
       this._router.navigate(['registration']);
     }
+  }
+  checkLang(lang:String):boolean{
+    return lang === this.current
   }
 
 
