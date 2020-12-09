@@ -1,5 +1,8 @@
 {
     "test": "Nederlands",
+    "is_required" : "Verplicht",
+    "min_length" : "heeft karakters nodig {{min}} kreeg : {{now}})",
+
 
     "mn_home" : "HOME",
     "mn_admin_dashboard": "DASHBOARD",
@@ -53,6 +56,8 @@
     "login_email":"E-mail adress",    
     "login_enter_passwoord":"vul wachtwoord in",
     "login_remember_me" : "Onthoud me",
+    "login_failed" : "Kon niet inloggen",
+    "login_error": "Fout bij het inloggen van gebruiker",
     "submit" : "Verzenden",
 
     "register_title" : "Ik maak een account",
@@ -62,6 +67,9 @@
     "register_nummer" : "Telefoonnummer",
     "register_share_email" : "We zullen uw e-mail nooit met iemand anders delen.",
     "register_confirm" : "Bevestig wachtwoord",
+    "register_userexists" : "Gebruiker bestaat al",
+    "register_mail": "Dit is geen geldig email adress",
+    "register_password":"Paswoorden zijn niet hetzelfde",
 
     "profile_title" : "Mijn profiel",
     "profile_title1" : "Wijzig mijn persoonlijke informatie",

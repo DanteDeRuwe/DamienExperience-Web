@@ -1,5 +1,7 @@
 {
     "test": "Français",
+    "is_required" : "Obligé",
+    "min_length" : "a besoin de caractères {{min}} maintenant: {{now}})",
 
     "mn_home" : "HOME",
     "mn_admin_dashboard" : "DASHBOARD",
@@ -53,6 +55,8 @@
     "login_email":"Adresse e-mail",
     "login_enter_passwoord":"entrer le mot de passe",
     "login_remember_me" : "Souviens-toi de moi",
+    "login_failed" : "Ne pouvait pas se connecter",
+    "login_error": "Erreur de connexion à l'utilisateur",
     "submit" : "Soumettre",
 
     "register_title" : "Je crée un compte",
@@ -62,6 +66,9 @@
     "register_nummer" : "numéro de téléphone",
     "register_share_email" : "Nous ne partagerons jamais votre e-mail avec qui que ce soit.",
     "register_confirm" : "Confirmez le mot de passe",
+    "register_userexists" : "L'utilisateur existe déjà",
+    "register_mail": "This is not a valid email address",
+    "register_password":"Les mots de passe ne sont pas les mêmes",
 
     "profile_title" : "Mon profil",
     "profile_title1" : "Changer mes informations personnelles",

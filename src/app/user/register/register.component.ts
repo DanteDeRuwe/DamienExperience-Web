@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
+import { errorMonitor } from 'events';
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
   public rememberMe : boolean = false;
 
   constructor(private _authService: AuthenticationService,
+    private translate: TranslateService,
     private _router: Router,
     private fb: FormBuilder) { }
 
@@ -74,19 +77,25 @@ export class RegisterComponent implements OnInit {
   }
 
   getErrorMessage(errors: any) {
+    var error = ""
     if (!errors) {
       return null;
     }
     if (errors.required) {
-      return 'is required';
+      this.translate.get('is_required').subscribe( val => {error  = val})
+      return error;
     } else if (errors.minlength) {
-      return `needs at least ${errors.minlength.requiredLength} characters (got ${errors.minlength.actualLength})`;
+      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      return error
     } else if (errors.userAlreadyExists) {
-      return `user already exists`;
+      this.translate.get('register_userexists').subscribe( val => {error  = val})
+      return error;
     } else if (errors.email) {
-      return `not a valid email address`;
+      this.translate.get('register_mail').subscribe( val => {error  = val})
+      return error;
     } else if (errors.passwordsDiffer) {
-      return `passwords are not the same`;
+      this.translate.get('register_password').subscribe( val => {error  = val})
+      return error;
     }
   }
 
