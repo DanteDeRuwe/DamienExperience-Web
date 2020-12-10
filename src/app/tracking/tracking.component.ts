@@ -33,7 +33,7 @@ export class TrackingComponent implements OnInit {
     });
   }
 
-  onSubmitSearch(){
+  onSubmitSearch() {
     const searchresult = this.searchForm.value.username;
     this.roomname = searchresult;
     if (searchresult) {
@@ -42,7 +42,8 @@ export class TrackingComponent implements OnInit {
         .subscribe((walk: Walk) => {
           if (walk) {
             this.setupWalk(walk)
-            this.setWalkToLiveWalk() //after initializing, use the live walk
+            this.setWalkToLiveWalk(searchresult) //after initializing, use the live walk
+            this.visible = false;
           } else {
             console.log('nowalk')
           }
@@ -57,16 +58,12 @@ export class TrackingComponent implements OnInit {
               console.error(this.errorMessage)
             }
           });
-
-      this._wds.connectToTrackingHub(); //connects to the real-time service
-      this.visible = false;
-
     } else {
       console.log('nouser')
     }
   }
 
-  onToggleChat(){
+  onToggleChat() {
     this.chatVisible = !this.chatVisible;
   }
 
@@ -78,7 +75,8 @@ export class TrackingComponent implements OnInit {
     });
   }
 
-  private setWalkToLiveWalk() {
+  private setWalkToLiveWalk(userToTrack: string) {
+    this._wds.connectToTrackingHub(userToTrack); //connects to the real-time service
     this._wds.liveWalk.subscribe(x => this.walk = x);
   }
 }

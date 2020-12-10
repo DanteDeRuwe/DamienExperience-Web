@@ -1,3 +1,4 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
@@ -37,17 +38,18 @@ export class WalkDataService {
   }
 
 
-  connectToTrackingHub() {
-    this.startHubConnection();
+  connectToTrackingHub(trackedUserName: string) {
+    this.hubConnection = this.getHubConnection();
+    this.startHubConnection(trackedUserName);
     this.addHubListeners();
   }
 
-  private startHubConnection() {
-    this.hubConnection = this.getHubConnection();
-
+  private startHubConnection(trackedUserName: string) {
     this.hubConnection.start()
+      .then(() => this.hubConnection.invoke("JoinGroup", trackedUserName)
+        .catch((err) => console.error(`error while joining group ${trackedUserName}: ${err}`)))
       .then(() => console.log('connection started'))
-      .catch((err) => console.log('error while establishing signalr connection: ' + err))
+      .catch((err) => console.error('error while establishing signalr connection: ' + err))
   }
 
   private addHubListeners() {
