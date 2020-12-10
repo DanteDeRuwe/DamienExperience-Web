@@ -1,15 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { getTestBed } from '@angular/core/testing';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { NgForm } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Route } from '../models/route.model';
 import { Walk } from '../models/walk.model';
 import { RouteDataService } from '../services/route-data.service';
 import { WalkDataService } from '../services/walk-data.service';
+
 @Component({
   selector: 'app-tracking',
   templateUrl: './tracking.component.html',
@@ -17,19 +14,16 @@ import { WalkDataService } from '../services/walk-data.service';
 })
 export class TrackingComponent implements OnInit {
   roomname: string;
-
-  tourName: string;
-  userName: string;
   visible = true;
-  
   errorMessage = '';
   chatVisible = false;
-  validWalk = false;
 
   searchForm: FormGroup;
 
+  walk: Walk;
+  route: Route;
+
   constructor(private fb: FormBuilder,
-    private router: Router,
     private _rds: RouteDataService,
     private _wds: WalkDataService) { }
 
@@ -42,31 +36,32 @@ export class TrackingComponent implements OnInit {
   onSubmitSearch(){
     const searchresult = this.searchForm.value.username;
     this.roomname = searchresult;
-    if(searchresult){
-      this._wds.getWalk$(searchresult).subscribe((walk: Walk) =>{
-        console.log(walk)
-        if(walk){
-          this._rds.getRouteById$(walk.routeID).subscribe((route: Route) => {
-            this.userName = searchresult;
-            this.tourName = route.tourName;
-            this.validWalk = true;
-            this.visible = false
+    if (searchresult) {
+      this._wds.getWalk$(searchresult)
+        .pipe(take(1)) //only get initial walk
+        .subscribe((walk: Walk) => {
+          if (walk) {
+            this.setupWalk(walk)
+            this.setWalkToLiveWalk() //after initializing, use the live walk
+          } else {
+            console.log('nowalk')
+          }
+        },
+          (err: HttpErrorResponse) => {
+            console.error(err);
+            if (err.error instanceof Error) {
+              this.errorMessage = `Error while trying to get the walk user`
+              console.error(this.errorMessage)
+            } else {
+              this.errorMessage = `Error ${err.status}`;
+              console.error(this.errorMessage)
+            }
           });
-        }else{
-          console.log('nowalk')
-        }
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err);
-        if (err.error instanceof Error) {
-          this.errorMessage = `Error while trying to get the walk user`
-          console.log(this.errorMessage)
-        } else {
-          this.errorMessage = `Error ${err.status}`;
-          console.log(this.errorMessage)
-        }
-      })
-    }else{
+
+      this._wds.connectToTrackingHub(); //connects to the real-time service
+      this.visible = false;
+
+    } else {
       console.log('nouser')
     }
   }
@@ -75,11 +70,15 @@ export class TrackingComponent implements OnInit {
     this.chatVisible = !this.chatVisible;
   }
 
-  get tourname(){
-    return this.tourName;
+  private setupWalk(walk: Walk) {
+    this.walk = walk;
+    this._rds.getRouteById$(walk.routeID).subscribe((route: Route) => {
+      this.route = route;
+      this.visible = false
+    });
   }
 
-  get username(){
-    return this.userName
+  private setWalkToLiveWalk() {
+    this._wds.liveWalk.subscribe(x => this.walk = x);
   }
 }
