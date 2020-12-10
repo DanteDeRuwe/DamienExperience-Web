@@ -79,8 +79,7 @@ export class RouteDataService {
         TRXDate : params.TRXDATE
       }).pipe(
         tap(),
-        catchError(this.handleError),
-        map(Payment.fromJson)
+        catchError(this.handleError)
       )
   }
 

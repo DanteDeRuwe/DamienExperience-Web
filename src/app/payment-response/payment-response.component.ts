@@ -12,6 +12,7 @@ export class PaymentResponseComponent implements OnInit {
   succes : boolean = false
   errorMessage : String = ""
   status : Number
+  tourName: string
 
   constructor(private route: ActivatedRoute,private _routeService : RouteDataService) { }
   /*
@@ -57,9 +58,13 @@ export class PaymentResponseComponent implements OnInit {
   }
   sendApiCall(){
     console.log(this._params.orderID)
-    this._routeService.paymentResponse(this._params).subscribe((val)=>{
-      console.log("response :" +val)
+    this._routeService.paymentResponse(this._params).subscribe((val : any)=>{
+      this.tourName = val.tourName
+      this.succes = val.valid
+      console.log(this.succes)
     });
   }
 
 }
+
+
