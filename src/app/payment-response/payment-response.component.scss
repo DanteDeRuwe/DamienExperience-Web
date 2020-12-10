@@ -1,0 +1,13 @@
+@import "src/scss-partials/variables";
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2{
+    color: $primary;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}

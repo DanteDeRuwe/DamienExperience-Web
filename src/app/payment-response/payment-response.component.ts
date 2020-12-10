@@ -5,12 +5,14 @@ import { RouteDataService } from '../services/route-data.service';
 @Component({
   selector: 'app-payment-response',
   templateUrl: './payment-response.component.html',
-  styleUrls: ['./payment-response.component.css']
+  styleUrls: ['./payment-response.component.scss']
 })
 export class PaymentResponseComponent implements OnInit {
   private _params : any
   succes : boolean = false
   errorMessage : String = ""
+  status : Number
+
   constructor(private route: ActivatedRoute,private _routeService : RouteDataService) { }
   /*
   AAVADDRESS: "NO"
@@ -38,9 +40,9 @@ export class PaymentResponseComponent implements OnInit {
     })
   }
   extractStatus(statusString : any){
-    var status = Number(statusString)
-    console.log(status)
-    switch (status) {
+    this.status = Number(statusString)
+    console.log(this.status)
+    switch (this.status) {
       case 0: this.succes = false; this.errorMessage = this._params.NCERROR;
         break;
       case 1: this.succes = false; this.errorMessage = "Customer canncelled payment";

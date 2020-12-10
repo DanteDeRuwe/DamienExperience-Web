@@ -7,7 +7,6 @@ import { Route } from '../models/route.model';
 import { DatainjectionService } from '../services/datainjection.service';
 import { RouteDataService } from '../services/route-data.service';
 import { UserDataService } from '../services/user-data.service';
-import sha1 from 'sha1';
 
 
 @Component({
