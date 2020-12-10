@@ -58,6 +58,31 @@ export class RouteDataService {
         map(Payment.fromJson)
       )
   }
+  paymentResponse(params : any) {
+    return this.http.post(`${environment.apiUrl}/routeregistration/ControlPaymentResponse/`,
+      {
+        Aavaddress :params.AAVADDRESS,
+        Acceptance :params.ACCEPTANCE,
+        Amount :params.amount,
+        Brand :params.BRAND,
+        CardNo : params.CARDNO,
+        CN : params.CN,
+        Currency : params.currency,
+        ED : params.ED,
+        IP : params.IP,
+        NCError : params.NCERROR,
+        OrderID : params.orderID,
+        PayId : params.PAYID,
+        PM:params.PM ,
+        ShaSign: params.SHASIGN,
+        Status : params.STATUS,
+        TRXDate : params.TRXDATE
+      }).pipe(
+        tap(),
+        catchError(this.handleError),
+        map(Payment.fromJson)
+      )
+  }
 
   deleteRoute(routeName: string) {
     return this.http.delete(`${environment.apiUrl}/route/delete?routeName=${routeName}`

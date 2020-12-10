@@ -22,6 +22,7 @@ import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentResolverService } from './services/payment-resolver.service';
+import { PaymentResponseComponent } from './payment-response/payment-response.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
   { path: 'payment', component: PaymentComponent,resolve : {data: PaymentResolverService}},
+  { path: 'payment-response', component: PaymentResponseComponent},
   { path: 'admin-nav', component: AdminNavComponent ,children:[
     { path: 'manageroutes', component: ManageroutesComponent},
     { path: 'dashboard', component: DashboardComponent},

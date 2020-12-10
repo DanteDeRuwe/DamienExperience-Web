@@ -57,6 +57,7 @@ import { TestComponent } from './admin/test/test.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentResponseComponent } from './payment-response/payment-response.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { PaymentComponent } from './payment/payment.component';
     TestComponent,
     AdminNavComponent,
     DeleteRouteDialogComponent,
-    PaymentComponent
+    PaymentComponent,
+    PaymentResponseComponent
   ],
   imports: [
     MatDialogModule,
