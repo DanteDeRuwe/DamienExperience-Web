@@ -48,7 +48,8 @@ export class RouteDataService {
       )
   }
   //https://localhost:5001/api/routeregistration/
-  generatePaymentData(language:string) {
+  generatePaymentData(language:string,url:string) {
+    
     return this.http.get(`${environment.apiUrl}/routeregistration/generatepaymentdata/${language}`,
       {
         

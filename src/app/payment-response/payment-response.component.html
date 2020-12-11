@@ -1,8 +1,22 @@
 <div class="container content">
-  <h2>Betaling succesvol!</h2>
-  <p>
-    U bent nu ingeschreven voor de Damien Tour: {{tourName}}. <br />
-    Verdere informatie kan u vinden in
-    <a routerLink="/about" routerLinkActive="active">over de tour</a>.
-  </p>
+  <div *ngIf="loading; else noLoading" class="check-status">
+    <mat-spinner></mat-spinner>
+  </div>
+  <ng-template #noLoading>
+    <div *ngIf="succes; else noSucces">
+      <h2>Betaling succesvol!</h2>
+      <p>
+        U bent nu ingeschreven voor de Damien Tour: {{tourName}}. <br />
+        Verdere informatie kan u vinden in
+        <a routerLink="/about" routerLinkActive="active">over de tour</a>.
+      </p>
+    </div>
+    <ng-template #noSucces>
+      <h2>Betaling NIET succesvol!</h2>
+      <p>
+      U bent niet ingeschreven voor de Damien Tour. <br />
+      Ga terug naar de<a routerLink="/payment" routerLinkActive="active"> betaling </a>pagina.
+      </p>
+    </ng-template>
+  </ng-template>
 </div>

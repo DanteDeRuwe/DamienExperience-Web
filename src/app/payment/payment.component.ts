@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouteDataService } from '../services/route-data.service';
 import { Payment } from '../models/payment.model';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -22,7 +23,7 @@ export class PaymentComponent implements OnInit {
   payment : Payment 
   orderdShirt : boolean = false
   amountInEuro : String = "50,00"
-
+  responseURL: string=""
   constructor(private route: ActivatedRoute,private _routeRepo : RouteDataService) { }
 
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class PaymentComponent implements OnInit {
       if(this.payment.amount == "6500"){
         this.amountInEuro = "65,00"
         this.orderdShirt = true
+        this.responseURL = environment.url+'/payment-response'
       }      
     })
   }

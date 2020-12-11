@@ -43,7 +43,12 @@
             <input type="hidden" name="LANGUAGE" value="{{payment.language}}">
             <input type="hidden" name="EMAIL" value="{{payment.email}}">
             <input type="hidden" name="USERID" value="{{payment.userId}}">
-            
+            <!--
+            <input type="hidden" name="ACCEPTURL" value="{{responseURL}}">
+            <input type="hidden" name="DECLINEURL" value="{{responseURL}}">
+            <input type="hidden" name="EXCEPTIONURL" value="{{responseURL}}">
+            <input type="hidden" name="CANCELURL" value="{{responseURL}}">
+            -->
             <input type="hidden" name="SHASIGN" value="{{payment.shaSign}}">
             <button class="btn btn-primary" type="submit" id="submit2" name="submit2">Verzenden</button>
         </form>

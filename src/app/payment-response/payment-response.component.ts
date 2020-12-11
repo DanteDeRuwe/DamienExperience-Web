@@ -9,6 +9,7 @@ import { RouteDataService } from '../services/route-data.service';
 })
 export class PaymentResponseComponent implements OnInit {
   private _params : any
+  loading : boolean = true
   succes : boolean = false
   errorMessage : String = ""
   status : Number
@@ -41,18 +42,17 @@ export class PaymentResponseComponent implements OnInit {
     })
   }
   extractStatus(statusString : any){
-    this.status = Number(statusString)
-    console.log(this.status)
-    switch (this.status) {
-      case 0: this.succes = false; this.errorMessage = this._params.NCERROR;
+    switch (statusString) {
+      case "0": this.succes = false; this.loading = false; this.errorMessage = this._params.NCERROR;
         break;
-      case 1: this.succes = false; this.errorMessage = "Customer canncelled payment";
+      case "1": this.succes = false; this.loading = false; this.errorMessage = "Customer canncelled payment";
         break;
-      case 5:  
-      case 9: this.sendApiCall()
+      case "5":  
+      case "9": this.sendApiCall()
         break;
        
       default:
+        this.succes = false; this.loading = false; this.errorMessage = "Customer canncelled payment";
         break;
     }
   }
@@ -61,6 +61,7 @@ export class PaymentResponseComponent implements OnInit {
     this._routeService.paymentResponse(this._params).subscribe((val : any)=>{
       this.tourName = val.tourName
       this.succes = val.valid
+      this.loading = false;
       console.log(this.succes)
     });
   }

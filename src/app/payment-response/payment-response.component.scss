@@ -1,9 +1,22 @@
 @import "src/scss-partials/variables";
+.check-status{
+    margin-top: 5em;
+    position: relative;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.check-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+    stroke : $primary;
+}
 
 .content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+    h2{
+        text-transform: uppercase;
+    }
 }
 
 h2{
