@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ShirtSize } from '../enums.model';
+import { Privacy, ShirtSize } from '../enums.model';
 import { Route } from '../models/route.model';
 import { DatainjectionService } from '../services/datainjection.service';
 import { RouteDataService } from '../services/route-data.service';
@@ -17,6 +17,8 @@ import { UserDataService } from '../services/user-data.service';
 export class RegistrationComponent implements OnInit {
   registration: FormGroup;
   routes: Route[];
+  privacySettings = Object.values(Privacy);
+  privacy = Privacy;
 
   tourName: string;
   errorMessage: string = '';
@@ -39,7 +41,8 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.registration = this.fb.group({
       orderedShirt: ['', Validators.required],
-      shirtSize: ['', Validators.required]
+      shirtSize: ['', Validators.required],
+      privacySetting: ['', Validators.required]
     });
 
     this._rds.getFutureRoutes$().subscribe(routes => {
@@ -81,8 +84,9 @@ export class RegistrationComponent implements OnInit {
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN) this.registration.value.orderedShirt = false
 
+    console.log(this.registration.value.privacySetting) //DELETE
     this._rds.getRoute$(this.tourName).subscribe(route =>{
-       this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize)
+       this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize, this.registration.value.privacySetting)
       .subscribe((val) => {
         if (val) {
           if (this._rds.redirectUrl) {

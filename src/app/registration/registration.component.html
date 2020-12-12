@@ -16,6 +16,35 @@
 
                     <app-tourselector></app-tourselector>
 
+                    <div>
+                        <!-- <div *ngFor="let privacy of privacySettings">
+                            <input type="radio" id="privacy" name="privacySetting" value="privacy">
+                            <label for="privacy">{{ privacy }}</label>
+                        </div> -->
+                        <p> {{ "registration_privacy" | translate }} </p>
+                        <label>
+                            <input type="radio" id="privacy.PRIVATE" formControlName="privacySetting"
+                                [value]="privacy.PRIVATE" checked [attr.checked]="true">
+                            <span> {{ "registration_privacy_private" | translate }} </span>
+                            <!-- <label for="privacy.PRIVATE"> {{ "registration_privacy_private" | translate }}</label> -->
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" id="privacy.FRIENDS" formControlName="privacySetting"
+                                [value]="privacy.FRIENDS">
+                            <span> {{ "registration_privacy_friends" | translate }} </span>
+                            <!-- <label for="privacy.FRIENDS"> {{ "registration_privacy_friends" | translate }}</label> -->
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" id="privacy.EVERYONE" formControlName="privacySetting"
+                                [value]="privacy.EVERYONE">
+                            <span> {{ "registration_privacy_everyone" | translate }} </span>
+                            <!-- <label for="privacy.EVERYONE"> {{ "registration_privacy_everyone" | translate }}</label> -->
+                        </label>
+                        <br>
+                    </div>
+
                     <h2 class="text-primary">{{"registration_tshirt" | translate}}</h2>
                     <div class="registration-tshirt">
                         <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
@@ -38,8 +67,8 @@
                         <div>
                             <p>{{"registration_pay" | translate}} €{{price}}</p>
 
-                            <button type="submit" class="btn btn-primary"
-                                (click)="onSubmitRegistration()">{{"submit" | translate}}</button>
+                            <button type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" |
+                                translate}}</button>
                         </div>
                     </div>
                 </form>

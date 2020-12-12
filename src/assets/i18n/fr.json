@@ -70,6 +70,10 @@
     "registration_chose_route" : "Choisissez votre promenade:",
     "registration_tshirt" : "Achetez un t-shirt en édition limitée",
     "registration_pay" : "Payer:",
+    "registration_privacy" : "Choisissez qui peut vous suivre pendant la marche :",
+    "registration_privacy_private" : "personne",
+    "registration_privacy_friends" : "mes amis",
+    "registration_privacy_everyone" : "tout le monde",
 
     "about_tour_info" : "L'info du tour",
 

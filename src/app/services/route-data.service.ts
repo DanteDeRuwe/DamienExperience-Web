@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Route } from '../models/route.model';
 import { Waypoint } from '../models/waypoint.model';
+import { Privacy } from '../enums.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +36,13 @@ export class RouteDataService {
     )
   }
 
-  routeRegistration$(routeId: string, orderedShirt: boolean, shirtSize: string) {
+  routeRegistration$(routeId: string, orderedShirt: boolean, shirtSize: string, privacy: Privacy) {
     return this.http.post(`${environment.apiUrl}/routeregistration`,
       {
         routeId,
         orderedShirt,
-        shirtSize
+        shirtSize,
+        privacy
       }).pipe(
         tap(),
         catchError(this.handleError)
