@@ -2,10 +2,10 @@
     <table class="payment-table">
         <tr class="table-header">
             <th>
-                Items
+                {{"payment_items" | translate}}
             </th>
             <th class="colomn-right">
-                Prijs
+                {{"payment_prijs" |translate}}
             </th>
         </tr>
         <tr>
@@ -18,7 +18,7 @@
         </tr>
         <tr *ngIf="orderdShirt">
             <td>
-                Damiaan t-shirt
+                Damian t-shirt
             </td>
             <td class="colomn-right colomn-border-right">
                 €15,00
@@ -29,7 +29,7 @@
                 
             </td>
             <td class="colomn-right colomn-border-right">
-                Totaal : €{{amountInEuro}}
+                {{"payment_total" | translate}} : €{{amountInEuro}}
             </td>
         </tr>
     </table>
@@ -50,7 +50,7 @@
             <input type="hidden" name="CANCELURL" value="{{responseURL}}">
             -->
             <input type="hidden" name="SHASIGN" value="{{payment.shaSign}}">
-            <button class="btn btn-primary" type="submit" id="submit2" name="submit2">Verzenden</button>
+            <button class="btn btn-primary" type="submit" id="submit2" name="submit2">{{"submit" | translate}}</button>
         </form>
     </div>
 </div>

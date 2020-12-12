@@ -52,7 +52,7 @@
     "login_email":"Adresse e-mail",
     "login_enter_passwoord":"entrer le mot de passe",
     "login_remember_me" : "Souviens-toi de moi",
-    "submit" : "Soumettre",
+    "submit" : "Confirmer",
 
     "register_title" : "Je crée un compte",
     "register_vn":"Prénom",
@@ -84,7 +84,22 @@
 
     "add_waypoint_main_title" : "Un aperçu des waypoints actuels",
     "add_waypoint_add_one" : "Ajouter un waypoint",
-    "add_waypoint_title" : "Titre"
+    "add_waypoint_title" : "Titre",
+
+
+    "payment_items" : "Articles",
+    "payment_prijs" : "Prix",
+    "payment_total" : "Total",
+
+    "payment_response_succes" : "Paiement réussi!",
+    "payment_response_succes_tour" : "Vous êtes maintenant inscrit au Damien Tour",
+    "payment_response_succes_info": "Vous trouverez de plus amples informations dans",
+    "payment_response_succes_link": "à propos de la tournée",
+    "payment_response_nosucces": "Paiement non réussi!",
+    "payment_response_nosucces_notRegisterd": "Vous n'êtes pas inscrit au Damien Tour.",
+    "payment_response_nosucces_go" : "Revenir à la",
+    "payment_response_nosucces_link": "paiement",
+    "payment_response_nosucces_pagina":"page"
 
 
 }

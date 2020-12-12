@@ -4,18 +4,18 @@
   </div>
   <ng-template #noLoading>
     <div *ngIf="succes; else noSucces">
-      <h2>Betaling succesvol!</h2>
+      <h2>{{"payment_response_succes" | translate}}</h2>
       <p>
-        U bent nu ingeschreven voor de Damien Tour: {{tourName}}. <br />
-        Verdere informatie kan u vinden in
-        <a routerLink="/about" routerLinkActive="active">over de tour</a>.
+        {{"payment_response_succes_tour" | translate}} : {{tourName}}. <br />
+        {{"payment_response_succes_info" | translate}}
+        <a routerLink="/about" routerLinkActive="active">{{"payment_response_succes_link" |translate}}</a>.
       </p>
     </div>
     <ng-template #noSucces>
-      <h2>Betaling NIET succesvol!</h2>
+      <h2>{{"payment_response_nosucces" | translate}}</h2>
       <p>
-      U bent niet ingeschreven voor de Damien Tour. <br />
-      Ga terug naar de<a routerLink="/payment" routerLinkActive="active"> betaling </a>pagina.
+      {{"payment_response_nosucces_notRegisterd" | translate}} <br />
+      {{"payment_response_nosucces_go" | translate}}<a routerLink="/payment" routerLinkActive="active"> {{"payment_response_nosucces_link"| translate}} </a>{{"payment_response_nosucces_pagina"| translate}}.
       </p>
     </ng-template>
   </ng-template>
