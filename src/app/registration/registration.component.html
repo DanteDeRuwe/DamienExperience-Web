@@ -1,4 +1,4 @@
-<div *ngIf="loaded">
+<div *ngIf="loaded; else stillLoading">
     <div class="container">
         <ng-template *ngIf="hasRegistrations; else Allowed">
             {{"registration_already_sign"| translate}}
@@ -24,21 +24,21 @@
                         <p> {{ "registration_privacy" | translate }} </p>
                         <label>
                             <input type="radio" id="privacy.PRIVATE" formControlName="privacySetting"
-                                [value]="privacy.PRIVATE" checked [attr.checked]="true">
+                                [value]="privacy.PRIVATE" checked [attr.checked]="true" (click)="setCanSubmit()">
                             <span> {{ "registration_privacy_private" | translate }} </span>
                             <!-- <label for="privacy.PRIVATE"> {{ "registration_privacy_private" | translate }}</label> -->
                         </label>
                         <br>
                         <label>
                             <input type="radio" id="privacy.FRIENDS" formControlName="privacySetting"
-                                [value]="privacy.FRIENDS">
+                                [value]="privacy.FRIENDS" (click)="setCanSubmit()">
                             <span> {{ "registration_privacy_friends" | translate }} </span>
                             <!-- <label for="privacy.FRIENDS"> {{ "registration_privacy_friends" | translate }}</label> -->
                         </label>
                         <br>
                         <label>
                             <input type="radio" id="privacy.EVERYONE" formControlName="privacySetting"
-                                [value]="privacy.EVERYONE">
+                                [value]="privacy.EVERYONE" (click)="setCanSubmit()">
                             <span> {{ "registration_privacy_everyone" | translate }} </span>
                             <!-- <label for="privacy.EVERYONE"> {{ "registration_privacy_everyone" | translate }}</label> -->
                         </label>
@@ -67,7 +67,7 @@
                         <div>
                             <p>{{"registration_pay" | translate}} €{{price}}</p>
 
-                            <button type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" |
+                            <button [disabled]="!canSubmit" type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" |
                                 translate}}</button>
                         </div>
                     </div>
@@ -77,3 +77,9 @@
         </ng-template>
     </div>
 </div>
+<ng-template #stillLoading >
+    <div class="check-status">
+        <mat-spinner></mat-spinner>
+    </div>
+    
+  </ng-template>

@@ -28,6 +28,14 @@ export class RegistrationComponent implements OnInit {
   hasRegistrations: boolean = false;
   loaded: boolean = false;
 
+  private _hasSelectedRoute : boolean = false;
+  private _hasSelectedShirt : boolean = false;
+  canSubmit : boolean = false;
+  setCanSubmit(){
+    var privacy = this.registration.value["privacySetting"]
+    var privacyValid = privacy != '';
+    this.canSubmit = this._hasSelectedRoute && this._hasSelectedShirt && privacyValid
+  }
   userLoaded: Promise<boolean>
 
   shirtSizes = Object.values(ShirtSize);
@@ -62,8 +70,11 @@ export class RegistrationComponent implements OnInit {
 
     this._dis.obserervableMapData$.subscribe(data => {
       this.tourName = data[0]
+      this._hasSelectedRoute = true
+      this.setCanSubmit()
     });
   }
+  
 
   // onChange(value) {
   //   console.log(this.routes[value[0]].tourName)
@@ -78,6 +89,8 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.price = 50;
     }
+    this._hasSelectedShirt = true;
+    this.setCanSubmit()
   }
 
   onSubmitRegistration() {
