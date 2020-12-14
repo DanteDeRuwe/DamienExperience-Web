@@ -50,6 +50,9 @@ export class MainNavComponent {
   logout() {
     this._authenticationService.logout();
   }
+  profile(){
+    this._router.navigate(['profile']);
+  }
 
   schrijfIn() {
     if (!this.loggedInUser$.value)

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -25,6 +25,12 @@ export class UserDataService {
     return this.http.get(`${environment.apiUrl}/profile`).pipe(
       catchError(this.handleError),
       map(User.fromJson)
+    );
+  }
+
+  updateFriends(friends : string[]){
+    return this.http.put(`${environment.apiUrl}/profile/UpdateFriends`,friends).pipe(
+      catchError(this.handleError)
     );
   }
 
