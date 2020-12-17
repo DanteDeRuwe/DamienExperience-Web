@@ -62,7 +62,12 @@ export class MainNavComponent {
 
   logout() {
     this._authenticationService.logout();
-    this._router.navigate(['home']);
+
+    this._router.navigate(['home'])
+  }
+  
+  profile(){
+    this._router.navigate(['profile']);
   }
 
   schrijfIn() {

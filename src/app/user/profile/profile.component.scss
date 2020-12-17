@@ -1,0 +1,82 @@
+@import "src/scss-partials/variables";
+@import "src/scss-partials/buttons";
+@import "src/scss-partials/typography";
+@import "src/scss-partials/scrollbars";
+@import "src/scss-partials/mixins";
+.profile{
+    padding:3rem;
+    .profile-line{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-grow: 4;
+        div{
+            margin-top: 2rem;
+            width: 30%;
+        }
+    }
+    .profile-friends{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        @include from-desktop{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        div{
+            width: 50%;
+            margin: 0;
+            padding: 10px;
+            @include from-desktop{
+                margin: 0 auto;
+                position: relative;
+            }
+            .profile-friends-scroll{
+                @include nice-scrollbar;
+                min-width: 20rem;
+                min-height: 15rem;
+                height: 25vw;
+                border: 1px solid red;
+                border-radius: 10px;
+                overflow-y: scroll;
+                .profile-friends-scroll-item{
+                    margin: 0;
+                    border-bottom:1px solid grey ;
+                    width: 100%;
+                    text-align: center;
+                    font-weight: bold;
+                    .item{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        margin: 0;
+                    }
+                    .profile-friend-clear {
+                        color: $primary;
+                        :hover{
+                            color: $gray-5;
+                        }
+                    }
+                }
+            }
+            .profile-friends-add{
+                margin: 0 0;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                .friendForm{
+                    margin: 0 0;
+                    width: 70%;
+                    
+                }
+                
+            }
+            
+        }
+    }
+    @media screen and(max-width: 500px) {
+        
+    }
+}

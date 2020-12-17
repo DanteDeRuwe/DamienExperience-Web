@@ -85,6 +85,12 @@
     "registration_chose_route" : "Kies je wandeling:",
     "registration_tshirt" : "Koop een limited edition T-shirt",
     "registration_pay" : "Te betalen:",
+
+    "registration_privacy" : "Kies wie jou kan volgen tijdens de wandeling: ",
+    "registration_privacy_private" : "niemand",
+    "registration_privacy_friends" : "mijn vrienden",
+    "registration_privacy_everyone" : "iedereen",
+
     "registration_error" : "Er ging iets mis bij het inschrijven",
     "registration_error1" : "Er ging iets mis bij het inschrijven. \nGelieve alle velden in te vullen",
 
@@ -93,6 +99,7 @@
     "inforegistration_no_tshirt" : "U hebt geen limited edition T-shirt besteld",
     "inforegistration_tshirt" : "U hebt een limited edition T-shirt besteld in volgende maat: ",
     "inforegistration_pay" : "Betaald bedrag: ",
+
 
     "about_tour_info" : "Tour info",
 

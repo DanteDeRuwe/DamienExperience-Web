@@ -85,12 +85,19 @@
     "registration_chose_route" : "Choisissez votre promenade:",
     "registration_tshirt" : "Achetez un t-shirt en édition limitée",
     "registration_pay" : "Payer:",
+
+    "registration_privacy" : "Choisissez qui peut vous suivre pendant la marche :",
+    "registration_privacy_private" : "personne",
+    "registration_privacy_friends" : "mes amis",
+    "registration_privacy_everyone" : "tout le monde",
+
     "registration_error" : "Une erreur s'est produite lors de l'inscription",
     "registration_error1" : "Une erreur s'est produite lors de l'inscription. \n Merci de remplir tous les champs",
 
     "inforegistration_chosen_route" : "U bent geregistreerd voor volgende wandeling: ",
     "inforegistration_no_tshirt" : "U hebt geen limited edition T-shirt besteld",
     "inforegistration_tshirt" : "U hebt een limited edition T-shirt besteld in volgende maat: ",
+
 
     "about_tour_info" : "L'info du tour",
 
