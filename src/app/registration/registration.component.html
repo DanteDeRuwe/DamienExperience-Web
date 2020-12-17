@@ -24,21 +24,21 @@
                         <p> {{ "registration_privacy" | translate }} </p>
                         <label>
                             <input type="radio" id="privacy.PRIVATE" formControlName="privacySetting"
-                                [value]="privacy.PRIVATE" checked [attr.checked]="true" (click)="setCanSubmit()">
+                                [value]="privacy.PRIVATE">
                             <span> {{ "registration_privacy_private" | translate }} </span>
                             <!-- <label for="privacy.PRIVATE"> {{ "registration_privacy_private" | translate }}</label> -->
                         </label>
                         <br>
                         <label>
                             <input type="radio" id="privacy.FRIENDS" formControlName="privacySetting"
-                                [value]="privacy.FRIENDS" (click)="setCanSubmit()">
+                                [value]="privacy.FRIENDS" >
                             <span> {{ "registration_privacy_friends" | translate }} </span>
                             <!-- <label for="privacy.FRIENDS"> {{ "registration_privacy_friends" | translate }}</label> -->
                         </label>
                         <br>
                         <label>
                             <input type="radio" id="privacy.EVERYONE" formControlName="privacySetting"
-                                [value]="privacy.EVERYONE" (click)="setCanSubmit()">
+                                [value]="privacy.EVERYONE">
                             <span> {{ "registration_privacy_everyone" | translate }} </span>
                             <!-- <label for="privacy.EVERYONE"> {{ "registration_privacy_everyone" | translate }}</label> -->
                         </label>
@@ -52,8 +52,8 @@
                         <div style="width:100%">
                             <select id="shirtSize" class="form-control" formControlName="shirtSize"
                                 (change)="onChangeShirt($event)">
-                                <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
-                                    {{ shirtSize }}
+                                <option *ngFor="let size of shirtSizes" [ngValue]="size">
+                                    {{ size }}
                                 </option>
                             </select>
                             <p class="text-danger"
@@ -67,7 +67,7 @@
                         <div>
                             <p>{{"registration_pay" | translate}} €{{price}}</p>
 
-                            <button [disabled]="!canSubmit" type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" |
+                            <button type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" |
                                 translate}}</button>
                         </div>
                     </div>

@@ -22,20 +22,21 @@ export class RegistrationComponent implements OnInit {
 
   tourName: string;
   errorMessage: string = '';
-  selectedSize: ShirtSize;
-  price: number = 0;
+  selectedSize: ShirtSize = ShirtSize.GEEN;
+  price: number = 50;
 
   hasRegistrations: boolean = false;
   loaded: boolean = false;
-
+/*
   private _hasSelectedRoute : boolean = false;
   private _hasSelectedShirt : boolean = false;
   canSubmit : boolean = false;
   setCanSubmit(){
     var privacy = this.registration.value["privacySetting"]
     var privacyValid = privacy != '';
-    this.canSubmit = this._hasSelectedRoute && this._hasSelectedShirt && privacyValid
+    this.canSubmit = privacyValid && this._hasSelectedRoute && this._hasSelectedShirt
   }
+  */
   userLoaded: Promise<boolean>
 
   shirtSizes = Object.values(ShirtSize);
@@ -48,13 +49,14 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registration = this.fb.group({
-      orderedShirt: ['', Validators.required],
-      shirtSize: ['', Validators.required],
-      privacySetting: ['', Validators.required]
+      orderedShirt: ['false', Validators.required],
+      shirtSize: ['GEEN', Validators.required],
+      privacySetting: [this.privacy.EVERYONE, Validators.required]
     });
 
     this._rds.getFutureRoutes$().subscribe(routes => {
       this.routes = routes;
+      this.tourName=routes[0].tourName
       this._uds.profile$.subscribe(user => {
         if(user.registrations.length != 0){
           user.registrations.forEach(registration => {
@@ -69,9 +71,10 @@ export class RegistrationComponent implements OnInit {
     });
 
     this._dis.obserervableMapData$.subscribe(data => {
+      console.log(data)
       this.tourName = data[0]
-      this._hasSelectedRoute = true
-      this.setCanSubmit()
+      //this._hasSelectedRoute = true
+      //this.setCanSubmit()
     });
   }
   
@@ -89,15 +92,16 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.price = 50;
     }
-    this._hasSelectedShirt = true;
-    this.setCanSubmit()
+    //this._hasSelectedShirt = true;
+    //this.setCanSubmit()
   }
 
   onSubmitRegistration() {
+    console.log(this.tourName)
+    console.log(this.registration)
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN) this.registration.value.orderedShirt = false
 
-    console.log(this.registration.value.privacySetting) //DELETE
     this._rds.getRoute$(this.tourName).subscribe(route =>{
        this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize, this.registration.value.privacySetting)
       .subscribe((val) => {
