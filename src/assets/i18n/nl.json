@@ -52,6 +52,9 @@
     "tracking_zoeken" : "ZOEKEN",
     "tracking_error" : "Fout bij het opvragen van de gebruiker",
 
+    "userpage_login":"log in",
+    "userpage_signup":"registreer",
+
     "login_title":"Ik heb al een account",
     "login_passwoord" : "Passwoord",
     "login_email":"E-mail adress",    
