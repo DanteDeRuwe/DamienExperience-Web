@@ -20,6 +20,7 @@ export class MapComponent implements OnInit, OnChanges {
   oldTour: string;
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
+  waypoints : mapboxgl.Marker[] = []
   
   //temp hardcoded startingpoint
   lat = 50.990410;
@@ -135,6 +136,10 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   addWaypoints(waypoints: Waypoint[]){
+    this.waypoints.forEach(marker => {
+      marker.remove();
+    });
+    this.waypoints=[];
     let localLang: string = localStorage.getItem("lang");
     waypoints.forEach(waypoint => {
       var marker = new mapboxgl.Marker()
@@ -142,6 +147,8 @@ export class MapComponent implements OnInit, OnChanges {
       .setPopup( new mapboxgl.Popup({ offset: 25 })
       .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
       .addTo(this.map);
+      this.waypoints.push(marker);
+      console.log(this.waypoints)
     });
   }
 }

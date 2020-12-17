@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from 'src/app/models/route.model';
 import { DatePipe, formatDate } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class AddRouteFormComponent implements OnInit {
   @Input()
   distance: number;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private translate: TranslateService) { }
   
   ngOnInit(): void {
     //mabye add color too
@@ -50,22 +51,19 @@ export class AddRouteFormComponent implements OnInit {
 
   getErrorMessage(errors: any): string {
     const localLang: string = localStorage.getItem("lang");
+    var error = ""
     if (!errors) {
       return null;
     }
-    if(localLang == 'nl'){
-      if (errors.required) {
-        return 'Dit is verplicht';
-      } else if (errors.minlength) {
-        return `Heeft op zijn minst ${errors.minlength.requiredLength} karakters nodig (heeft ${errors.minlength.actualLength})`;
-      } 
-    }else if(localLang == 'fr'){
-      if (errors.required) {
-        return "C'est obligatoire";
-      } else if (errors.minlength) {
-        return `Nécessite au moins ${errors.minlength.requiredLength} caractères (prend ${errors.minlength.actualLength})`;
-      }
-    }
+    
+    if (errors.required) {
+      this.translate.get('is_required').subscribe( val => {error  = val})
+      return error;
+    } else if (errors.minlength) {
+      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      return error    
+    } 
+    
   }
   setRouteFields(route: Route) {
     this.routeForm.controls['tourName'].setValue(route.tourName) 

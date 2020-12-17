@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Privacy } from 'src/app/enums.model';
+import { TranslateService } from '@ngx-translate/core';
+
 
 
 @Component({
@@ -27,6 +29,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _uds: UserDataService,
     private fb: FormBuilder,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -116,19 +119,25 @@ export class ProfileComponent implements OnInit {
 }
 
   getErrorMessage(errors: any) {
+    var error = ""
     if (!errors) {
       return null;
     }
     if (errors.required) {
-      return 'is required';
+      this.translate.get('is_required').subscribe( val => {error  = val})
+      return error;
     } else if (errors.minlength) {
-      return `needs at least ${errors.minlength.requiredLength} characters (got ${errors.minlength.actualLength})`;
+      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      return error
     } else if (errors.userAlreadyExists) {
-      return `user already exists`;
+      this.translate.get('register_userexists').subscribe( val => {error  = val})
+      return error;
     } else if (errors.email) {
-      return `not a valid email address`;
+      this.translate.get('register_mail').subscribe( val => {error  = val})
+      return error;
     } else if (errors.passwordsDiffer) {
-      return `passwords are not the same`;
+      this.translate.get('register_password').subscribe( val => {error  = val})
+      return error;
     }
   }
 }

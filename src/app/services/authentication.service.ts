@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 function parseJwt(token) {
   if (!token) {
@@ -20,7 +20,7 @@ export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
   private _user$: BehaviorSubject<string>;
   public redirectUrl: string = null;
-  private _checkAdmin: boolean;
+  private _checkAdmin$ =  new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
@@ -34,6 +34,7 @@ export class AuthenticationService {
     this._user$ = new BehaviorSubject<string>(
       parsedToken && parsedToken.unique_name
     );
+    
   }
 
   get user$(): BehaviorSubject<string> {
@@ -45,8 +46,8 @@ export class AuthenticationService {
     return !!localToken ? localToken : '';
   }
 
-  get checkAdmin(): boolean {
-    return this._checkAdmin;
+  get checkAdmin$():Observable<boolean>{
+    return this._checkAdmin$;
   }
 
   //insert code for login request 
@@ -61,7 +62,7 @@ export class AuthenticationService {
     )
       .pipe(
         map((token: any) => {
-          console.log(token);
+          console.log(token); //DELETE
           if (token) {
             // if (rememberme) {
             //   localStorage.setItem(this._tokenKey, token);
@@ -69,10 +70,9 @@ export class AuthenticationService {
             // else {
             //   sessionStorage.setItem(this._tokenKey, token);
             // }
-
+            //this.isAdmin()
             localStorage.setItem(this._tokenKey, token);
             this._user$.next(email);
-            this.isAdmin().subscribe(val => { this._checkAdmin = val; console.log(this._checkAdmin) });
             return true;
           } else {
             return false;
@@ -131,13 +131,38 @@ export class AuthenticationService {
     if (this.user$.getValue()) {
       localStorage.removeItem('currentUser');
       sessionStorage.removeItem('currentUser');
+      this._checkAdmin$.next(false);
       this._user$.next(null);
     }
   }
 
-  isAdmin(): Observable<boolean> {
-    return this.http.get<boolean>(
-      `${environment.apiUrl}/profile/isadmin`
-    );
+  isAdmin(){
+    var ls = localStorage.getItem('currentUser');
+    var ss =sessionStorage.getItem('currentUser');
+    if(ls || ss){
+      this.http.get<boolean>(
+         `${environment.apiUrl}/profile/isadmin`
+        ).pipe(
+          catchError(this.handleError)
+        ).subscribe((v: boolean)=>{
+          this._checkAdmin$.next(v)
+        });
+    }else{
+      //indien niet ingelogd nooit true zetten
+      this._checkAdmin$.next(false)
+    }
+  }
+  
+  handleError(err: any): Observable<never> {
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else if (err instanceof HttpErrorResponse) {
+      console.log(err);
+      errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;
+    } else {
+      errorMessage = err;
+    }
+    return throwError(errorMessage);
   }
 }

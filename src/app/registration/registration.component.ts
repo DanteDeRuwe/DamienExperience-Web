@@ -7,6 +7,7 @@ import { Route } from '../models/route.model';
 import { DatainjectionService } from '../services/datainjection.service';
 import { RouteDataService } from '../services/route-data.service';
 import { UserDataService } from '../services/user-data.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -41,9 +42,15 @@ export class RegistrationComponent implements OnInit {
 
   shirtSizes = Object.values(ShirtSize);
 
+  //hash = sha1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU")
+  //CryptoJS.SHA1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU");
+
+
   constructor(private fb: FormBuilder,
-    private _rds: RouteDataService, private _router: Router,
+    private _rds: RouteDataService, 
+    private _router: Router,
     private _uds: UserDataService,
+    private translate: TranslateService,
     private _dis: DatainjectionService
   ) { }
 
@@ -106,23 +113,19 @@ export class RegistrationComponent implements OnInit {
        this._rds.routeRegistration$(route.tourId, this.registration.value.orderedShirt, this.registration.value.shirtSize, this.registration.value.privacySetting)
       .subscribe((val) => {
         if (val) {
-          if (this._rds.redirectUrl) {
-            this._router.navigateByUrl(this._rds.redirectUrl);
-            this._rds.redirectUrl = undefined;
-
-          } else {
-            this._router.navigate(['about']);
-          }
+          this._router.navigate(['payment'])
         } else {
-          this.errorMessage = 'Er ging iets mis...'
+          this.translate.get('smt_wrong').subscribe( val => {this.errorMessage  = val})
         }
       },
         (err: HttpErrorResponse) => {
           console.log(err);
-          if (err.error instanceof Error) {
-            this.errorMessage = `Er ging iets mis bij het inschrijven: ${err.error.message}`
+          if (err.error instanceof Error) {//registration_error
+            this.translate.get('registration_error').subscribe( val => {this.errorMessage  = val})
+            //this.errorMessage = `Er ging iets mis bij het inschrijven: ${err.error.message}`
           } else {
-            this.errorMessage = `Error ${err.status}: Er ging iets mis bij het inschrijven. \n Gelieve alle velden in te vullen`;
+            this.translate.get('registration_error1').subscribe( val => {this.errorMessage  = val})
+            //this.errorMessage = `Error ${err.status}: Er ging iets mis bij het inschrijven. \n Gelieve alle velden in te vullen`;
           }
         }
       );
@@ -130,11 +133,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   getErrorMessage(errors: any) {
+    var error = ""
     if (!errors) {
       return null;
     }
     if (errors.required) {
-      return 'Dit veld is verplicht';
+      this.translate.get('is_required').subscribe( val => { error = val})
+      return error;
     }
   }
 }

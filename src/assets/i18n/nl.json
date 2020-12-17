@@ -1,6 +1,10 @@
 {
     "test": "Nederlands",
+    "is_required" : "Verplicht",
+    "min_length" : "heeft karakters nodig {{min}} kreeg : {{now}})",
+    "smt_wrong":"Er ging iets mis...",
 
+    "mn_home" : "HOME",
     "mn_admin_dashboard": "DASHBOARD",
     "mn_over_de_tour" : "OVER DE TOUR",
     "mn_wandelaar_volgen" : "WANDELAAR VOLGEN",
@@ -24,7 +28,7 @@
     "home_title":"Damien Experience wandelingen",
     "home_schrijf_je_in" : "Schrijf je nu in voor de damien experience wandelingen.",
     "home_schrijf_me_in" : "SCHRIJF ME IN",
-    "home_datum" : "14 MEI 2020",
+    "home_datum" : "14 MEI 2021",
     "home_DAGEN" : "DAGEN",
     "home_UREN" : "UREN",
     "home_MINUTEN" : "MINUTEN",
@@ -46,13 +50,21 @@
 
     "tracking_zoek" : "ZOEK EEN WANDELAAR",
     "tracking_zoeken" : "ZOEKEN",
+    "tracking_error" : "Fout bij het opvragen van de gebruiker",
+
+    "userpage_login":"log in",
+    "userpage_signup":"registreer",
 
     "login_title":"Ik heb al een account",
     "login_passwoord" : "Passwoord",
     "login_email":"E-mail adress",    
     "login_enter_passwoord":"vul wachtwoord in",
     "login_remember_me" : "Onthoud me",
-    "submit" : "Verzenden",
+
+    "login_failed" : "Kon niet inloggen",
+    "login_error": "Fout bij het inloggen van gebruiker",
+    "submit" : "Bevestigen",
+
 
     "register_title" : "Ik maak een account",
     "register_vn":"Voornaam",
@@ -61,6 +73,9 @@
     "register_nummer" : "Telefoonnummer",
     "register_share_email" : "We zullen uw e-mail nooit met iemand anders delen.",
     "register_confirm" : "Bevestig wachtwoord",
+    "register_userexists" : "Gebruiker bestaat al",
+    "register_mail": "Dit is geen geldig email adress",
+    "register_password":"Paswoorden zijn niet hetzelfde",
 
     "profile_title" : "Mijn profiel",
     "profile_title1" : "Wijzig mijn persoonlijke informatie",
@@ -70,10 +85,21 @@
     "registration_chose_route" : "Kies je wandeling:",
     "registration_tshirt" : "Koop een limited edition T-shirt",
     "registration_pay" : "Te betalen:",
+
     "registration_privacy" : "Kies wie jou kan volgen tijdens de wandeling: ",
     "registration_privacy_private" : "niemand",
     "registration_privacy_friends" : "mijn vrienden",
     "registration_privacy_everyone" : "iedereen",
+
+    "registration_error" : "Er ging iets mis bij het inschrijven",
+    "registration_error1" : "Er ging iets mis bij het inschrijven. \nGelieve alle velden in te vullen",
+
+
+    "inforegistration_chosen_route" : "U bent geregistreerd voor volgende wandeling: ",
+    "inforegistration_no_tshirt" : "U hebt geen limited edition T-shirt besteld",
+    "inforegistration_tshirt" : "U hebt een limited edition T-shirt besteld in volgende maat: ",
+    "inforegistration_pay" : "Betaald bedrag: ",
+
 
     "about_tour_info" : "Tour info",
 
@@ -84,11 +110,25 @@
     "taalfull_fr": "Frans",
     "add_route_form_besch" : "Beschrijving",
     "add_route_form_dist" : "Huidige afstand : ",
-    "add_route_form_submit" : "Opslaan en voeg waypoints toe",
+    "add_route_form_submit" : "Opslaan en beheer waypoints toe",
+    "add_route_form_add" : "Route toevoegen op kaart:",
 
     "add_waypoint_main_title" : "Een overzicht van de huidige waypoints",
     "add_waypoint_add_one" : "Voeg een waypoint toe",
-    "add_waypoint_title" : "Titel"
+    "add_waypoint_title" : "Titel",
     
+    "payment_items" : "Items",
+    "payment_prijs" : "Prijs",
+    "payment_total" : "Totaal",
+
+    "payment_response_succes" : "Betaling succesvol!",
+    "payment_response_succes_tour" : "U bent nu ingeschreven voor de Damien Tour",
+    "payment_response_succes_info": "Verdere informatie kan u vinden in",
+    "payment_response_succes_link": "over de tour",
+    "payment_response_nosucces": "Betaling NIET succesvol!",
+    "payment_response_nosucces_notRegisterd": "U bent niet ingeschreven voor de Damien Tour.",
+    "payment_response_nosucces_go" : "Ga terug naar de",
+    "payment_response_nosucces_link": "betaling",
+    "payment_response_nosucces_pagina":"pagina"
 
 }

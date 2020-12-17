@@ -2,15 +2,21 @@
   <div class="content-wrap" id="content-wrap">
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark black ie-nav" [containerInside]="false">
       <span class="form-inline">
+
         <a class="btn text-light logout" *ngIf="loggedInUser$ | async" (click)="profile()">
           profile
         </a>
-        <a class="btn text-light logout" *ngIf="loggedInUser$ | async" (click)="logout()">
+        <a class="btn text-light logout" *ngIf="loggedInUser$ | async; else loggedOut" (click)="logout()">
           logout
         </a>
+        <ng-template #loggedOut>
+        <a class="btn text-light logout"  (click)="schrijfIn()">
+          login
+        </a>
+        </ng-template>
         <select class="form-control" #selectedLang (change)="changeLang(selectedLang.value)">
           <option *ngFor="let language of translate.getLangs()" [value]="language"
-            [selected]="language === translate.currentLang">
+            [selected]="checkLang(language)">
             {{ language }}
           </option>
         </select>
@@ -25,13 +31,17 @@
             <img src="assets/images/logoDE.png" height="40" alt="damiaantours logo" />
           </a>
         </a>
+
       </mdb-navbar-brand>
 
       <links>
         <!-- Links -->
+          <a class="nav-link text-dark" [routerLink]="['home']" href="">{{
+            "mn_home" | translate
+          }}</a>
         <ul class="navbar-nav ml-auto" id="navitems">
-          <li class="nav-item" *ngIf="isAdmin()">
-            <a class="nav-link text-dark" [routerLink]="['admin-nav']" href="">{{
+          <li class="nav-item" *ngIf="isCheckAdmin">
+            <a class="nav-link text-dark" [routerLink]="['admin-nav/dashboard']" href="">{{
               "mn_admin_dashboard" | translate
             }}</a>
           </li>
