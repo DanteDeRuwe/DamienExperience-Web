@@ -8,6 +8,7 @@ export const environment = {
     accessToken: 'pk.eyJ1Ijoiam9yZHl2YW5rZXJrdm9vcmRlIiwiYSI6ImNrZzNvN3o2bTBicncycHBqYzRtZW50dHkifQ.ceuhpKlsJFUPaxinU4qoag'
   },
   apiUrl: '/api',
+  url : 'http://localhost:4200' ,
   chatApi: 'http://localhost:3000/',
   liveChatApi: 'https://damienexperience-chat.herokuapp.com',
 };

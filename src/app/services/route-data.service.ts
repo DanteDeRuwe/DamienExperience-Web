@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Route } from '../models/route.model';
 import { Waypoint } from '../models/waypoint.model';
+import { Payment } from '../models/payment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,42 @@ export class RouteDataService {
         routeId,
         orderedShirt,
         shirtSize
+      }).pipe(
+        tap(),
+        catchError(this.handleError)
+      )
+  }
+  //https://localhost:5001/api/routeregistration/
+  generatePaymentData(language:string,url:string) {
+    
+    return this.http.get(`${environment.apiUrl}/routeregistration/generatepaymentdata/${language}`,
+      {
+        
+      }).pipe(
+        tap(),
+        catchError(this.handleError),
+        map(Payment.fromJson)
+      )
+  }
+  paymentResponse(params : any) {
+    return this.http.post(`${environment.apiUrl}/routeregistration/ControlPaymentResponse/`,
+      {
+        Aavaddress :params.AAVADDRESS,
+        Acceptance :params.ACCEPTANCE,
+        Amount :params.amount,
+        Brand :params.BRAND,
+        CardNo : params.CARDNO,
+        CN : params.CN,
+        Currency : params.currency,
+        ED : params.ED,
+        IP : params.IP,
+        NCError : params.NCERROR,
+        OrderID : params.orderID,
+        PayId : params.PAYID,
+        PM:params.PM ,
+        ShaSign: params.SHASIGN,
+        Status : params.STATUS,
+        TRXDate : params.TRXDATE
       }).pipe(
         tap(),
         catchError(this.handleError)

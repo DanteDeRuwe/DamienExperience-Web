@@ -19,9 +19,13 @@ import { RegisterComponent } from './user/register/register.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
 import { AddRouteComponent } from './admin/add-route/add-route.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentResolverService } from './services/payment-resolver.service';
+import { PaymentResponseComponent } from './payment-response/payment-response.component';
 import { RoleGuard } from './user/role.guard';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 import { RouteResolverService } from './services/route-resolver.service';
+
 
 
 const routes: Routes = [
@@ -33,11 +37,15 @@ const routes: Routes = [
   { path: 'privacypolicy', component: PrivacyPolicyComponent },
   { path: 'sponsors', component: SponsorsComponent },
   { path: 'cookiepolicy', component: CookiePolicyComponent},
+
+  { path: 'payment', component: PaymentComponent,resolve : {data: PaymentResolverService}},
+  { path: 'payment-response', component: PaymentResponseComponent},
   { path: 'admin-nav', component: AdminNavComponent, canActivate: [RoleGuard],children:[
     { path: 'manageroutes', component: ManageroutesComponent, canActivate: [RoleGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
     { path: 'add-route', component: AddRouteComponent, canActivate: [RoleGuard] },
     { path: 'edit-route/:routename', component: EditRouteComponent, canActivate: [RoleGuard] ,resolve: { route: RouteResolverService }},
+
   ]},
 
 

@@ -60,9 +60,11 @@
     "login_email":"E-mail adress",    
     "login_enter_passwoord":"vul wachtwoord in",
     "login_remember_me" : "Onthoud me",
+
     "login_failed" : "Kon niet inloggen",
     "login_error": "Fout bij het inloggen van gebruiker",
-    "submit" : "Verzenden",
+    "submit" : "Bevestigen",
+
 
     "register_title" : "Ik maak een account",
     "register_vn":"Voornaam",
@@ -106,7 +108,20 @@
 
     "add_waypoint_main_title" : "Een overzicht van de huidige waypoints",
     "add_waypoint_add_one" : "Voeg een waypoint toe",
-    "add_waypoint_title" : "Titel"
+    "add_waypoint_title" : "Titel",
     
+    "payment_items" : "Items",
+    "payment_prijs" : "Prijs",
+    "payment_total" : "Totaal",
+
+    "payment_response_succes" : "Betaling succesvol!",
+    "payment_response_succes_tour" : "U bent nu ingeschreven voor de Damien Tour",
+    "payment_response_succes_info": "Verdere informatie kan u vinden in",
+    "payment_response_succes_link": "over de tour",
+    "payment_response_nosucces": "Betaling NIET succesvol!",
+    "payment_response_nosucces_notRegisterd": "U bent niet ingeschreven voor de Damien Tour.",
+    "payment_response_nosucces_go" : "Ga terug naar de",
+    "payment_response_nosucces_link": "betaling",
+    "payment_response_nosucces_pagina":"pagina"
 
 }

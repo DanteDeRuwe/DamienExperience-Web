@@ -55,8 +55,11 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentResponseComponent } from './payment-response/payment-response.component';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 import { InfoRegistrationComponent } from './info-registration/info-registration.component';
+
 
 
 @NgModule({
@@ -87,8 +90,11 @@ import { InfoRegistrationComponent } from './info-registration/info-registration
     ManageroutesComponent,
     AdminNavComponent,
     DeleteRouteDialogComponent,
+    PaymentComponent,
+    PaymentResponseComponent
     EditRouteComponent,
     InfoRegistrationComponent
+
   ],
   imports: [
     MatDialogModule,
