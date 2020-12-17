@@ -79,6 +79,10 @@
 
     "profile_title" : "Mijn profiel",
     "profile_title1" : "Wijzig mijn persoonlijke informatie",
+    "privacy" : "Privacy",
+    "profile_add_friends" : "Voeg vrienden toe",
+    "profile_email_friend" : "Email van een vriend",
+    "profile_friends" : "Mijn vrienden",
 
     "registration_already_sign" : "Je bent al geregistreerd",
     "registration_regist" : "Ik schrijf me in voor een wandeling!",
@@ -90,6 +94,7 @@
     "registration_privacy_private" : "niemand",
     "registration_privacy_friends" : "mijn vrienden",
     "registration_privacy_everyone" : "iedereen",
+   
 
     "registration_error" : "Er ging iets mis bij het inschrijven",
     "registration_error1" : "Er ging iets mis bij het inschrijven. \nGelieve alle velden in te vullen",

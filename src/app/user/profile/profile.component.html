@@ -101,7 +101,7 @@
         </p>
       </div>
       <div>
-        <label for="privacy">privacy</label>
+        <label for="privacy">{{"privacy" | translate}}</label>
         <select  class="form-control" formControlName="privacy" name="privacy" id="privacy" [value]='privacyNow'>
           <option *ngFor="let option of privacyOptions" [value]="option">{{option}}</option>
         </select>
@@ -123,7 +123,7 @@
   </form>
   <hr/>
   <div>
-    <h2>Mijn Vrienden</h2>
+    <h2>{{ "profile_friends" | translate}}</h2>
     <div class="profile-friends">
       <div class="profile-friends-sections">
         <div class="profile-friends-scroll">
@@ -142,11 +142,11 @@
         </div>
       </div>
       <div>
-        <h3>Voeg vrienden toe</h3>
+        <h3> {{"profile_add_friends" | translate}}</h3>
         <div class="profile-friends-add">
           <form [formGroup]="friendForm" (ngSubmit)="addFriend()">
             <div class="friendForm">
-              <label for="friendEmail">Friend Email</label>
+              <label for="friendEmail">{{"profile_friends" | translate}}</label>
               <input
                     type="text"
                     class="form-control"
