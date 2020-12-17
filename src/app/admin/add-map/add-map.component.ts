@@ -52,6 +52,21 @@ export class AddMapComponent implements OnInit {
         this.newCoordinatesWaypoint.emit(coords)
       }
     })
+    this.map.on('load',()=>{
+      this.drawPath()
+      this.showWaypoints(this.waypoints)
+      if(this.coordinates){
+        this.fitToBounds(this.coordinates)
+      }
+    })
+  }
+  fitToBounds(coords : any) {
+    var bounds = coords.reduce(function (bounds, coord) {
+      return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(coords[0], coords[0]));
+      this.map.fitBounds(bounds, {
+      padding: 20
+    });
   }
   ngOnDestroy() {
     this.removePath()
@@ -137,7 +152,6 @@ export class AddMapComponent implements OnInit {
       this.marker.remove()
     }
     this.waypointDrawn = false;
-    console.log("Merry Christmas");
   }
 
   startSelectingWaypoint() {
@@ -192,8 +206,9 @@ export class AddMapComponent implements OnInit {
     if(waypoints != null)
       this.waypoints = waypoints;
 
-    let localLang: string = localStorage.getItem("lang");
-    this.waypoints.forEach(waypoint => {
+    if(this.waypoints != null){
+      let localLang: string = localStorage.getItem("lang");
+      this.waypoints.forEach(waypoint => {
 
       var marker = new mapboxgl.Marker()
       .setLngLat([waypoint.longitude, waypoint.latitude])
@@ -201,6 +216,8 @@ export class AddMapComponent implements OnInit {
       .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
       .addTo(this.map);
       this.waypointMarkers.push(marker);
-    });
+      });
+    }
   }
+  
 }

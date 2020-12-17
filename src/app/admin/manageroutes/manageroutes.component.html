@@ -25,7 +25,7 @@
                 <p matLine> <span> {{route.distanceInMeters / 1000}} km </span></p>
 
                 <div class="icon-right">
-                    <button mat-icon-button class="icon-right-button">
+                    <button mat-icon-button class="icon-right-button" [routerLink]="['/admin-nav/edit-route',route.tourName]" >
                         <mat-icon class="mat-24">create</mat-icon>
                     </button>
                 </div>

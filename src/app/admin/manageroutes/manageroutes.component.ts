@@ -20,7 +20,7 @@ export class ManageroutesComponent implements OnInit {
   constructor(private _rds: RouteDataService, private _dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this._rds.getFutureRoutes$().subscribe((routes: Route[]) => {
+    this._rds.getCashedRoutes().subscribe((routes: Route[]) => {
       this.routes = routes;
     });
   }
@@ -36,7 +36,7 @@ export class ManageroutesComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        location.reload(); //Is dit ok (reload page), of beter met een updatende lijst werke? 
+        //location.reload(); //Is dit ok (reload page), of beter met een updatende lijst werke? 
       }
     });
 

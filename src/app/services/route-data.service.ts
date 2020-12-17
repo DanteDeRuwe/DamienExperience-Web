@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Route } from '../models/route.model';
@@ -12,8 +12,24 @@ import { Payment } from '../models/payment.model';
 })
 export class RouteDataService {
   public redirectUrl: string = null;
-
-  constructor(private http: HttpClient) { }
+  private _routes$ = new BehaviorSubject<Route[]>([]);
+  private _routes : Route[];
+  constructor(private http: HttpClient) {
+    this.getFutureRoutes$()
+    .pipe(
+      catchError(err => {
+        this._routes$.error(err);
+        return throwError(err);
+      })
+    )
+    .subscribe((v: Route[]) => {
+      this._routes = v;
+      this._routes$.next(this._routes);
+    });
+   }
+  getCashedRoutes() : Observable<Route[]>{
+    return this._routes$
+  }
 
   getRoute$(name: string): Observable<Route> {
     return this.http.get(`${environment.apiUrl}/route/getroutebyname/${name}`).pipe(
@@ -90,7 +106,12 @@ export class RouteDataService {
       .pipe(
         tap(),
         catchError(this.handleError)
-      ).subscribe()
+      ).subscribe(
+        ()=>{
+          this._routes = this._routes.filter(rec => rec.tourName != routeName);
+          this._routes$.next(this._routes);
+        }
+      )
   }
 
 
@@ -104,6 +125,36 @@ export class RouteDataService {
     waypoints : Waypoint[]) {
       var jsonWaypoints = Waypoint.toJsonList(waypoints);
     return this.http.post(`${environment.apiUrl}/route/add`,
+      {
+        tourName,
+        date,
+        distanceInMeters,
+        lineColor,
+        coordinates,
+        info,
+        waypoints : jsonWaypoints
+      }).pipe(
+        catchError(this.handleError),
+        tap(),
+        map((data:any) => {
+          var route =  Route.fromJson(data)
+          this._routes = [...this._routes, route];
+          this._routes$.next(this._routes);
+          return route;
+        }
+      ))
+  }
+
+  updateRoute$(
+    tourName : string,
+    date : Date,
+    distanceInMeters : number,
+    lineColor : string,
+    coordinates : [number[]],
+    info : {},
+    waypoints : Waypoint[]) {
+      var jsonWaypoints = Waypoint.toJsonList(waypoints);
+    return this.http.put(`${environment.apiUrl}/route/update`,
       {
         tourName,
         date,

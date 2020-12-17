@@ -9,12 +9,12 @@
     <div class="toggle-buttons mb-3">
       <button class="btn btn-primary toggle-button" (click)="this.registerActive = false"
         [ngClass]="{'active': !this.registerActive}">
-        Log In
+        {{"userpage_login" |translate}}
       </button>
 
       <button class="btn btn-primary toggle-button" (click)="this.registerActive = true"
         [ngClass]="{'active': this.registerActive}">
-        Sign Up
+        {{"userpage_signup" |translate}}
       </button>
     </div>
 

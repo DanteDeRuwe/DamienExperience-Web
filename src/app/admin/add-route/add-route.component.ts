@@ -7,6 +7,7 @@ import { AddWaypointsFormComponent } from '../add-waypoints-form/add-waypoints-f
 import { Waypoint } from 'src/app/models/waypoint.model';
 import { WaypointService } from 'src/app/services/waypoint.service';
 import { RouteDataService } from 'src/app/services/route-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-route',
@@ -19,39 +20,7 @@ export class AddRouteComponent implements OnInit {
   coordinates : [number[]]
   waypointAdding : number[]
   lineColor : string = "#3bb7a9";
-  waypointsDUMMY : Waypoint[] //TODO DELETE DUMMYDATA
-  = [
-    Waypoint.fromJson({
-      id: "2b6c07f0-4464-41c1-a837-eab958a0d0e2",
-      longitude: 4.705204,
-      latitude: 50.99041,
-      languagesText: {
-        title: {
-          nl: "Delhaize Tremelo",
-          fr: "Delhaize Tremelo"
-        },
-        description: {
-          nl: "Gratis blikje frisdrank en snoepreep bij vertoon van een geldige coupon.",
-          fr: "Canette de soda et bonbon gratuit"
-        }
-      }
-    }), Waypoint.fromJson(
-    {
-      id: "0570fdbb-28e5-4cb8-a41f-defcbc3aeba9",
-      longitude: 4.708955,
-      latitude: 50.994423,
-      languagesText: {
-        title: {
-          nl: "Bevoorrading 1",
-          fr: "Rations 1"
-        },
-        description: {
-          nl: "Hier krijg je een appeltje voor de dorst!",
-          fr: "une pomme ou deux"
-        }
-      }
-    })
-  ];
+
   // change back don't forget 
   //TODO 
    routeFormShowing : boolean = true;
@@ -62,13 +31,6 @@ export class AddRouteComponent implements OnInit {
     lineColor : this.lineColor,
     coordinates: [[]]
 },0,[]);
-/*
-  route: Route 
-   = new Route("","", new Date(),0,{
-    lineColor : this.lineColor,
-    coordinates: [[]]
-},0,this.waypointsDUMMY);
-*/
   //get acces to child component
   @ViewChild(AddMapComponent)
   private addMapComponent: AddMapComponent;
@@ -76,7 +38,7 @@ export class AddRouteComponent implements OnInit {
   @ViewChild(AddWaypointsFormComponent)
   private addWaypointsFormComponent: AddWaypointsFormComponent;
 
-  constructor(private _routeService : RouteDataService, private _waypointService : WaypointService, private fb: FormBuilder) { }
+  constructor(private _routeService : RouteDataService, private _waypointService : WaypointService, private _router: Router) { }
 
   ngOnInit(): void {  
   }
@@ -98,14 +60,18 @@ export class AddRouteComponent implements OnInit {
     let fr = value.info_fr;
     let info = {nl, fr}
     let distance = this.distanceInMeters*1000
-      this._routeService.addRoute$(value.tourName,
-        value.date,
-        distance,
-        this.lineColor,
-        this.coordinates,
-        info,
-        this.waypointsDUMMY).subscribe(temp => {this.route = temp; console.log(this.route); //TODO DELETE DUMMYDATA
-          this.addMapComponent.showWaypoints(this.route.waypoints);});
+    this._routeService.addRoute$(value.tourName,
+      value.date,
+      distance,
+      this.lineColor,
+      this.coordinates,
+      info,
+      [])
+      .subscribe(temp => 
+        {
+          this.route = temp;
+          this.addMapComponent.showWaypoints(this.route.waypoints);
+        });
     this.routeFormShowing=false;
   }
 
@@ -186,7 +152,6 @@ export class AddRouteComponent implements OnInit {
     this.route.waypoints = waypoints;
     this.addMapComponent.aferAddWaypoint();
     this.addMapComponent.showWaypoints();
-    console.log(this.route)
   }
 
   deleteWaypoint(waypoint : Waypoint){
@@ -201,5 +166,6 @@ export class AddRouteComponent implements OnInit {
 
   saveWaypoints(){
     this._waypointService.addWaypoints$(this.route.tourName, this.route.waypoints).subscribe(temp => this.route.waypoints = temp);
+    this._router.navigate(['admin-nav/manageroutes']);
   }
 }

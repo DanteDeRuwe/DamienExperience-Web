@@ -38,6 +38,8 @@
   padding: 3rem;
   z-index: 99;
   height: 100%;
+  width: fit-content;
+  float: right;
 
   .icon{
     width: 4rem;
@@ -65,7 +67,8 @@
     border-radius: 1rem;
     backdrop-filter: blur(15px);
     padding: 1rem;
-    visibility: hidden;
+    display: none;
+
   }
 
 }
