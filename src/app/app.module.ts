@@ -91,7 +91,7 @@ import { InfoRegistrationComponent } from './info-registration/info-registration
     AdminNavComponent,
     DeleteRouteDialogComponent,
     PaymentComponent,
-    PaymentResponseComponent
+    PaymentResponseComponent,
     EditRouteComponent,
     InfoRegistrationComponent
 
