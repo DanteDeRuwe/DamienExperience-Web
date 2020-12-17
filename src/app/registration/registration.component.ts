@@ -68,7 +68,7 @@ export class RegistrationComponent implements OnInit {
         if(user.registrations.length != 0){
           user.registrations.forEach(registration => {
           routes.forEach(route => {
-            if (route.tourId == registration.routeId)
+            if (route.tourId == registration.routeId && registration.paid)
               this.hasRegistrations = true
             })
           });
