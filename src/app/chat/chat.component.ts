@@ -13,9 +13,6 @@ import { ChatMessage } from '../models/chatmessage.model';
 export class ChatComponent implements OnInit {
   @ViewChild('scrollMe') chat: ElementRef;
   @Input() roomname: string;
-  // username = 'Jordy';
-  // room = 'JordyRoom';
-  // chatForm = document.getElementById('chat-form');
   socket;
 
   loggedon = false;
@@ -32,8 +29,7 @@ export class ChatComponent implements OnInit {
       if(user){
         this.loggedon = true
         this.socket = io(environment.liveChatApi, { transports: ['websocket']});
-        const room = 'Jordy\'s Room';
-
+        
         this.socket.emit('join room', {username: user.lastName, email: user.email, room: this.roomname})
 
         this.socket.on('chat message', (message: ChatMessage) => { 
@@ -41,6 +37,7 @@ export class ChatComponent implements OnInit {
           this.scrolltop = this.chat.nativeElement.scrollHeight;
         });
       }
+      
     });
   }
 

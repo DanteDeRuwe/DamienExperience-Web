@@ -1,11 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { getTestBed } from '@angular/core/testing';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component,  OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { NgForm } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import {  Router } from '@angular/router';
 import { Route } from '../models/route.model';
 import { Walk } from '../models/walk.model';
 import { RouteDataService } from '../services/route-data.service';
@@ -46,7 +43,7 @@ export class TrackingComponent implements OnInit {
     this.roomname = searchresult;
     if(searchresult){
       this._wds.getWalk$(searchresult).subscribe((walk: Walk) =>{
-        console.log(walk)
+        
         if(walk){
           this._rds.getRouteById$(walk.routeID).subscribe((route: Route) => {
             this.userName = searchresult;
@@ -59,20 +56,20 @@ export class TrackingComponent implements OnInit {
         }
       },
       (err: HttpErrorResponse) => {
-        console.log(err);
+        
         if (err.error instanceof Error) {
           this.translate.get('tracking_error').subscribe( val => {this.errorMessage  = val})
-          console.log(this.errorMessage)
+          
           alert(this.errorMessage)
         } else {
           this.errorMessage = `Error ${err.status}`;
-          console.log(this.errorMessage)
+          
           this.translate.get('tracking_error').subscribe( val => {this.errorMessage  = val})
           alert(this.errorMessage)
         }
       })
     }else{
-      console.log('nouser')
+      
     }
   }
 

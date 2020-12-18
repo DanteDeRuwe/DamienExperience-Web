@@ -17,27 +17,8 @@ export class PaymentResponseComponent implements OnInit {
   tourName: string
 
   constructor(private route: ActivatedRoute,private _routeService : RouteDataService) { }
-  /*
-  AAVADDRESS: "NO"
-  ACCEPTANCE: "TEST"
-  BRAND: "KBC Online"
-  CARDNO: ""
-  CN: ""
-  ED: ""
-  IP: "178.117.47.151"
-  NCERROR: "0"
-  PAYID: "3092731841"
-  PM: "KBC Online"
-  SHASIGN: "EE86434F942B07A27DB63F5068E1F8236DCA6DC5"
-  STATUS: "9"
-  TRXDATE: "12/10/20"
-  amount: "65"
-  currency: "EUR"
-  orderID: "785a535b-9759-497e-b59c-c4e311a5da96"
-  */
   ngOnInit(): void {
     this.route.queryParams.subscribe((params)=>{
-      console.log(params)
       this._params = params
       this.extractStatus(params.STATUS)
     })
@@ -64,7 +45,6 @@ export class PaymentResponseComponent implements OnInit {
       this.tourName = val.tourName
       this.succes = val.valid
       this.loading = false;
-      console.log(this.succes)
     },
     (err: HttpErrorResponse) => {
       this.succes = false; 

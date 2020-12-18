@@ -65,17 +65,13 @@ export class ProfileComponent implements OnInit {
   }
 
   changeCredentials() {
-    console.log('submit');
-    console.log(this.user);
-    var index 
-    console.log(`/${this.credentials.get("privacy").value}/`)
     
+    var index 
     index = this.privacyOptions.indexOf(this.credentials.get("privacy").value)
     if(index<0){
       index = this._oldPrivacy
-      console.log(index)
+      
     }
-    console.log(index)
     var tempUser = {
       email: this.credentials.get("email").value,
       firstName: this.credentials.get("firstname").value,
@@ -85,8 +81,7 @@ export class ProfileComponent implements OnInit {
       friends: this.friends,
       privacy: index
     }
-    console.log(this.credentials.get("dateOfBirth").value)
-    console.log(tempUser)
+
     //  console.log(tempUser)
     this._uds.changeCredentials(tempUser).subscribe();
   }
@@ -98,7 +93,6 @@ export class ProfileComponent implements OnInit {
     console.log(index)
     if(index<0){
       this.friends.push(email)
-      console.log(this.user.friends)
       this._uds.updateFriends(this.friends).subscribe();
       this.friendForm.get("friendEmail").setValue("")
     }

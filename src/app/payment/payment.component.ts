@@ -29,7 +29,6 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(item => {
       this.payment = item['data']
-      console.log(this.payment)
       if(this.payment.amount == "6600"){
         this.amountInEuro = "66,00"
         this.orderdShirt = true
