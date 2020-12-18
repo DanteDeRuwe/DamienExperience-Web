@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouteDataService } from '../services/route-data.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-payment-response',
@@ -58,11 +59,17 @@ export class PaymentResponseComponent implements OnInit {
   }
   sendApiCall(){
     console.log(this._params.orderID)
-    this._routeService.paymentResponse(this._params).subscribe((val : any)=>{
+    this._routeService.paymentResponse(this._params).subscribe(
+      (val : any)=>{
       this.tourName = val.tourName
       this.succes = val.valid
       this.loading = false;
       console.log(this.succes)
+    },
+    (err: HttpErrorResponse) => {
+      this.succes = false; 
+      this.loading = false; 
+      this.errorMessage = "Payment failed"             
     });
   }
 
