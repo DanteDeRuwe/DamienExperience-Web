@@ -42,7 +42,8 @@ const routes: Routes = [
   { path: 'payment-response', component: PaymentResponseComponent},
   { path: 'admin-nav', component: AdminNavComponent, canActivate: [RoleGuard],children:[
     { path: 'manageroutes', component: ManageroutesComponent, canActivate: [RoleGuard] },
-    { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
+    //has currently no functunality in project
+    //{ path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
     { path: 'add-route', component: AddRouteComponent, canActivate: [RoleGuard] },
     { path: 'edit-route/:routename', component: EditRouteComponent, canActivate: [RoleGuard] ,resolve: { route: RouteResolverService }},
 
