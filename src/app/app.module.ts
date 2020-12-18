@@ -43,22 +43,12 @@ import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
 import { environment } from 'src/environments/environment';
 
-
 const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket']} };
 
-import { AddRouteComponent } from './admin/add-route/add-route.component';
-import { AddMapComponent } from './admin/add-map/add-map.component';
-import { AddRouteFormComponent } from './admin/add-route-form/add-route-form.component';
-import { AddWaypointsFormComponent } from './admin/add-waypoints-form/add-waypoints-form.component';
-
-import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
-import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
-import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentResponseComponent } from './payment-response/payment-response.component';
-import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 import { InfoRegistrationComponent } from './info-registration/info-registration.component';
+import { AdminModule } from './admin/admin.module';
 
 
 
@@ -82,17 +72,8 @@ import { InfoRegistrationComponent } from './info-registration/info-registration
     CookiePolicyComponent,
     TourselectorComponent,
     ChatComponent,
-    AddRouteComponent,
-    AddMapComponent,
-    AddRouteFormComponent,
-    AddWaypointsFormComponent,
-    DashboardComponent,
-    ManageroutesComponent,
-    AdminNavComponent,
-    DeleteRouteDialogComponent,
     PaymentComponent,
     PaymentResponseComponent,
-    EditRouteComponent,
     InfoRegistrationComponent
 
   ],
@@ -113,10 +94,12 @@ import { InfoRegistrationComponent } from './info-registration/info-registration
         deps: [HttpClient]
       }
     }),
+    AdminModule,
     //SocketIoModule.forRoot(config)
   ],
   providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[TranslateModule]
 })
 export class AppModule { }
 

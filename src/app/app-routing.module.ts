@@ -40,16 +40,13 @@ const routes: Routes = [
 
   { path: 'payment', component: PaymentComponent,resolve : {data: PaymentResolverService}},
   { path: 'payment-response', component: PaymentResponseComponent},
-  { path: 'admin-nav', component: AdminNavComponent, canActivate: [RoleGuard],children:[
-    { path: 'manageroutes', component: ManageroutesComponent, canActivate: [RoleGuard] },
-    //has currently no functunality in project
-    //{ path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
-    { path: 'add-route', component: AddRouteComponent, canActivate: [RoleGuard] },
-    { path: 'edit-route/:routename', component: EditRouteComponent, canActivate: [RoleGuard] ,resolve: { route: RouteResolverService }},
-
-  ]},
-
-
+  
+  { path: 'admin-nav', component: AdminNavComponent, canActivate: [RoleGuard],
+   loadChildren: () =>
+      import('./admin/admin.module').then((mod) => mod.AdminModule),
+    data: { preload: false },
+  },
+  
   //temp route
   { path: 'chat', component: ChatComponent },
 
