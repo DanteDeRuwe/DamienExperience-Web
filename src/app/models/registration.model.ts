@@ -1,3 +1,5 @@
+import { ShirtSize } from "../enums.model";
+
 export interface RegistrationJson {
     registrationId: string,
     timeStamp: Date,
@@ -18,12 +20,13 @@ export class Registration {
     ) { }
 
     static fromJson(json: RegistrationJson) {
+        var enumValue = (<any>ShirtSize)[json.sizeShirt];
         const registration = new Registration(
             json.registrationId,
             json.timeStamp,
             json.routeId,
             json.orderedShirt,
-            json.sizeShirt,
+            enumValue,
             json.paid
         )
         return registration;

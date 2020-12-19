@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.privacyOptions = Object.values(Privacy);
-    console.log(this.privacyOptions)
     
     this.credentials = this.fb.group({
       firstname: ['', Validators.required],
