@@ -1,15 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { getTestBed } from '@angular/core/testing';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { NgForm } from '@angular/forms';
-import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { Route } from '../models/route.model';
 import { Walk } from '../models/walk.model';
 import { RouteDataService } from '../services/route-data.service';
 import { WalkDataService } from '../services/walk-data.service';
+
 @Component({
   selector: 'app-tracking',
   templateUrl: './tracking.component.html',
@@ -17,69 +15,83 @@ import { WalkDataService } from '../services/walk-data.service';
 })
 export class TrackingComponent implements OnInit {
   roomname: string;
-
-  tourName: string;
-  userName: string;
   visible = true;
-  
   errorMessage = '';
   chatVisible = false;
-  validWalk = false;
 
   searchForm: FormGroup;
 
+  walk: Walk;
+  route: Route;
+
   constructor(private fb: FormBuilder,
-    private router: Router,
     private _rds: RouteDataService,
-    private _wds: WalkDataService) { }
+    private _wds: WalkDataService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      let email = params['email'];
+      if (!!email) {
+        this.visible = false;
+        this.initWalk(email)
+      }
+    });
+
     this.searchForm = this.fb.group({
       username: ['', Validators.required]
     });
   }
 
-  onSubmitSearch(){
+  onSubmitSearch() {
     const searchresult = this.searchForm.value.username;
     this.roomname = searchresult;
-    if(searchresult){
-      this._wds.getWalk$(searchresult).subscribe((walk: Walk) =>{
-        console.log(walk)
-        if(walk){
-          this._rds.getRouteById$(walk.routeID).subscribe((route: Route) => {
-            this.userName = searchresult;
-            this.tourName = route.tourName;
-            this.validWalk = true;
-            this.visible = false
-          });
-        }else{
-          console.log('nowalk')
-        }
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err);
-        if (err.error instanceof Error) {
-          this.errorMessage = `Error while trying to get the walk user`
-          console.log(this.errorMessage)
-        } else {
-          this.errorMessage = `Error ${err.status}`;
-          console.log(this.errorMessage)
-        }
-      })
-    }else{
+    if (searchresult) {
+      this.router.navigate(["/track"], { queryParams: { email: searchresult } })
+    } else {
       console.log('nouser')
     }
   }
 
-  onToggleChat(){
+  private initWalk(email: string) {
+    this._wds.getWalk$(email)
+      .pipe(take(1)) //only get initial walk
+      .subscribe((walk: Walk) => {
+        if (walk) {
+          this.setupWalk(walk)
+          this.setWalkToLiveWalk(email) //after initializing, use the live walk
+          this.visible = false;
+        } else {
+          console.log('nowalk')
+        }
+      },
+        (err: HttpErrorResponse) => {
+          console.error(err);
+          if (err.error instanceof Error) {
+            this.errorMessage = `Error while trying to get the walk user`
+            console.error(this.errorMessage)
+          } else {
+            this.errorMessage = `Error ${err.status}`;
+            console.error(this.errorMessage)
+          }
+        });
+  }
+
+  onToggleChat() {
     this.chatVisible = !this.chatVisible;
   }
 
-  get tourname(){
-    return this.tourName;
+  private setupWalk(walk: Walk) {
+    this.walk = walk;
+    this._rds.getRouteById$(walk.routeID).subscribe((route: Route) => {
+      this.route = route;
+      this.visible = false
+    });
   }
 
-  get username(){
-    return this.userName
+  private setWalkToLiveWalk(userToTrack: string) {
+    this._wds.connectToTrackingHub(userToTrack); //connects to the real-time service
+    this._wds.liveWalk.subscribe(x => this.walk = x);
   }
 }

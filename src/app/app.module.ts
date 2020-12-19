@@ -57,6 +57,7 @@ import { TestComponent } from './admin/test/test.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
+import { TrackingMapComponent } from './tracking-map/tracking-map.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { EditRouteComponent } from './admin/edit-route/edit-route.component';
     TestComponent,
     AdminNavComponent,
     DeleteRouteDialogComponent,
-    EditRouteComponent
+    EditRouteComponent,
+    TrackingMapComponent
   ],
   imports: [
     MatDialogModule,
