@@ -99,14 +99,24 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  translateDate(date: string) :string {
+    var year = date.substring(0,4)
+    var month = date.substring(5,7)
+    var day = date.substring(8)
+    return `${day}${month}${year}`
+  }
+
   onSubmitRegister() {
     console.log(this.register.value.dobaAndPhoneGroup.dob)
     console.log(this.register.value.dobaAndPhoneGroup.phone)
+
+    var date = this.translateDate(this.register.value.dobaAndPhoneGroup.dob)
+    
     console.log(typeof(this.register.value.dobaAndPhoneGroup.dob))
     this._authService.register(
       this.register.value.nameGroup.firstname,
       this.register.value.nameGroup.lastname,
-      this.register.value.dobaAndPhoneGroup.dob,
+      date,
       this.register.value.dobaAndPhoneGroup.phone,
       this.register.value.email,
       this.register.value.passwordGroup.password,
