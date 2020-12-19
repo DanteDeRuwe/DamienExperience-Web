@@ -135,7 +135,14 @@
     "payment_response_nosucces_notRegisterd": "Vous n'êtes pas inscrit au Damien Tour.",
     "payment_response_nosucces_go" : "Revenir à la",
     "payment_response_nosucces_link": "paiement",
-    "payment_response_nosucces_pagina":"page"
+    "payment_response_nosucces_pagina":"page",
+
+    "404_page": "Cette page n'existe pas :/",
+    "404_page_now_youre_here": "Tant que vous êtes ici...",
+    "404_page_time": "Donnez-nous votre temps",
+    "404_page_time_btn": "Je vais être volontaire",
+    "404_page_money": "Donnez-nous votre contribution",
+    "404_page_money_btn": "Je fais une donation en ligne"
 
 
 }
