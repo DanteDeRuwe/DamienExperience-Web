@@ -135,6 +135,13 @@
     "payment_response_nosucces_notRegisterd": "U bent niet ingeschreven voor de Damien Tour.",
     "payment_response_nosucces_go" : "Ga terug naar de",
     "payment_response_nosucces_link": "betaling",
-    "payment_response_nosucces_pagina":"pagina"
+    "payment_response_nosucces_pagina":"pagina",
+
+    "404_page": "Deze pagina lijkt niet te bestaan :/",
+    "404_page_now_youre_here": "Nu je hier toch bent...",
+    "404_page_time": "Schenk ons je tijd",
+    "404_page_time_btn": "Ik word vrijwilliger",
+    "404_page_money": "Schenk ons je bijdrage",
+    "404_page_money_btn": "Ik doe een online gift"
 
 }
