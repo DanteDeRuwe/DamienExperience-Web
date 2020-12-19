@@ -74,7 +74,7 @@
     "register_share_email" : "Nous ne partagerons jamais votre e-mail avec qui que ce soit.",
     "register_confirm" : "Confirmez le mot de passe",
     "register_userexists" : "L'utilisateur existe déjà",
-    "register_mail": "This is not a valid email address",
+    "register_mail": "Ceci n'est pas une adresse électronique valide",
     "register_password":"Les mots de passe ne sont pas les mêmes",
 
     "profile_title" : "Mon profil",
@@ -115,7 +115,7 @@
     "add_route_form_besch": "La description",
     "add_route_form_dist" : "Distance actuelle : ",
     "add_route_form_submit" : "Enregistrer et modifier des waypoints",
-    "add_route_form_add" : "Route toevoegen op kaart:",
+    "add_route_form_add" : "Ajouter l'itinéraire sur la carte :",
 
     "add_waypoint_main_title" : "Un aperçu des waypoints actuels",
     "add_waypoint_add_one" : "Ajouter un waypoint",
