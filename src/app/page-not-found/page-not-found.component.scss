@@ -1,0 +1,42 @@
+@import "src/scss-partials/variables";
+@import "src/scss-partials/buttons";
+@import "src/scss-partials/mixins";
+
+.component{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .left{
+        .header{
+            margin-bottom: 3rem;
+            h1{
+                font-size: 6rem;
+                color: $gray-4;
+            }
+            h2{
+                font-size: 1.5rem;
+                color: $gray-4;
+            }
+        }
+        .content{
+            h2{
+                font-size: 2rem;
+                color: $primary;
+                font-weight: bold;
+            }
+            h4{
+                font-size: 1.5rem;
+                color: $primary;
+                font-weight: bolder;
+            }
+        }
+    }
+    .right{
+        .img {
+            position: fixed;
+            bottom: 0;
+        }
+    }
+}
