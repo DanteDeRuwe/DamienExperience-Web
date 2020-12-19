@@ -32,19 +32,15 @@
 }
 
 .content-wrap{
-    padding-bottom: 18rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    .main-content{
+        flex:1;
+    }
 }
 
 footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 18rem;
-}
-  
-.footer-copyright{
-    position: absolute;
-    bottom: 0;
     width: 100%;
 }
 

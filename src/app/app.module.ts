@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MapComponent } from './map/map.component';
 
@@ -43,23 +43,19 @@ import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
 import { environment } from 'src/environments/environment';
 
+const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket'] } };
 
-const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket']} };
-
-import { AddRouteComponent } from './admin/add-route/add-route.component';
-import { AddMapComponent } from './admin/add-map/add-map.component';
-import { AddRouteFormComponent } from './admin/add-route-form/add-route-form.component';
-import { AddWaypointsFormComponent } from './admin/add-waypoints-form/add-waypoints-form.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentResponseComponent } from './payment-response/payment-response.component';
+import { InfoRegistrationComponent } from './info-registration/info-registration.component';
+import { AdminModule } from './admin/admin.module';
 
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
-import { PaymentComponent } from './payment/payment.component';
-import { PaymentResponseComponent } from './payment-response/payment-response.component';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
-import { InfoRegistrationComponent } from './info-registration/info-registration.component';
-
+import { TrackingMapComponent } from './tracking-map/tracking-map.component';
 
 
 @NgModule({
@@ -82,19 +78,10 @@ import { InfoRegistrationComponent } from './info-registration/info-registration
     CookiePolicyComponent,
     TourselectorComponent,
     ChatComponent,
-    AddRouteComponent,
-    AddMapComponent,
-    AddRouteFormComponent,
-    AddWaypointsFormComponent,
-    DashboardComponent,
-    ManageroutesComponent,
-    AdminNavComponent,
-    DeleteRouteDialogComponent,
+    TrackingMapComponent,
     PaymentComponent,
     PaymentResponseComponent,
-    EditRouteComponent,
     InfoRegistrationComponent
-
   ],
   imports: [
     MatDialogModule,
@@ -113,13 +100,15 @@ import { InfoRegistrationComponent } from './info-registration/info-registration
         deps: [HttpClient]
       }
     }),
+    AdminModule,
     //SocketIoModule.forRoot(config)
   ],
   providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [TranslateModule]
 })
 export class AppModule { }
 
-export function httpTranslateLoader(http: HttpClient){
+export function httpTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

@@ -125,6 +125,7 @@
     "payment_items" : "Items",
     "payment_prijs" : "Prijs",
     "payment_total" : "Totaal",
+    "payment_betalen" : "Betaal nu", 
 
     "payment_response_succes" : "Betaling succesvol!",
     "payment_response_succes_tour" : "U bent nu ingeschreven voor de Damien Tour",

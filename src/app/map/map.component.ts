@@ -148,7 +148,7 @@ export class MapComponent implements OnInit, OnChanges {
       .setHTML('<h3>' + waypoint.languagesText.title[localLang] + '</h3><p>' + waypoint.languagesText.description[localLang] + '</p>'))
       .addTo(this.map);
       this.waypoints.push(marker);
-      console.log(this.waypoints)
+      //console.log(this.waypoints)
     });
   }
 }

@@ -11,6 +11,7 @@ export const environment = {
   url : 'http://localhost:4200' ,
   chatApi: 'http://localhost:3000/',
   liveChatApi: 'https://damienexperience-chat.herokuapp.com',
+  trackingHubUrl: "https://localhost:5001/tracking",
 };
 
 /*

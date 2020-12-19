@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from 'src/app/models/route.model';
-import { DatePipe, formatDate } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 

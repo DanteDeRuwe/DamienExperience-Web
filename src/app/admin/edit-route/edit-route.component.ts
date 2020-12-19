@@ -153,7 +153,6 @@ saveAddedWaypoint(value: any){
   this.toEditRoute.waypoints = waypoints;
   this.addMapComponent.aferAddWaypoint();
   this.addMapComponent.showWaypoints();
-  //console.log(this.route)
 }
 
 deleteWaypoint(waypoint : Waypoint){
