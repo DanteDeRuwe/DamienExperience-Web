@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MapComponent } from './map/map.component';
 
@@ -43,13 +43,19 @@ import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
 import { environment } from 'src/environments/environment';
 
-const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket']} };
+const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket'] } };
 
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentResponseComponent } from './payment-response/payment-response.component';
 import { InfoRegistrationComponent } from './info-registration/info-registration.component';
 import { AdminModule } from './admin/admin.module';
 
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
+import { EditRouteComponent } from './admin/edit-route/edit-route.component';
+import { TrackingMapComponent } from './tracking-map/tracking-map.component';
 
 
 @NgModule({
@@ -72,10 +78,10 @@ import { AdminModule } from './admin/admin.module';
     CookiePolicyComponent,
     TourselectorComponent,
     ChatComponent,
+    TrackingMapComponent,
     PaymentComponent,
     PaymentResponseComponent,
     InfoRegistrationComponent
-
   ],
   imports: [
     MatDialogModule,
@@ -99,10 +105,10 @@ import { AdminModule } from './admin/admin.module';
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
-  exports:[TranslateModule]
+  exports: [TranslateModule]
 })
 export class AppModule { }
 
-export function httpTranslateLoader(http: HttpClient){
+export function httpTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
