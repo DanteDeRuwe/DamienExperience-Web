@@ -1,7 +1,10 @@
-<h2>{{"profile_title" | translate}}</h2>
-<h3>{{"profile_title1" | translate}}</h3>
-<form [formGroup]="credentials" (ngSubmit)="changeCredentials()">
-    <div>
+<div class="profile">
+  <h2>{{"profile_title" | translate}}</h2>
+  <h3>{{"profile_title1" | translate}}</h3>
+  <form [formGroup]="credentials" (ngSubmit)="changeCredentials()">
+    <div class="profile-line">
+      <div>
+        
         <label for="firstname">{{"register_vn" | translate}}</label>
         <input
           type="text"
@@ -36,7 +39,10 @@
         >
           {{ getErrorMessage(credentials.get("firstname").errors) }}
         </p>
-      </div>
+      </div> 
+      
+    </div>
+    <div class="profile-line">
       <div>
         <label for="email">{{"login_email" | translate}}</label>
         <input
@@ -73,24 +79,96 @@
           {{ getErrorMessage(credentials.get("phoneNumber").errors) }}
         </p>
       </div>
+      
+    </div> 
+    <div class="profile-line">
       <div>
         <label for="dateOfBirth">{{"register_gd" | translate}}</label>
         <input
-          type="text"
-          class="form-control"
-          id="dateOfBirth"
-          formControlName="dateOfBirth"
-        />
+            type="date"
+            class="form-control"
+            id="dateOfBirth"
+            formControlName="dateOfBirth"
+          />
+        <p
+            class="text-danger"
+            *ngIf="
+              credentials.get('dateOfBirth').errors &&
+              credentials.get('dateOfBirth').touched
+            "
+          >
+            {{ getErrorMessage(credentials.get("dateOfBirth").errors) }}
+        </p>
+      </div>
+      <div>
+        <label for="privacy">{{"privacy" | translate}}</label>
+        <select  class="form-control" formControlName="privacy" name="privacy" id="privacy" [value]='privacyNow'>
+          <option *ngFor="let option of privacyOptions" [value]="option">{{option}}</option>
+        </select>
+       
         <p
           class="text-danger"
           *ngIf="
-            credentials.get('dateOfBirth').errors &&
-            credentials.get('dateOfBirth').touched
+            credentials.get('phoneNumber').errors &&
+            credentials.get('phoneNumber').touched
           "
         >
-          {{ getErrorMessage(credentials.get("dateOfBirth").errors) }}
+          {{ getErrorMessage(credentials.get("phoneNumber").errors) }}
         </p>
       </div>
-    <button type="submit" class="btn btn-primary">{{"submit" |translate}}</button>
-</form>
-
+    </div>
+    <div class="profile-line">
+      <button type="submit" class="btn btn-primary">{{"submit" |translate}}</button>
+    </div>
+  </form>
+  <hr/>
+  <div>
+    <h2>{{ "profile_friends" | translate}}</h2>
+    <div class="profile-friends">
+      <div class="profile-friends-sections">
+        <div class="profile-friends-scroll">
+          <div class="profile-friends-scroll-item" *ngFor="let friend of friends; let i = index">
+            <div class="item">
+              <p>{{friend}}</p>
+              <a class="profile-friend-clear" (click)="removeFriend(i)">
+                <span class="material-icons"   >
+                  clear
+                </span>
+              </a>
+            </div>
+            
+          </div>
+          
+        </div>
+      </div>
+      <div>
+        <h3> {{"profile_add_friends" | translate}}</h3>
+        <div class="profile-friends-add">
+          <form [formGroup]="friendForm" (ngSubmit)="addFriend()">
+            <div class="friendForm">
+              <label for="friendEmail">{{"profile_friends" | translate}}</label>
+              <input
+                    type="text"
+                    class="form-control"
+                    id="friendEmail"
+                    formControlName="friendEmail"
+                  />
+                <p
+                    class="text-danger"
+                    *ngIf="
+                    friendForm.get('friendEmail').errors &&
+                    friendForm.get('friendEmail').touched
+                    "
+                  >
+                    {{ getErrorMessage(friendForm.get("friendEmail").errors) }}
+              </p>
+              </div>
+              <div>
+                <button type="submit" [disabled]="!friendForm.valid" class="btn btn-primary">{{"submit" |translate}}</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>

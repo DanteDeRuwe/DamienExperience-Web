@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
+import { type } from 'os';
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
   public rememberMe : boolean = false;
 
   constructor(private _authService: AuthenticationService,
+    private translate: TranslateService,
     private _router: Router,
     private fb: FormBuilder) { }
 
@@ -74,28 +77,47 @@ export class RegisterComponent implements OnInit {
   }
 
   getErrorMessage(errors: any) {
+    var error = ""
     if (!errors) {
       return null;
     }
     if (errors.required) {
-      return 'is required';
+      this.translate.get('is_required').subscribe( val => {error  = val})
+      return error;
     } else if (errors.minlength) {
-      return `needs at least ${errors.minlength.requiredLength} characters (got ${errors.minlength.actualLength})`;
+      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      return error
     } else if (errors.userAlreadyExists) {
-      return `user already exists`;
+      this.translate.get('register_userexists').subscribe( val => {error  = val})
+      return error;
     } else if (errors.email) {
-      return `not a valid email address`;
+      this.translate.get('register_mail').subscribe( val => {error  = val})
+      return error;
     } else if (errors.passwordsDiffer) {
-      return `passwords are not the same`;
+      this.translate.get('register_password').subscribe( val => {error  = val})
+      return error;
     }
   }
 
+  translateDate(date: string) :string {
+    var year = date.substring(0,4)
+    var month = date.substring(5,7)
+    var day = date.substring(8)
+    return `${day}${month}${year}`
+  }
+
   onSubmitRegister() {
+    console.log(this.register.value.dobaAndPhoneGroup.dob)
+    console.log(this.register.value.dobaAndPhoneGroup.phone)
+
+    var date = this.translateDate(this.register.value.dobaAndPhoneGroup.dob)
+    
+    console.log(typeof(this.register.value.dobaAndPhoneGroup.dob))
     this._authService.register(
       this.register.value.nameGroup.firstname,
       this.register.value.nameGroup.lastname,
-      this.register.value.dobaAndPhoneGroup.birthdate,
-      this.register.value.dobaAndPhoneGroup.phoneNumber,
+      date,
+      this.register.value.dobaAndPhoneGroup.phone,
       this.register.value.email,
       this.register.value.passwordGroup.password,
       this.register.value.passwordGroup.confirmPassword,
@@ -107,7 +129,6 @@ export class RegisterComponent implements OnInit {
             if (this._authService.redirectUrl) {
               // this._router.navigateByUrl(this._authService.redirectUrl);
               // this._authService.redirectUrl = undefined;
-              console.log(this.register)
             } else {
               this._router.navigate(['about']);
             }
@@ -116,7 +137,6 @@ export class RegisterComponent implements OnInit {
           }
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
           if (err.error instanceof Error) {
             this.errorMessage = `Error while tryling to login user ${this.register.value.email}: ${err.error.message}`
           } else {

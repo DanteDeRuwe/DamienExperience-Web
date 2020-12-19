@@ -1,9 +1,12 @@
+import { ShirtSize } from "../enums.model";
+
 export interface RegistrationJson {
     registrationId: string,
     timeStamp: Date,
     routeId: string,
     orderedShirt: boolean,
-    sizeShirt: string
+    shirtSize: string,
+    paid: boolean
 }
 
 export class Registration {
@@ -12,16 +15,19 @@ export class Registration {
         private _timeStamp: Date,
         private _routeId: string,
         private _orderedShirt: boolean,
-        private _sizeShirt: string
+        private _shirtSize: string,
+        private _paid: boolean
     ) { }
 
     static fromJson(json: RegistrationJson) {
+        var enumValue = (<any>ShirtSize)[json.shirtSize];
         const registration = new Registration(
             json.registrationId,
             json.timeStamp,
             json.routeId,
             json.orderedShirt,
-            json.sizeShirt,
+            enumValue,
+            json.paid
         )
         return registration;
     }
@@ -32,8 +38,13 @@ export class Registration {
             timeStamp: this._timeStamp,
             routeId: this._routeId,
             orderedShirt: this._orderedShirt,
-            sizeShirt: this._sizeShirt
+            shirtSize: this._shirtSize,
+            paid: this._paid
         };
+    }
+
+    get paid(){
+        return this._paid;
     }
 
     get registrationId() {
@@ -52,8 +63,8 @@ export class Registration {
         return this._orderedShirt;
     }
 
-    get sizeShirt() {
-        return this._sizeShirt;
+    get shirtSize() {
+        return this._shirtSize;
     }
 
 

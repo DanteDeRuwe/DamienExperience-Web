@@ -6,7 +6,10 @@ export interface UserJson {
     firstName: string;
     email: string;
     phoneNumber: number;
+    dateOfBirth : string;
     registrations: Registration[];
+    friends : string[];
+    privacy : number;
 }
 
 export class User{
@@ -16,18 +19,26 @@ export class User{
         private _lastName: string,
         private _email: string,
         private _phoneNumber: number,
-        private _registrations: Registration[]
+        private _dateOfBirth : string,
+        private _registrations: Registration[],
+        private _friends : string[],
+        private _privacy : number
     ) {}
 
     static fromJson(json: UserJson){
+        var date = User.translateDate(json.dateOfBirth)
         const user = new User(
             json.id,
-            json.lastName,
             json.firstName,
+            json.lastName,
             json.email,
             json.phoneNumber,
-            json.registrations
+            date,
+            json.registrations,
+            json.friends,
+            json.privacy
         );
+        
         return user;
     }
 
@@ -38,7 +49,10 @@ export class User{
             firstName: this._firstName,
             email: this._email,
             phoneNumber: this._phoneNumber,
-            registrations: this._registrations
+            dateOfBirth : this._dateOfBirth,
+            registrations: this._registrations,
+            friends : this._friends,
+            privacy : this._privacy
         };
     }
 
@@ -66,4 +80,21 @@ export class User{
     get registrations(){
         return this._registrations;
     }
+    get friends() {
+        return this._friends;
+    }
+    get privacy() {
+        return this._privacy;
+    }
+    get dateOfBirth() {
+        return this._dateOfBirth;
+    }
+    static translateDate(date: string) :string {
+        var year = date.substring(6)
+        var month = date.substring(3,5)
+        var day = date.substring(0,2)
+        return `${year}-${month}-${day}`
+    }
+    
+    
 }

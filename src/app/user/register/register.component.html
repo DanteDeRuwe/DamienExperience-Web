@@ -160,6 +160,6 @@
     <input type="checkbox" class="form-check-input" id="rememberMe" [checked]="rememberMe" (change)="this.rememberMe = !this.rememberMe"/>
     <label class="rememberMe" for="rememberMe">{{"login_remember_me" |translate}}</label>
   </div>
-  <button type="submit" class="btn btn-primary">{{"submit" |translate}}</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!register.valid">{{"submit" |translate}}</button>
 </form>
 

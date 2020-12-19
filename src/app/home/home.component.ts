@@ -53,8 +53,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (!this.loggedInUser$.value)
       this._router.navigate(['register']);
     else {
-      console.log(this.loggedInUser$.value);
-
       this._router.navigate(['registration']);
     }
   }

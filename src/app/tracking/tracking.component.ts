@@ -7,7 +7,7 @@ import { Route } from '../models/route.model';
 import { Walk } from '../models/walk.model';
 import { RouteDataService } from '../services/route-data.service';
 import { WalkDataService } from '../services/walk-data.service';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-tracking',
   templateUrl: './tracking.component.html',
@@ -25,10 +25,12 @@ export class TrackingComponent implements OnInit {
   route: Route;
 
   constructor(private fb: FormBuilder,
+    private router: Router,
+    private translate: TranslateService,
     private _rds: RouteDataService,
     private _wds: WalkDataService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {

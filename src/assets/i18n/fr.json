@@ -1,7 +1,11 @@
 {
     "test": "Français",
+    "is_required" : "Obligé",
+    "min_length" : "a besoin de caractères {{min}} maintenant: {{now}})",
+    "smt_wrong":"Une erreur s'est produite ...",
 
-    "mn_admin_dashboard" : "DASHBOARD",
+    "mn_home" : "PAGE D'ACCUEIL",
+    "mn_admin_dashboard" : "TABLEAU DE BORD",
     "mn_over_de_tour" : "À PROPOS DU TOUR",
     "mn_wandelaar_volgen" : "SUIVEZ LE RANDONNEUR",
     "mn_ik_schrijf_me_in" : "JE M'INSCRIS",
@@ -24,7 +28,7 @@
     "home_title":"Promenades Damien expérience",
     "home_schrijf_je_in" : "Inscrivez-vous dès maintenant aux promenades Damien Experience.",
     "home_schrijf_me_in" : "ENREGISTRE-MOI",
-    "home_datum" : "14 MAI 2020",
+    "home_datum" : "14 MAI 2021",
     "home_DAGEN" : "JOURS",
     "home_UREN" : "HEURES",
     "home_MINUTEN" : "MINUTES",
@@ -46,30 +50,60 @@
 
     "tracking_zoek" : "TROUVEZ UN RANDONNEUR",
     "tracking_zoeken": "CHERCHER",
+    "tracking_error": "Erreur lors de la demande de l'utilisateur",
+
+    "userpage_login":"s'identifier",
+    "userpage_signup":"s'inscrire",
 
     "login_title":"Je ai déjà un compte",
     "login_passwoord" : "Mot de passe",
     "login_email":"Adresse e-mail",
     "login_enter_passwoord":"entrer le mot de passe",
     "login_remember_me" : "Souviens-toi de moi",
-    "submit" : "Soumettre",
+  
+    "login_failed" : "Ne pouvait pas se connecter",
+    "login_error": "Erreur de connexion à l'utilisateur",
+    "submit" : "Confirmer",
+
 
     "register_title" : "Je crée un compte",
     "register_vn":"Prénom",
     "register_ln" : "Nom de famille",
     "register_gd" : "Date de naissance",
-    "register_nummer" : "numéro de téléphone",
+    "register_nummer" : "Numéro de téléphone",
     "register_share_email" : "Nous ne partagerons jamais votre e-mail avec qui que ce soit.",
     "register_confirm" : "Confirmez le mot de passe",
+    "register_userexists" : "L'utilisateur existe déjà",
+    "register_mail": "Ceci n'est pas une adresse électronique valide",
+    "register_password":"Les mots de passe ne sont pas les mêmes",
 
     "profile_title" : "Mon profil",
     "profile_title1" : "Changer mes informations personnelles",
+    "privacy" : "Confidentialité",
+    "profile_add_friends" : "Ajouter des amis",
+    "profile_email_friend" : "Courriel d'un ami",
+    "profile_friends" : "Mes amis",
 
     "registration_already_sign" : "Vous êtes déjà inscrit",
     "registration_regist" :"Je m'inscris pour une promenade!",
     "registration_chose_route" : "Choisissez votre promenade:",
     "registration_tshirt" : "Achetez un t-shirt en édition limitée",
     "registration_pay" : "Payer:",
+
+    "registration_privacy" : "Choisissez qui peut vous suivre pendant la marche :",
+    "registration_privacy_private" : "personne",
+    "registration_privacy_friends" : "mes amis",
+    "registration_privacy_everyone" : "tout le monde",
+    
+
+    "registration_error" : "Une erreur s'est produite lors de l'inscription",
+    "registration_error1" : "Une erreur s'est produite lors de l'inscription. \n Merci de remplir tous les champs",
+
+    "inforegistration_chosen_route" : "Vous êtes inscrit à la prochaine promenade: ",
+    "inforegistration_no_tshirt" : "Vous n'avez pas commandé un T-shirt en édition limitée",
+    "inforegistration_tshirt" : "Vous avez commandé un T-shirt en édition limitée dans la taille suivante : ",
+    "inforegistration_pay" : "Montant payé : ",
+
 
     "about_tour_info" : "L'info du tour",
 
@@ -80,11 +114,35 @@
     "taalfull_fr": "Français",
     "add_route_form_besch": "La description",
     "add_route_form_dist" : "Distance actuelle : ",
-    "add_route_form_submit" : "Enregistrer et ajouter des waypoints",
+    "add_route_form_submit" : "Enregistrer et modifier des waypoints",
+    "add_route_form_add" : "Ajouter l'itinéraire sur la carte :",
 
     "add_waypoint_main_title" : "Un aperçu des waypoints actuels",
     "add_waypoint_add_one" : "Ajouter un waypoint",
-    "add_waypoint_title" : "Titre"
+    "add_waypoint_title" : "Titre",
+
+
+    "payment_items" : "Articles",
+    "payment_prijs" : "Prix",
+    "payment_total" : "Total",
+    "payment_betalen" : "Payez maintenant", 
+
+    "payment_response_succes" : "Paiement réussi!",
+    "payment_response_succes_tour" : "Vous êtes maintenant inscrit au Damien Tour",
+    "payment_response_succes_info": "Vous trouverez de plus amples informations dans",
+    "payment_response_succes_link": "à propos de la tournée",
+    "payment_response_nosucces": "Paiement non réussi!",
+    "payment_response_nosucces_notRegisterd": "Vous n'êtes pas inscrit au Damien Tour.",
+    "payment_response_nosucces_go" : "Revenir à la",
+    "payment_response_nosucces_link": "paiement",
+    "payment_response_nosucces_pagina":"page",
+
+    "404_page": "Cette page n'existe pas :/",
+    "404_page_now_youre_here": "Tant que vous êtes ici...",
+    "404_page_time": "Donnez-nous votre temps",
+    "404_page_time_btn": "Je vais être volontaire",
+    "404_page_money": "Donnez-nous votre contribution",
+    "404_page_money_btn": "Je fais une donation en ligne"
 
 
 }
