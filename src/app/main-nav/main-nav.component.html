@@ -36,10 +36,13 @@
 
       <links>
         <!-- Links -->
-          <a class="nav-link text-dark" [routerLink]="['home']" href="">{{
-            "mn_home" | translate
-          }}</a>
+         
         <ul class="navbar-nav ml-auto" id="navitems">
+          <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['home']" href="">{{
+              "mn_home" | translate
+            }}</a>
+          </li>
           <li class="nav-item" *ngIf="isCheckAdmin">
             <a class="nav-link text-dark" [routerLink]="['admin-nav/manageroutes']" href="">{{
               "mn_admin_dashboard" | translate
