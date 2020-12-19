@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TranslateService } from '@ngx-translate/core';
+import { type } from 'os';
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
@@ -99,11 +100,14 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmitRegister() {
+    console.log(this.register.value.dobaAndPhoneGroup.dob)
+    console.log(this.register.value.dobaAndPhoneGroup.phone)
+    console.log(typeof(this.register.value.dobaAndPhoneGroup.dob))
     this._authService.register(
       this.register.value.nameGroup.firstname,
       this.register.value.nameGroup.lastname,
-      this.register.value.dobaAndPhoneGroup.birthdate,
-      this.register.value.dobaAndPhoneGroup.phoneNumber,
+      this.register.value.dobaAndPhoneGroup.dob,
+      this.register.value.dobaAndPhoneGroup.phone,
       this.register.value.email,
       this.register.value.passwordGroup.password,
       this.register.value.passwordGroup.confirmPassword,
