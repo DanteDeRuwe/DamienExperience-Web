@@ -42,10 +42,6 @@ export class RegistrationComponent implements OnInit {
 
   shirtSizes = Object.values(ShirtSize);
 
-  //hash = sha1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU")
-  //CryptoJS.SHA1("PSPID=damiaanacties*aW2dr86U++ZaKUORDERID=3s*aW2dr86U++ZaKUAMOUNT=5s*aW2dr86U++ZaKUCURRENCY=EURs*aW2dr86U++ZaKULANGUAGE=en_USs*aW2dr86U++ZaKUEMAIL=ruben.naudts@student.hogent.bes*aW2dr86U++ZaKU");
-
-
   constructor(private fb: FormBuilder,
     private _rds: RouteDataService, 
     private _router: Router,
@@ -78,34 +74,22 @@ export class RegistrationComponent implements OnInit {
     });
 
     this._dis.obserervableMapData$.subscribe(data => {
-      console.log(data)
       this.tourName = data[0]
-      //this._hasSelectedRoute = true
-      //this.setCanSubmit()
     });
   }
   
 
-  // onChange(value) {
-  //   console.log(this.routes[value[0]].tourName)
-  //   this.tourName = this.routes[value[0]].tourName
-  //   console.log(this.tourName)
-  // }
-
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
     if (!this.selectedSize.endsWith("GEEN")) {
-      this.price = 65;
+      this.price = 60;
     } else {
       this.price = 50;
     }
-    //this._hasSelectedShirt = true;
-    //this.setCanSubmit()
+
   }
 
   onSubmitRegistration() {
-    console.log(this.tourName)
-    console.log(this.registration)
     this.registration.value.orderedShirt = true
     if (this.registration.value.shirtSize == ShirtSize.GEEN) this.registration.value.orderedShirt = false
 

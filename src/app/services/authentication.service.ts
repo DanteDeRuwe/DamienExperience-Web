@@ -62,7 +62,6 @@ export class AuthenticationService {
     )
       .pipe(
         map((token: any) => {
-          console.log(token); //DELETE
           if (token) {
             // if (rememberme) {
             //   localStorage.setItem(this._tokenKey, token);
@@ -158,7 +157,6 @@ export class AuthenticationService {
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;
     } else if (err instanceof HttpErrorResponse) {
-      console.log(err);
       errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;
     } else {
       errorMessage = err;

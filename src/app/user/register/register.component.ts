@@ -115,7 +115,6 @@ export class RegisterComponent implements OnInit {
             if (this._authService.redirectUrl) {
               // this._router.navigateByUrl(this._authService.redirectUrl);
               // this._authService.redirectUrl = undefined;
-              console.log(this.register)
             } else {
               this._router.navigate(['about']);
             }
@@ -124,7 +123,6 @@ export class RegisterComponent implements OnInit {
           }
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
           if (err.error instanceof Error) {
             this.errorMessage = `Error while tryling to login user ${this.register.value.email}: ${err.error.message}`
           } else {

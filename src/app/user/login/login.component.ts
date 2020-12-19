@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             if (this._authService.redirectUrl) {
               this._router.navigateByUrl(this._authService.redirectUrl);
               this._authService.redirectUrl = undefined;
-              console.log(this.login)
+             
             } else {
               this._router.navigate(['about']);
             }
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           }
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
+          
           if (err.error instanceof Error) { //login_error
             this.translate.get('login_failed').subscribe( val => {this.errorMessage  = val + ` ${this.login.value.email}`})
           } else {
