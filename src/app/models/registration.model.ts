@@ -3,7 +3,8 @@ export interface RegistrationJson {
     timeStamp: Date,
     routeId: string,
     orderedShirt: boolean,
-    sizeShirt: string
+    sizeShirt: string,
+    paid: boolean
 }
 
 export class Registration {
@@ -12,7 +13,8 @@ export class Registration {
         private _timeStamp: Date,
         private _routeId: string,
         private _orderedShirt: boolean,
-        private _sizeShirt: string
+        private _sizeShirt: string,
+        private _paid: boolean
     ) { }
 
     static fromJson(json: RegistrationJson) {
@@ -22,6 +24,7 @@ export class Registration {
             json.routeId,
             json.orderedShirt,
             json.sizeShirt,
+            json.paid
         )
         return registration;
     }
@@ -32,8 +35,13 @@ export class Registration {
             timeStamp: this._timeStamp,
             routeId: this._routeId,
             orderedShirt: this._orderedShirt,
-            sizeShirt: this._sizeShirt
+            sizeShirt: this._sizeShirt,
+            paid: this._paid
         };
+    }
+
+    get paid(){
+        return this._paid;
     }
 
     get registrationId() {
