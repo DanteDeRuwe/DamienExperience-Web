@@ -95,7 +95,7 @@ export class RegistrationComponent implements OnInit {
   onChangeShirt(selected) {
     this.selectedSize = selected.target.value;
     if (!this.selectedSize.endsWith("GEEN")) {
-      this.price = 65;
+      this.price = 60;
     } else {
       this.price = 50;
     }

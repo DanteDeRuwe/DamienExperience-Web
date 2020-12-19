@@ -34,7 +34,7 @@ export class ChatComponent implements OnInit {
         this.socket = io(environment.liveChatApi, { transports: ['websocket']});
         const room = 'Jordy\'s Room';
 
-        this.socket.emit('join room', {username: user.lastName, email: user.email, room: this.roomname})
+        this.socket.emit('join room', {username: user.firstName, email: user.email, room: this.roomname})
 
         this.socket.on('chat message', (message: ChatMessage) => { 
           this.outputMessage(message);
