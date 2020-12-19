@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShirtSize } from '../enums.model';
 import { Registration } from '../models/registration.model';
 import { Route } from '../models/route.model';
 import { RouteDataService } from '../services/route-data.service';
@@ -14,6 +15,7 @@ export class InfoRegistrationComponent implements OnInit {
   loaded: boolean = false;
   registration: Registration;
   route: Route;
+  shirtSizes = Object.values(ShirtSize);
 
   constructor( private _rds: RouteDataService, private _uds: UserDataService) { }
 

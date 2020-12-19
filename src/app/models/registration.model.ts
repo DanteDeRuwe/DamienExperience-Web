@@ -5,7 +5,7 @@ export interface RegistrationJson {
     timeStamp: Date,
     routeId: string,
     orderedShirt: boolean,
-    sizeShirt: string,
+    shirtSize: string,
     paid: boolean
 }
 
@@ -15,12 +15,12 @@ export class Registration {
         private _timeStamp: Date,
         private _routeId: string,
         private _orderedShirt: boolean,
-        private _sizeShirt: string,
+        private _shirtSize: string,
         private _paid: boolean
     ) { }
 
     static fromJson(json: RegistrationJson) {
-        var enumValue = (<any>ShirtSize)[json.sizeShirt];
+        var enumValue = (<any>ShirtSize)[json.shirtSize];
         const registration = new Registration(
             json.registrationId,
             json.timeStamp,
@@ -38,7 +38,7 @@ export class Registration {
             timeStamp: this._timeStamp,
             routeId: this._routeId,
             orderedShirt: this._orderedShirt,
-            sizeShirt: this._sizeShirt,
+            shirtSize: this._shirtSize,
             paid: this._paid
         };
     }
@@ -63,8 +63,8 @@ export class Registration {
         return this._orderedShirt;
     }
 
-    get sizeShirt() {
-        return this._sizeShirt;
+    get shirtSize() {
+        return this._shirtSize;
     }
 
 

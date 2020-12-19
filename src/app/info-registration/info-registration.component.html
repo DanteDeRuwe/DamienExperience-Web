@@ -6,7 +6,7 @@
         </p>
         <div *ngIf="registration.orderedShirt; else NoShirt">
             <p>
-                {{"inforegistration_tshirt"| translate}}{{registration.sizeShirt}}<br>
+                {{"inforegistration_tshirt"| translate}}{{shirtSizes[registration.shirtSize]}}<br>
                 {{"inforegistration_pay"| translate}}60€<br>
             </p>
         </div>
