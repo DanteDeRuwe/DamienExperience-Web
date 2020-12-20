@@ -42,14 +42,10 @@ import { TourselectorComponent } from './tourselector/tourselector.component';
 import { ChatComponent } from './chat/chat.component';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
 import { environment } from 'src/environments/environment';
-
-const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket'] } };
-
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentResponseComponent } from './payment-response/payment-response.component';
 import { InfoRegistrationComponent } from './info-registration/info-registration.component';
 import { AdminModule } from './admin/admin.module';
-
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
 import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
@@ -57,6 +53,8 @@ import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-r
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 import { TrackingMapComponent } from './tracking-map/tracking-map.component';
 
+
+const config: SocketIoConfig = { url: environment.liveChatApi, options: { transports: ['websocket'] } };
 
 @NgModule({
   declarations: [
