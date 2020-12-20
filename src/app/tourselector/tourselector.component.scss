@@ -1,0 +1,39 @@
+@import "src/scss-partials/buttons";
+@import "src/scss-partials/mixins";
+
+.tourselector{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    &-buttons{
+        margin-bottom: 1rem;
+        flex-basis: 100%;
+        display: flex;
+        flex: {
+            display: row;
+            wrap:wrap;
+        }
+    }
+    &-map{        
+        width: 100%;
+        height: 30rem;
+        @include from-desktop{
+            flex-basis: 69%;
+        }
+
+    }
+
+    &-about{
+        flex-grow: 0;
+        @include from-desktop{
+            flex-basis: 29%;
+        }
+        p{
+            width: 100%;
+            word-break: break-word;
+            hyphens: auto;
+        }
+    }
+}

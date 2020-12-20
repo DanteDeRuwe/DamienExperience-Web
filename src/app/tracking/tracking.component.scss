@@ -1,0 +1,74 @@
+@import "src/scss-partials/variables";
+@import "src/scss-partials/buttons";
+
+
+.tracking-map {
+  height: 80vh !important;
+}
+
+#search{
+    width: 50%;
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    background-color: #FE0040;
+    padding: 1rem;
+    border-radius: 10px;
+  
+
+  .searchcontrols{
+      display: flex;
+      gap: 1rem;
+  }
+
+  label {
+      color: white;
+  }
+}
+
+
+.chat{
+  position: relative;
+  top: -100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 3rem;
+  z-index: 99;
+  height: 100%;
+  width: fit-content;
+  float: right;
+
+  .icon{
+    width: 4rem;
+    height: 4rem;
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 0.75rem #FE0040);
+  }
+
+  .iconify{
+    width: 3rem;
+    height: 3rem;
+    color: #FE0040;
+  }
+
+  .icon:hover{
+      cursor: pointer;
+  }
+
+  app-chat{
+    height: 100%;
+    width: 35rem;
+    background-color: rgba(100, 70, 70, 0.1);  
+    border-radius: 1rem;
+    backdrop-filter: blur(15px);
+    padding: 1rem;
+    display: none;
+
+  }
+
+}

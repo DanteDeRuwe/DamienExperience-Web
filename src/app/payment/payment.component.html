@@ -1,0 +1,56 @@
+<div class="payment-main">
+    <table class="payment-table">
+        <tr class="table-header">
+            <th>
+                {{"payment_items" | translate}}
+            </th>
+            <th class="colomn-right">
+                {{"payment_prijs" |translate}}
+            </th>
+        </tr>
+        <tr>
+            <td>
+                {{payment.routeName}}
+            </td>
+            <td class="colomn-right colomn-border-right">
+                €50,00
+            </td>
+        </tr>
+        <tr *ngIf="orderdShirt">
+            <td>
+                Damian t-shirt
+            </td>
+            <td class="colomn-right colomn-border-right">
+                €10,00
+            </td>
+        </tr>
+        <tr class="table-last">
+            <td class="colomn-right">
+                
+            </td>
+            <td class="colomn-right colomn-border-right">
+                {{"payment_total" | translate}} : €{{amountInEuro}}
+            </td>
+        </tr>
+    </table>
+    <div class="form-button">
+        <form ngNoForm method="POST" target="_blank" action="https://ogone.test.v-psp.com/ncol/test/orderstandard_utf8.asp" id="form1"
+        name="form1">
+            <input type="hidden" name="PSPID" value="{{payment.pspId}}">
+            <input type="hidden" name="ORDERID" value="{{payment.orderId}}">
+            <input type="hidden" name="AMOUNT" value="{{payment.amount}}">
+            <input type="hidden" name="CURRENCY" value="{{payment.currency}}">
+            <input type="hidden" name="LANGUAGE" value="{{payment.language}}">
+            <input type="hidden" name="EMAIL" value="{{payment.email}}">
+            <input type="hidden" name="USERID" value="{{payment.userId}}">
+            <!--
+            <input type="hidden" name="ACCEPTURL" value="{{responseURL}}">
+            <input type="hidden" name="DECLINEURL" value="{{responseURL}}">
+            <input type="hidden" name="EXCEPTIONURL" value="{{responseURL}}">
+            <input type="hidden" name="CANCELURL" value="{{responseURL}}">
+            -->
+            <input type="hidden" name="SHASIGN" value="{{payment.shaSign}}">
+            <button class="btn btn-primary" type="submit" id="submit2" name="submit2">{{"payment_betalen" | translate}}</button>
+        </form>
+    </div>
+</div>

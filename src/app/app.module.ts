@@ -16,13 +16,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MapComponent } from './map/map.component';
 
 import { RegisterComponent } from './user/register/register.component';
 import { MaterialModule } from './material/material/material.module';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './user/login/login.component';
 import { UserpageComponent } from './user/userpage/userpage.component';
 import { httpInterceptorProviders } from './interceptors';
@@ -34,7 +36,26 @@ import { RegulationsComponent } from './regulations/regulations.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TourselectorComponent } from './tourselector/tourselector.component';
+import { ChatComponent } from './chat/chat.component';
+import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io'
+import { environment } from 'src/environments/environment';
 
+const config: SocketIoConfig = { url: environment.chatApi, options: { transports: ['websocket'] } };
+
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentResponseComponent } from './payment-response/payment-response.component';
+import { InfoRegistrationComponent } from './info-registration/info-registration.component';
+import { AdminModule } from './admin/admin.module';
+
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageroutesComponent } from './admin/manageroutes/manageroutes.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
+import { EditRouteComponent } from './admin/edit-route/edit-route.component';
+import { TrackingMapComponent } from './tracking-map/tracking-map.component';
 
 
 @NgModule({
@@ -54,9 +75,16 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
     RegulationsComponent,
     PrivacyPolicyComponent,
     SponsorsComponent,
-    CookiePolicyComponent
+    CookiePolicyComponent,
+    TourselectorComponent,
+    ChatComponent,
+    TrackingMapComponent,
+    PaymentComponent,
+    PaymentResponseComponent,
+    InfoRegistrationComponent
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -64,9 +92,23 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
     MaterialModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    AdminModule,
+    //SocketIoModule.forRoot(config)
   ],
   providers: [httpInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [TranslateModule]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

@@ -3,9 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  accessToken: 'pk.eyJ1Ijoiam9yZHl2YW5rZXJrdm9vcmRlIiwiYSI6ImNrZzNvN3o2bTBicncycHBqYzRtZW50dHkifQ.ceuhpKlsJFUPaxinU4qoag',
-  apiUrl: 'https://damiantourapi.azurewebsites.net/api',
+  production: false,
+  mapbox: {
+    accessToken: 'pk.eyJ1Ijoiam9yZHl2YW5rZXJrdm9vcmRlIiwiYSI6ImNrZzNvN3o2bTBicncycHBqYzRtZW50dHkifQ.ceuhpKlsJFUPaxinU4qoag'
+  },
+  apiUrl: '/api',
+  url : 'http://localhost:4200' ,
+  chatApi: 'http://localhost:3000/',
+  liveChatApi: 'https://damienexperience-chat.herokuapp.com',
+  trackingHubUrl: "https://localhost:5001/tracking",
+
+  //accessToken: 'pk.eyJ1Ijoiam9yZHl2YW5rZXJrdm9vcmRlIiwiYSI6ImNrZzNvN3o2bTBicncycHBqYzRtZW50dHkifQ.ceuhpKlsJFUPaxinU4qoag',
+  //apiUrl: 'https://damiantourapi.azurewebsites.net/api',
 };
 
 /*

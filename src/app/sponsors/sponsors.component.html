@@ -1,14 +1,8 @@
-<div style="text-align: center;" class="content">
-    <h2>Met dank aan onze sponsors!</h2>
-    <div class="grid">
-        <img src="/assets/sponsors/ASA.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/coca-cola.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/colruyt.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/Decathlon.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/r2.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/spotify.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/streamz.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/vrt.png" class="sponsor" alt="">
-        <img src="/assets/sponsors/vw.png" class="sponsor" alt="">
+<div class="container">
+    <h2>{{"sp_met_dank" | translate}}</h2>
+    <div class="grid py-5">
+        <div *ngFor="let sponsor of sponsors" style="background-image: url('/assets/sponsors/{{sponsor}}.png');"
+            class="sponsor col" alt="">
+        </div>
     </div>
 </div>

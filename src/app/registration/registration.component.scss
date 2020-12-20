@@ -1,0 +1,30 @@
+@import "src/scss-partials/typography";
+@import "src/scss-partials/buttons";
+
+h2{
+    font-weight: bolder;
+    margin: 2rem 0;
+}
+
+.registration{
+    &-tshirt{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-pay{
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 5rem;
+    }
+}
+.check-status{
+    margin-top: 5em;
+    position: relative;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+.check-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+    stroke : $primary;
+}

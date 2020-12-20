@@ -1,59 +1,85 @@
+<div *ngIf="loaded; else stillLoading">
+    <div class="container">
+        <div *ngIf="hasRegistrations; else Allowed">
+            <app-info-registration></app-info-registration>
+        </div>
 
-<div class="content"><ng-template *ngIf="hasRegistrations; else notAllowed" >
-    You already signed up for a tour
-</ng-template>
-<ng-template #notAllowed>
-    <h2>Ik schrijf me in voor een wandeling!</h2>
-    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
-        {{ errorMessage }}
-    </div>
 
-    <div>
-        <form [formGroup]="registration" (ngSubmit)="onSubmitRegistration()">
-            <div class="components">
-                <div class="component">
-                    <label for="route">Kies je wandeling:</label>
-                    <select id="route" class="form-control" formControlName="route"
-                    (change)="onChange($event.target.value)"
-                     >
-                     <!-- (change)="onChange($event.target.value)" -->
-                        <option *ngFor="let route of routes" [ngValue]="route">
-                            {{ route.tourName }} ; {{ route.distanceInMeters / 1000 }}km
-                        </option>
-                    </select>
-                    <p class="text-danger" *ngIf="registration.get('route').errors && registration.get('route').touched">
-                        {{ getErrorMessage(registration.get("route").errors) }}
-                    </p>
-                    
-                    <div class="map">
-                        <app-map
-                            [tourName] = "tourname"
-                            [userName] = "username"
-                        ></app-map>
-                    </div>
-                </div>
-                <div class="component">
-                    <label for="shirtSize">Koop een limited edition T-shirt</label> <br>
-                    <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
-                    <select id="shirtSize" class="form-control" formControlName="shirtSize" (change)="onChangeShirt($event)">
-                        <option *ngFor="let shirtSize of shirtSizes" [ngValue]="shirtSize">
-                            {{ shirtSize }}
-                        </option>
-                    </select>
-                    <p class="text-danger"
-                        *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
-                        {{ getErrorMessage(registration.get("shirtSize").errors) }}
-                    </p><br>
-        
-                    <p>Te betalen: €{{price}}</p>
-        
-                    <button type="submit" class="btn btn-primary">Bevestig</button>
-                </div>
+        <ng-template #Allowed>
+            <h2 class="text-primary">{{"registration_regist" | translate}}</h2>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{ errorMessage }}
             </div>
-        </form>
 
+            <div>
+                <form [formGroup]="registration">
+
+                    <app-tourselector></app-tourselector>
+
+                    <div>
+                        <!-- <div *ngFor="let privacy of privacySettings">
+                            <input type="radio" id="privacy" name="privacySetting" value="privacy">
+                            <label for="privacy">{{ privacy }}</label>
+                        </div> -->
+                        <p> {{ "registration_privacy" | translate }} </p>
+                        <label>
+                            <input type="radio" id="privacy.PRIVATE" formControlName="privacySetting"
+                                [value]="privacy.PRIVATE">
+                            <span> {{ "registration_privacy_private" | translate }} </span>
+                            <!-- <label for="privacy.PRIVATE"> {{ "registration_privacy_private" | translate }}</label> -->
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" id="privacy.FRIENDS" formControlName="privacySetting"
+                                [value]="privacy.FRIENDS" >
+                            <span> {{ "registration_privacy_friends" | translate }} </span>
+                            <!-- <label for="privacy.FRIENDS"> {{ "registration_privacy_friends" | translate }}</label> -->
+                        </label>
+                        <br>
+                        <label>
+                            <input type="radio" id="privacy.EVERYONE" formControlName="privacySetting"
+                                [value]="privacy.EVERYONE">
+                            <span> {{ "registration_privacy_everyone" | translate }} </span>
+                            <!-- <label for="privacy.EVERYONE"> {{ "registration_privacy_everyone" | translate }}</label> -->
+                        </label>
+                        <br>
+                    </div>
+
+                    <h2 class="text-primary">{{"registration_tshirt" | translate}}</h2>
+                    <div class="registration-tshirt">
+                        <img src="assets/images/tshirt.png" alt="damiaantours t-shirt" height="400px">
+
+                        <div style="width:100%">
+                            <select id="shirtSize" class="form-control" formControlName="shirtSize"
+                                (change)="onChangeShirt($event)">
+                                <option *ngFor="let size of shirtSizes" [ngValue]="size">
+                                    {{ size }}
+                                </option>
+                            </select>
+                            <p class="text-danger"
+                                *ngIf="registration.get('shirtSize').errors && registration.get('shirtSize').touched">
+                                {{ getErrorMessage(registration.get("shirtSize").errors) }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="registration-pay">
+                        <div>
+                            <p>{{"registration_pay" | translate}} €{{price}}</p>
+
+                            <button type="submit" class="btn btn-primary" (click)="onSubmitRegistration()">{{"submit" |
+                                translate}}</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </ng-template>
     </div>
-</ng-template>
 </div>
-
+<ng-template #stillLoading >
+    <div class="check-status">
+        <mat-spinner></mat-spinner>
+    </div>
     
+  </ng-template>

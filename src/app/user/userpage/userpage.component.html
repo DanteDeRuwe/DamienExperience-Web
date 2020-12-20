@@ -1,18 +1,25 @@
-<div class="register-wrapper">
-    
-  
-    <div class="loginRegister">
-      <!-- Login -->
-      <div class="container">
-        <app-login></app-login>
-      </div>
-  
-      <!-- Verticale lijn -->
-      <div class="vl"></div>
-  
-      <!-- Register -->
-      <div class="container">
-        <app-register></app-register>
-      </div>
+<div class="container my-5 userpage userpage-desktop" *ngIf="!isMobile else mobileLayout">
+  <app-login></app-login>
+  <app-register></app-register>
+</div>
+
+
+<ng-template #mobileLayout>
+  <div class="container userpage userpage-mobile">
+    <div class="toggle-buttons mb-3">
+      <button class="btn btn-primary toggle-button" (click)="this.registerActive = false"
+        [ngClass]="{'active': !this.registerActive}">
+        {{"userpage_login" |translate}}
+      </button>
+
+      <button class="btn btn-primary toggle-button" (click)="this.registerActive = true"
+        [ngClass]="{'active': this.registerActive}">
+        {{"userpage_signup" |translate}}
+      </button>
     </div>
+
+    <app-login *ngIf="!this.registerActive"></app-login>
+    <app-register *ngIf="this.registerActive"></app-register>
+
   </div>
+</ng-template>
