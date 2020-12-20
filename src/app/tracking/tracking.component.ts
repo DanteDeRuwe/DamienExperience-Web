@@ -68,17 +68,16 @@ export class TrackingComponent implements OnInit {
           this.setWalkToLiveWalk(email) //after initializing, use the live walk
           this.visible = false;
         } else {
-          console.log('nowalk')
+          //console.log('nowalk')
         }
       },
-        (err: HttpErrorResponse) => {
-          console.error(err);
+        (err) => {
+          //console.error(err);
           if (err.error instanceof Error) {
             this.errorMessage = `Error while trying to get the walk user`
-            console.error(this.errorMessage)
+            //console.error(this.errorMessage)
           } else {
-            this.errorMessage = `Error ${err.status}`;
-            console.error(this.errorMessage)
+            this.errorMessage = `Error ${err}`;
           }
           this.dialogRef = this._dialog.open(ErrorDialogComponent, {
             height: '400px',
