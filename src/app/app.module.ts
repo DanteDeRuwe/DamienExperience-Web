@@ -56,6 +56,7 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 import { TrackingMapComponent } from './tracking-map/tracking-map.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { TrackingMapComponent } from './tracking-map/tracking-map.component';
     TrackingMapComponent,
     PaymentComponent,
     PaymentResponseComponent,
-    InfoRegistrationComponent
+    InfoRegistrationComponent,
+    ErrorDialogComponent
   ],
   imports: [
     MatDialogModule,
