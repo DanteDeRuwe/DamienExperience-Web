@@ -8,6 +8,8 @@ import { Waypoint } from 'src/app/models/waypoint.model';
 import { WaypointService } from 'src/app/services/waypoint.service';
 import { RouteDataService } from 'src/app/services/route-data.service';
 import { Router } from '@angular/router';
+import { ErrorDialogComponent } from 'src/app/error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-route',
@@ -37,8 +39,12 @@ export class AddRouteComponent implements OnInit {
 
   @ViewChild(AddWaypointsFormComponent)
   private addWaypointsFormComponent: AddWaypointsFormComponent;
+  dialogRef: any;
 
-  constructor(private _routeService : RouteDataService, private _waypointService : WaypointService, private _router: Router) { }
+  constructor(private _routeService : RouteDataService, 
+    private _waypointService : WaypointService, 
+    private _router: Router,
+    private _dialog: MatDialog) { }
 
   ngOnInit(): void {  
   }
@@ -71,6 +77,25 @@ export class AddRouteComponent implements OnInit {
         {
           this.route = temp;
           this.addMapComponent.showWaypoints(this.route.waypoints);
+        },(err) => {
+          //console.error(err);
+          var errorMessage
+          if (err.error instanceof Error) {
+            errorMessage = `Error while trying to get the walk user`
+            //console.error(this.errorMessage)
+          } else {
+            errorMessage = `Error ${err}`;
+          }
+          this.dialogRef = this._dialog.open(ErrorDialogComponent, {
+            height: '400px',
+            width: '600px',
+            data: {
+              errorMessage: errorMessage
+            }
+          });
+          this.dialogRef.afterClosed().subscribe(result => {
+            this._router.navigate(["admin-nav"])
+          });
         });
     this.routeFormShowing=false;
   }
@@ -165,7 +190,28 @@ export class AddRouteComponent implements OnInit {
   }
 
   saveWaypoints(){
-    this._waypointService.addWaypoints$(this.route.tourName, this.route.waypoints).subscribe(temp => this.route.waypoints = temp);
+    this._waypointService.addWaypoints$(this.route.tourName, this.route.waypoints)
+    .subscribe(temp =>{ this.route.waypoints = temp}
+      ,(err) => {
+        //console.error(err);
+        var errorMessage
+        if (err.error instanceof Error) {
+          errorMessage = `Error while trying to get the walk user`
+          //console.error(this.errorMessage)
+        } else {
+          errorMessage = `Error ${err}`;
+        }
+        this.dialogRef = this._dialog.open(ErrorDialogComponent, {
+          height: '400px',
+          width: '600px',
+          data: {
+            errorMessage: errorMessage
+          }
+        });
+        this.dialogRef.afterClosed().subscribe(result => {
+          this._router.navigate(["admin-nav"])
+        });
+      });
     this._router.navigate(['admin-nav/manageroutes']);
   }
 }

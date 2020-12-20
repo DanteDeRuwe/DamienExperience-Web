@@ -16,14 +16,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class ProfileComponent implements OnInit {
   public credentials: FormGroup;
   public changePassword: FormGroup;
-  public friendForm : FormGroup;
+  public friendForm: FormGroup;
   public credErr: string = '';
   public passErr: string = '';
-  privacyOptions : string[] = []
-  privacyNow : string ='';
-  friends : string[] = []
-  emailExists :boolean = true;
-  private _oldPrivacy :number
+  privacyOptions: string[] = []
+  privacyNow: string = '';
+  friends: string[] = []
+  emailExists: boolean = true;
+  private _oldPrivacy: number
   public user: User;
 
   constructor(
@@ -34,17 +34,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.privacyOptions = Object.values(Privacy);
-    
+
     this.credentials = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       privacy: ['', Validators.required],
     });
-    this.friendForm= this.fb.group({
-      friendEmail : ['',Validators.required]
+    this.friendForm = this.fb.group({
+      friendEmail: ['', [Validators.required, Validators.email]]
     })
     this._uds.profile$.subscribe((user: User) => {
       console.log(user);
@@ -55,21 +55,22 @@ export class ProfileComponent implements OnInit {
       this.credentials.patchValue({
         firstname: user.firstName,
         lastname: user.lastName,
-        email : user.email,
-        phoneNumber : user.phoneNumber,
-        dateOfBirth :user.dateOfBirth,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        dateOfBirth: user.dateOfBirth,
+        privacy: this.privacyNow
       });
       this.friends = user.friends
     });
   }
 
   changeCredentials() {
-    
-    var index 
+
+    var index
     index = this.privacyOptions.indexOf(this.credentials.get("privacy").value)
-    if(index<0){
+    if (index < 0) {
       index = this._oldPrivacy
-      
+
     }
     var tempUser = {
       email: this.credentials.get("email").value,
@@ -82,34 +83,38 @@ export class ProfileComponent implements OnInit {
     }
 
     //  console.log(tempUser)
-    this._uds.changeCredentials(tempUser).subscribe();
+    this._uds.changeCredentials(tempUser).subscribe((val) =>
+      this.translate.get('profile_alert_succes').subscribe(val => { alert(val) }
+      )
+
+    );
   }
 
-  addFriend(){
+  addFriend() {
     var email = this.friendForm.get("friendEmail").value
     const nameEquals = (element) => element == email;
     var index = this.friends.findIndex(nameEquals)
     console.log(index)
-    if(index<0){
+    if (index < 0) {
       this.friends.push(email)
       this._uds.updateFriends(this.friends).subscribe();
       this.friendForm.get("friendEmail").setValue("")
     }
-    
+
   }
-  removeFriend(i : number){
+  removeFriend(i: number) {
     if (i > -1) {
       this.friends.splice(i, 1);
       this._uds.updateFriends(this.friends).subscribe();
     }
   }
   //1998-06-15
-  translateDate(date: string) :string {
-    var year = date.substring(0,4)
-    var month = date.substring(5,7)
+  translateDate(date: string): string {
+    var year = date.substring(0, 4)
+    var month = date.substring(5, 7)
     var day = date.substring(8)
     return `${day}${month}${year}`
-}
+  }
 
   getErrorMessage(errors: any) {
     var error = ""
@@ -117,19 +122,19 @@ export class ProfileComponent implements OnInit {
       return null;
     }
     if (errors.required) {
-      this.translate.get('is_required').subscribe( val => {error  = val})
+      this.translate.get('is_required').subscribe(val => { error = val })
       return error;
     } else if (errors.minlength) {
-      this.translate.get('min_length',{ min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe( val => {error  = val})
+      this.translate.get('min_length', { min: errors.minlength.requiredLength, now: errors.minlength.actualLength }).subscribe(val => { error = val })
       return error
     } else if (errors.userAlreadyExists) {
-      this.translate.get('register_userexists').subscribe( val => {error  = val})
+      this.translate.get('register_userexists').subscribe(val => { error = val })
       return error;
     } else if (errors.email) {
-      this.translate.get('register_mail').subscribe( val => {error  = val})
+      this.translate.get('register_mail').subscribe(val => { error = val })
       return error;
     } else if (errors.passwordsDiffer) {
-      this.translate.get('register_password').subscribe( val => {error  = val})
+      this.translate.get('register_password').subscribe(val => { error = val })
       return error;
     }
   }

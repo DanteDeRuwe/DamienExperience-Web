@@ -118,8 +118,9 @@
       </div>
     </div>
     <div class="profile-line">
-      <button type="submit" class="btn btn-primary">{{"submit" |translate}}</button>
+      <button [disabled]="!credentials.valid" type="submit"  class="btn btn-primary">{{"submit" |translate}}</button>
     </div>
+    
   </form>
   <hr/>
   <div>

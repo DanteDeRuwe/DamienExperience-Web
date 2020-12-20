@@ -52,6 +52,7 @@ import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
 import { DeleteRouteDialogComponent } from './admin/delete-route-dialog/delete-route-dialog.component';
 import { EditRouteComponent } from './admin/edit-route/edit-route.component';
 import { TrackingMapComponent } from './tracking-map/tracking-map.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 const config: SocketIoConfig = { url: environment.liveChatApi, options: { transports: ['websocket'] } };
@@ -79,7 +80,8 @@ const config: SocketIoConfig = { url: environment.liveChatApi, options: { transp
     TrackingMapComponent,
     PaymentComponent,
     PaymentResponseComponent,
-    InfoRegistrationComponent
+    InfoRegistrationComponent,
+    ErrorDialogComponent
   ],
   imports: [
     MatDialogModule,

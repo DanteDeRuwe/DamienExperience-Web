@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TranslateService } from '@ngx-translate/core';
 import { type } from 'os';
+import { ErrorDialogComponent } from 'src/app/error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
@@ -40,11 +42,13 @@ export class RegisterComponent implements OnInit {
   public register: FormGroup;
   public errorMessage: string = '';
   public rememberMe : boolean = false;
+  dialogRef: any;
 
   constructor(private _authService: AuthenticationService,
     private translate: TranslateService,
     private _router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private _dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.register = this.fb.group({
@@ -136,12 +140,13 @@ export class RegisterComponent implements OnInit {
             this.errorMessage = 'Could not register'
           }
         },
-        (err: HttpErrorResponse) => {
+        (err) => {
           if (err.error instanceof Error) {
             this.errorMessage = `Error while tryling to login user ${this.register.value.email}: ${err.error.message}`
           } else {
-            this.errorMessage = `Error ${err.status} while trying to login user ${this.register.value.email}: ${err.error}`;
+            this.errorMessage = err;
           }
+          
         }
       )
   }
