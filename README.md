@@ -1,27 +1,24 @@
-# DamiantourWeb
+# Damien Experience Web App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+[![Website](https://img.shields.io/website?down_message=offline&label=website&up_message=online&url=http%3A%2F%2Fdamienexperience.online)](damienexperience.online) ![Netlify Status](https://api.netlify.com/api/v1/badges/72b13b53-9c08-4f9f-ae61-4450507d5cd6/deploy-status)
 
-## Development server
+De web app is online te vinden op [damienexperience.online](https://damienexperience.online).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Team
+|Naam|GitHub|HoGent Email|
+|--|--|--|
+Simon Bettens | [@simonbettens](https://github.com/simonbettens) | [Simon.Bettens@student.hogent.be](mailto:Simon.Bettens@student.hogent.be)
+Dante De Ruwe | [@DanteDeRuwe](https://github.com/dantederuwe) | [Dante.DeRuwe@student.hogent.be](mailto:Dante.DeRuwe@student.hogent.be)
+Jonas Haenebalcke | [@JonasHaenebalcke](https://github.com/JonasHaenebalcke) | [Jonas.Haenebalcke@student.hogent.be](mailto:Jonas.Haenebalcke@student.hogent.be)
+Ruben Naudts | [@NaudtsRuben](https://github.com/naudtsruben) | [Ruben.Naudts@student.hogent.be](mailto:Ruben.Naudts@student.hogent.be)
+Lucas Van der Haegen |[@LucasVanderHaegen](https://github.com/LucasVanderHaegen) | [Lucas.VanderHaegen@student.hogent.be](mailto:Lucas.VanderHaegen@student.hogent.be)
+Jordy Van Kerkvoorde | [@JordyVanKerkvoorde](https://github.com/JordyVanKerkvoorde) | [Jordy.Vankerkvoorde@student.hogent.be](mailto:Jordy.Vankerkvoorde@student.hogent.be)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Lokaal uitvoeren
+Voer `npm start` uit in een terminalvenster. Als de backend ook lokaal gerund zal worden moeten de `environment.ts` url's en de `proxy.conf.json` gecontrolleerd worden op de juiste localhost url's en ports.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Zie ook
+- [Android Repository](https://github.com/HoGent-Projecten3/projecten3-2021-android-d4)
+- [Backend Repository](https://github.com/HoGent-Projecten3/projecten3-2021-backend-d4)
+- [Backend Documentatie](https://github.com/HoGent-Projecten3/projecten3-2021-backend-d4/wiki)
