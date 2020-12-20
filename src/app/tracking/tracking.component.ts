@@ -54,8 +54,6 @@ export class TrackingComponent implements OnInit {
     this.roomname = searchresult;
     if (searchresult) {
       this.router.navigate(["/track"], { queryParams: { email: searchresult } })
-    } else {
-      console.log('nouser')
     }
   }
 
@@ -67,15 +65,12 @@ export class TrackingComponent implements OnInit {
           this.setupWalk(walk)
           this.setWalkToLiveWalk(email) //after initializing, use the live walk
           this.visible = false;
-        } else {
-          //console.log('nowalk')
         }
       },
         (err) => {
           //console.error(err);
           if (err.error instanceof Error) {
             this.errorMessage = `Error while trying to get the walk user`
-            //console.error(this.errorMessage)
           } else {
             this.errorMessage = `Error ${err}`;
           }
