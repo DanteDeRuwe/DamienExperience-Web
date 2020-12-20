@@ -8,6 +8,8 @@ import { Walk } from '../models/walk.model';
 import { RouteDataService } from '../services/route-data.service';
 import { WalkDataService } from '../services/walk-data.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 @Component({
   selector: 'app-tracking',
   templateUrl: './tracking.component.html',
@@ -18,7 +20,7 @@ export class TrackingComponent implements OnInit {
   visible = true;
   errorMessage = '';
   chatVisible = false;
-
+  dialogRef;
   searchForm: FormGroup;
 
   walk: Walk;
@@ -30,6 +32,7 @@ export class TrackingComponent implements OnInit {
     private _rds: RouteDataService,
     private _wds: WalkDataService,
     private activatedRoute: ActivatedRoute,
+    private _dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
@@ -51,8 +54,6 @@ export class TrackingComponent implements OnInit {
     this.roomname = searchresult;
     if (searchresult) {
       this.router.navigate(["/track"], { queryParams: { email: searchresult } })
-    } else {
-      console.log('nouser')
     }
   }
 
@@ -64,19 +65,33 @@ export class TrackingComponent implements OnInit {
           this.setupWalk(walk)
           this.setWalkToLiveWalk(email) //after initializing, use the live walk
           this.visible = false;
-        } else {
-          console.log('nowalk')
         }
       },
-        (err: HttpErrorResponse) => {
-          console.error(err);
+        (err) => {
+          //console.error(err);
           if (err.error instanceof Error) {
             this.errorMessage = `Error while trying to get the walk user`
-            console.error(this.errorMessage)
           } else {
-            this.errorMessage = `Error ${err.status}`;
-            console.error(this.errorMessage)
+            this.errorMessage = `Error ${err}`;
           }
+          this.dialogRef = this._dialog.open(ErrorDialogComponent, {
+            height: '400px',
+            width: '600px',
+            data: {
+              errorMessage: this.errorMessage
+            }
+          });
+          this.dialogRef.afterClosed().subscribe(result => {
+            this.visible=true
+            this.searchForm.controls['username'].setValue("");
+            this.router.navigate([], {
+              queryParams: {
+                email: null
+              },
+              queryParamsHandling: 'merge'
+            })
+          });
+          
         });
   }
 

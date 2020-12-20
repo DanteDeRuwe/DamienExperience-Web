@@ -45,15 +45,3 @@
         }
     }
 }
-
-.toggle-button{
-    border: 1px solid $primary;
-    border-radius: 0;
-    background: none;
-    color: $dark;
-    &.active, &:hover, &:active{
-        background-color: $primary;
-        color: $white;
-        font-weight: bolder;
-    }
-}
